@@ -9,4 +9,4 @@ Netlify Development - [https://music-meteorologist-development.netlify.com/](ht
 
 Netlify Staging1 - [https://music-meteorologist-staging1.netlify.com/](https://music-meteorologist-staging1.netlify.com/)
 
-Netlify Staging1 - [https://music-meteorologist-staging2.netlify.com/](https://music-meteorologist-staging1.netlify.com/)
+Netlify Staging2 - [https://music-meteorologist-staging2.netlify.com/](https://music-meteorologist-staging1.netlify.com/)

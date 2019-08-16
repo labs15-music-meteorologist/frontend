@@ -10,7 +10,7 @@ export const getUsers = () => dispatch => {
   dispatch({
     type: GET_USERS_FETCHING,
   });
-  return axios
+  axios
     .get(url)
     .then(res => {
       dispatch({
@@ -31,18 +31,18 @@ export const GET_WELCOME_FETCHING = 'GET_WELCOME_FETCHING';
 export const GET_WELCOME_SUCCESS = 'GET_WELCOME_SUCCESS'; 
 export const GET_WELCOME_FAILURE = 'GET_WELCOME_FAILURE'; 
 
-export const getWelcome = () => dispatch => {
+export const getWelcome = char => dispatch => {
   dispatch({
     type: GET_WELCOME_FETCHING,
   });
-  return axios
-    .get(url)
+  axios
+    .get("https://music-meteorology-development.herokuapp.com/")
     .then(res => {
       dispatch({
         type: GET_WELCOME_SUCCESS,
-        payload: res,
+        payload: res.data.results,
       });
-      console.log(res);
+      console.log(res.data.results);
     })
     .catch(err => {
       dispatch({

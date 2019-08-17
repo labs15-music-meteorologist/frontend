@@ -2,20 +2,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getWelcome } from '../actions';
 
- class ApiRunner extends React.Component {
+class ApiRunner extends React.Component {
   constructor() {
     super();
   }
 
   componentDidMount() {
-    console.log("in CDM");
+    console.log('in CDM');
     this.props.getWelcome();
   }
 
   render() {
     return (
       <div>
-        
         <h1>{this.props.message}</h1>
       </div>
     );
@@ -23,7 +22,7 @@ import { getWelcome } from '../actions';
 }
 
 const mapStateToProps = state => ({
-  message: state.apiRunningReducer.message,
+  message: state.apiRunningReducer.message
 });
 
 export default connect(

@@ -8,46 +8,46 @@ const url = process.env.REACT_APP_BACKEND_BASE_URL;
 
 export const getUsers = () => dispatch => {
   dispatch({
-    type: GET_USERS_FETCHING,
+    type: GET_USERS_FETCHING
   });
   axios
     .get(url)
     .then(res => {
       dispatch({
         type: GET_USERS_SUCCESS,
-        payload: res,
+        payload: res
       });
       console.log(res);
     })
     .catch(err => {
       dispatch({
         type: GET_USERS_FAILURE,
-        payload: err,
+        payload: err
       });
     });
 };
 
-export const GET_WELCOME_FETCHING = 'GET_WELCOME_FETCHING'; 
-export const GET_WELCOME_SUCCESS = 'GET_WELCOME_SUCCESS'; 
-export const GET_WELCOME_FAILURE = 'GET_WELCOME_FAILURE'; 
+export const GET_WELCOME_FETCHING = 'GET_WELCOME_FETCHING';
+export const GET_WELCOME_SUCCESS = 'GET_WELCOME_SUCCESS';
+export const GET_WELCOME_FAILURE = 'GET_WELCOME_FAILURE';
 
-export const getWelcome = char => dispatch => {
+export const getWelcome = () => dispatch => {
   dispatch({
-    type: GET_WELCOME_FETCHING,
+    type: GET_WELCOME_FETCHING
   });
   axios
-    .get("https://music-meteorology-development.herokuapp.com/")
+    .get('https://music-meteorology-development.herokuapp.com/')
     .then(res => {
       dispatch({
         type: GET_WELCOME_SUCCESS,
-        payload: res.data.results,
+        payload: res.data
       });
-      console.log(res.data.results);
+      console.log(res);
     })
     .catch(err => {
       dispatch({
         type: GET_WELCOME_FAILURE,
-        payload: err,
+        payload: err
       });
     });
 };

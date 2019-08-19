@@ -21,6 +21,7 @@ const getUsersReducer = (state = initialState, action) => {
     case GET_USERS_SUCCESS:
       return {
         ...state,
+        users: action.payload,
         fetchingUsers: false,
         fetchingUsersError: '',
       };

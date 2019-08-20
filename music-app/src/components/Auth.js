@@ -23,11 +23,12 @@ export class Auth extends Component {
     componentDidMount() {
         let _token = hash.access_token;
         if(_token) {
-            this.setState({
-                token: _token
-            })
+            localStorage.setItem("token", _token);
+            console.log(_token); 
         }
     }
+     
+
   render() {
     return (
       <div>

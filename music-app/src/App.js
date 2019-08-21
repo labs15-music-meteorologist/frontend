@@ -7,8 +7,6 @@ import ReactGA from 'react-ga';
 import { createBrowserHistory } from 'history';
 
 const history = createBrowserHistory();
-const trackingId = 'UA-145979080-2';
-ReactGA.initialize(trackingId);
 
 history.listen(location => {
   ReactGA.set({ page: location.pathname }); // update the user's current page

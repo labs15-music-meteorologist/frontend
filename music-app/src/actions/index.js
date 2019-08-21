@@ -50,3 +50,32 @@ export const getWelcome = () => dispatch => {
       });
     });
 };
+
+export const GET_LIKEDSONGS_FETCHING = 'GET_LIKEDSONGS_FETCHING';
+export const GET_LIKEDSONGS_SUCCESS = 'GET_LIKEDSONGS_SUCCESS';
+export const GET_LIKEDSONGS_FAILURE = 'GET_LIKEDSONGS_FAILURE';
+
+export const getlikedSongs = token => dispatch => {
+  dispatch({
+    type: GET_LIKEDSONGS_FETCHING,
+  });
+
+  var config = {
+    headers: { Authorization: 'Bearer ' + token },
+  };
+
+  axios
+    .get('https://api.spotify.com/v1/me/tracks', config)
+    .then(res => {
+      dispatch({
+        type: GET_LIKEDSONGS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_LIKEDSONGS_FAILURE,
+        payload: err,
+      });
+    });
+};

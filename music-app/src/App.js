@@ -6,6 +6,7 @@ import LikedSongs from './components/LikedSongs';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ReactGA from 'react-ga';
 import { createBrowserHistory } from 'history';
+import Helloworld from './components/Helloworld'
 
 const history = createBrowserHistory();
 
@@ -19,8 +20,13 @@ class App extends Component {
     return (
       <Router history={history}>
         <ApiRunner />
-        <Route exact path='/' component={Auth} />
-        <Route exact path='/dashboard' component={LikedSongs} />
+        <Route exact path='/' render={props => <Auth {...props} />} />
+        <Route
+          exact
+          path='/dashboard'
+          render={props => <LikedSongs {...props} />}
+        />
+        <Route exact path='/helloworld' component={Helloworld}/>
       </Router>
     );
   }

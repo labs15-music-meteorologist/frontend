@@ -3,29 +3,30 @@ import { connect } from 'react-redux';
 import Song from './Song.js';
 import { getlikedSongs, getUsers } from '../actions';
 
-const token = localStorage.getItem('token');
-
 class LikedSongs extends React.Component {
   componentDidMount() {
-    this.props.getlikedSongs(token);
+    this.props.getlikedSongs();
     this.props.getUsers();
   }
 
-  logout() {
-    localStorage.removeItem('token'); 
-    window.location.href = '/';
-  };
+  logout = e => {
+    e.preventDefault(); 
+    console.log('PROPS', this.props);
+    localStorage.removeItem('token');
+    this.props.history.push('/helloworld');
+  }
 
   render() {
-    console.log(this.props.songs);
-    console.log('USERS', this.props.users[0]);
+    if (this.props.fetchingLikedSongs) {
+      return <h1>Loading...</h1>;
+    }
     return (
       <div>
-        <button onClick={() => this.logout()}>Logout</button>
+        <button onClick={(e) => this.logout(e)}>Logout</button>
         <div>
           <h1>Liked Songs Dashboard</h1>
           {this.props.songs.map(song => (
-            <Song song={song} />
+            <Song song={song} id={song.track.id} />
           ))}
         </div>
         <div>

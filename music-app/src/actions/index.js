@@ -11,13 +11,13 @@ export const getUsers = () => dispatch => {
     type: GET_USERS_FETCHING,
   });
   axios
-    .get(url)
+    .get(`${url}v1/users`)
     .then(res => {
       dispatch({
         type: GET_USERS_SUCCESS,
-        payload: res,
+        payload: res.data,
       });
-      console.log(res);
+      console.log('ACTION', res.data);
     })
     .catch(err => {
       dispatch({

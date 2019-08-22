@@ -11,11 +11,17 @@ class LikedSongs extends React.Component {
     this.props.getUsers();
   }
 
+  logout() {
+    localStorage.removeItem('token'); 
+    window.location.href = '/';
+  };
+
   render() {
     console.log(this.props.songs);
     console.log('USERS', this.props.users[0]);
     return (
       <div>
+        <button onClick={() => this.logout()}>Logout</button>
         <div>
           <h1>Liked Songs Dashboard</h1>
           {this.props.songs.map(song => (

@@ -5,22 +5,16 @@ import {
 } from '../actions';
 
 const initialState = {
-  item: {
-    album: {
-      images: [
-        {
-          url: ''
-        }
-      ]
-    },
-    name: '',
-    artists: [{ name: '' }],
-    duration_ms: 0
-  },
-  is_playing: 'Paused',
-  progress_ms: 0,
-  fetchingCurrentSong: false,
-  error: ''
+  token: '',
+  deviceId: '',
+  loggedIn: false,
+  error: '',
+  trackName: 'Track Name',
+  artistName: 'Artist Name',
+  albumName: 'Album Name',
+  playing: false,
+  position: 0,
+  duration: 0
 };
 
 const playerReducer = (state = initialState, action) => {

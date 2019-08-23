@@ -11,7 +11,6 @@ class LikedSongs extends React.Component {
 
   logout = e => {
     e.preventDefault(); 
-    console.log('PROPS', this.props);
     localStorage.removeItem('token');
     this.props.history.push('/helloworld');
   }

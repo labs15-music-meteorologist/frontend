@@ -6,7 +6,7 @@ import LikedSongs from './components/LikedSongs';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ReactGA from 'react-ga';
 import { createBrowserHistory } from 'history';
-import Helloworld from './components/Helloworld'
+import LogoutPage from './components/Logout';
 
 const history = createBrowserHistory();
 
@@ -26,7 +26,7 @@ class App extends Component {
           path='/dashboard'
           render={props => <LikedSongs {...props} />}
         />
-        <Route exact path='/helloworld' component={Helloworld}/>
+        <Route exact path='/logout' component={LogoutPage} />
       </Router>
     );
   }

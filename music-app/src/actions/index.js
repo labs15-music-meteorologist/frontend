@@ -17,7 +17,6 @@ export const getUsers = () => dispatch => {
         type: GET_USERS_SUCCESS,
         payload: res.data,
       });
-      console.log('ACTION', res.data);
     })
     .catch(err => {
       dispatch({

@@ -10,10 +10,10 @@ class LikedSongs extends React.Component {
   }
 
   logout = e => {
-    e.preventDefault(); 
+    e.preventDefault();
     localStorage.removeItem('token');
-    this.props.history.push('/helloworld');
-  }
+    this.props.history.push('/logout');
+  };
 
   render() {
     if (this.props.fetchingLikedSongs) {
@@ -21,7 +21,7 @@ class LikedSongs extends React.Component {
     }
     return (
       <div>
-        <button onClick={(e) => this.logout(e)}>Logout</button>
+        <button onClick={e => this.logout(e)}>Logout</button>
         <div>
           <h1>Liked Songs Dashboard</h1>
           {this.props.songs.map(song => (

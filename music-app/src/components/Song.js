@@ -1,19 +1,16 @@
 import React from 'react';
 import { getTrackInfo } from '../actions';
 import { connect } from 'react-redux';
-// import { connect } from 'react-redux';
-
-const token = localStorage.getItem('token');
 
 class Song extends React.Component {
   componentDidMount() {
-    getTrackInfo(token, this.props.id);
+    this.props.getTrackInfo(this.props.id);
   }
 
   render() {
-    console.log('ID', this.props.id); 
-    console.log('Song', this.props.song);
-    console.log('AF', this.props.audio_features[0])
+    // console.log('ID', this.props.id);
+    // console.log('Song', this.props.song);
+    console.log('AF', this.props.audio_features);
     return (
       <div>
         <li
@@ -21,17 +18,16 @@ class Song extends React.Component {
             display: 'flex',
             flexFlow: 'column nowrap',
             alignItems: 'flex-start',
-            lineHeight: 4,
+            lineHeight: 1.5,
           }}>
           <img
             src={this.props.song.track.album.images[2].url}
             alt='album art'
             width='64px'
           />
-          Song: {this.props.song.track.name} / Artist:
-          {this.props.song.track.artists[0].name}
-          
-          Audio Features: {this.props.audio_features}
+          <p>Song: {this.props.song.track.name}</p>
+          <p>Artist: {this.props.song.track.artists[0].name}</p>
+          <p>Audio Features: {this.props.audio_features.tempo}</p>
         </li>
       </div>
     );
@@ -39,7 +35,7 @@ class Song extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  audio_features: state.trackInfoReducer.audio_features
+  audio_features: state.getTrackInfoReducer.audio_features,
 });
 
 export default connect(

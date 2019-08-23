@@ -5,7 +5,20 @@ import {
 } from '../actions';
 
 const initialState = {
-  song: [],
+  item: {
+    album: {
+      images: [
+        {
+          url: ''
+        }
+      ]
+    },
+    name: '',
+    artists: [{ name: '' }],
+    duration_ms: 0
+  },
+  is_playing: 'Paused',
+  progress_ms: 0,
   fetchingCurrentSong: false,
   error: ''
 };
@@ -21,7 +34,9 @@ const playerReducer = (state = initialState, action) => {
     case GET_CURRENTSONG_SUCCESS:
       return {
         ...state,
-        song: action.payload,
+        item: action.payload.item,
+        is_playing: action.payload.is_playing,
+        progress_ms: action.payload.progress_ms,
         fetchingCurrentSong: false,
         fetchingCurrentSongError: ''
       };

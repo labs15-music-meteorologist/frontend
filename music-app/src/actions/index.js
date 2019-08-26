@@ -55,7 +55,7 @@ export const GET_LIKEDSONGS_FETCHING = 'GET_LIKEDSONGS_FETCHING';
 export const GET_LIKEDSONGS_SUCCESS = 'GET_LIKEDSONGS_SUCCESS';
 export const GET_LIKEDSONGS_FAILURE = 'GET_LIKEDSONGS_FAILURE';
 
-export const getlikedSongs = () => dispatch => {
+export const getLikedSongs = () => dispatch => {
   dispatch({
     type: GET_LIKEDSONGS_FETCHING,
   });
@@ -68,21 +68,44 @@ export const getlikedSongs = () => dispatch => {
     .get('https://api.spotify.com/v1/me/tracks', config)
     .then(res => {
       let likedSongs = res.data;
-      console.log('likedSongs', likedSongs);
+      let params = []
+      likedSongs.items.map(item=>{
+        params.push(item.track.id)
+      })
 
-      // likedSongs.map(song => {
-      //   console.log('Song', song);
-      // });
-      // let params =
-      // axios.get(
-      //   `https://api.spotify.com/v1/audio-features/?ids=${params}`,
-      //   config,
-      // );
+      //TODO
+      // try to get all song details from the array in params
+      // use 1 endpoint and pass all the ids
+      // then pass both songDetail and likedSongs
+
+      /*
+      If we could clean up the object and return them together her that would be ideal
+      Ex.
+      let returnObject = {
+        title: song.title,
+        artist: song.artist,
+        details: song.details
+      }
+      */
+
+      // axios
+      // .get(`https://api.spotify.com/v1/audio-features/?ids=${params}`)
+
+      let songDetails = []
+      // console.log("PARAMS",params)
+
       dispatch({
         type: GET_LIKEDSONGS_SUCCESS,
         payload: likedSongs,
-      });
+      })
     })
+
+        // let params =
+        // axios.get(
+          //   `https://api.spotify.com/v1/audio-features/?ids=${params}`,
+          //   config,
+          // );
+
     .catch(err => {
       dispatch({
         type: GET_LIKEDSONGS_FAILURE,

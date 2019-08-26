@@ -2,12 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Song from './Song.js';
 import AudioFeatures from './AudioFeatures.js';
-import { getlikedSongs, getUsers } from '../actions';
+import { getLikedSongs, getUsers } from '../actions';
 
 class LikedSongs extends React.Component {
   state = {};
   componentDidMount() {
-    this.props.getlikedSongs();
+    this.props.getLikedSongs();
     this.props.getUsers();
   }
 
@@ -51,5 +51,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getlikedSongs, getUsers },
+  { getLikedSongs, getUsers },
 )(LikedSongs);

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
 
-const clientId = '256aebf9b04a4f5480a757f770864028';
-const redirectUri = 'http://localhost:3000/'; // has to match exactly with spotify dashboard redirect uri
+const clientId = 'cb21b49c3cb14eb7b755528022adb91a'; // testing ENV
+const redirectUri = 'http://music.saschamajewsky.de/'; // has to match exactly with spotify dashboard redirect uri
 const scopes = [
   'user-read-currently-playing',
   'user-read-playback-state',
@@ -24,16 +24,14 @@ const hash = window.location.hash
 window.location.hash = '';
 
 export class Auth extends Component {
-
-
   componentDidMount() {
     let _token = hash.access_token;
-    console.log('TOKEN', _token); 
-    console.log('HASH TOKEN', hash.access_token)
+    console.log('TOKEN', _token);
+    console.log('HASH TOKEN', hash.access_token);
     if (_token) {
       localStorage.setItem('token', _token);
       // window.location.href = '/dashboard';
-      this.props.history.push('/dashboard'); 
+      this.props.history.push('/dashboard');
     }
   }
 

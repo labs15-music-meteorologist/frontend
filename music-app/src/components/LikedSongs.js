@@ -2,18 +2,28 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Song from './Song.js';
 import { getlikedSongs, getUsers } from '../actions';
+import { Mixpanel } from '../analytics/Mixpanel';
 
 class LikedSongs extends React.Component {
   componentDidMount() {
     this.props.getlikedSongs();
     this.props.getUsers();
+    Mixpanel.track('Spotify Login');
+
+    // // Mixpanel Tracking
+    // Mixpanel.identify(this.props.user.display_name);
+    // Mixpanel.track('Successful login');
+    // Mixpanel.people.set({
+    //   $first_name: this.props.user.first_name,
+    //   $last_name: this.props.user.last_name,
+    // });
   }
 
   logout = e => {
-    e.preventDefault(); 
+    e.preventDefault();
     localStorage.removeItem('token');
     this.props.history.push('/helloworld');
-  }
+  };
 
   render() {
     if (this.props.fetchingLikedSongs) {
@@ -21,7 +31,7 @@ class LikedSongs extends React.Component {
     }
     return (
       <div>
-        <button onClick={(e) => this.logout(e)}>Logout</button>
+        <button onClick={e => this.logout(e)}>Logout</button>
         <div>
           <h1>Liked Songs Dashboard</h1>
           {this.props.songs.map(song => (

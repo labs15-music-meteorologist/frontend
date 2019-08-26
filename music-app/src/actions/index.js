@@ -79,12 +79,20 @@ export const getLikedSongsAndFeatures = () => dispatch => {
         headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
       };
 
+      let allAudioFeatures = [];
+
       idsArray.map(id => {
         dispatch({ type: GET_TRACK_INFO_FETCHING });
         axios
           .get(`https://api.spotify.com/v1/audio-features/?ids=${id}`, config)
           .then(res => {
-            dispatch({ type: GET_TRACK_INFO_SUCCESS, payload: res.data });
+            allAudioFeatures.push(res.data.audio_features[0]);
+            // console.log('FEATURES', allAudioFeatures);
+
+            dispatch({
+              type: GET_TRACK_INFO_SUCCESS,
+              payload: allAudioFeatures,
+            });
           })
           .catch(err => {
             dispatch({ type: GET_TRACK_INFO_FAILURE, payload: err });

@@ -25,6 +25,7 @@ const getTrackInfoReducer = (state = initialState, action) => {
         fetchingAudioFeatures: false,
         fetchingAudioFeaturesError: '',
       };
+
     case GET_TRACK_INFO_FAILURE:
       return {
         ...state,

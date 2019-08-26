@@ -5,12 +5,14 @@ import { connect } from 'react-redux';
 class Song extends React.Component {
   componentDidMount() {
     this.props.getTrackInfo(this.props.id);
+    console.log('CDM');
   }
 
   render() {
+    console.log('Audio_Features', this.props.audio_features);
     // console.log('ID', this.props.id);
     // console.log('Song', this.props.song);
-    console.log('AF', this.props.audio_features);
+    // console.log('AF', this.props.audio_features);
     return (
       <div>
         <li
@@ -42,3 +44,5 @@ export default connect(
   mapStateToProps,
   { getTrackInfo },
 )(Song);
+
+// export default Song;

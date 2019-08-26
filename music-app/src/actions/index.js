@@ -67,9 +67,20 @@ export const getlikedSongs = () => dispatch => {
   axios
     .get('https://api.spotify.com/v1/me/tracks', config)
     .then(res => {
+      let likedSongs = res.data;
+      console.log('likedSongs', likedSongs);
+
+      // likedSongs.map(song => {
+      //   console.log('Song', song);
+      // });
+      // let params =
+      // axios.get(
+      //   `https://api.spotify.com/v1/audio-features/?ids=${params}`,
+      //   config,
+      // );
       dispatch({
         type: GET_LIKEDSONGS_SUCCESS,
-        payload: res.data,
+        payload: likedSongs,
       });
     })
     .catch(err => {

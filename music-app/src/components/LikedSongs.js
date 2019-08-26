@@ -1,19 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Song from './Song.js';
+import AudioFeatures from './AudioFeatures.js';
 import { getlikedSongs, getUsers } from '../actions';
 
 class LikedSongs extends React.Component {
+  state = {};
   componentDidMount() {
     this.props.getlikedSongs();
     this.props.getUsers();
   }
 
   logout = e => {
-    e.preventDefault(); 
+    e.preventDefault();
     localStorage.removeItem('token');
-    this.props.history.push('/helloworld');
-  }
+    this.props.history.push('/logout');
+  };
 
   render() {
     if (this.props.fetchingLikedSongs) {
@@ -21,11 +23,14 @@ class LikedSongs extends React.Component {
     }
     return (
       <div>
-        <button onClick={(e) => this.logout(e)}>Logout</button>
+        <button onClick={e => this.logout(e)}>Logout</button>
         <div>
           <h1>Liked Songs Dashboard</h1>
           {this.props.songs.map(song => (
-            <Song song={song} id={song.track.id} />
+            <>
+              <Song song={song} id={song.track.id} />
+              {/* <AudioFeatures id={song.track.id} /> */}
+            </>
           ))}
         </div>
         <div>

@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ReactGA from 'react-ga';
 import { createBrowserHistory } from 'history';
 import Helloworld from './components/Helloworld';
+import { MixpanelConsumer } from 'react-mixpanel';
 
 const history = createBrowserHistory();
 
@@ -19,7 +20,9 @@ class App extends Component {
   render() {
     return (
       <Router history={history}>
-        <ApiRunner />
+        <MixpanelConsumer>
+          {mixpanel => <ApiRunner mixpanel={mixpanel} />}
+        </MixpanelConsumer>
         <Route exact path='/' render={props => <Auth {...props} />} />
         <Route
           exact

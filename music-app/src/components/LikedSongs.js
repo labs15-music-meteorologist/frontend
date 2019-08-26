@@ -2,12 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Song from './Song.js';
 import AudioFeatures from './AudioFeatures.js';
-import { getLikedSongs, getUsers } from '../actions';
+import { getLikedSongsAndFeatures, getUsers } from '../actions';
 
 class LikedSongs extends React.Component {
   state = {};
   componentDidMount() {
-    this.props.getLikedSongs();
+    this.props.getLikedSongsAndFeatures();
     this.props.getUsers();
   }
 
@@ -18,6 +18,7 @@ class LikedSongs extends React.Component {
   };
 
   render() {
+    console.log('PROPS BABY', this.props.audio_features);
     if (this.props.fetchingLikedSongs) {
       return <h1>Loading...</h1>;
     }
@@ -28,17 +29,17 @@ class LikedSongs extends React.Component {
           <h1>Liked Songs Dashboard</h1>
           {this.props.songs.map(song => (
             <>
-              <Song song={song} id={song.track.id} />
-              {/* <AudioFeatures id={song.track.id} /> */}
+              <Song song={song} audio_features={this.props.audio_features} />
             </>
           ))}
         </div>
-        <div>
+
+        {/* <div>
           <h1>Users</h1>
           {this.props.users.map(user => (
             <p>{user.display_name}</p>
           ))}
-        </div>
+        </div> */}
       </div>
     );
   }
@@ -47,9 +48,11 @@ class LikedSongs extends React.Component {
 const mapStateToProps = state => ({
   songs: state.likedSongsReducer.songs,
   users: state.getUsersReducer.users,
+  ids: state.likedSongsReducer.ids,
+  audio_features: state.getTrackInfoReducer.audio_features,
 });
 
 export default connect(
   mapStateToProps,
-  { getLikedSongs, getUsers },
+  { getLikedSongsAndFeatures, getUsers },
 )(LikedSongs);

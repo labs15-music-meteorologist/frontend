@@ -1,18 +1,14 @@
 import React from 'react';
-import { getTrackInfo } from '../actions';
+import { getLikedSongsAndFeatures } from '../actions';
 import { connect } from 'react-redux';
 
 class Song extends React.Component {
-  componentDidMount() {
-    // this.props.getTrackInfo(this.props.id);
-    // console.log('CDM');
-  }
-
   render() {
-    // console.log('Audio_Features', this.props.audio_features);
-    // console.log('ID', this.props.id);
+    console.log('Audio_Features', this.props.audio_features);
+    console.log('Track Name', this.props.song.track.name);
     // console.log('Song', this.props.song);
     // console.log('AF', this.props.audio_features);
+    // if (this.props.song.track.id === this.props.audio_features.id) {
     return (
       <div>
         <li
@@ -29,20 +25,22 @@ class Song extends React.Component {
           />
           <p>Song: {this.props.song.track.name}</p>
           <p>Artist: {this.props.song.track.artists[0].name}</p>
-          <p>Audio Features: {this.props.audio_features.tempo}</p>
+
+          {/* <p>Audio Features: {this.props.audio_features.tempo}</p> */}
         </li>
       </div>
     );
+    // } else {
+    //   return null;
+    // }
   }
 }
 
-const mapStateToProps = state => ({
-  audio_features: state.getTrackInfoReducer.audio_features,
-});
+const mapStateToProps = state => ({});
 
 export default connect(
   mapStateToProps,
-  { getTrackInfo },
+  { getLikedSongsAndFeatures },
 )(Song);
 
 // export default Song;

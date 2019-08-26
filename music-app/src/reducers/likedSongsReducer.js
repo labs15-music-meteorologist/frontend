@@ -6,6 +6,7 @@ import {
 
 const initialState = {
   songs: [],
+  ids: [],
   fetchingLikedSongs: false,
   fetchingLikedSongsError: '',
 };
@@ -22,6 +23,7 @@ const likedSongsReducer = (state = initialState, action) => {
       return {
         ...state,
         songs: action.payload.items,
+        ids: action.ids,
         fetchingLikedSongs: false,
         fetchingLikedSongsError: '',
       };

@@ -4,15 +4,25 @@ import { connect } from 'react-redux';
 
 class Song extends React.Component {
   componentDidMount() {
-    this.props.getTrackInfo(this.props.id);
+    if (!this.props.tracksInfo[this.props.id]) {
+      this.props.getTrackInfo(this.props.id);
+    }
   }
 
   render() {
     // console.log('ID', this.props.id);
     // console.log('Song', this.props.song);
     console.log('AF', this.props.tracksInfo);
-    const tf = this.props.tracksInfo[this.props.id]
-    console.log('tf', tf)
+    const tf = this.props.tracksInfo[this.props.id];
+    const loadingTf = !tf || tf.fetching;
+    // let af = 'Loading...';
+    // if (tfErr) {
+    //   af = 'Error Occurred';
+    // }
+    // if (tf && tf.data && tf.data.tempo) {
+    //   af = tf.data.tempo;
+    // }
+    console.log('tf', tf);
     return (
       <div>
         <li
@@ -27,9 +37,12 @@ class Song extends React.Component {
             alt='album art'
             width='64px'
           />
-          {/* <p>Song: {this.props.song.track.name}</p>
+          <p>Song: {this.props.song.track.name}</p>
           <p>Artist: {this.props.song.track.artists[0].name}</p>
-          <p>Audio Features: {this.props.audio_features.tempo}</p> */}
+          <p>
+            Audio Features:{' '}
+            {loadingTf ? 'loading....' : tf.data.tempo}
+          </p>
         </li>
       </div>
     );

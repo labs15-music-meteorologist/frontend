@@ -12,14 +12,6 @@ class Song extends React.Component {
   render() {
     const tf = this.props.tracksInfo[this.props.id];
     const loadingTf = !tf || tf.fetching;
-    // let af = 'Loading...';
-    // if (tfErr) {
-    //   af = 'Error Occurred';
-    // }
-    // if (tf && tf.data && tf.data.tempo) {
-    //   af = tf.data.tempo;
-    // }
-    console.log('tf', tf);
     return (
       <div>
         <li

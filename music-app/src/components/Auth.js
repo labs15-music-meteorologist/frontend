@@ -34,14 +34,11 @@ export class Auth extends Component {
       this.props.history.push('/dashboard');
     }
   }
-
   render() {
     return (
       <div>
         <a
-          href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
-            '%20',
-          )}&response_type=token&show_dialog=true`}>
+          href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${encodeURIComponent('user-read-private user-read-email')}&response_type=token&show_dialog=true`}>
           Login
         </a>
       </div>

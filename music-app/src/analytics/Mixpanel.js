@@ -1,4 +1,4 @@
-import mixpanel from 'mixpanel-browser';
+/* import mixpanel from 'mixpanel-browser';
 
 // Declare mixpanel tracking ID
 mixpanel.init('d94aefc540b96a9d3f4fb06be52a83fd');
@@ -26,3 +26,4 @@ let actions = {
 
 // Export logic to be used inside components we wish to track
 export let Mixpanel = actions;
+ */

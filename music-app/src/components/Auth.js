@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
 
-const clientId = 'cb21b49c3cb14eb7b755528022adb91a'; // testing ENV
-const redirectUri = 'http://music.saschamajewsky.de/'; // has to match exactly with spotify dashboard redirect uri
+const clientId = '256aebf9b04a4f5480a757f770864028'; // testing ENV
+const redirectUri = 'http://localhost:3000/'; // has to match exactly with spotify dashboard redirect uri
 const scopes = [
   'user-read-currently-playing',
   'user-read-playback-state',

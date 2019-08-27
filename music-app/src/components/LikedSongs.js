@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Song from './Song.js';
 import { getlikedSongs, getUsers } from '../actions';
-import { Mixpanel } from '../analytics/Mixpanel';
+// import { Mixpanel } from '../analytics/Mixpanel';
 
 class LikedSongs extends React.Component {
   componentDidMount() {

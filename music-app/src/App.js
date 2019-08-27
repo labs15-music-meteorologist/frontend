@@ -24,12 +24,10 @@ class App extends Component {
           {mixpanel => <ApiRunner mixpanel={mixpanel} />}
           {/* {mixpanel => <LikedSongs {...mixpanel} />} */}
         </MixpanelConsumer>
-        <Route
+        <Route // Here we need to wrap this route within a <MixpanelConsumer>
           exact
           path='/dashboard'
-          render={(props, mixpanel) => (
-            <LikedSongs {...props} mixpanel={mixpanel} />
-          )}
+          render={props => <LikedSongs {...props} />}
         />
         <Route exact path='/helloworld' component={Helloworld} />
         <Route exact path='/' render={props => <Auth {...props} />} />

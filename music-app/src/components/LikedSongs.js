@@ -18,7 +18,6 @@ class LikedSongs extends React.Component {
   };
 
   render() {
-    console.log('PROPS BABY', this.props.audio_features);
     if (this.props.fetchingLikedSongs) {
       return <h1>Loading...</h1>;
     }
@@ -29,7 +28,11 @@ class LikedSongs extends React.Component {
           <h1>Liked Songs Dashboard</h1>
           {this.props.songs.map(song => (
             <>
-              <Song song={song} audio_features={this.props.audio_features} />
+              <Song
+                song={song}
+                id={song.track.id}
+                audio_features={this.props.audio_features}
+              />
             </>
           ))}
         </div>

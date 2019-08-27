@@ -79,32 +79,3 @@ export const getlikedSongs = token => dispatch => {
       });
     });
 };
-
-export const GET_CURRENTSONG_FETCHING = 'GET_CURRENTSONG_FETCHING';
-export const GET_CURRENTSONG_SUCCESS = 'GET_CURRENTSONG_SUCCESS';
-export const GET_CURRENTSONG_FAILURE = 'GET_CURRENTSONG_FAILURE';
-
-export const getCurrentSong = token => dispatch => {
-  dispatch({
-    type: GET_CURRENTSONG_FETCHING
-  });
-
-  var config = {
-    headers: { Authorization: 'Bearer ' + token }
-  };
-
-  axios
-    .get('https://api.spotify.com/v1/me/player/currently-playing', config)
-    .then(res => {
-      dispatch({
-        type: GET_CURRENTSONG_SUCCESS,
-        payload: res.data
-      });
-    })
-    .catch(err => {
-      dispatch({
-        type: GET_CURRENTSONG_FAILURE,
-        payload: err
-      });
-    });
-};

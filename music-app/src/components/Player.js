@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class MusicPlayer extends Component {
   constructor(props) {
     super(props);
     // set the initial state
     this.state = {
-      token: '',
+      token: localStorage.getItem('token'),
       deviceId: '',
       loggedIn: false,
       error: '',
       trackName: 'Track Name',
       artistName: 'Artist Name',
       albumName: 'Album Name',
+      imageUrl: '',
       playing: false,
       position: 0,
       duration: 1
@@ -20,6 +22,9 @@ class MusicPlayer extends Component {
     this.playerCheckInterval = null;
   }
 
+  componentDidMount() {
+    this.handleLogin();
+  }
   // when we click the "go" button
   handleLogin() {
     if (this.state.token !== '') {
@@ -82,7 +87,10 @@ class MusicPlayer extends Component {
     });
 
     // Playback status updates
-    this.player.on('player_state_changed', state => this.onStateChanged(state));
+    this.player.on('player_state_changed', state => {
+      this.onStateChanged(state);
+      this.getCurrentSong();
+    });
 
     // Ready
     this.player.on('ready', async data => {
@@ -116,6 +124,24 @@ class MusicPlayer extends Component {
       this.player.connect();
     }
   }
+
+  getCurrentSong() {
+    const config = {
+      headers: { Authorization: 'Bearer ' + this.state.token }
+    };
+    axios
+      .get('https://api.spotify.com/v1/me/player/currently-playing', config)
+      .then(res => {
+        console.log(res.data.item);
+        this.setState({
+          imageUrl: res.data.item.album.images[0].url
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+  // SDK Player Song playback controls
 
   onPrevClick() {
     this.player.previousTrack();
@@ -162,45 +188,23 @@ class MusicPlayer extends Component {
       <div className='App'>
         <div className='App-header'>
           <h2>Now Playing</h2>
-          <p>A Spotify Web Playback API Demo.</p>
+          <img src={this.state.imageUrl} alt='album-art' />
         </div>
 
         {error && <p>Error: {error}</p>}
 
-        {loggedIn ? (
-          <div>
-            <p>Artist: {artistName}</p>
-            <p>Track: {trackName}</p>
-            <p>Album: {albumName}</p>
-            <p>
-              <button onClick={() => this.onPrevClick()}>Previous</button>
-              <button onClick={() => this.onPlayClick()}>
-                {playing ? 'Pause' : 'Play'}
-              </button>
-              <button onClick={() => this.onNextClick()}>Next</button>
-            </p>
-          </div>
-        ) : (
-          <div>
-            <p className='App-intro'>
-              Enter your Spotify access token. Get it from{' '}
-              <a href='https://beta.developer.spotify.com/documentation/web-playback-sdk/quick-start/#authenticating-with-spotify'>
-                here
-              </a>
-              .
-            </p>
-            <p>
-              <input
-                type='text'
-                value={token}
-                onChange={e => this.setState({ token: e.target.value })}
-              />
-            </p>
-            <p>
-              <button onClick={() => this.handleLogin()}>Go</button>
-            </p>
-          </div>
-        )}
+        <div>
+          <p>Artist: {artistName}</p>
+          <p>Track: {trackName}</p>
+          <p>Album: {albumName}</p>
+          <p>
+            <button onClick={() => this.onPrevClick()}>Previous</button>
+            <button onClick={() => this.onPlayClick()}>
+              {playing ? 'Pause' : 'Play'}
+            </button>
+            <button onClick={() => this.onNextClick()}>Next</button>
+          </p>
+        </div>
       </div>
     );
   }

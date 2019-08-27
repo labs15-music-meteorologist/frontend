@@ -8,7 +8,7 @@ class LikedSongs extends React.Component {
   componentDidMount() {
     this.props.getlikedSongs();
     this.props.getUsers();
-    this.props.mixpanel.track('Spotify Login');
+    // this.props.mixpanel.track('Spotify Login'); // Removed temp tracking
 
     // // Mixpanel Tracking
     // Mixpanel.identify(this.props.user.display_name);

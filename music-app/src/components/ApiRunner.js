@@ -12,7 +12,7 @@ class ApiRunner extends React.Component {
 
   componentDidMount() {
     this.props.getWelcome();
-    this.props.mixpanel.track('We did it');
+    this.props.mixpanel.track('Homepage Visit');
   }
 
   render() {

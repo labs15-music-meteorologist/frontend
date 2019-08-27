@@ -22,14 +22,19 @@ class App extends Component {
       <Router history={history}>
         <MixpanelConsumer>
           {mixpanel => <ApiRunner mixpanel={mixpanel} />}
+          {/* {mixpanel => <LikedSongs {...mixpanel} />} */}
         </MixpanelConsumer>
-        <Route exact path='/' render={props => <Auth {...props} />} />
         <Route
           exact
           path='/dashboard'
-          render={props => <LikedSongs {...props} />}
+          render={(props, mixpanel) => (
+            <MixpanelConsumer>
+              <LikedSongs {...props} mixpanel={mixpanel} />
+            </MixpanelConsumer>
+          )}
         />
         <Route exact path='/helloworld' component={Helloworld} />
+        <Route exact path='/' render={props => <Auth {...props} />} />
       </Router>
     );
   }

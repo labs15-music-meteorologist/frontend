@@ -15,11 +15,7 @@ export const getUsers = () => dispatch => {
     .then(res => {
       dispatch({
         type: GET_USERS_SUCCESS,
-<<<<<<< HEAD
-        payload: res
-=======
-        payload: res.data,
->>>>>>> 5a438ec828dae0036d349d0e2bfdce60d8717a6e
+        payload: res.data
       });
       console.log('ACTION', res.data);
     })
@@ -65,11 +61,7 @@ export const getlikedSongs = () => dispatch => {
   });
 
   var config = {
-<<<<<<< HEAD
-    headers: { Authorization: 'Bearer ' + token }
-=======
-    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
->>>>>>> 5a438ec828dae0036d349d0e2bfdce60d8717a6e
+    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
   };
 
   axios
@@ -94,11 +86,11 @@ export const GET_TRACK_INFO_FAILURE = 'GET_TRACK_INFO_FAILURE';
 
 export const getTrackInfo = id => dispatch => {
   dispatch({
-    type: GET_TRACK_INFO_FETCHING,
+    type: GET_TRACK_INFO_FETCHING
   });
 
   var config = {
-    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
+    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
   };
 
   axios
@@ -106,13 +98,13 @@ export const getTrackInfo = id => dispatch => {
     .then(res => {
       dispatch({
         type: GET_TRACK_INFO_SUCCESS,
-        payload: res.data,
+        payload: res.data
       });
     })
     .catch(err => {
       dispatch({
         type: GET_TRACK_INFO_FAILURE,
-        payload: err,
+        payload: err
       });
     });
 };

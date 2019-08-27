@@ -10,7 +10,9 @@ class Song extends React.Component {
   render() {
     // console.log('ID', this.props.id);
     // console.log('Song', this.props.song);
-    console.log('AF', this.props.audio_features);
+    console.log('AF', this.props.tracksInfo);
+    const tf = this.props.tracksInfo[this.props.id]
+    console.log('tf', tf)
     return (
       <div>
         <li
@@ -25,9 +27,9 @@ class Song extends React.Component {
             alt='album art'
             width='64px'
           />
-          <p>Song: {this.props.song.track.name}</p>
+          {/* <p>Song: {this.props.song.track.name}</p>
           <p>Artist: {this.props.song.track.artists[0].name}</p>
-          <p>Audio Features: {this.props.audio_features.tempo}</p>
+          <p>Audio Features: {this.props.audio_features.tempo}</p> */}
         </li>
       </div>
     );
@@ -35,7 +37,7 @@ class Song extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  audio_features: state.getTrackInfoReducer.audio_features,
+  tracksInfo: state.getTrackInfoReducer,
 });
 
 export default connect(

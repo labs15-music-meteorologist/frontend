@@ -4,10 +4,19 @@ import {
   GET_TRACK_INFO_FAILURE,
 } from '../actions';
 
+/*
+{
+  i: {
+    audio_features: [],
+    fetchingAudioFeatures: false,
+    fetchingAudioFeaturesError: ''
+  },
+  j: {
+
+  }
+}
+*/
 const initialState = {
-  audio_features: [],
-  fetchingAudioFeatures: false,
-  fetchingAudioFeaturesError: '',
 };
 
 const getTrackInfoReducer = (state = initialState, action) => {
@@ -15,21 +24,17 @@ const getTrackInfoReducer = (state = initialState, action) => {
     case GET_TRACK_INFO_FETCHING:
       return {
         ...state,
-        fetchingAudioFeatures: true,
-        fetchingAudioFeaturesError: '',
+        ...action.payload,
       };
     case GET_TRACK_INFO_SUCCESS:
       return {
         ...state,
-        audio_features: action.payload,
-        fetchingAudioFeatures: false,
-        fetchingAudioFeaturesError: '',
+        ...action.payload,
       };
     case GET_TRACK_INFO_FAILURE:
       return {
         ...state,
-        fetchingAudioFeatures: false,
-        fetchingAudioFeaturesError: action.payload,
+        ...action.payload,
       };
     default:
       return state;

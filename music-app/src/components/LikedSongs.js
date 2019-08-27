@@ -2,13 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Song from './Song.js';
 import { getlikedSongs, getUsers } from '../actions';
-import { Mixpanel } from '../analytics/Mixpanel';
+// import { Mixpanel } from '../analytics/Mixpanel';
 
 class LikedSongs extends React.Component {
   componentDidMount() {
     this.props.getlikedSongs();
     this.props.getUsers();
-    Mixpanel.track('Spotify Login');
+    // this.props.mixpanel.track('Spotify Login'); // Removed temp tracking
+
+    // Example tracking once implemented
 
     // // Mixpanel Tracking
     // Mixpanel.identify(this.props.user.display_name);

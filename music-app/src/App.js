@@ -6,7 +6,8 @@ import LikedSongs from './components/LikedSongs';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ReactGA from 'react-ga';
 import { createBrowserHistory } from 'history';
-import Helloworld from './components/Helloworld'
+import Helloworld from './components/Helloworld';
+import { MixpanelConsumer } from 'react-mixpanel';
 
 const history = createBrowserHistory();
 
@@ -19,14 +20,17 @@ class App extends Component {
   render() {
     return (
       <Router history={history}>
-        <ApiRunner />
-        <Route exact path='/' render={props => <Auth {...props} />} />
-        <Route
+        <MixpanelConsumer>
+          {mixpanel => <ApiRunner mixpanel={mixpanel} />}
+          {/* {mixpanel => <LikedSongs {...mixpanel} />} */}
+        </MixpanelConsumer>
+        <Route // Here we need to wrap this route within a <MixpanelConsumer>
           exact
           path='/dashboard'
           render={props => <LikedSongs {...props} />}
         />
-        <Route exact path='/helloworld' component={Helloworld}/>
+        <Route exact path='/helloworld' component={Helloworld} />
+        <Route exact path='/' render={props => <Auth {...props} />} />
       </Router>
     );
   }

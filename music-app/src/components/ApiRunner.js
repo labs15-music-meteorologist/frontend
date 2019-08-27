@@ -2,6 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getWelcome } from '../actions';
 
+// Styles imports
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+
 class ApiRunner extends React.Component {
   constructor() {
     super();
@@ -15,11 +19,15 @@ class ApiRunner extends React.Component {
     this.props.mixpanel.track('Homepage Visit');
   }
 
+  // Material UI
+
   render() {
     return this.props.message ? (
       <div>
         <h1>API RUNNER</h1>
-        <h1>{this.props.message}</h1>
+        <Typography variant='h4' gutterBottom>
+          {this.props.message}
+        </Typography>
       </div>
     ) : (
       <h1>Loading...</h1>

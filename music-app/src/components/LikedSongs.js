@@ -1,23 +1,49 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Song from './Song.js';
-import { getlikedSongs } from '../actions';
-
-const token = localStorage.getItem('token');
+import { getlikedSongs, getUsers } from '../actions';
+import { Mixpanel } from '../analytics/Mixpanel';
 
 class LikedSongs extends React.Component {
   componentDidMount() {
-    this.props.getlikedSongs(token);
+    this.props.getlikedSongs();
+    this.props.getUsers();
+    Mixpanel.track('Spotify Login');
+
+    // // Mixpanel Tracking
+    // Mixpanel.identify(this.props.user.display_name);
+    // Mixpanel.track('Successful login');
+    // Mixpanel.people.set({
+    //   $first_name: this.props.user.first_name,
+    //   $last_name: this.props.user.last_name,
+    // });
   }
 
+  logout = e => {
+    e.preventDefault();
+    localStorage.removeItem('token');
+    this.props.history.push('/helloworld');
+  };
+
   render() {
-    console.log(this.props.songs);
+    if (this.props.fetchingLikedSongs) {
+      return <h1>Loading...</h1>;
+    }
     return (
       <div>
-        <h1>Liked Songs Dashboard</h1>
-        {this.props.songs.map(song => (
-          <Song song={song} />
-        ))}
+        <button onClick={e => this.logout(e)}>Logout</button>
+        <div>
+          <h1>Liked Songs Dashboard</h1>
+          {this.props.songs.map(song => (
+            <Song song={song} id={song.track.id} />
+          ))}
+        </div>
+        <div>
+          <h1>Users</h1>
+          {this.props.users.map(user => (
+            <p>{user.display_name}</p>
+          ))}
+        </div>
       </div>
     );
   }
@@ -25,9 +51,10 @@ class LikedSongs extends React.Component {
 
 const mapStateToProps = state => ({
   songs: state.likedSongsReducer.songs,
+  users: state.getUsersReducer.users,
 });
 
 export default connect(
   mapStateToProps,
-  { getlikedSongs },
+  { getlikedSongs, getUsers },
 )(LikedSongs);

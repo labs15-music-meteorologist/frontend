@@ -11,13 +11,17 @@ export const getUsers = () => dispatch => {
     type: GET_USERS_FETCHING
   });
   axios
-    .get(url)
+    .get(`${url}v1/users`)
     .then(res => {
       dispatch({
         type: GET_USERS_SUCCESS,
+<<<<<<< HEAD
         payload: res
+=======
+        payload: res.data,
+>>>>>>> 5a438ec828dae0036d349d0e2bfdce60d8717a6e
       });
-      console.log(res);
+      console.log('ACTION', res.data);
     })
     .catch(err => {
       dispatch({
@@ -55,13 +59,17 @@ export const GET_LIKEDSONGS_FETCHING = 'GET_LIKEDSONGS_FETCHING';
 export const GET_LIKEDSONGS_SUCCESS = 'GET_LIKEDSONGS_SUCCESS';
 export const GET_LIKEDSONGS_FAILURE = 'GET_LIKEDSONGS_FAILURE';
 
-export const getlikedSongs = token => dispatch => {
+export const getlikedSongs = () => dispatch => {
   dispatch({
     type: GET_LIKEDSONGS_FETCHING
   });
 
   var config = {
+<<<<<<< HEAD
     headers: { Authorization: 'Bearer ' + token }
+=======
+    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
+>>>>>>> 5a438ec828dae0036d349d0e2bfdce60d8717a6e
   };
 
   axios
@@ -76,6 +84,35 @@ export const getlikedSongs = token => dispatch => {
       dispatch({
         type: GET_LIKEDSONGS_FAILURE,
         payload: err
+      });
+    });
+};
+
+export const GET_TRACK_INFO_FETCHING = 'GET_TRACK_INFO_FETCHING';
+export const GET_TRACK_INFO_SUCCESS = 'GET_TRACK_INFO_SUCCESS';
+export const GET_TRACK_INFO_FAILURE = 'GET_TRACK_INFO_FAILURE';
+
+export const getTrackInfo = id => dispatch => {
+  dispatch({
+    type: GET_TRACK_INFO_FETCHING,
+  });
+
+  var config = {
+    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
+  };
+
+  axios
+    .get(`https://api.spotify.com/v1/audio-features/${id}`, config)
+    .then(res => {
+      dispatch({
+        type: GET_TRACK_INFO_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_TRACK_INFO_FAILURE,
+        payload: err,
       });
     });
 };

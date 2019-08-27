@@ -25,11 +25,16 @@ const hash = window.location.hash
 window.location.hash = '';
 
 export class Auth extends Component {
+
+
   componentDidMount() {
     let _token = hash.access_token;
+    console.log('TOKEN', _token); 
+    console.log('HASH TOKEN', hash.access_token)
     if (_token) {
       localStorage.setItem('token', _token);
-      console.log(_token);
+      // window.location.href = '/dashboard';
+      this.props.history.push('/dashboard'); 
     }
   }
 

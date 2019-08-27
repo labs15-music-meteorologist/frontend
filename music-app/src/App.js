@@ -6,7 +6,11 @@ import LikedSongs from './components/LikedSongs';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ReactGA from 'react-ga';
 import { createBrowserHistory } from 'history';
+<<<<<<< HEAD
 import SpotifyPlayer from './components/Player';
+=======
+import Helloworld from './components/Helloworld'
+>>>>>>> 5a438ec828dae0036d349d0e2bfdce60d8717a6e
 
 const history = createBrowserHistory();
 
@@ -20,9 +24,19 @@ class App extends Component {
     return (
       <Router history={history}>
         <ApiRunner />
+<<<<<<< HEAD
         <Route exact path='/' component={Auth} />
         <Route exact path='/dashboard' component={LikedSongs} />
         <Route exact path='/player' component={SpotifyPlayer} />
+=======
+        <Route exact path='/' render={props => <Auth {...props} />} />
+        <Route
+          exact
+          path='/dashboard'
+          render={props => <LikedSongs {...props} />}
+        />
+        <Route exact path='/helloworld' component={Helloworld}/>
+>>>>>>> 5a438ec828dae0036d349d0e2bfdce60d8717a6e
       </Router>
     );
   }

@@ -28,9 +28,7 @@ class App extends Component {
           exact
           path='/dashboard'
           render={(props, mixpanel) => (
-            <MixpanelConsumer>
-              <LikedSongs {...props} mixpanel={mixpanel} />
-            </MixpanelConsumer>
+            <LikedSongs {...props} mixpanel={mixpanel} />
           )}
         />
         <Route exact path='/helloworld' component={Helloworld} />

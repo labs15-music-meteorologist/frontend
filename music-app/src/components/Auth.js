@@ -8,7 +8,8 @@ const scopes = [
   'streaming',
   'user-read-currently-playing',
   'user-read-playback-state',
-  'user-library-read'
+  'user-library-read',
+  'user-modify-playback-state'
 ];
 
 const hash = window.location.hash

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
 
 const clientId = '256aebf9b04a4f5480a757f770864028'; // testing ENV
@@ -23,6 +24,19 @@ const hash = window.location.hash
 
 window.location.hash = '';
 
+// Material styling
+
+const useStyles = makeStyles(theme => ({
+  button: {
+    margin: theme.spacing(1),
+  },
+  input: {
+    display: 'none',
+  },
+}));
+
+// const classes = useStyles();
+
 export class Auth extends Component {
   componentDidMount() {
     let _token = hash.access_token;
@@ -37,10 +51,14 @@ export class Auth extends Component {
   render() {
     return (
       <div>
-        <a
-          href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${encodeURIComponent('user-read-private user-read-email')}&response_type=token&show_dialog=true`}>
+        <Button
+          variant='contained'
+          className={useStyles.button}
+          href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${encodeURIComponent(
+            'user-read-private user-read-email',
+          )}&response_type=token&show_dialog=true`}>
           Login
-        </a>
+        </Button>
       </div>
     );
   }

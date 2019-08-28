@@ -24,7 +24,9 @@ class ApiRunner extends React.Component {
   render() {
     return this.props.message ? (
       <div>
-        <h1>API RUNNER</h1>
+        <Typography variant='h4' gutterBottom>
+          API RUNNER
+        </Typography>
         <Typography variant='h4' gutterBottom>
           {this.props.message}
         </Typography>

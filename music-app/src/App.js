@@ -9,6 +9,7 @@ import { createBrowserHistory } from 'history';
 import { MixpanelConsumer } from 'react-mixpanel';
 import Helloworld from './components/Helloworld';
 import Info from './components/Info';
+import SpotifyPlayer from './components/Player';
 
 const history = createBrowserHistory();
 
@@ -25,13 +26,14 @@ class App extends Component {
           {mixpanel => <ApiRunner mixpanel={mixpanel} />}
           {/* {mixpanel => <LikedSongs {...mixpanel} />} */}
         </MixpanelConsumer>
-        <Route // Here we need to wrap this route within a <MixpanelConsumer>
+        <Route exact path='/player' component={SpotifyPlayer} />
+        <Route exact path='/' render={props => <Auth {...props} />} />
+        <Route
           exact
           path='/dashboard'
           render={props => <LikedSongs {...props} />}
         />
-        <Route exact path='/' render={props => <Auth {...props} />} />
-        <Route exact path='/helloworld' component={Helloworld}/>
+        <Route exact path='/helloworld' component={Helloworld} />
         <Route exact path='/info' render={props => <Info {...props} />} />
       </Router>
     );

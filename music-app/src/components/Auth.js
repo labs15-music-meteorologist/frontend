@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import { Paper, Grid } from '@material-ui/core';
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
 
 const clientId = '256aebf9b04a4f5480a757f770864028'; // testing ENV
 const redirectUri = 'http://localhost:3000/'; // has to match exactly with spotify dashboard redirect uri
 const scopes = [
+  'streaming',
   'user-read-currently-playing',
   'user-read-playback-state',
   'user-library-read',
@@ -28,10 +30,18 @@ window.location.hash = '';
 
 const useStyles = makeStyles(theme => ({
   button: {
-    margin: theme.spacing(1),
+    padding: theme.spacing(1),
   },
   input: {
     display: 'none',
+  },
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: 0,
+    margin: 'auto',
+    maxWidth: 500,
   },
 }));
 

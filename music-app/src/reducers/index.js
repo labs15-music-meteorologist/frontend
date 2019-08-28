@@ -8,5 +8,5 @@ export default combineReducers({
   getUsersReducer,
   apiRunningReducer,
   likedSongsReducer,
-  getTrackInfoReducer,
+  getTrackInfoReducer
 });

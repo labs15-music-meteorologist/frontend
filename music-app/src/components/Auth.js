@@ -7,6 +7,7 @@ export const authEndpoint = 'https://accounts.spotify.com/authorize';
 const clientId = '256aebf9b04a4f5480a757f770864028'; // testing ENV
 const redirectUri = 'http://localhost:3000/'; // has to match exactly with spotify dashboard redirect uri
 const scopes = [
+  'streaming',
   'user-read-currently-playing',
   'user-read-playback-state',
   'user-library-read',

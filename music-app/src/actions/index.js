@@ -8,21 +8,21 @@ const url = process.env.REACT_APP_BACKEND_BASE_URL;
 
 export const getUsers = () => dispatch => {
   dispatch({
-    type: GET_USERS_FETCHING,
+    type: GET_USERS_FETCHING
   });
   axios
     .get(`${url}v1/users`)
     .then(res => {
       dispatch({
         type: GET_USERS_SUCCESS,
-        payload: res.data,
+        payload: res.data
       });
       console.log('ACTION', res.data);
     })
     .catch(err => {
       dispatch({
         type: GET_USERS_FAILURE,
-        payload: err,
+        payload: err
       });
     });
 };
@@ -33,20 +33,20 @@ export const GET_WELCOME_FAILURE = 'GET_WELCOME_FAILURE';
 
 export const getWelcome = () => dispatch => {
   dispatch({
-    type: GET_WELCOME_FETCHING,
+    type: GET_WELCOME_FETCHING
   });
   axios
     .get(url)
     .then(res => {
       dispatch({
         type: GET_WELCOME_SUCCESS,
-        payload: res.data,
+        payload: res.data
       });
     })
     .catch(err => {
       dispatch({
         type: GET_WELCOME_FAILURE,
-        payload: err,
+        payload: err
       });
     });
 };
@@ -57,11 +57,11 @@ export const GET_LIKEDSONGS_FAILURE = 'GET_LIKEDSONGS_FAILURE';
 
 export const getlikedSongs = () => dispatch => {
   dispatch({
-    type: GET_LIKEDSONGS_FETCHING,
+    type: GET_LIKEDSONGS_FETCHING
   });
 
   var config = {
-    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
+    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
   };
 
   axios
@@ -69,13 +69,13 @@ export const getlikedSongs = () => dispatch => {
     .then(res => {
       dispatch({
         type: GET_LIKEDSONGS_SUCCESS,
-        payload: res.data,
+        payload: res.data
       });
     })
     .catch(err => {
       dispatch({
         type: GET_LIKEDSONGS_FAILURE,
-        payload: err,
+        payload: err
       });
     });
 };
@@ -86,11 +86,11 @@ export const GET_TRACK_INFO_FAILURE = 'GET_TRACK_INFO_FAILURE';
 
 export const getTrackInfo = id => dispatch => {
   dispatch({
-    type: GET_TRACK_INFO_FETCHING,
+    type: GET_TRACK_INFO_FETCHING
   });
 
   var config = {
-    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
+    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
   };
 
   axios
@@ -98,13 +98,13 @@ export const getTrackInfo = id => dispatch => {
     .then(res => {
       dispatch({
         type: GET_TRACK_INFO_SUCCESS,
-        payload: res.data,
+        payload: res.data
       });
     })
     .catch(err => {
       dispatch({
         type: GET_TRACK_INFO_FAILURE,
-        payload: err,
+        payload: err
       });
     });
 };

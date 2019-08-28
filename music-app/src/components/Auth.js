@@ -11,6 +11,8 @@ const scopes = [
   'user-read-currently-playing',
   'user-read-playback-state',
   'user-library-read',
+  'user-read-email',
+  'user-read-private',
 ];
 
 const hash = window.location.hash
@@ -65,7 +67,7 @@ export class Auth extends Component {
           variant='contained'
           className={useStyles.button}
           href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${encodeURIComponent(
-            'user-read-private user-read-email',
+            scopes,
           )}&response_type=token&show_dialog=true`}>
           Login
         </Button>

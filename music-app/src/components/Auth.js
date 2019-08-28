@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import { Paper, Grid } from '@material-ui/core';
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
 
 const clientId = '256aebf9b04a4f5480a757f770864028'; // testing ENV
@@ -28,10 +29,18 @@ window.location.hash = '';
 
 const useStyles = makeStyles(theme => ({
   button: {
-    margin: theme.spacing(1),
+    padding: theme.spacing(1),
   },
   input: {
     display: 'none',
+  },
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: 0,
+    margin: 'auto',
+    maxWidth: 500,
   },
 }));
 
@@ -48,18 +57,21 @@ export class Auth extends Component {
       this.props.history.push('/dashboard');
     }
   }
-
   render() {
     return (
-      <div>
-        <Button
-          variant='contained'
-          className={useStyles.button}
-          href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
-            '%20',
-          )}&response_type=token&show_dialog=true`}>
-          Login
-        </Button>
+      <div className={useStyles.root}>
+        <Grid container spacing={2}>
+          <Grid item>
+            <Button
+              variant='contained'
+              className={useStyles.button}
+              href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${encodeURIComponent(
+                'user-read-private user-read-email',
+              )}&response_type=token&show_dialog=true`}>
+              Login
+            </Button>
+          </Grid>
+        </Grid>
       </div>
     );
   }

@@ -60,19 +60,15 @@ export class Auth extends Component {
   }
   render() {
     return (
-      <div className={useStyles.root}>
-        <Grid container spacing={2}>
-          <Grid item>
-            <Button
-              variant='contained'
-              className={useStyles.button}
-              href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${encodeURIComponent(
-                'user-read-private user-read-email',
-              )}&response_type=token&show_dialog=true`}>
-              Login
-            </Button>
-          </Grid>
-        </Grid>
+      <div>
+        <Button
+          variant='contained'
+          className={useStyles.button}
+          href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${encodeURIComponent(
+            'user-read-private user-read-email',
+          )}&response_type=token&show_dialog=true`}>
+          Login
+        </Button>
       </div>
     );
   }

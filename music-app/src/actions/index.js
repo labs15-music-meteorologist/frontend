@@ -87,6 +87,7 @@ export const GET_TRACK_INFO_FAILURE = 'GET_TRACK_INFO_FAILURE';
 export const getTrackInfo = id => dispatch => {
   dispatch({
     type: GET_TRACK_INFO_FETCHING,
+    payload:  { [id]: { fetching: true }}
   });
 
   var config = {
@@ -98,13 +99,13 @@ export const getTrackInfo = id => dispatch => {
     .then(res => {
       dispatch({
         type: GET_TRACK_INFO_SUCCESS,
-        payload: res.data,
+        payload: { [id] : { fetching: false, data: res.data }},
       });
     })
     .catch(err => {
       dispatch({
         type: GET_TRACK_INFO_FAILURE,
-        payload: err,
+        payload: { [id]: { fetching: false, err }},
       });
     });
 };

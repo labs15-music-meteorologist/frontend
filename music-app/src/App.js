@@ -21,21 +21,23 @@ history.listen(location => {
 class App extends Component {
   render() {
     return (
-      <Router history={history}>
-        <NavBar />
-        <MixpanelConsumer>
-          {mixpanel => <ApiRunner mixpanel={mixpanel} />}
-          {/* {mixpanel => <LikedSongs {...mixpanel} />} */}
-        </MixpanelConsumer>
-        <Route // Here we need to wrap this route within a <MixpanelConsumer>
-          exact
-          path='/dashboard'
-          render={props => <LikedSongs {...props} />}
-        />
-        {/* <Route exact path='/' render={props => <Auth {...props} />} /> */}
-        <Route exact path='/helloworld' component={Helloworld} />
-        <Route exact path='/info' render={props => <Info {...props} />} />
-      </Router>
+      <div className='App'>
+        <Router history={history}>
+          <NavBar />
+          <MixpanelConsumer>
+            {mixpanel => <ApiRunner mixpanel={mixpanel} />}
+            {/* {mixpanel => <LikedSongs {...mixpanel} />} */}
+          </MixpanelConsumer>
+          <Route // Here we need to wrap this route within a <MixpanelConsumer>
+            exact
+            path='/dashboard'
+            render={props => <LikedSongs {...props} />}
+          />
+          {/* <Route exact path='/' render={props => <Auth {...props} />} /> */}
+          <Route exact path='/helloworld' component={Helloworld} />
+          <Route exact path='/info' render={props => <Info {...props} />} />
+        </Router>
+      </div>
     );
   }
 }

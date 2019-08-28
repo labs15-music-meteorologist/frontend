@@ -109,3 +109,33 @@ export const getTrackInfo = id => dispatch => {
       });
     });
 };
+
+export const GET_SPOTIFY_PRIVATE_ACCOUNT_DETAILS_FETCHING = 'GET_SPOTIFY_PRIVATE_ACCOUNT_DETAILS_FETCHING';
+export const GET_SPOTIFY_PRIVATE_ACCOUNT_DETAILS_SUCCESS = 'GET_SPOTIFY_PRIVATE_ACCOUNT_DETAILS_SUCCESS';
+export const GET_SPOTIFY_PRIVATE_ACCOUNT_DETAILS_FAILURE = 'GET_SPOTIFY_PRIVATE_ACCOUNT_DETAILS_FAILURE';
+
+export const getSpotifyAccountDetails = () => dispatch => {
+  dispatch({
+    type: GET_SPOTIFY_PRIVATE_ACCOUNT_DETAILS_FETCHING,
+  });
+
+  var config = {
+    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
+  };
+
+  axios
+    .get(`https://api.spotify.com/v1/me`, config)
+    .then(res => {
+      if (!('product' in res.data)) {res.data.product = 'unprovided'}
+      dispatch({
+        type: GET_SPOTIFY_PRIVATE_ACCOUNT_DETAILS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_SPOTIFY_PRIVATE_ACCOUNT_DETAILS_FAILURE,
+        payload: err,
+      });
+    });
+};

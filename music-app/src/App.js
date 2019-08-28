@@ -6,8 +6,9 @@ import LikedSongs from './components/LikedSongs';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ReactGA from 'react-ga';
 import { createBrowserHistory } from 'history';
-import Helloworld from './components/Helloworld';
 import { MixpanelConsumer } from 'react-mixpanel';
+import Helloworld from './components/Helloworld';
+import Info from './components/Info';
 
 const history = createBrowserHistory();
 
@@ -29,8 +30,9 @@ class App extends Component {
           path='/dashboard'
           render={props => <LikedSongs {...props} />}
         />
-        <Route exact path='/helloworld' component={Helloworld} />
         <Route exact path='/' render={props => <Auth {...props} />} />
+        <Route exact path='/helloworld' component={Helloworld}/>
+        <Route exact path='/info' render={props => <Info {...props} />} />
       </Router>
     );
   }

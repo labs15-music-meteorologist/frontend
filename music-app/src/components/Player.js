@@ -16,7 +16,7 @@ class MusicPlayer extends Component {
       imageUrl: '',
       playing: false,
       position: 0,
-      duration: 1
+      duration: 1,
     };
     // this will later be set by setInterval
     this.playerCheckInterval = null;
@@ -41,7 +41,7 @@ class MusicPlayer extends Component {
       const {
         current_track: currentTrack,
         position,
-        duration
+        duration,
       } = state.track_window;
       const trackName = currentTrack.name;
       const albumName = currentTrack.album.name;
@@ -55,12 +55,12 @@ class MusicPlayer extends Component {
         trackName,
         albumName,
         artistName,
-        playing
+        playing,
       });
     } else {
       // state was null, user might have swapped to another device
       this.setState({
-        error: 'Looks like you might have swapped to another device?'
+        error: 'Looks like you might have swapped to another device?',
       });
     }
   }
@@ -115,7 +115,7 @@ class MusicPlayer extends Component {
         name: 'Music Meteorologist Spotify Player',
         getOAuthToken: cb => {
           cb(token);
-        }
+        },
       });
       // set up the player's event handlers
       this.createEventHandlers();
@@ -127,14 +127,14 @@ class MusicPlayer extends Component {
 
   getCurrentSong() {
     const config = {
-      headers: { Authorization: 'Bearer ' + this.state.token }
+      headers: { Authorization: 'Bearer ' + this.state.token },
     };
     axios
       .get('https://api.spotify.com/v1/me/player/currently-playing', config)
       .then(res => {
         console.log(res.data.item);
         this.setState({
-          imageUrl: res.data.item.album.images[0].url
+          imageUrl: res.data.item.album.images[0].url,
         });
       })
       .catch(err => {
@@ -162,14 +162,14 @@ class MusicPlayer extends Component {
       method: 'PUT',
       headers: {
         authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         device_ids: [deviceId],
         // true: start playing music if it was paused on the other device
         // false: paused if paused on other device, start playing music otherwise
-        play: true
-      })
+        play: true,
+      }),
     });
   }
 
@@ -181,7 +181,7 @@ class MusicPlayer extends Component {
       artistName,
       albumName,
       error,
-      playing
+      playing,
     } = this.state;
 
     return (

@@ -11,7 +11,7 @@ import thunk from 'redux-thunk';
 import ReactGA from 'react-ga';
 import mixpanel from 'mixpanel-browser';
 import { MixpanelProvider } from 'react-mixpanel';
-import 'typeface-roboto';
+// import 'typeface-roboto';
 
 // Tracking IDs //
 ReactGA.initialize('UA-145979080-2');

@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ReactGA from 'react-ga';
 import { createBrowserHistory } from 'history';
 import { MixpanelConsumer } from 'react-mixpanel';
-import Helloworld from './components/Helloworld';
+import Logout from './components/Logout';
 import Info from './components/Info';
 import NavBar from './components/NavBar';
 import SpotifyPlayer from './components/Player';
@@ -35,7 +35,7 @@ class App extends Component {
             render={props => <LikedSongs {...props} />}
           />
           {/* <Route exact path='/' render={props => <Auth {...props} />} /> */}
-          <Route exact path='/helloworld' component={Helloworld} />
+          <Route exact path='/logout' component={Logout} />
           <Route exact path='/info' render={props => <Info {...props} />} />
         </Router>
       </div>

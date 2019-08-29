@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 // import { Mixpanel } from '../analytics/Mixpanel';
 
-export class Helloworld extends Component {
+export class Logout extends Component {
   render() {
     return (
       <div>
-        <h1>Hello World</h1>
+        <h2>Thank you for vising Music Meteorologist!</h2>
       </div>
     );
   }
 }
 
-export default Helloworld;
+export default Logout;

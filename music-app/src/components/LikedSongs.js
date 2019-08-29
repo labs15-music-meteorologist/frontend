@@ -4,6 +4,7 @@ import Song from './Song.js';
 import { getlikedSongs, getUsers, getSpotifyAccountDetails } from '../actions';
 import { Mixpanel } from '../analytics/Mixpanel';
 import Footer from './Footer.js';
+import Chart from './Chart';
 
 class LikedSongs extends React.Component {
   componentDidMount() {
@@ -54,6 +55,7 @@ class LikedSongs extends React.Component {
           ))}
         </div>
         <Footer />
+        <Chart />
       </div>
     );
   }

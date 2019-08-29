@@ -56,6 +56,7 @@ export class Auth extends Component {
     let _token = hash.access_token;
     console.log('TOKEN', _token);
     console.log('HASH TOKEN', hash.access_token);
+    console.log('PROPS', this.props);
     if (_token) {
       localStorage.setItem('token', _token);
       // window.location.href = '/dashboard';

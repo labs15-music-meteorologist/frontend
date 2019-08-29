@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Typography, AppBar } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import LikedSongs from './LikedSongs.js';
 import MusicPlayer from './Player.js';
 // import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,32 +14,40 @@ import List from '@material-ui/core/List';
 // import MoreIcon from '@material-ui/icons/MoreVert';
 
 class Dashboard extends React.Component {
+  logout = e => {
+    e.preventDefault();
+    localStorage.removeItem('token');
+    this.props.history.push('/logout');
+  };
   render() {
-    console.log('PROPS', this.props);
     return (
-      <Grid
-        container
-        direction='row'
-        justify='space-around'
-        alignItems='center'>
-        <Grid item>
-          <Paper
-            style={{
-              maxHeight: 300,
-              width: 250,
-              overflow: 'auto',
-              backgroundColor: 'black',
-              color: 'white',
-            }}>
-            <List>
-              <LikedSongs props={this.props} />
-            </List>
-          </Paper>
+      <>
+        <button onClick={e => this.logout(e)}>Logout</button>
+        <Grid
+          container
+          direction='row'
+          justify='space-around'
+          alignItems='center'>
+          <Grid item>
+            <Paper
+              style={{
+                maxHeight: 450,
+                width: 400,
+                overflow: 'auto',
+                // backgroundColor: 'black',
+                backgroundColor: `rgba(${0}, ${0}, ${17}, ${0.6})`,
+                color: 'white',
+              }}>
+              <List>
+                <LikedSongs props={this.props} />
+              </List>
+            </Paper>
+          </Grid>
+          <Grid item>
+            <MusicPlayer />
+          </Grid>
         </Grid>
-        <Grid item>
-          <MusicPlayer />
-        </Grid>
-      </Grid>
+      </>
     );
   }
 }

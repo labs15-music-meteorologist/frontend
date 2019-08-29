@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Song from './Song.js';
 import { getlikedSongs, getUsers, getSpotifyAccountDetails } from '../actions';
 import { Mixpanel } from '../analytics/Mixpanel';
+import { Grid } from '@material-ui/core';
 
 class LikedSongs extends React.Component {
   componentDidMount() {
@@ -23,12 +24,6 @@ class LikedSongs extends React.Component {
     // });
   }
 
-  logout = e => {
-    e.preventDefault();
-    localStorage.removeItem('token');
-    this.props.history.push('/logout');
-  };
-
   render() {
     if (this.props.fetchingLikedSongs) {
       return <h1>Loading...</h1>;
@@ -36,23 +31,22 @@ class LikedSongs extends React.Component {
       //   this.props.history.push('/info')
     }
     return (
-      <div>
-        <button onClick={e => this.logout(e)}>Logout</button>
-        <div>
+      <Grid containter>
+        <Grid item>
           <h1>Liked Songs Dashboard</h1>
           {this.props.songs.map(song => (
             <Song song={song} id={song.track.id} key={song.track.id} />
           ))}
-        </div>
-        <div>
+        </Grid>
+        <Grid item>
           <h1>Users</h1>
           {this.props.users.map(user => (
             <div>
               <p>{user.display_name}</p>
             </div>
           ))}
-        </div>
-      </div>
+        </Grid>
+      </Grid>
     );
   }
 }

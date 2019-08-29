@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Song from './Song.js';
 import { getlikedSongs, getUsers, getSpotifyAccountDetails } from '../actions';
 import { Mixpanel } from '../analytics/Mixpanel';
+import Footer from './Footer.js';
 
 class LikedSongs extends React.Component {
   componentDidMount() {
@@ -32,8 +33,8 @@ class LikedSongs extends React.Component {
   render() {
     if (this.props.fetchingLikedSongs) {
       return <h1>Loading...</h1>;
-      // } else if(this.props.spotifyUser.product && this.props.fetchingSpotifyUser === false && this.props.spotifyUser.product !== 'premium') {
-      //   this.props.history.push('/info')
+    // } else if(this.props.spotifyUser.product && this.props.fetchingSpotifyUser === false && this.props.spotifyUser.product !== 'premium') {
+    //   this.props.history.push('/info')
     }
     return (
       <div>
@@ -52,6 +53,7 @@ class LikedSongs extends React.Component {
             </div>
           ))}
         </div>
+        <Footer />
       </div>
     );
   }

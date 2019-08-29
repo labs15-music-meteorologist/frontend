@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import './App.css';
-import ApiRunner from './components/ApiRunner';
-import Auth from './components/Auth';
-import LikedSongs from './components/LikedSongs';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ReactGA from 'react-ga';
 import { createBrowserHistory } from 'history';
 import { MixpanelConsumer } from 'react-mixpanel';
+
+import ApiRunner from './components/ApiRunner';
+import Auth from './components/Auth';
+import LikedSongs from './components/LikedSongs';
 import Logout from './components/Logout';
 import Info from './components/Info';
 import NavBar from './components/NavBar';
 import MusicPlayer from './components/Player';
+import View from './components/View.js';
+import Footer from './components/Footer.js';
 
 const history = createBrowserHistory();
 
@@ -21,8 +24,6 @@ history.listen(location => {
 
 class App extends Component {
   render() {
-    // console.log('props', props);
-    // console.log('this props', this.props);
     return (
       <div className='App'>
         <Router history={history}>
@@ -40,6 +41,8 @@ class App extends Component {
           <Route exact path='/logout' component={Logout} />
           <Route exact path='/info' render={props => <Info {...props} />} />
           <Route exact path='/player' component={MusicPlayer} />
+          <Route exact path='/view' component={View} />
+          <Footer />
         </Router>
       </div>
     );

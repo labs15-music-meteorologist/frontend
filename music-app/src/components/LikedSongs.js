@@ -13,7 +13,7 @@ class LikedSongs extends React.Component {
 
     // Example tracking once implemented
     this.props.getSpotifyAccountDetails();
-/*     Mixpanel.track('Spotify Login'); */
+    /*     Mixpanel.track('Spotify Login'); */
 
     // // Mixpanel Tracking
     // Mixpanel.identify(this.props.user.display_name);
@@ -37,19 +37,19 @@ class LikedSongs extends React.Component {
     //   this.props.history.push('/info')
     }
     return (
-      <div >
+      <div>
         <button onClick={e => this.logout(e)}>Logout</button>
         <div>
           <h1>Liked Songs Dashboard</h1>
           {this.props.songs.map(song => (
-            <Song song={song} id={song.track.id} key={song.track.id}/>
+            <Song song={song} id={song.track.id} key={song.track.id} />
           ))}
         </div>
         <div>
           <h1>Users</h1>
           {this.props.users.map(user => (
             <div>
-            <p>{user.display_name}</p>
+              <p>{user.display_name}</p>
             </div>
           ))}
         </div>
@@ -63,7 +63,7 @@ const mapStateToProps = state => ({
   songs: state.likedSongsReducer.songs,
   users: state.getUsersReducer.users,
   spotifyUser: state.getUsersReducer.spotifyUser,
-  fetchingSpotifyUser: state.getUsersReducer.fetchingSpotifyUser
+  fetchingSpotifyUser: state.getUsersReducer.fetchingSpotifyUser,
 });
 
 export default connect(

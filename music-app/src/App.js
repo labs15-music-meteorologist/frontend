@@ -7,8 +7,9 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ReactGA from 'react-ga';
 import { createBrowserHistory } from 'history';
 import { MixpanelConsumer } from 'react-mixpanel';
-import Helloworld from './components/Helloworld';
+import Logout from './components/Logout';
 import Info from './components/Info';
+import NavBar from './components/NavBar';
 import SpotifyPlayer from './components/Player';
 
 const history = createBrowserHistory();
@@ -21,21 +22,23 @@ history.listen(location => {
 class App extends Component {
   render() {
     return (
-      <Router history={history}>
-        <MixpanelConsumer>
-          {mixpanel => <ApiRunner mixpanel={mixpanel} />}
-          {/* {mixpanel => <LikedSongs {...mixpanel} />} */}
-        </MixpanelConsumer>
-        <Route exact path='/player' component={SpotifyPlayer} />
-        <Route exact path='/' render={props => <Auth {...props} />} />
-        <Route
-          exact
-          path='/dashboard'
-          render={props => <LikedSongs {...props} />}
-        />
-        <Route exact path='/helloworld' component={Helloworld} />
-        <Route exact path='/info' render={props => <Info {...props} />} />
-      </Router>
+      <div className='App'>
+        <Router history={history}>
+          <NavBar />
+          <MixpanelConsumer>
+            {mixpanel => <ApiRunner mixpanel={mixpanel} />}
+            {/* {mixpanel => <LikedSongs {...mixpanel} />} */}
+          </MixpanelConsumer>
+          <Route // Here we need to wrap this route within a <MixpanelConsumer>
+            exact
+            path='/dashboard'
+            render={props => <LikedSongs {...props} />}
+          />
+          {/* <Route exact path='/' render={props => <Auth {...props} />} /> */}
+          <Route exact path='/logout' component={Logout} />
+          <Route exact path='/info' render={props => <Info {...props} />} />
+        </Router>
+      </div>
     );
   }
 }

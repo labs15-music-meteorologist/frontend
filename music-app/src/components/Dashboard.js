@@ -32,10 +32,10 @@ class Dashboard extends React.Component {
             <Paper
               style={{
                 maxHeight: 450,
-                width: 400,
+                width: 380,
                 overflow: 'auto',
                 // backgroundColor: 'black',
-                backgroundColor: `rgba(${0}, ${0}, ${17}, ${0.6})`,
+                backgroundColor: `rgba(${20}, ${20}, ${20}, ${0.85})`,
                 color: 'white',
               }}>
               <List>

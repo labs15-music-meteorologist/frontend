@@ -10,7 +10,7 @@ import { MixpanelConsumer } from 'react-mixpanel';
 import Logout from './components/Logout';
 import Info from './components/Info';
 import NavBar from './components/NavBar';
-import SpotifyPlayer from './components/Player';
+import MusicPlayer from './components/Player';
 
 const history = createBrowserHistory();
 
@@ -21,6 +21,8 @@ history.listen(location => {
 
 class App extends Component {
   render() {
+    // console.log('props', props);
+    // console.log('this props', this.props);
     return (
       <div className='App'>
         <Router history={history}>
@@ -34,9 +36,10 @@ class App extends Component {
             path='/dashboard'
             render={props => <LikedSongs {...props} />}
           />
-          {/* <Route exact path='/' render={props => <Auth {...props} />} /> */}
+          <Route exact path='/' render={props => <Auth {...props} />} />
           <Route exact path='/logout' component={Logout} />
           <Route exact path='/info' render={props => <Info {...props} />} />
+          <Route exact path='/player' component={MusicPlayer} />
         </Router>
       </div>
     );

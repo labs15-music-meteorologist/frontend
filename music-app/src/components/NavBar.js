@@ -22,9 +22,9 @@ class NavBar extends React.Component {
           <img src={MusicLogo} style={{ height: 70 }} />
         </Grid>
 
-        <Grid item>
+        {/* <Grid item>
           <Auth />
-        </Grid>
+        </Grid> */}
       </Grid>
     );
   }

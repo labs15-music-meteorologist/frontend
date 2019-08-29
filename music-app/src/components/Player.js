@@ -22,8 +22,7 @@ class MusicPlayer extends Component {
     this.playerCheckInterval = null;
   }
 
-
-  componentDidMount(){
+  componentDidMount() {
     this.handleLogin();
   }
   // when we click the "go" button
@@ -99,8 +98,7 @@ class MusicPlayer extends Component {
       console.log('Let the music play on!');
       // set the deviceId variable, then let's try
       // to swap music playback to *our* player!
-      await this.setState({ deviceId: device_id,
-      loggedIn:true });
+      await this.setState({ deviceId: device_id, loggedIn: true });
       this.transferPlaybackHere();
     });
   }
@@ -136,7 +134,7 @@ class MusicPlayer extends Component {
       .then(res => {
         console.log(res.data);
         this.setState({
-          imageUrl: res.data.item.album.images[0].url,
+          imageUrl: res.data.item.album.images[1].url,
         });
       })
       .catch(err => {
@@ -159,24 +157,27 @@ class MusicPlayer extends Component {
 
   transferPlaybackHere() {
     const { deviceId, token } = this.state;
-    fetch(`https://api.spotify.com/v1/me/player/play?device_id=${this.state.deviceId}`, {
-      method: 'PUT',
-      headers: {
-        authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
+    fetch(
+      `https://api.spotify.com/v1/me/player/play?device_id=${this.state.deviceId}`,
+      {
+        method: 'PUT',
+        headers: {
+          authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          // This is where we will control what music is fed to the user
+          // If we want to direct them to a specific playlist,artist or album we will pass in "context_uri" with its respective uri
+          context_uri:
+            'spotify:user:spotifycharts:playlist:37i9dQZEVXbMDoHDwVN2tF', //Directs User to Global Top 50 playlist curated by spotify
+
+          // In order manipulate the user's queue and feed them a more fluid and unique array of songs we would instead
+          // pass an array of song uris through the "uris" key
+          // The example below if uncommented will direct the user to 3 songs (make sure to comment out the context_uri)
+          // uris:["spotify:track:0aULRU35N9kTj6O1xMULRR","spotify:track:0VgkVdmE4gld66l8iyGjgx","spotify:track:5ry2OE6R2zPQFDO85XkgRb"]
+        }),
       },
-      body: JSON.stringify({
-        // This is where we will control what music is fed to the user
-        // If we want to direct them to a specific playlist,artist or album we will pass in "context_uri" with its respective uri
-        context_uri: "spotify:user:spotifycharts:playlist:37i9dQZEVXbMDoHDwVN2tF" //Directs User to Global Top 50 playlist curated by spotify
-
-        // In order manipulate the user's queue and feed them a more fluid and unique array of songs we would instead
-        // pass an array of song uris through the "uris" key
-        // The example below if uncommented will direct the user to 3 songs (make sure to comment out the context_uri)
-        // uris:["spotify:track:0aULRU35N9kTj6O1xMULRR","spotify:track:0VgkVdmE4gld66l8iyGjgx","spotify:track:5ry2OE6R2zPQFDO85XkgRb"]
-      })
-
-    });
+    );
   }
 
   render() {
@@ -193,7 +194,7 @@ class MusicPlayer extends Component {
     return (
       <div className='App'>
         <div className='App-header'>
-          <h2>Now Playing</h2>
+          <h4>Now Playing</h4>
           <img src={this.state.imageUrl} alt='album-art' />
         </div>
 

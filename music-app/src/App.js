@@ -10,6 +10,7 @@ import { MixpanelConsumer } from 'react-mixpanel';
 import Helloworld from './components/Helloworld';
 import Info from './components/Info';
 import NavBar from './components/NavBar';
+import SpotifyPlayer from './components/Player';
 
 const history = createBrowserHistory();
 

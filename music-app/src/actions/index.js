@@ -87,7 +87,7 @@ export const GET_TRACK_INFO_FAILURE = 'GET_TRACK_INFO_FAILURE';
 export const getTrackInfo = id => dispatch => {
   dispatch({
     type: GET_TRACK_INFO_FETCHING,
-    payload:  { [id]: { fetching: true }}
+    payload: { [id]: { fetching: true } },
   });
 
   var config = {
@@ -99,20 +99,23 @@ export const getTrackInfo = id => dispatch => {
     .then(res => {
       dispatch({
         type: GET_TRACK_INFO_SUCCESS,
-        payload: { [id] : { fetching: false, data: res.data }},
+        payload: { [id]: { fetching: false, data: res.data } },
       });
     })
     .catch(err => {
       dispatch({
         type: GET_TRACK_INFO_FAILURE,
-        payload: { [id]: { fetching: false, err }},
+        payload: { [id]: { fetching: false, err } },
       });
     });
 };
 
-export const GET_SPOTIFY_PRIVATE_ACCOUNT_DETAILS_FETCHING = 'GET_SPOTIFY_PRIVATE_ACCOUNT_DETAILS_FETCHING';
-export const GET_SPOTIFY_PRIVATE_ACCOUNT_DETAILS_SUCCESS = 'GET_SPOTIFY_PRIVATE_ACCOUNT_DETAILS_SUCCESS';
-export const GET_SPOTIFY_PRIVATE_ACCOUNT_DETAILS_FAILURE = 'GET_SPOTIFY_PRIVATE_ACCOUNT_DETAILS_FAILURE';
+export const GET_SPOTIFY_PRIVATE_ACCOUNT_DETAILS_FETCHING =
+  'GET_SPOTIFY_PRIVATE_ACCOUNT_DETAILS_FETCHING';
+export const GET_SPOTIFY_PRIVATE_ACCOUNT_DETAILS_SUCCESS =
+  'GET_SPOTIFY_PRIVATE_ACCOUNT_DETAILS_SUCCESS';
+export const GET_SPOTIFY_PRIVATE_ACCOUNT_DETAILS_FAILURE =
+  'GET_SPOTIFY_PRIVATE_ACCOUNT_DETAILS_FAILURE';
 
 export const getSpotifyAccountDetails = () => dispatch => {
   dispatch({
@@ -126,7 +129,9 @@ export const getSpotifyAccountDetails = () => dispatch => {
   axios
     .get(`https://api.spotify.com/v1/me`, config)
     .then(res => {
-      if (!('product' in res.data)) {res.data.product = 'unprovided'}
+      if (!('product' in res.data)) {
+        res.data.product = 'unprovided';
+      }
       dispatch({
         type: GET_SPOTIFY_PRIVATE_ACCOUNT_DETAILS_SUCCESS,
         payload: res.data,

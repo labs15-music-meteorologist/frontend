@@ -2,6 +2,8 @@ import React from 'react';
 import { getTrackInfo } from '../actions';
 import { connect } from 'react-redux';
 import { Grid, Typography } from '@material-ui/core';
+import { withStyles } from '@material-ui/styles';
+import '../App.css';
 
 class Song extends React.Component {
   componentDidMount() {
@@ -14,26 +16,33 @@ class Song extends React.Component {
     const tf = this.props.tracksInfo[this.props.id];
     const loadingTf = !tf || tf.fetching;
     return (
-      <Grid container direction='row' alignItems='center' wrap='wrap'>
-        <Grid item style={{ padding: 5 }}>
-          <img
-            src={this.props.song.track.album.images[2].url}
-            alt='album art'
-            width='64px'
-          />
+      <div>
+        <Grid
+          container
+          direction='row'
+          alignItems='center'
+          wrap='wrap'
+          className='song'>
+          <Grid item style={{ padding: 5 }}>
+            <img
+              src={this.props.song.track.album.images[2].url}
+              alt='album art'
+              width='64px'
+            />
+          </Grid>
+          <Grid item xs style={{ padding: 5 }}>
+            <Typography
+              style={{ fontSize: 13, fontWeight: 'bold' }}
+              direction='row'>
+              {this.props.song.track.name}
+            </Typography>
+            <Typography style={{ fontSize: 13 }}>
+              {this.props.song.track.artists[0].name}
+            </Typography>
+            {/* <p>Audio Features: {loadingTf ? 'loading....' : tf.data.tempo}</p> */}
+          </Grid>
         </Grid>
-        <Grid item xs style={{ padding: 5 }}>
-          <Typography
-            style={{ fontSize: 13, fontWeight: 'bold' }}
-            direction='row'>
-            {this.props.song.track.name}
-          </Typography>
-          <Typography style={{ fontSize: 13 }}>
-            {this.props.song.track.artists[0].name}
-          </Typography>
-          {/* <p>Audio Features: {loadingTf ? 'loading....' : tf.data.tempo}</p> */}
-        </Grid>
-      </Grid>
+      </div>
     );
   }
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Grid, Typography } from '@material-ui/core';
 
 class MusicPlayer extends Component {
   constructor(props) {
@@ -192,27 +193,27 @@ class MusicPlayer extends Component {
     } = this.state;
 
     return (
-      <div className='App'>
-        <div className='App-header'>
+      <Grid container direction='column' justify='center' alignItems='center'>
+        <Grid item>
           <h4>Now Playing</h4>
           <img src={this.state.imageUrl} alt='album-art' />
-        </div>
+        </Grid>
 
         {error && <p>Error: {error}</p>}
 
-        <div>
+        <Grid item>
           <p>Artist: {artistName}</p>
           <p>Track: {trackName}</p>
           <p>Album: {albumName}</p>
-          <p>
-            <button onClick={() => this.onPrevClick()}>Previous</button>
-            <button onClick={() => this.onPlayClick()}>
-              {playing ? 'Pause' : 'Play'}
-            </button>
-            <button onClick={() => this.onNextClick()}>Next</button>
-          </p>
-        </div>
-      </div>
+        </Grid>
+        <Grid item direction='row' justify='center'>
+          <button onClick={() => this.onPrevClick()}>Previous</button>
+          <button onClick={() => this.onPlayClick()}>
+            {playing ? 'Pause' : 'Play'}
+          </button>
+          <button onClick={() => this.onNextClick()}>Next</button>
+        </Grid>
+      </Grid>
     );
   }
 }

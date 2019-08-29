@@ -1,6 +1,7 @@
 import React from 'react';
 import { getTrackInfo } from '../actions';
 import { connect } from 'react-redux';
+import { Grid, Typography } from '@material-ui/core';
 
 class Song extends React.Component {
   componentDidMount() {
@@ -13,27 +14,24 @@ class Song extends React.Component {
     const tf = this.props.tracksInfo[this.props.id];
     const loadingTf = !tf || tf.fetching;
     return (
-      <div>
-        <li
-          style={{
-            display: 'flex',
-            flexFlow: 'column nowrap',
-            alignItems: 'flex-start',
-            lineHeight: 1.5,
-          }}>
+      <Grid container direction='row' alignItems='center'>
+        <Grid item style={{ marginRight: 1 }}>
           <img
             src={this.props.song.track.album.images[2].url}
             alt='album art'
             width='64px'
           />
-          <p>Song: {this.props.song.track.name}</p>
-          <p>Artist: {this.props.song.track.artists[0].name}</p>
-          <p>
-            Audio Features:{' '}
-            {loadingTf ? 'loading....' : tf.data.tempo}
-          </p>
-        </li>
-      </div>
+        </Grid>
+        <Grid item>
+          <Typography style={{ fontSize: 14 }}>
+            Song: {this.props.song.track.name}
+          </Typography>
+          <Typography style={{ fontSize: 12 }}>
+            Artist: {this.props.song.track.artists[0].name}
+          </Typography>
+          {/* <p>Audio Features: {loadingTf ? 'loading....' : tf.data.tempo}</p> */}
+        </Grid>
+      </Grid>
     );
   }
 }

@@ -13,8 +13,9 @@ import List from '@material-ui/core/List';
 // import SearchIcon from '@material-ui/icons/Search';
 // import MoreIcon from '@material-ui/icons/MoreVert';
 
-class View extends React.Component {
+class Dashboard extends React.Component {
   render() {
+    console.log('PROPS', this.props);
     return (
       <Grid
         container
@@ -31,7 +32,7 @@ class View extends React.Component {
               color: 'white',
             }}>
             <List>
-              <LikedSongs />
+              <LikedSongs props={this.props} />
             </List>
           </Paper>
         </Grid>
@@ -43,4 +44,4 @@ class View extends React.Component {
   }
 }
 
-export default View;
+export default Dashboard;

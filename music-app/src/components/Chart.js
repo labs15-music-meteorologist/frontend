@@ -1,20 +1,37 @@
 import React, { Component } from 'react';
-import { Surface, Radar, RadarChart, PolarGrid, Legend, Tooltip,
-  PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer,
-  LabelList, Label } from 'recharts';
+import {
+  Surface,
+  Radar,
+  RadarChart,
+  PolarGrid,
+  Legend,
+  Tooltip,
+  PolarAngleAxis,
+  PolarRadiusAxis,
+  ResponsiveContainer,
+  LabelList,
+  Label,
+} from 'recharts';
+import { getCurrentSong, getTrackInfo } from '../actions';
+import { connect } from 'react-redux';
 
 const data = [
-  { subject: 'Math', A: 120, B: 110 },
-  { subject: 'Chinese', A: 98, B: 130 },
-  { subject: 'English', A: 86, B: 130 },
-  { subject: 'Geography', A: 99, B: 100 },
-  { subject: 'Physics', A: 85, B: 90 },
-  { subject: 'History', A: 65, B: 85 },
+  { subject: 'Acousticness', A: 120, B: 110 },
+  { subject: 'Danceability', A: 98, B: 130 },
+  { subject: 'Energy', A: 86, B: 130 },
+  { subject: 'Instrumentalness', A: 99, B: 100 },
+  { subject: 'Liveness', A: 85, B: 90 },
+  { subject: 'Valence', A: 65, B: 85 },
 ];
 
 const initialState = { data };
 
-export default class Chart extends Component {
+class Chart extends Component {
+  componentDidMount() {
+    this.props.getCurrentSong(); 
+    
+    
+  }
 
   static displayName = 'RadarChartDemo';
 
@@ -27,7 +44,7 @@ export default class Chart extends Component {
 
   handleChangeData() {
     // this.setState(() => _.mapValues(initialState, changeNumberOfData));
-    this.setState(data)
+    this.setState(data);
   }
 
   handleMouseEnter(props) {
@@ -35,30 +52,43 @@ export default class Chart extends Component {
   }
 
   render() {
+    console.log('Current Song', this.props)
     const { data } = this.state;
-    
 
     return (
       <div>
         <a
-          href="javascript: void(0);"
-          className="btn update"
-          onClick={this.handleChangeData}
-        >
+          href='javascript: void(0);'
+          className='btn update'
+          onClick={this.handleChangeData}>
           change data
         </a>
-        <br/>
+        <br />
         <p>A simple RadarChart</p>
 
         {/* Specify chart elements from import list to use them ex. PolarAngleAxis are the subjects */}
 
-        <RadarChart label={{fill: 'white'}} value={{color: 'white'}} cx={300} cy={250} outerRadius={150} width={600} height={500} data={data}>
-        
+        <RadarChart
+          label={{ fill: 'white' }}
+          value={{ color: 'white' }}
+          cx={300}
+          cy={250}
+          outerRadius={150}
+          width={600}
+          height={500}
+          data={data}>
           <PolarGrid />
-          <PolarAngleAxis stroke='white' dataKey="subject" />
+          <PolarAngleAxis stroke='white' dataKey='subject' />
           <Legend formatter={this.renderColorfulLegendText} />
           <PolarRadiusAxis tick={{ fill: 'white' }} />
-          <Radar tick={{fill: 'white'}} name="Mike" dataKey="A" stroke="red" fill="white" fillOpacity={0.6} />
+          <Radar
+            tick={{ fill: 'white' }}
+            name='Mike'
+            dataKey='A'
+            stroke='red'
+            fill='white'
+            fillOpacity={0.6}
+          />
           {/* <Label fill="white" /> */}
         </RadarChart>
 
@@ -110,3 +140,14 @@ export default class Chart extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  id: state.getCurrentSong,
+  trackInfo: state.getTrackInfo
+});
+
+export default connect(
+  mapStateToProps,
+  { getTrackInfo, getCurrentSong },
+)(Chart);
+

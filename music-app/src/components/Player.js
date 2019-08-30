@@ -133,7 +133,6 @@ class MusicPlayer extends Component {
     axios
       .get('https://api.spotify.com/v1/me/player/currently-playing', config)
       .then(res => {
-        console.log(res.data);
         this.setState({
           imageUrl: res.data.item.album.images[1].url,
         });

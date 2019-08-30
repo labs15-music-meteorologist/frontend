@@ -1,7 +1,7 @@
 import {
     GET_CURRENT_SONG_FETCHING,
     GET_CURRENT_SONG_SUCCESS,
-    GET_CURRENT_SONG_FAILURE,
+    GET_CURRENT_SONG_FAILURE
   } from '../actions';
   
   const initialState = {
@@ -11,20 +11,21 @@ import {
   
   const getCurrentSongReducer = (state = initialState, action) => {
     switch (action.type) {
-      case GET_WELCOME_FETCHING:
+      case GET_CURRENT_SONG_FETCHING:
         return {
           ...state,
+          fetchingSongError: ''
         };
-      case GET_WELCOME_SUCCESS:
+      case GET_CURRENT_SONG_SUCCESS:
         return {
           ...state,
           id: action.payload,
-          fetchingSongError: '',
+          fetchingSongError: ''
         };
-      case GET_WELCOME_FAILURE:
+      case GET_CURRENT_SONG_FAILURE:
         return {
           ...state,
-          fetchingSongError: action.payload,
+          fetchingSongError: action.payload
         };
       default:
         return state;
@@ -32,4 +33,3 @@ import {
   };
   
   export default getCurrentSongReducer;
-  

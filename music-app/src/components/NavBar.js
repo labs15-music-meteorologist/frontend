@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 import Auth from './Auth';
 // import { flexbox } from '@material-ui/system';
 import { Grid, Typography } from '@material-ui/core';
-import MusicLogo from '../music-meteorologist-logo.png';
+import MusicLogo from '../images/music-logo-new.png';
 
 class NavBar extends React.Component {
   render() {

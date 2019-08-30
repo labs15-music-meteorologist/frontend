@@ -112,7 +112,7 @@ class MusicPlayer extends Component {
     const { token } = this.state;
 
     // if the Spotify SDK has loaded
-    if (window.Spotify !== null) {
+    if (window.Spotify !== undefined) {
       // cancel the interval
       clearInterval(this.playerCheckInterval);
       // create a new player
@@ -223,7 +223,7 @@ class MusicPlayer extends Component {
               outline: 'none',
             }}
             onClick={() => this.onPrevClick()}>
-            <img src={SkipLeft} style={{ maxHeight: 25 }} />
+            <img src={SkipLeft} style={{ maxHeight: 22 }} />
           </button>
 
           <button
@@ -247,7 +247,7 @@ class MusicPlayer extends Component {
               outline: 'none',
             }}
             onClick={() => this.onNextClick()}>
-            <img src={SkipRight} style={{ maxHeight: 25 }} />
+            <img src={SkipRight} style={{ maxHeight: 22 }} />
           </button>
         </Grid>
       </Grid>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
-import { Paper, Grid } from '@material-ui/core';
+import { Paper, Grid, Typography } from '@material-ui/core';
+import '../App.css';
 
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
 
@@ -30,18 +30,6 @@ const hash = window.location.hash
 
 window.location.hash = '';
 
-// Material styling
-
-const useStyles = makeStyles(theme => ({
-  button: {
-    padding: theme.spacing(1),
-    margin: 10,
-  },
-  container: {
-    marginTop: 100,
-  },
-}));
-
 export class Auth extends Component {
   componentDidMount() {
     let _token = hash.access_token;
@@ -56,18 +44,57 @@ export class Auth extends Component {
   }
   render() {
     return (
-      <Grid container direction='column' alignItems='center'>
-        <Grid item>
-          <Button
-            variant='contained'
-            className={useStyles.button}
-            href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${encodeURIComponent(
-              scopes,
-            )}&response_type=token&show_dialog=true`}>
-            Login
-          </Button>
-        </Grid>
-      </Grid>
+      <div className='auth'>
+        <Paper
+          style={{
+            backgroundColor: `rgba(${20}, ${20}, ${20}, ${0.85})`,
+            margin: 100,
+          }}>
+          <Grid
+            container
+            direction='column'
+            justify='space-between'
+            alignItems='center'>
+            <Typography
+              variant='h4'
+              style={{ color: 'white', margin: 10, fontWeight: 'bold' }}>
+              Create your own Spotify Playlists
+            </Typography>
+            <Typography
+              variant='h6'
+              style={{
+                color: 'white',
+                marginLeft: 50,
+                marginRight: 50,
+                marginTop: 10,
+                marginBottom: 10,
+              }}>
+              Based on your mood, musical preferences, or if you just want to
+              hear new music
+            </Typography>
+            <Typography variant='h7' style={{ color: 'white', margin: 10 }}>
+              Please Login below to continue...
+            </Typography>
+            <Button
+              variant='contained'
+              style={{
+                paddingTop: 10,
+                paddingBottom: 10,
+                paddingLeft: 20,
+                paddingRight: 20,
+                margin: 30,
+                fontWeight: 'bold',
+                fontSize: 18,
+                backgroundColor: `rgba(${255}, ${189}, ${89}, ${0.75})`,
+              }}
+              href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${encodeURIComponent(
+                scopes,
+              )}&response_type=token&show_dialog=true`}>
+              Login
+            </Button>
+          </Grid>
+        </Paper>
+      </div>
     );
   }
 }

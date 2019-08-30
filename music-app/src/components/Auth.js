@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import { Paper, Grid, Typography } from '@material-ui/core';
 import '../App.css';
+import HeaderImage from '../images/header.jpg';
 
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
 
@@ -45,10 +46,11 @@ export class Auth extends Component {
   render() {
     return (
       <div className='auth'>
+        <img src={HeaderImage} style={{ width: '63%', margin: 20 }} />
         <Paper
           style={{
-            backgroundColor: `rgba(${20}, ${20}, ${20}, ${0.85})`,
-            margin: 100,
+            // backgroundColor: `rgba(${20}, ${20}, ${20}, ${0.85})`
+            backgroundColor: `rgba(${20}, ${20}, ${20}, ${0.0})`,
           }}>
           <Grid
             container
@@ -64,10 +66,6 @@ export class Auth extends Component {
               variant='h6'
               style={{
                 color: 'white',
-                marginLeft: 50,
-                marginRight: 50,
-                marginTop: 10,
-                marginBottom: 10,
               }}>
               Based on your mood, musical preferences, or if you just want to
               hear new music

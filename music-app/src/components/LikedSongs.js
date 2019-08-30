@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Song from './Song.js';
 import { getlikedSongs, getUsers, getSpotifyAccountDetails } from '../actions';
 import { Mixpanel } from '../analytics/Mixpanel';
-import { Grid } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 
 class LikedSongs extends React.Component {
   componentDidMount() {
@@ -33,7 +33,10 @@ class LikedSongs extends React.Component {
     return (
       <Grid containter>
         <Grid item>
-          <h1>Liked Songs Dashboard</h1>
+          <Typography
+            style={{ fontWeight: 'bold', fontSize: 18, textAlign: 'center' }}>
+            Liked Songs Dashboard
+          </Typography>
           {this.props.songs.map(song => (
             <Song song={song} id={song.track.id} key={song.track.id} />
           ))}

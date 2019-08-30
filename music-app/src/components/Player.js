@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Grid, Typography } from '@material-ui/core';
+import SkipLeft from '../images/skip-left.png';
+import SkipRight from '../images/skip-right.png';
+import Pause from '../images/player-stop.png';
+import Play from '../images/player-start.png';
 
 class MusicPlayer extends Component {
   constructor(props) {
@@ -108,7 +112,7 @@ class MusicPlayer extends Component {
     const { token } = this.state;
 
     // if the Spotify SDK has loaded
-    if (window.Spotify !== null) {
+    if (window.Spotify !== undefined) {
       // cancel the interval
       clearInterval(this.playerCheckInterval);
       // create a new player
@@ -206,12 +210,45 @@ class MusicPlayer extends Component {
           <p>Track: {trackName}</p>
           <p>Album: {albumName}</p>
         </Grid>
-        <Grid item direction='row' justify='center'>
-          <button onClick={() => this.onPrevClick()}>Previous</button>
-          <button onClick={() => this.onPlayClick()}>
-            {playing ? 'Pause' : 'Play'}
+        <Grid
+          container
+          direction='row'
+          justify='center'
+          alignItems='center'
+          style={{ width: 300 }}>
+          <button
+            style={{
+              background: 'none',
+              border: 'none',
+              outline: 'none',
+            }}
+            onClick={() => this.onPrevClick()}>
+            <img src={SkipLeft} style={{ maxHeight: 22 }} />
           </button>
-          <button onClick={() => this.onNextClick()}>Next</button>
+
+          <button
+            style={{
+              background: 'none',
+              border: 'none',
+              outline: 'none',
+            }}
+            onClick={() => this.onPlayClick()}>
+            {playing ? (
+              <img src={Pause} style={{ maxHeight: 35 }} />
+            ) : (
+              <img src={Play} style={{ maxHeight: 35 }} />
+            )}
+          </button>
+
+          <button
+            style={{
+              background: 'none',
+              border: 'none',
+              outline: 'none',
+            }}
+            onClick={() => this.onNextClick()}>
+            <img src={SkipRight} style={{ maxHeight: 22 }} />
+          </button>
         </Grid>
       </Grid>
     );

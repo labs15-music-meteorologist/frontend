@@ -32,3 +32,7 @@
     transform: rotate(360deg);
   }
 }
+
+.song:hover {
+  background-color: rgba(255, 145, 77, 0.55);
+}

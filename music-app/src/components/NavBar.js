@@ -6,6 +6,11 @@ import { Grid, Typography } from '@material-ui/core';
 import MusicLogo from '../images/music-logo-new.png';
 
 class NavBar extends React.Component {
+  homeButton = e => {
+    e.preventDefault();
+    window.location.href = '/'; // need to figure out how to pass down props here
+    // this.history.push("/")
+  };
   render() {
     return (
       <Grid
@@ -14,7 +19,12 @@ class NavBar extends React.Component {
         justify='space-between'
         alignItems='center'>
         <Grid item>
-          <Button to='/' style={{ color: 'inherit' }}>
+          <Button
+            to='/'
+            style={{ color: 'inherit' }}
+            onClick={e => {
+              this.homeButton(e);
+            }}>
             Home
           </Button>
         </Grid>

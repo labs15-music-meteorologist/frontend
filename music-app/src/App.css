@@ -1,6 +1,6 @@
 .App {
   /* text-align: center; */
-  margin: 0 5%;
+  margin: 0 5% 0 5%;
 }
 
 .App-logo {
@@ -35,4 +35,17 @@
 
 .song:hover {
   background-color: rgba(255, 145, 77, 0.55);
+}
+
+.auth {
+  height: 100vh;
+}
+
+.dashboard {
+  height: 100vh;
+}
+
+.footer {
+  bottom: 0;
+  position: relative;
 }

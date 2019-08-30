@@ -3,12 +3,12 @@ import { Grid } from '@material-ui/core';
 import LikedSongs from './LikedSongs.js';
 import MusicPlayer from './Player.js';
 import Button from '@material-ui/core/Button';
-// import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
 import List from '@material-ui/core/List';
 import { makeStyles } from '@material-ui/core/styles';
+import '../App.css';
 // import Fab from '@material-ui/core/Fab';
 // import MenuIcon from '@material-ui/icons/Menu';
 // import AddIcon from '@material-ui/icons/Add';
@@ -18,18 +18,8 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(theme => ({
   button: {
     padding: theme.spacing(1),
+    backgroundColor: `rgba(${255}, ${189}, ${89}, ${0.75})`,
   },
-  // input: {
-  //   display: 'none',
-  // },
-  // root: {
-  //   flexGrow: 1,
-  // },
-  // paper: {
-  //   padding: 0,
-  //   margin: 'auto',
-  //   maxWidth: 500,
-  // },
 }));
 
 class Dashboard extends React.Component {
@@ -40,7 +30,7 @@ class Dashboard extends React.Component {
   };
   render() {
     return (
-      <>
+      <div className='dashboard'>
         <Button
           variant='contained'
           className={useStyles.button}
@@ -58,7 +48,6 @@ class Dashboard extends React.Component {
                 maxHeight: 450,
                 width: 380,
                 overflow: 'auto',
-                // backgroundColor: 'black',
                 backgroundColor: `rgba(${20}, ${20}, ${20}, ${0.85})`,
                 color: 'white',
               }}>
@@ -71,7 +60,7 @@ class Dashboard extends React.Component {
             <MusicPlayer />
           </Grid>
         </Grid>
-      </>
+      </div>
     );
   }
 }

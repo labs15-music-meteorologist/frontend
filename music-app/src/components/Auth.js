@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-// import { Paper, Grid } from '@material-ui/core';
+import { Paper, Grid } from '@material-ui/core';
 
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
 
@@ -35,21 +35,12 @@ window.location.hash = '';
 const useStyles = makeStyles(theme => ({
   button: {
     padding: theme.spacing(1),
+    margin: 10,
   },
-  // input: {
-  //   display: 'none',
-  // },
-  // root: {
-  //   flexGrow: 1,
-  // },
-  // paper: {
-  //   padding: 0,
-  //   margin: 'auto',
-  //   maxWidth: 500,
-  // },
+  container: {
+    marginTop: 100,
+  },
 }));
-
-// const classes = useStyles();
 
 export class Auth extends Component {
   componentDidMount() {
@@ -65,16 +56,18 @@ export class Auth extends Component {
   }
   render() {
     return (
-      <div>
-        <Button
-          variant='contained'
-          className={useStyles.button}
-          href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${encodeURIComponent(
-            scopes,
-          )}&response_type=token&show_dialog=true`}>
-          Login
-        </Button>
-      </div>
+      <Grid container direction='column' alignItems='center'>
+        <Grid item>
+          <Button
+            variant='contained'
+            className={useStyles.button}
+            href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${encodeURIComponent(
+              scopes,
+            )}&response_type=token&show_dialog=true`}>
+            Login
+          </Button>
+        </Grid>
+      </Grid>
     );
   }
 }

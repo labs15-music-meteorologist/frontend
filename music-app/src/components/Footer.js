@@ -11,6 +11,9 @@ const useStyles = makeStyles({
     backgroundColor: 'black',
     color: 'white',
     borderRadius: 0,
+    position: 'fixed',
+    bottom: 0,
+    width: '90%',
   },
 });
 
@@ -35,7 +38,9 @@ export default function CenteredTabs() {
         <Tab label='Contact' />
       </Tabs>
       <Tabs centered>
-        <p style={{fontSize: 14}}>&copy; Copyright 2019, Music Meteorologist</p>
+        <p style={{ fontSize: 14 }}>
+          &copy; Copyright 2019, Music Meteorologist
+        </p>
       </Tabs>
     </Paper>
   );

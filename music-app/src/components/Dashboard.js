@@ -1,16 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
+
 import { Grid } from '@material-ui/core';
-import LikedSongs from './LikedSongs.js';
-import MusicPlayer from './Player.js';
 import Button from '@material-ui/core/Button';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
 import List from '@material-ui/core/List';
 import { makeStyles } from '@material-ui/core/styles';
+
 import { getlikedSongs, getUsers, getSpotifyAccountDetails } from '../actions';
+import LikedSongs from './LikedSongs.js';
+import MusicPlayer from './Player.js';
 import '../App.css';
+
 // import Fab from '@material-ui/core/Fab';
 // import MenuIcon from '@material-ui/icons/Menu';
 // import AddIcon from '@material-ui/icons/Add';
@@ -41,7 +42,6 @@ class Dashboard extends React.Component {
     ) {
       this.props.history.push('/info');
     }
-    console.log('OS SYSTEM: ', window.navigator);
     return (
       <div className='dashboard'>
         <Button
@@ -79,8 +79,6 @@ class Dashboard extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  songs: state.likedSongsReducer.songs,
-  users: state.getUsersReducer.users,
   spotifyUser: state.getUsersReducer.spotifyUser,
   fetchingSpotifyUser: state.getUsersReducer.fetchingSpotifyUser,
 });

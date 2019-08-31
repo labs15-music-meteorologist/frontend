@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+
 import { Grid, Typography } from '@material-ui/core';
+
 import SkipLeft from '../images/skip-left.png';
 import SkipRight from '../images/skip-right.png';
 import Pause from '../images/player-stop.png';
 import Play from '../images/player-start.png';
+import loadingSpinner from '../images/lava-lamp-preloader.svg';
 
 class MusicPlayer extends Component {
   constructor(props) {
     super(props);
-    // set the initial state
     this.state = {
       token: localStorage.getItem('token'),
       deviceId: '',
@@ -30,10 +32,9 @@ class MusicPlayer extends Component {
   componentDidMount() {
     this.handleLogin();
   }
-  // when we click the "go" button
+
   handleLogin() {
     if (this.state.token !== '') {
-      // change the loggedIn variable, then start checking for the window.Spotify variable
       this.setState({ loggedIn: true });
       this.playerCheckInterval = setInterval(() => this.checkForPlayer(), 1000);
     }
@@ -199,8 +200,17 @@ class MusicPlayer extends Component {
     return (
       <Grid container direction='column' justify='center' alignItems='center'>
         <Grid item>
-          <h4>Now Playing</h4>
-          <img src={this.state.imageUrl} alt='album-art' />
+          {window.Spotify === undefined && (
+            <div className='spinning-loader-burning'>
+              <img src={loadingSpinner} alt='Moving animation of a flame.' />
+            </div>
+          )}
+          {window.Spotify !== undefined && this.state.imageUrl !== '' && (
+            <div className='album-art'>
+              <h4>Now Playing</h4>
+              <img src={this.state.imageUrl} alt='album-art' />
+            </div>
+          )}
         </Grid>
 
         {error && <p>Error: {error}</p>}

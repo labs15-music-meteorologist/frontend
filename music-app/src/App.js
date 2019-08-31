@@ -10,7 +10,7 @@ import LikedSongs from './components/LikedSongs';
 import Logout from './components/Logout';
 import Info from './components/Info';
 import NavBar from './components/NavBar';
-import MusicPlayer from './components/Player';
+import MusicPlayer from './components/MusicPlayer';
 import Dashboard from './components/Dashboard.js';
 import Footer from './components/Footer.js';
 

@@ -9,7 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import { getlikedSongs, getUsers, getSpotifyAccountDetails } from '../actions';
 import LikedSongs from './LikedSongs.js';
-import MusicPlayer from './Player.js';
+import MusicPlayer from './MusicPlayer.js';
 import '../App.css';
 
 // import Fab from '@material-ui/core/Fab';

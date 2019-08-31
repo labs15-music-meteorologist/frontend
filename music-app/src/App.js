@@ -5,12 +5,13 @@ import { createBrowserHistory } from 'history';
 import ReactGA from 'react-ga';
 
 import Auth from './components/Auth';
-import Logout from './components/Logout';
-import Info from './components/Info';
 import NavBar from './components/NavBar';
 import MusicPlayer from './components/MusicPlayer';
-import Dashboard from './components/Dashboard.js';
 import Footer from './components/Footer.js';
+
+import Logout from './views/Logout';
+import Info from './views/Info';
+import Dashboard from './views/Dashboard.js';
 import './App.css';
 
 /* import { MixpanelConsumer } from 'react-mixpanel'; */

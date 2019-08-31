@@ -1,9 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Song from './Song.js';
-import { getlikedSongs, getUsers, getSpotifyAccountDetails } from '../actions';
+
 import { Mixpanel } from '../analytics/Mixpanel';
 import { Grid, Typography } from '@material-ui/core';
+
+import { getlikedSongs, getUsers, getSpotifyAccountDetails } from '../actions';
+import Song from './Song.js';
 
 class LikedSongs extends React.Component {
   componentDidMount() {

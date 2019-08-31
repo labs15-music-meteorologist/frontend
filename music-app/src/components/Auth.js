@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+
 import Button from '@material-ui/core/Button';
 import { Paper, Grid, Typography } from '@material-ui/core';
+
 import '../App.css';
 
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
@@ -32,13 +34,9 @@ window.location.hash = '';
 
 export class Auth extends Component {
   componentDidMount() {
-    let _token = hash.access_token;
-    console.log('TOKEN', _token);
-    console.log('HASH TOKEN', hash.access_token);
-    console.log('PROPS', this.props);
-    if (_token) {
-      localStorage.setItem('token', _token);
-      // window.location.href = '/dashboard';
+    let token = hash.access_token;
+    if (token) {
+      localStorage.setItem('token', token);
       this.props.history.push('/dashboard');
     }
   }

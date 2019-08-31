@@ -8,8 +8,10 @@ import List from '@material-ui/core/List';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { getlikedSongs, getUsers, getSpotifyAccountDetails } from '../actions';
-import LikedSongs from '../components/dashboard/LikedSongs.js';
-import MusicPlayer from '../components/dashboard/MusicPlayer.js';
+
+import LikedSongs from '../components/dashbaord/LikedSongs';
+import MusicPlayer from '../components/dashbaord/MusicPlayer';
+
 import '../App.css';
 
 const useStyles = makeStyles(theme => ({

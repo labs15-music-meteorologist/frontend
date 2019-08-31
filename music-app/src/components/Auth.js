@@ -70,7 +70,7 @@ export class Auth extends Component {
               Based on your mood, musical preferences, or if you just want to
               hear new music
             </Typography>
-            <Typography variant='h7' style={{ color: 'white', margin: 10 }}>
+            <Typography variant='h6' style={{ color: 'white', margin: 10 }}>
               Please Login below to continue...
             </Typography>
             <Button

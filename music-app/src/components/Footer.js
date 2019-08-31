@@ -32,8 +32,8 @@ export default function CenteredTabs() {
         <Tabs
           value={value}
           onChange={handleChange}
-          indicatorColor='white'
-          textColor='white'
+          /* indicatorColor='white' */
+          /* textColor='white' */
           centered>
           <Tab label='About' />
           <Tab label='Github' />

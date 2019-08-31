@@ -3,11 +3,11 @@ import axios from 'axios';
 
 import { Grid } from '@material-ui/core';
 
-import SkipLeft from '../assets/skip-left.png';
-import SkipRight from '../assets/skip-right.png';
-import Pause from '../assets/player-stop.png';
-import Play from '../assets/player-start.png';
-import loadingSpinner from '../assets/lava-lamp-preloader.svg';
+import SkipLeft from '../../assets/skip-left.png';
+import SkipRight from '../../assets/skip-right.png';
+import Pause from '../../assets/player-stop.png';
+import Play from '../../assets/player-start.png';
+import loadingSpinner from '../../assets/lava-lamp-preloader.svg';
 
 class MusicPlayer extends Component {
   constructor(props) {
@@ -187,7 +187,7 @@ class MusicPlayer extends Component {
               <img src={loadingSpinner} alt='Moving animation of a flame.' />
             </div>
           )}
-          {window.Spotify !== undefined && this.state.imageUrl !== '' && (
+          {window.Spotify !== undefined && this.state.imageUrl !== '' && artistName !== 'Artist Name' && (
             <div className='album-art'>
               <h4 style={{ textAlign: 'center' }}>Now Playing</h4>
               <img src={this.state.imageUrl} alt='album-art' />

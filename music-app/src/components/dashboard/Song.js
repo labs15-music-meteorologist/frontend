@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 
 import { Grid, Typography } from '@material-ui/core';
 
-import { getTrackInfo } from '../actions';
-import '../App.css';
+import { getTrackInfo } from '../../actions';
+import '../../App.css';
 
 class Song extends React.Component {
   componentDidMount() {

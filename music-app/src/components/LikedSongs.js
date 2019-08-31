@@ -27,8 +27,6 @@ class LikedSongs extends React.Component {
   render() {
     if (this.props.fetchingLikedSongs) {
       return <h1>Loading...</h1>;
-      // } else if(this.props.spotifyUser.product && this.props.fetchingSpotifyUser === false && this.props.spotifyUser.product !== 'premium') {
-      //   this.props.history.push('/info')
     }
     return (
       <Grid containter>
@@ -57,8 +55,6 @@ class LikedSongs extends React.Component {
 const mapStateToProps = state => ({
   songs: state.likedSongsReducer.songs,
   users: state.getUsersReducer.users,
-  spotifyUser: state.getUsersReducer.spotifyUser,
-  fetchingSpotifyUser: state.getUsersReducer.fetchingSpotifyUser,
 });
 
 export default connect(

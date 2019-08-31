@@ -216,7 +216,7 @@ class MusicPlayer extends Component {
               outline: 'none',
             }}
             onClick={() => this.onPrevClick()}>
-            <img src={SkipLeft} style={{ maxHeight: 22 }} />
+            <img src={SkipLeft} alt="White icon to skip to the previous song." style={{ maxHeight: 22 }} />
           </button>
 
           <button
@@ -227,9 +227,9 @@ class MusicPlayer extends Component {
             }}
             onClick={() => this.onPlayClick()}>
             {playing ? (
-              <img src={Pause} style={{ maxHeight: 35 }} />
+              <img src={Pause} alt="White icon to pause a song." style={{ maxHeight: 35 }} />
             ) : (
-              <img src={Play} style={{ maxHeight: 35 }} />
+              <img src={Play} alt="White icon to start a pause song." style={{ maxHeight: 35 }} />
             )}
           </button>
 
@@ -240,7 +240,7 @@ class MusicPlayer extends Component {
               outline: 'none',
             }}
             onClick={() => this.onNextClick()}>
-            <img src={SkipRight} style={{ maxHeight: 22 }} />
+            <img src={SkipRight} alt="White icon to skip to the next song." style={{ maxHeight: 22 }} />
           </button>
         </Grid>
       </Grid>

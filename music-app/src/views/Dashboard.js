@@ -45,7 +45,6 @@ class Dashboard extends React.Component {
       : false;
   };
   render() {
-    console.log('DASHBOARD PROPS', this.props)
     if (this.checkPremiumUser() || this.checkNoIOS()) {
       this.props.history.push('/info');
     }
@@ -79,9 +78,9 @@ class Dashboard extends React.Component {
           <Grid item>
             <MusicPlayer />
           </Grid>
-          <Grid item>
+          {/* <Grid item>
             <Chart props={this.props} />
-          </Grid>
+          </Grid> */}
         </Grid>
       </div>
     );

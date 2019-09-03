@@ -39,14 +39,17 @@ class LikedSongs extends React.Component {
         <Grid item>
           <Typography
             style={{ fontWeight: 'bold', fontSize: 18, textAlign: 'center' }}>
-            Liked Songs Dashboard
+            Liked Songs
           </Typography>
           {this.props.songs.map(song => (
             <Song song={song} id={song.track.id} key={song.track.id} />
           ))}
         </Grid>
         <Grid item>
-          <h1>Users</h1>
+          <Typography
+            style={{ fontWeight: 'bold', fontSize: 18, textAlign: 'center' }}>
+            Users
+          </Typography>
           {this.props.users.map(user => (
             <div>
               <p>{user.display_name}</p>

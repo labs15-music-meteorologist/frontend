@@ -10,7 +10,7 @@ import {
   PolarRadiusAxis,
   ResponsiveContainer,
   LabelList,
-  Label,
+  Label
 } from 'recharts';
 import { getCurrentSong, getTrackInfo } from '../actions';
 import { connect } from 'react-redux';
@@ -21,18 +21,12 @@ const data = [
   { subject: 'Energy', A: 86, B: 130 },
   { subject: 'Instrumentalness', A: 99, B: 100 },
   { subject: 'Liveness', A: 85, B: 90 },
-  { subject: 'Valence', A: 65, B: 85 },
+  { subject: 'Valence', A: 65, B: 85 }
 ];
 
 const initialState = { data };
 
 class Chart extends Component {
-  componentDidMount() {
-    this.props.getCurrentSong(); 
-    
-    
-  }
-
   static displayName = 'RadarChartDemo';
 
   constructor() {
@@ -52,7 +46,7 @@ class Chart extends Component {
   }
 
   render() {
-    console.log('Current Song', this.props)
+    console.log('Current Song', this.props);
     const { data } = this.state;
 
     return (
@@ -148,6 +142,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getTrackInfo, getCurrentSong },
+  { getTrackInfo, getCurrentSong }
 )(Chart);
-

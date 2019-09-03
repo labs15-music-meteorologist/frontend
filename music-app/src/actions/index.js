@@ -27,33 +27,6 @@ export const getUsers = () => dispatch => {
     });
 };
 
-<<<<<<< HEAD
-export const GET_WELCOME_FETCHING = 'GET_WELCOME_FETCHING';
-export const GET_WELCOME_SUCCESS = 'GET_WELCOME_SUCCESS';
-export const GET_WELCOME_FAILURE = 'GET_WELCOME_FAILURE';
-
-export const getWelcome = () => dispatch => {
-  dispatch({
-    type: GET_WELCOME_FETCHING
-  });
-  axios
-    .get(url)
-    .then(res => {
-      dispatch({
-        type: GET_WELCOME_SUCCESS,
-        payload: res.data
-      });
-    })
-    .catch(err => {
-      dispatch({
-        type: GET_WELCOME_FAILURE,
-        payload: err
-      });
-    });
-};
-
-=======
->>>>>>> d27811e0e125b482c1a3fe747208aeb13e1e2ce0
 export const GET_LIKEDSONGS_FETCHING = 'GET_LIKEDSONGS_FETCHING';
 export const GET_LIKEDSONGS_SUCCESS = 'GET_LIKEDSONGS_SUCCESS';
 export const GET_LIKEDSONGS_FAILURE = 'GET_LIKEDSONGS_FAILURE';
@@ -89,8 +62,7 @@ export const GET_TRACK_INFO_FAILURE = 'GET_TRACK_INFO_FAILURE';
 
 export const getTrackInfo = id => dispatch => {
   dispatch({
-    type: GET_TRACK_INFO_FETCHING,
-    payload: { [id]: { fetching: true } }
+    type: GET_TRACK_INFO_FETCHING
   });
 
   var config = {
@@ -102,13 +74,13 @@ export const getTrackInfo = id => dispatch => {
     .then(res => {
       dispatch({
         type: GET_TRACK_INFO_SUCCESS,
-        payload: { [id]: { fetching: false, data: res.data } }
+        payload: res.data
       });
     })
     .catch(err => {
       dispatch({
         type: GET_TRACK_INFO_FAILURE,
-        payload: { [id]: { fetching: false, err } }
+        payload: err.data
       });
     });
 };
@@ -152,24 +124,19 @@ export const GET_CURRENT_SONG_FETCHING = 'GET_CURRENT_SONG_FETCHING';
 export const GET_CURRENT_SONG_SUCCESS = 'GET_CURRENT_SONG_SUCCESS';
 export const GET_CURRENT_SONG_FAILURE = 'GET_CURRENT_SONG_FAILURE';
 
-export const getCurrentSong = dispatch => {
+export const getCurrentSong = () => dispatch => {
   dispatch({
     type: GET_CURRENT_SONG_FETCHING
   });
-<<<<<<< HEAD
-  const config = {
-    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
-=======
   var config = {
-    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
->>>>>>> d27811e0e125b482c1a3fe747208aeb13e1e2ce0
+    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
   };
   axios
     .get('https://api.spotify.com/v1/me/player/currently-playing', config)
     .then(res => {
       dispatch({
         type: GET_CURRENT_SONG_SUCCESS,
-        payload: res.data.item.id
+        payload: res.data.item
       });
     })
     .catch(err => {

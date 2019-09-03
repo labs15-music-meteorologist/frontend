@@ -102,3 +102,12 @@
   position: absolute;
 }
  */
+
+.logout {
+  height: 100vh;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 3%;
+}

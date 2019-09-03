@@ -1,9 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
+
+/* import { Mixpanel } from '../analytics/Mixpanel'; */
+import { Grid, Typography } from '@material-ui/core';
+
+import {
+  getlikedSongs,
+  getUsers,
+  getSpotifyAccountDetails,
+} from '../../actions';
 import Song from './Song.js';
-import { getlikedSongs, getUsers, getSpotifyAccountDetails } from '../actions';
-import { Mixpanel } from '../analytics/Mixpanel';
-import { Grid } from '@material-ui/core';
 
 class LikedSongs extends React.Component {
   componentDidMount() {
@@ -27,13 +33,14 @@ class LikedSongs extends React.Component {
   render() {
     if (this.props.fetchingLikedSongs) {
       return <h1>Loading...</h1>;
-      // } else if(this.props.spotifyUser.product && this.props.fetchingSpotifyUser === false && this.props.spotifyUser.product !== 'premium') {
-      //   this.props.history.push('/info')
     }
     return (
-      <Grid containter>
+      <Grid container>
         <Grid item>
-          <h1>Liked Songs Dashboard</h1>
+          <Typography
+            style={{ fontWeight: 'bold', fontSize: 18, textAlign: 'center' }}>
+            Liked Songs Dashboard
+          </Typography>
           {this.props.songs.map(song => (
             <Song song={song} id={song.track.id} key={song.track.id} />
           ))}
@@ -54,8 +61,6 @@ class LikedSongs extends React.Component {
 const mapStateToProps = state => ({
   songs: state.likedSongsReducer.songs,
   users: state.getUsersReducer.users,
-  spotifyUser: state.getUsersReducer.spotifyUser,
-  fetchingSpotifyUser: state.getUsersReducer.fetchingSpotifyUser,
 });
 
 export default connect(

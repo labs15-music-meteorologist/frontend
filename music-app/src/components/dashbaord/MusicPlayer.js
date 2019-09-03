@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Grid, Typography } from '@material-ui/core';
+
+import { Grid } from '@material-ui/core';
+
+import SkipLeft from '../../assets/skip-left.png';
+import SkipRight from '../../assets/skip-right.png';
+import Pause from '../../assets/player-stop.png';
+import Play from '../../assets/player-start.png';
+import loadingSpinner from '../../assets/lava-lamp-preloader.svg';
 
 class MusicPlayer extends Component {
   constructor(props) {
     super(props);
-    // set the initial state
     this.state = {
       token: localStorage.getItem('token'),
       deviceId: '',
@@ -26,10 +32,9 @@ class MusicPlayer extends Component {
   componentDidMount() {
     this.handleLogin();
   }
-  // when we click the "go" button
+
   handleLogin() {
     if (this.state.token !== '') {
-      // change the loggedIn variable, then start checking for the window.Spotify variable
       this.setState({ loggedIn: true });
       this.playerCheckInterval = setInterval(() => this.checkForPlayer(), 1000);
     }
@@ -67,38 +72,31 @@ class MusicPlayer extends Component {
   }
 
   createEventHandlers() {
-    // problem setting up the player
     this.player.on('initialization_error', e => {
       console.error(e);
     });
-    // problem authenticating the user.
-    // either the token was invalid in the first place,
-    // or it expired (it lasts one hour)
+
     this.player.on('authentication_error', e => {
       console.error(e);
       this.setState({ loggedIn: false });
     });
-    // currently only premium accounts can use the API
+
     this.player.on('account_error', e => {
       console.error(e);
     });
-    // loading/playing the track failed for some reason
+
     this.player.on('playback_error', e => {
       console.error(e);
     });
 
-    // Playback status updates
     this.player.on('player_state_changed', state => {
       this.onStateChanged(state);
       this.getCurrentSong();
     });
 
-    // Ready
     this.player.on('ready', async data => {
       let { device_id } = data;
-      console.log('Let the music play on!');
-      // set the deviceId variable, then let's try
-      // to swap music playback to *our* player!
+
       await this.setState({ deviceId: device_id, loggedIn: true });
       this.transferPlaybackHere();
     });
@@ -107,21 +105,18 @@ class MusicPlayer extends Component {
   checkForPlayer() {
     const { token } = this.state;
 
-    // if the Spotify SDK has loaded
-    if (window.Spotify !== null) {
-      // cancel the interval
+    if (window.Spotify !== undefined) {
       clearInterval(this.playerCheckInterval);
-      // create a new player
+
       this.player = new window.Spotify.Player({
         name: 'Music Meteorologist Spotify Player',
         getOAuthToken: cb => {
           cb(token);
         },
       });
-      // set up the player's event handlers
+
       this.createEventHandlers();
 
-      // finally, connect!
       this.player.connect();
     }
   }
@@ -141,8 +136,8 @@ class MusicPlayer extends Component {
         console.log(err);
       });
   }
-  // SDK Player Song playback controls
 
+  // SDK Player Song playback controls
   onPrevClick() {
     this.player.previousTrack();
   }
@@ -156,7 +151,7 @@ class MusicPlayer extends Component {
   }
 
   transferPlaybackHere() {
-    const { deviceId, token } = this.state;
+    const { token } = this.state;
     fetch(
       `https://api.spotify.com/v1/me/player/play?device_id=${this.state.deviceId}`,
       {
@@ -181,36 +176,71 @@ class MusicPlayer extends Component {
   }
 
   render() {
-    const {
-      token,
-      loggedIn,
-      trackName,
-      artistName,
-      albumName,
-      error,
-      playing,
-    } = this.state;
+    const { trackName, artistName, albumName, error, playing } = this.state;
 
     return (
       <Grid container direction='column' justify='center' alignItems='center'>
         <Grid item>
-          <h4>Now Playing</h4>
-          <img src={this.state.imageUrl} alt='album-art' />
+          {window.Spotify === undefined && (
+            <div className='spinning-loader-burning'>
+              <img src={loadingSpinner} alt='Moving animation of a flame.' />
+            </div>
+          )}
+          {window.Spotify !== undefined && this.state.imageUrl !== '' && artistName !== 'Artist Name' && (
+            <div className='album-art'>
+              <h4 style={{ textAlign: 'center' }}>Now Playing</h4>
+              <img src={this.state.imageUrl} alt='album-art' />
+            </div>
+          )}
         </Grid>
 
         {error && <p>Error: {error}</p>}
 
         <Grid item>
-          <p>Artist: {artistName}</p>
+          <div>Artist: {artistName}</div>
           <p>Track: {trackName}</p>
           <p>Album: {albumName}</p>
         </Grid>
-        <Grid item direction='row' justify='center'>
-          <button onClick={() => this.onPrevClick()}>Previous</button>
-          <button onClick={() => this.onPlayClick()}>
-            {playing ? 'Pause' : 'Play'}
+
+        <Grid
+          container
+          direction='row'
+          justify='center'
+          alignItems='center'
+          style={{ width: 300 }}>
+          <button
+            style={{
+              background: 'none',
+              border: 'none',
+              outline: 'none',
+            }}
+            onClick={() => this.onPrevClick()}>
+            <img src={SkipLeft} alt="White icon to skip to the previous song." style={{ maxHeight: 22 }} />
           </button>
-          <button onClick={() => this.onNextClick()}>Next</button>
+
+          <button
+            style={{
+              background: 'none',
+              border: 'none',
+              outline: 'none',
+            }}
+            onClick={() => this.onPlayClick()}>
+            {playing ? (
+              <img src={Pause} alt="White icon to pause a song." style={{ maxHeight: 35 }} />
+            ) : (
+              <img src={Play} alt="White icon to start a pause song." style={{ maxHeight: 35 }} />
+            )}
+          </button>
+
+          <button
+            style={{
+              background: 'none',
+              border: 'none',
+              outline: 'none',
+            }}
+            onClick={() => this.onNextClick()}>
+            <img src={SkipRight} alt="White icon to skip to the next song." style={{ maxHeight: 22 }} />
+          </button>
         </Grid>
       </Grid>
     );

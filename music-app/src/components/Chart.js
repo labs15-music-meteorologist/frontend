@@ -29,8 +29,6 @@ const initialState = { data };
 class Chart extends Component {
   componentDidMount() {
     this.props.getCurrentSong(); 
-    
-    
   }
 
   static displayName = 'RadarChartDemo';

@@ -27,30 +27,6 @@ export const getUsers = () => dispatch => {
     });
 };
 
-export const GET_WELCOME_FETCHING = 'GET_WELCOME_FETCHING';
-export const GET_WELCOME_SUCCESS = 'GET_WELCOME_SUCCESS';
-export const GET_WELCOME_FAILURE = 'GET_WELCOME_FAILURE';
-
-export const getWelcome = () => dispatch => {
-  dispatch({
-    type: GET_WELCOME_FETCHING,
-  });
-  axios
-    .get(url)
-    .then(res => {
-      dispatch({
-        type: GET_WELCOME_SUCCESS,
-        payload: res.data,
-      });
-    })
-    .catch(err => {
-      dispatch({
-        type: GET_WELCOME_FAILURE,
-        payload: err,
-      });
-    });
-};
-
 export const GET_LIKEDSONGS_FETCHING = 'GET_LIKEDSONGS_FETCHING';
 export const GET_LIKEDSONGS_SUCCESS = 'GET_LIKEDSONGS_SUCCESS';
 export const GET_LIKEDSONGS_FAILURE = 'GET_LIKEDSONGS_FAILURE';

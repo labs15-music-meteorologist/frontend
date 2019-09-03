@@ -1,15 +1,14 @@
 import React from 'react';
+
+import { Grid } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-import Auth from './Auth';
-// import { flexbox } from '@material-ui/system';
-import { Grid, Typography } from '@material-ui/core';
-import MusicLogo from '../images/music-logo-new.png';
+
+import MusicLogo from '../assets/music-logo-new.png';
 
 class NavBar extends React.Component {
   homeButton = e => {
     e.preventDefault();
-    window.location.href = '/'; // need to figure out how to pass down props here
-    // this.history.push("/")
+    window.location.href = '/';
   };
   render() {
     return (
@@ -29,12 +28,8 @@ class NavBar extends React.Component {
           </Button>
         </Grid>
         <Grid item>
-          <img src={MusicLogo} style={{ height: 70 }} />
+          <img src={MusicLogo} alt={"White text logo with a meteor on top of the last o."} style={{ height: 70 }} />
         </Grid>
-
-        {/* <Grid item>
-          <Auth />
-        </Grid> */}
       </Grid>
     );
   }

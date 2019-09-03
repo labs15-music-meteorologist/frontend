@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+
 import Button from '@material-ui/core/Button';
 import { Paper, Grid, Typography } from '@material-ui/core';
+
 import '../App.css';
-import HeaderImage from '../images/header.jpg';
+import HeaderImage from '../assets/header.jpg';
 
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
 
@@ -33,13 +35,9 @@ window.location.hash = '';
 
 export class Auth extends Component {
   componentDidMount() {
-    let _token = hash.access_token;
-    console.log('TOKEN', _token);
-    console.log('HASH TOKEN', hash.access_token);
-    console.log('PROPS', this.props);
-    if (_token) {
-      localStorage.setItem('token', _token);
-      // window.location.href = '/dashboard';
+    let token = hash.access_token;
+    if (token) {
+      localStorage.setItem('token', token);
       this.props.history.push('/dashboard');
     }
   }
@@ -70,7 +68,7 @@ export class Auth extends Component {
               Based on your mood, musical preferences, or if you just want to
               hear new music
             </Typography>
-            <Typography variant='h7' style={{ color: 'white', margin: 10 }}>
+            <Typography variant='h6' style={{ color: 'white', margin: 10 }}>
               Please Login below to continue...
             </Typography>
             <Button

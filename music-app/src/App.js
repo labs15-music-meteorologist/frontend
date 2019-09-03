@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
-import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import ReactGA from 'react-ga';
 import { createBrowserHistory } from 'history';
-import { MixpanelConsumer } from 'react-mixpanel';
+
+import ReactGA from 'react-ga';
 
 import Auth from './components/Auth';
-import LikedSongs from './components/LikedSongs';
-import Logout from './components/Logout';
-import Info from './components/Info';
 import NavBar from './components/NavBar';
-import MusicPlayer from './components/Player';
-import Dashboard from './components/Dashboard.js';
+import MusicPlayer from './components/dashboard/MusicPlayer';
 import Footer from './components/Footer.js';
+
+import Logout from './views/Logout';
+import Info from './views/Info';
+import Dashboard from './views/Dashboard.js';
+import './App.css';
+
+/* import { MixpanelConsumer } from 'react-mixpanel'; */
+/* import LikedSongs from './components/LikedSongs'; */
 
 const history = createBrowserHistory();
 

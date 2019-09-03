@@ -1,9 +1,10 @@
 import React from 'react';
-import { getTrackInfo } from '../actions';
 import { connect } from 'react-redux';
+
 import { Grid, Typography } from '@material-ui/core';
-import { withStyles } from '@material-ui/styles';
-import '../App.css';
+
+import { getTrackInfo } from '../../actions';
+import '../../App.css';
 
 class Song extends React.Component {
   componentDidMount() {
@@ -13,8 +14,8 @@ class Song extends React.Component {
   }
 
   render() {
-    const tf = this.props.tracksInfo[this.props.id];
-    const loadingTf = !tf || tf.fetching;
+    /*     const tf = this.props.tracksInfo[this.props.id]; */
+    /*    const loadingTf = !tf || tf.fetching; */
     return (
       <div>
         <Grid

@@ -16,7 +16,7 @@ import { getCurrentSong, getTrackInfo } from '../actions';
 import { connect } from 'react-redux';
 
 const data = [
-  { subject: 'Acousticness', A: 120, B: 110 },
+  { subject: 'Acousticness', A: this.props.features.data.acousticness},
   { subject: 'Danceability', A: 98, B: 130 },
   { subject: 'Energy', A: 86, B: 130 },
   { subject: 'Instrumentalness', A: 99, B: 100 },
@@ -46,8 +46,12 @@ class Chart extends Component {
   }
 
   render() {
+<<<<<<< HEAD
     console.log('Current Song', this.props);
+=======
+>>>>>>> d27811e0e125b482c1a3fe747208aeb13e1e2ce0
     const { data } = this.state;
+    console.log('props.player', this.props);
 
     return (
       <div>
@@ -136,11 +140,15 @@ class Chart extends Component {
 }
 
 const mapStateToProps = state => ({
-  id: state.getCurrentSong,
-  trackInfo: state.getTrackInfo
+  // id: state.getCurrentSong,
+  trackInfo: state.getTrackInfo,
 });
 
 export default connect(
   mapStateToProps,
+<<<<<<< HEAD
   { getTrackInfo, getCurrentSong }
+=======
+  { getTrackInfo },
+>>>>>>> d27811e0e125b482c1a3fe747208aeb13e1e2ce0
 )(Chart);

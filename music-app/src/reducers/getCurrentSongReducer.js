@@ -5,7 +5,7 @@ import {
   } from '../actions';
   
   const initialState = {
-    id: '',
+    id: [],
     fetchingSongError: ''
   };
   

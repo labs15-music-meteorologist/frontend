@@ -27,6 +27,7 @@ export const getUsers = () => dispatch => {
     });
 };
 
+<<<<<<< HEAD
 export const GET_WELCOME_FETCHING = 'GET_WELCOME_FETCHING';
 export const GET_WELCOME_SUCCESS = 'GET_WELCOME_SUCCESS';
 export const GET_WELCOME_FAILURE = 'GET_WELCOME_FAILURE';
@@ -51,6 +52,8 @@ export const getWelcome = () => dispatch => {
     });
 };
 
+=======
+>>>>>>> d27811e0e125b482c1a3fe747208aeb13e1e2ce0
 export const GET_LIKEDSONGS_FETCHING = 'GET_LIKEDSONGS_FETCHING';
 export const GET_LIKEDSONGS_SUCCESS = 'GET_LIKEDSONGS_SUCCESS';
 export const GET_LIKEDSONGS_FAILURE = 'GET_LIKEDSONGS_FAILURE';
@@ -153,8 +156,13 @@ export const getCurrentSong = dispatch => {
   dispatch({
     type: GET_CURRENT_SONG_FETCHING
   });
+<<<<<<< HEAD
   const config = {
     headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
+=======
+  var config = {
+    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
+>>>>>>> d27811e0e125b482c1a3fe747208aeb13e1e2ce0
   };
   axios
     .get('https://api.spotify.com/v1/me/player/currently-playing', config)

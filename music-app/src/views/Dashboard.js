@@ -5,18 +5,11 @@ import { Grid } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import List from '@material-ui/core/List';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import Grow from '@material-ui/core/Grow';
-import Popper from '@material-ui/core/Popper';
-import MenuItem from '@material-ui/core/MenuItem';
-import MenuList from '@material-ui/core/MenuList';
-import { makeStyles } from '@material-ui/core/styles';
 
 import { getlikedSongs, getUsers, getSpotifyAccountDetails } from '../actions';
 
-import LikedSongs from '../components/dashbaord/LikedSongs';
-import MusicPlayer from '../components/dashbaord/MusicPlayer';
-import Chart from '../components/Chart'; 
+import LikedSongs from '../components/dashboard/LikedSongs';
+import MusicPlayer from '../components/dashboard/MusicPlayer';
 
 import '../App.css';
 

@@ -6,7 +6,7 @@ import ReactGA from 'react-ga';
 
 import Auth from './components/Auth';
 import NavBar from './components/NavBar';
-import MusicPlayer from './components/dashbaord/MusicPlayer';
+import MusicPlayer from './components/dashboard/MusicPlayer';
 import Footer from './components/Footer.js';
 
 import Logout from './views/Logout';

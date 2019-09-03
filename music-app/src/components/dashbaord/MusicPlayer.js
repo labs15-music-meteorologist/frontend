@@ -152,10 +152,10 @@ class MusicPlayer extends Component {
     axios
       .get(`https://api.spotify.com/v1/audio-features/${this.state.id}`, config)
       .then(res => {
-        console.log(this.getCurrentSongFeatures)
         this.setState({
-        songFeatures: { data: res.data  }
+        songFeatures: res.data
         });
+        console.log('RESPONSE', res)
       })
       .catch(err => {
         console.log(err);

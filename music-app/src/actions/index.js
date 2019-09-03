@@ -140,6 +140,7 @@ export const getCurrentSong = () => dispatch => {
         type: GET_CURRENT_SONG_SUCCESS,
         payload: res.data,
       });
+      console.log('RESPONSE', res)
     })
     .catch(err => {
       dispatch({

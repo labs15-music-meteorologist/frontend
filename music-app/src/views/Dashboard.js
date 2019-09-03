@@ -11,6 +11,7 @@ import { getlikedSongs, getUsers, getSpotifyAccountDetails } from '../actions';
 
 import LikedSongs from '../components/dashbaord/LikedSongs';
 import MusicPlayer from '../components/dashbaord/MusicPlayer';
+import Chart from '../components/Chart'; 
 
 import '../App.css';
 
@@ -44,6 +45,7 @@ class Dashboard extends React.Component {
       : false;
   };
   render() {
+    console.log('DASHBOARD PROPS', this.props)
     if (this.checkPremiumUser() || this.checkNoIOS()) {
       this.props.history.push('/info');
     }
@@ -76,6 +78,9 @@ class Dashboard extends React.Component {
           </Grid>
           <Grid item>
             <MusicPlayer />
+          </Grid>
+          <Grid item>
+            <Chart props={this.props} />
           </Grid>
         </Grid>
       </div>

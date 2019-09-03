@@ -130,7 +130,7 @@ export const getCurrentSong = () => dispatch => {
     type: GET_CURRENT_SONG_FETCHING,
     payload: 'FETCHING'
   });
-  const config = {
+  var config = {
     headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
   };
   axios

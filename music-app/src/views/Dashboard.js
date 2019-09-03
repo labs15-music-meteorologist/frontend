@@ -1,19 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
 import { Grid } from '@material-ui/core';
-import LikedSongs from './LikedSongs.js';
-import MusicPlayer from './Player.js';
 import Button from '@material-ui/core/Button';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
 import List from '@material-ui/core/List';
 import { makeStyles } from '@material-ui/core/styles';
+
+import { getlikedSongs, getUsers, getSpotifyAccountDetails } from '../actions';
+
+import LikedSongs from '../components/dashbaord/LikedSongs';
+import MusicPlayer from '../components/dashbaord/MusicPlayer';
+
 import '../App.css';
-// import Fab from '@material-ui/core/Fab';
-// import MenuIcon from '@material-ui/icons/Menu';
-// import AddIcon from '@material-ui/icons/Add';
-// import SearchIcon from '@material-ui/icons/Search';
-// import MoreIcon from '@material-ui/icons/MoreVert';
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -28,7 +27,26 @@ class Dashboard extends React.Component {
     localStorage.removeItem('token');
     this.props.history.push('/logout');
   };
+
+  checkPremiumUser = () => {
+    return this.props.spotifyUser.product &&
+      this.props.fetchingSpotifyUser === false &&
+      this.props.spotifyUser.product !== 'premium'
+      ? true
+      : false;
+  };
+
+  checkNoIOS = () => {
+    return window.navigator.platform === 'iPhone' ||
+      window.navigator.platform === 'iPad' ||
+      window.navigator.platform === 'iPod'
+      ? true
+      : false;
+  };
   render() {
+    if (this.checkPremiumUser() || this.checkNoIOS()) {
+      this.props.history.push('/info');
+    }
     return (
       <div className='dashboard'>
         <Button
@@ -65,4 +83,12 @@ class Dashboard extends React.Component {
   }
 }
 
-export default Dashboard;
+const mapStateToProps = state => ({
+  spotifyUser: state.getUsersReducer.spotifyUser,
+  fetchingSpotifyUser: state.getUsersReducer.fetchingSpotifyUser,
+});
+
+export default connect(
+  mapStateToProps,
+  { getlikedSongs, getUsers, getSpotifyAccountDetails },
+)(Dashboard);

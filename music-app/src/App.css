@@ -39,6 +39,11 @@
 
 .auth {
   height: 100vh;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 3%;
 }
 
 .dashboard {
@@ -48,4 +53,61 @@
 .footer {
   bottom: 0;
   position: relative;
+}
+
+.side-menu-open {
+  position: absolute;
+  z-index: 1;
+  top: 40px;
+  margin-left: 0px;
+  padding-left: 0px;
+}
+
+.side-menu-closed {
+  display: none;
+}
+
+.burger {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  z-index: 0;
+}
+
+.burger div div {
+  width: 28px;
+  height: 2px;
+  background-color: #ffffff;
+  margin: 4px;
+  transition: all 0.5s ease;
+}
+
+.toggle-line-one {
+  transform: rotate(-45deg) translate(-9px, 5px);
+}
+.toggle-line-two {
+  opacity: 0;
+}
+.toggle-line-three {
+  transform: rotate(45deg) translate(-9px, -6px);
+}
+
+/* .dashboard-grid {
+  position: fixed;
+}
+ */
+
+/* .dashboard {
+  position: absolute;
+}
+ */
+
+.logout {
+  height: 100vh;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 3%;
 }

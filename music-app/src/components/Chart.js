@@ -15,50 +15,73 @@ import {
 import { getCurrentSong, getTrackInfo } from '../actions';
 import { connect } from 'react-redux';
 
-const data = [
-  { subject: 'Acousticness', A: 98, B: 110 },
-  { subject: 'Danceability', A: 98, B: 130 },
-  { subject: 'Energy', A: 86, B: 130 },
-  { subject: 'Instrumentalness', A: 99, B: 100 },
-  { subject: 'Liveness', A: 85, B: 90 },
-  { subject: 'Valence', A: 65, B: 85 }
-];
-
-const initialState = { data };
-
 class Chart extends Component {
   static displayName = 'RadarChartDemo';
 
   constructor() {
     super();
+    // this.handleChangeData = this.handleChangeData.bind(this);
 
-    this.state = initialState;
-    this.handleChangeData = this.handleChangeData.bind(this);
+    this.state = {
+      data: [
+        { subject: 'Acousticness', A: 0 },
+        { subject: 'Danceability', A: 0 },
+        { subject: 'Energy', A: 86, B: 130 },
+        { subject: 'Instrumentalness', A: 99, B: 100 },
+        { subject: 'Liveness', A: 85, B: 90 },
+        { subject: 'Valence', A: 65, B: 85 }
+      ]
+    };
+  }
+  componentDidUpdate(prevProps) {
+    console.log('prevprops', prevProps);
+    if (this.props.features.acousticness !== prevProps.features.acousticness) {
+      console.log('This is running');
+      this.setState({
+        data: [
+          {
+            subject: 'Acousticness',
+            A: this.props.features.acousticness * 100
+          },
+          {
+            subject: 'Danceability',
+            A: this.props.features.danceability * 100
+          },
+          { subject: 'Energy', A: this.props.features.energy * 100 },
+          {
+            subject: 'Instrumentalness',
+            A: this.props.features.instrumentalness * 100
+          },
+          { subject: 'Liveness', A: this.props.features.liveness * 100 },
+          { subject: 'Valence', A: this.props.features.valence * 100 }
+        ]
+      });
+    }
   }
 
-  handleChangeData() {
-    // this.setState(() => _.mapValues(initialState, changeNumberOfData));
-    this.setState(data);
-  }
+  // handleChangeData() {
+  //   // this.setState(() => _.mapValues(initialState, changeNumberOfData));
+  //   this.setState(data);
+  // }
 
   handleMouseEnter(props) {
     console.log(props);
   }
 
   render() {
-    const { data } = this.state;
-    console.log('props.player', this.props);
+    // const { data } = this.state;
+    console.log('Chart Props', this.props.features.acousticness);
 
     return (
       <div>
-        <a
+        {/* <a
           href='javascript: void(0);'
           className='btn update'
           onClick={this.handleChangeData}>
           change data
         </a>
         <br />
-        <p>A simple RadarChart</p>
+        <p>A simple RadarChart</p> */}
 
         {/* Specify chart elements from import list to use them ex. PolarAngleAxis are the subjects */}
 
@@ -70,14 +93,14 @@ class Chart extends Component {
           outerRadius={150}
           width={600}
           height={500}
-          data={data}>
+          data={this.state.data}>
           <PolarGrid />
           <PolarAngleAxis stroke='white' dataKey='subject' />
           <Legend formatter={this.renderColorfulLegendText} />
           <PolarRadiusAxis tick={{ fill: 'white' }} />
           <Radar
             tick={{ fill: 'white' }}
-            name='Mike'
+            name='Audio Features'
             dataKey='A'
             stroke='red'
             fill='white'
@@ -136,11 +159,11 @@ class Chart extends Component {
 }
 
 const mapStateToProps = state => ({
-  // id: state.getCurrentSong,
+  id: state.getCurrentSong,
   trackInfo: state.getTrackInfo
 });
 
 export default connect(
   mapStateToProps,
-  { getTrackInfo }
+  { getTrackInfo, getCurrentSong }
 )(Chart);

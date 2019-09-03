@@ -100,7 +100,7 @@ class Chart extends Component {
           <PolarRadiusAxis tick={{ fill: 'white' }} />
           <Radar
             tick={{ fill: 'white' }}
-            name='Mike'
+            name='Audio Features'
             dataKey='A'
             stroke='red'
             fill='white'

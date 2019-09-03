@@ -120,3 +120,32 @@ export const getSpotifyAccountDetails = () => dispatch => {
       });
     });
 };
+
+export const GET_CURRENT_SONG_FETCHING = 'GET_CURRENT_SONG_FETCHING';
+export const GET_CURRENT_SONG_SUCCESS = 'GET_CURRENT_SONG_SUCCESS';
+export const GET_CURRENT_SONG_FAILURE = 'GET_CURRENT_SONG_FAILURE';
+
+export const getCurrentSong = () => dispatch => {
+  dispatch({
+    type: GET_CURRENT_SONG_FETCHING,
+    payload: 'FETCHING'
+  });
+  var config = {
+    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
+  };
+  axios
+    .get('https://api.spotify.com/v1/me/player/currently-playing', config)
+    .then(res => {
+      dispatch({
+        type: GET_CURRENT_SONG_SUCCESS,
+        payload: res.data,
+      });
+      console.log('RESPONSE', res)
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_CURRENT_SONG_FAILURE,
+        payload: err,
+      });
+    });
+};

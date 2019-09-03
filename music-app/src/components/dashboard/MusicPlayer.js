@@ -9,6 +9,8 @@ import Pause from '../../assets/player-stop.png';
 import Play from '../../assets/player-start.png';
 import loadingSpinner from '../../assets/lava-lamp-preloader.svg';
 
+import Chart from '../Chart'
+
 class MusicPlayer extends Component {
   constructor(props) {
     super(props);
@@ -24,6 +26,8 @@ class MusicPlayer extends Component {
       playing: false,
       position: 0,
       duration: 1,
+      id: '', 
+      songFeatures: [],
     };
     // this will later be set by setInterval
     this.playerCheckInterval = null;
@@ -92,6 +96,7 @@ class MusicPlayer extends Component {
     this.player.on('player_state_changed', state => {
       this.onStateChanged(state);
       this.getCurrentSong();
+      this.getCurrentSongFeatures(); 
     });
 
     this.player.on('ready', async data => {
@@ -128,10 +133,29 @@ class MusicPlayer extends Component {
     axios
       .get('https://api.spotify.com/v1/me/player/currently-playing', config)
       .then(res => {
-        console.log(res.data);
         this.setState({
           imageUrl: res.data.item.album.images[1].url,
+          id: res.data.item.id
         });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  
+
+  getCurrentSongFeatures = () => {
+    const config = {
+      headers: { Authorization: 'Bearer ' + this.state.token },
+    };
+    axios
+      .get(`https://api.spotify.com/v1/audio-features/${this.state.id}`, config)
+      .then(res => {
+        this.setState({
+        songFeatures: res.data
+        });
+        console.log('RESPONSE', res)
       })
       .catch(err => {
         console.log(err);
@@ -178,7 +202,7 @@ class MusicPlayer extends Component {
 
   render() {
     const { trackName, artistName, albumName, error, playing } = this.state;
-
+    console.log('Player state', this.state)
     return (
       <Grid container direction='column' justify='center' alignItems='center'>
         <Grid item>
@@ -242,6 +266,9 @@ class MusicPlayer extends Component {
             onClick={() => this.onNextClick()}>
             <img src={SkipRight} alt="White icon to skip to the next song." style={{ maxHeight: 22 }} />
           </button>
+        </Grid>
+        <Grid item>
+          <Chart features={this.state.songFeatures} />
         </Grid>
       </Grid>
     );

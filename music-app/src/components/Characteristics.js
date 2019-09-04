@@ -51,7 +51,7 @@ class Characteristics extends React.Component {
         <Paper
           className={useStyles.paper}
           style={{
-            backgroundColor: `rgba(${255}, ${255}, ${255}, ${0.5})`,
+            backgroundColor: `rgba(${255}, ${255}, ${255}, ${0.7})`,
           }}>
           <Table className={useStyles.table} size='small'>
             <TableHead>

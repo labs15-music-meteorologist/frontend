@@ -18,24 +18,32 @@ import { connect } from 'react-redux';
 class Chart extends Component {
   static displayName = 'RadarChartDemo';
 
-  constructor() {
-    super();
-    // this.handleChangeData = this.handleChangeData.bind(this);
+  // componentDidMount() {
+  //   this.props.getCurrentSong();
+  //   this.props.getTrackInfo(this.props.id);
+  // }
 
-    this.state = {
-      data: [
-        { subject: 'Acousticness', A: 0 },
-        { subject: 'Danceability', A: 0 },
-        { subject: 'Energy', A: 0 },
-        { subject: 'Instrumentalness', A: 0 },
-        { subject: 'Liveness', A: 0 },
-        { subject: 'Valence', A: 0 }
-      ]
-    };
-  }
+  // this.handleChangeData = this.handleChangeData.bind(this);
+
+  state = {
+    data: [
+      { subject: 'Acousticness', A: 0 },
+      { subject: 'Danceability', A: 0 },
+      { subject: 'Energy', A: 0 },
+      { subject: 'Instrumentalness', A: 0 },
+      { subject: 'Liveness', A: 0 },
+      { subject: 'Valence', A: 0 }
+    ]
+  };
+
+  // componentDidMount() {
+  //   this.props.getCurrentSong();
+  // }
+
   componentDidUpdate(prevProps) {
-    console.log('prevprops', prevProps);
-    if (this.props.features.acousticness !== prevProps.features.acousticness) {
+    console.log('PREVPROPS', prevProps);
+    console.log('features******', this.props.features);
+    if (this.props.features.id !== prevProps.features.id) {
       console.log('This is running');
       this.setState({
         data: [
@@ -70,7 +78,7 @@ class Chart extends Component {
 
   render() {
     // const { data } = this.state;
-    console.log('Chart Props', this.props.features.acousticness);
+    console.log('Chart Props', this.props);
 
     return (
       <div>
@@ -159,7 +167,8 @@ class Chart extends Component {
 }
 
 const mapStateToProps = state => ({
-  id: state.getCurrentSong
+  item: state.getCurrentSong,
+  trackInfo: state.getTrackInfo
 });
 
 export default connect(

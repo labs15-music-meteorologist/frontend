@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -35,9 +36,22 @@ export default function CenteredTabs() {
           indicatorColor='white'
           /* textColor='white' */
           centered>
-          <Tab label='About' />
-          <Tab label='Github' />
-          <Tab label='Contact' />
+          <Tab
+            label='About'
+            value='/dashboard'
+            component={Link}
+            to='/dashboard'
+          />
+          <Tab
+            label='Github'
+            href='https://github.com/labs15-music-meteorologist/frontend'
+            target='_blank'
+          />
+          <Tab
+            label='Contact'
+            href='https://github.com/Dstar4'
+            target='_blank'
+          />
         </Tabs>
         <Tabs centered>
           <p style={{ fontSize: 14 }}>

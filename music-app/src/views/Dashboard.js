@@ -86,7 +86,8 @@ class Dashboard extends React.Component {
             variant='contained'
             onClick={e => this.logout(e)}
             style={{
-              backgroundColor: `rgba(${255}, ${189}, ${89}, ${0.75})`,
+              color: 'white',
+              backgroundColor: `rgba(${56}, ${182}, ${255}, ${0.6})`,
               fontWeight: '600',
               letterSpacing: '1.5px',
               position: 'absolute',
@@ -112,18 +113,9 @@ class Dashboard extends React.Component {
             </Paper>
           </List>
         </div>
-        <Grid
-          className='dashboard-grid'
-          container
-          direction='row'
-          justify='space-around'
-          alignItems='center'>
-          <Grid item>
-            <MusicPlayer />
-          </Grid>
-          {/* <Grid item>
-            <Chart props={this.props} />
-          </Grid> */}
+
+        <Grid item>
+          <MusicPlayer />
         </Grid>
       </div>
     );

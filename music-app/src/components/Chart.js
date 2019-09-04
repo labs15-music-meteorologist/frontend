@@ -63,14 +63,14 @@ class Chart extends Component {
     return (
       <div>
         {/* Specify chart elements from import list to use them ex. PolarAngleAxis are the subjects */}
-
+        {/* <ResponsiveContainer width='99%' height='99%'> */}
         <RadarChart
           label={{ fill: 'white' }}
           value={{ color: 'white' }}
-          cx={250}
+          cx={225}
           cy={200}
           outerRadius={150}
-          width={500}
+          width={450}
           height={400}
           data={this.state.data}>
           <PolarGrid />
@@ -87,6 +87,7 @@ class Chart extends Component {
             fillOpacity={0.7}
           />
         </RadarChart>
+        {/* </ResponsiveContainer> */}
       </div>
     );
   }

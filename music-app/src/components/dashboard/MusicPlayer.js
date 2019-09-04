@@ -195,104 +195,113 @@ class MusicPlayer extends Component {
         direction='row'
         justify='center'
         alignItems='center'
-        spacing={0}>
-        <Grid item xs={3}>
-          {this.props.imageUrl[1] && (
-            <img
-              ref='image'
-              src={this.props.imageUrl[1].url}
-              style={{ width: '100%', objectFit: 'scale-down' }}
-            />
-          )}
-          {/* <p>Artist Name: {this.props.imageUrl[2]}</p> */}
-          <p>Artist: {artistName}</p>
-          <p>Track: {trackName}</p>
-          <p>Album: {albumName}</p>
-        </Grid>
-
-        <Grid container direction='column' justify='center' alignItems='center'>
-          <Grid item xs={6}>
-            <Chart
-              features={this.props.traits}
-              style={{ width: '100%', objectFit: 'scale-down' }}
-            />
-          </Grid>
+        spacing={6}>
+        <div style={{ width: '20%' }}>
           <Grid item>
-            {window.Spotify !== undefined &&
-              this.state.imageUrl !== '' &&
-              artistName !== 'Artist Name' && (
-                <div className='album-art'>
-                  <h4 style={{ textAlign: 'center' }}>Now Playing</h4>
-                  <img src={this.state.imageUrl} alt='album-art' />
-                </div>
-              )}
+            {this.props.imageUrl[1] && (
+              <img
+                ref='image'
+                src={this.props.imageUrl[1].url}
+                style={{ width: '100%', objectFit: 'scale-down' }}
+              />
+            )}
+            <p>Artist: {artistName}</p>
+            <p>Track: {trackName}</p>
+            <p>Album: {albumName}</p>
           </Grid>
+        </div>
 
-          {error && <p>Error: {error}</p>}
-
+        <div style={{ width: '40%' }}>
           <Grid
             container
-            direction='row'
+            direction='column'
             justify='center'
-            alignItems='center'
-            style={{ width: 300 }}>
-            <button
-              style={{
-                background: 'none',
-                border: 'none',
-                outline: 'none',
-              }}
-              onClick={() => this.onPrevClick()}>
-              <img
-                src={SkipLeft}
-                alt='White icon to skip to the previous song.'
-                style={{ maxHeight: 22 }}
+            alignItems='center'>
+            <Grid item>
+              <Chart
+                features={this.props.traits}
+                style={{ width: '100%', objectFit: 'scale-down' }}
               />
-            </button>
+            </Grid>
+            <Grid item>
+              {window.Spotify !== undefined &&
+                this.state.imageUrl !== '' &&
+                artistName !== 'Artist Name' && (
+                  <div className='album-art'>
+                    <h4 style={{ textAlign: 'center' }}>Now Playing</h4>
+                    <img src={this.state.imageUrl} alt='album-art' />
+                  </div>
+                )}
+            </Grid>
 
-            <button
-              style={{
-                background: 'none',
-                border: 'none',
-                outline: 'none',
-              }}
-              onClick={() => this.onPlayClick()}>
-              {playing ? (
-                <img
-                  src={Pause}
-                  alt='White icon to pause a song.'
-                  style={{ maxHeight: 35 }}
-                />
-              ) : (
-                <img
-                  src={Play}
-                  alt='White icon to start a pause song.'
-                  style={{ maxHeight: 35 }}
-                />
-              )}
-            </button>
+            {error && <p>Error: {error}</p>}
 
-            <button
-              style={{
-                background: 'none',
-                border: 'none',
-                outline: 'none',
-              }}
-              onClick={() => this.onNextClick()}>
-              <img
-                src={SkipRight}
-                alt='White icon to skip to the next song.'
-                style={{ maxHeight: 22 }}
-              />
-            </button>
+            <Grid
+              container
+              direction='row'
+              justify='center'
+              alignItems='center'
+              style={{ width: 300 }}>
+              <button
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  outline: 'none',
+                }}
+                onClick={() => this.onPrevClick()}>
+                <img
+                  src={SkipLeft}
+                  alt='White icon to skip to the previous song.'
+                  style={{ maxHeight: 22 }}
+                />
+              </button>
+
+              <button
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  outline: 'none',
+                }}
+                onClick={() => this.onPlayClick()}>
+                {playing ? (
+                  <img
+                    src={Pause}
+                    alt='White icon to pause a song.'
+                    style={{ maxHeight: 35 }}
+                  />
+                ) : (
+                  <img
+                    src={Play}
+                    alt='White icon to start a pause song.'
+                    style={{ maxHeight: 35 }}
+                  />
+                )}
+              </button>
+
+              <button
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  outline: 'none',
+                }}
+                onClick={() => this.onNextClick()}>
+                <img
+                  src={SkipRight}
+                  alt='White icon to skip to the next song.'
+                  style={{ maxHeight: 22 }}
+                />
+              </button>
+            </Grid>
           </Grid>
-        </Grid>
+        </div>
 
-        <Grid item xs={3}>
-          <p>Hello</p>
-          <p>Hello</p>
-          <p>Hello</p>
-        </Grid>
+        <div style={{ width: '20%' }}>
+          <Grid item>
+            <p>Hello</p>
+            <p>Hello</p>
+            <p>Hello</p>
+          </Grid>
+        </div>
       </Grid>
     );
   }

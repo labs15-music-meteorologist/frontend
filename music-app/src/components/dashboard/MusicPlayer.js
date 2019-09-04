@@ -96,6 +96,7 @@ class MusicPlayer extends Component {
     this.player.on('player_state_changed', state => {
       this.onStateChanged(state);
       this.currentSong();
+      this.getCurrentSongFeatures(this.props.song.id); 
     });
 
     this.player.on('ready', async data => {
@@ -128,12 +129,12 @@ class MusicPlayer extends Component {
   async currentSong() {
     try {
       await this.props.getCurrentSong();
-      if (this.props.song === undefined) {
+      if ((this.props.song === this.props.song) || (this.props.song === undefined)) {
         console.log('searching...');
         this.props.getCurrentSong();
       } else {
         console.log('Current Song:', this.props.song.id);
-        console.log('Song Traits:', this.props.traits);
+        
       }
     } catch (e) {
       console.log(e);
@@ -156,22 +157,11 @@ class MusicPlayer extends Component {
   //     });
   // }
 
-  // getCurrentSongFeatures = () => {
-  //   const config = {
-  //     headers: { Authorization: 'Bearer ' + this.state.token },
-  //   };
-  //   axios
-  //     .get(`https://api.spotify.com/v1/audio-features/${this.state.id}`, config)
-  //     .then(res => {
-  //       console.log(this.getCurrentSongFeatures)
-  //       this.setState({
-  //       songFeatures: { data: res.data  }
-  //       });
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // }
+
+
+  getCurrentSongFeatures = (id) => {
+   this.props.getTrackInfo(id); 
+  }
 
   // SDK Player Song playback controls
   onPrevClick() {
@@ -214,6 +204,8 @@ class MusicPlayer extends Component {
   render() {
     const { trackName, artistName, albumName, error, playing } = this.state;
     console.log('Player state', this.state);
+    console.log('Player Props', this.props);
+    console.log('Song Traits:', this.props.traits);
     return (
       <Grid container direction='column' justify='center' alignItems='center'>
         <Grid item>
@@ -297,7 +289,7 @@ class MusicPlayer extends Component {
           </button>
         </Grid>
         <Grid item>
-          <Chart features={this.state.songFeatures} />
+          <Chart features={this.props.traits} />
         </Grid>
       </Grid>
     );

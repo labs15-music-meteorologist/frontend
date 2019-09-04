@@ -105,7 +105,7 @@ class Dashboard extends React.Component {
                 maxHeight: 450,
                 width: 280,
                 overflow: 'auto',
-                backgroundColor: `rgba(${20}, ${20}, ${20}, ${0.85})`,
+                backgroundColor: `rgba(${20}, ${20}, ${20}, ${0.9})`,
                 color: 'white',
               }}>
               <LikedSongs props={this.props} />

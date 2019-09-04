@@ -187,12 +187,15 @@ class MusicPlayer extends Component {
 
   render() {
     const { trackName, artistName, albumName, error, playing } = this.state;
-    console.log('Song props', this.props.imageUrl[2]);
+    console.log('Song props', this.props.imageUrl);
+
     return (
       <Grid container direction='row' justify='center' alignItems='center'>
         <div>
           <Grid item>
-            {/* <img ref='image' src={this.props.imageUrl[2].url} /> */}
+            {this.props.imageUrl[1] && (
+              <img ref='image' src={this.props.imageUrl[1].url} />
+            )}
             {/* <p>Artist Name: {this.props.imageUrl[2]}</p> */}
             <p>Artist: {artistName}</p>
             <p>Track: {trackName}</p>

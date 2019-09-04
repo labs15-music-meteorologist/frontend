@@ -82,6 +82,7 @@ class Chart extends Component {
             name='Audio Features'
             dataKey='A'
             stroke='#38b6ff'
+            stroke-width='2%'
             fill='#5ce1e6'
             fillOpacity={0.7}
           />

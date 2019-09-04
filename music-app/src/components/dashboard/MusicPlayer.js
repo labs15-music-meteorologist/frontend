@@ -187,91 +187,106 @@ class MusicPlayer extends Component {
 
   render() {
     const { trackName, artistName, albumName, error, playing } = this.state;
+    console.log('Song props', this.props.imageUrl[2]);
     return (
-      <Grid container direction='column' justify='center' alignItems='center'>
-        <Grid item>
-          <Chart features={this.props.traits} />
-        </Grid>
-        <Grid item>
-          {window.Spotify === undefined && (
-            <div className='spinning-loader-burning'>
-              <img src={loadingSpinner} alt='Moving animation of a flame.' />
-            </div>
-          )}
-          {window.Spotify !== undefined &&
-            this.state.imageUrl !== '' &&
-            artistName !== 'Artist Name' && (
-              <div className='album-art'>
-                <h4 style={{ textAlign: 'center' }}>Now Playing</h4>
-                <img src={this.state.imageUrl} alt='album-art' />
-              </div>
-            )}
-        </Grid>
+      <Grid container direction='row' justify='center' alignItems='center'>
+        <div>
+          <Grid item>
+            {/* <img ref='image' src={this.props.imageUrl[2].url} /> */}
+            {/* <p>Artist Name: {this.props.imageUrl[2]}</p> */}
+            <p>Artist: {artistName}</p>
+            <p>Track: {trackName}</p>
+            <p>Album: {albumName}</p>
+          </Grid>
+        </div>
+        <div>
+          <Grid
+            container
+            direction='column'
+            justify='center'
+            alignItems='center'>
+            <Grid item>
+              <Chart features={this.props.traits} />
+            </Grid>
+            <Grid item>
+              {/* {window.Spotify === undefined && (
+                <div className='spinning-loader-burning'>
+                  <img
+                    src={loadingSpinner}
+                    alt='Moving animation of a flame.'
+                  />
+                </div>
+              )} */}
+              {window.Spotify !== undefined &&
+                this.state.imageUrl !== '' &&
+                artistName !== 'Artist Name' && (
+                  <div className='album-art'>
+                    <h4 style={{ textAlign: 'center' }}>Now Playing</h4>
+                    <img src={this.state.imageUrl} alt='album-art' />
+                  </div>
+                )}
+            </Grid>
 
-        {error && <p>Error: {error}</p>}
+            {error && <p>Error: {error}</p>}
 
-        {/* <Grid item>
-          <div>Artist: {artistName}</div>
-          <p>Track: {trackName}</p>
-          <p>Album: {albumName}</p>
-        </Grid> */}
+            <Grid
+              container
+              direction='row'
+              justify='center'
+              alignItems='center'
+              style={{ width: 300 }}>
+              <button
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  outline: 'none',
+                }}
+                onClick={() => this.onPrevClick()}>
+                <img
+                  src={SkipLeft}
+                  alt='White icon to skip to the previous song.'
+                  style={{ maxHeight: 22 }}
+                />
+              </button>
 
-        <Grid
-          container
-          direction='row'
-          justify='center'
-          alignItems='center'
-          style={{ width: 300 }}>
-          <button
-            style={{
-              background: 'none',
-              border: 'none',
-              outline: 'none',
-            }}
-            onClick={() => this.onPrevClick()}>
-            <img
-              src={SkipLeft}
-              alt='White icon to skip to the previous song.'
-              style={{ maxHeight: 22 }}
-            />
-          </button>
+              <button
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  outline: 'none',
+                }}
+                onClick={() => this.onPlayClick()}>
+                {playing ? (
+                  <img
+                    src={Pause}
+                    alt='White icon to pause a song.'
+                    style={{ maxHeight: 35 }}
+                  />
+                ) : (
+                  <img
+                    src={Play}
+                    alt='White icon to start a pause song.'
+                    style={{ maxHeight: 35 }}
+                  />
+                )}
+              </button>
 
-          <button
-            style={{
-              background: 'none',
-              border: 'none',
-              outline: 'none',
-            }}
-            onClick={() => this.onPlayClick()}>
-            {playing ? (
-              <img
-                src={Pause}
-                alt='White icon to pause a song.'
-                style={{ maxHeight: 35 }}
-              />
-            ) : (
-              <img
-                src={Play}
-                alt='White icon to start a pause song.'
-                style={{ maxHeight: 35 }}
-              />
-            )}
-          </button>
-
-          <button
-            style={{
-              background: 'none',
-              border: 'none',
-              outline: 'none',
-            }}
-            onClick={() => this.onNextClick()}>
-            <img
-              src={SkipRight}
-              alt='White icon to skip to the next song.'
-              style={{ maxHeight: 22 }}
-            />
-          </button>
-        </Grid>
+              <button
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  outline: 'none',
+                }}
+                onClick={() => this.onNextClick()}>
+                <img
+                  src={SkipRight}
+                  alt='White icon to skip to the next song.'
+                  style={{ maxHeight: 22 }}
+                />
+              </button>
+            </Grid>
+          </Grid>
+        </div>
       </Grid>
     );
   }
@@ -279,6 +294,7 @@ class MusicPlayer extends Component {
 
 const mapStateToProps = state => ({
   song: state.currentSongReducer.item,
+  imageUrl: state.currentSongReducer.imageUrl,
   traits: state.getTrackInfoReducer,
 });
 

@@ -10,7 +10,7 @@ import {
   PolarRadiusAxis,
   ResponsiveContainer,
   LabelList,
-  Label,
+  Label
 } from 'recharts';
 import { getCurrentSong, getTrackInfo } from '../actions';
 import { connect } from 'react-redux';
@@ -18,43 +18,52 @@ import { connect } from 'react-redux';
 class Chart extends Component {
   static displayName = 'RadarChartDemo';
 
-  constructor() {
-    super();
+  // componentDidMount() {
+  //   this.props.getCurrentSong(); 
+  //   this.props.getTrackInfo(this.props.id);
+  // }
+
     // this.handleChangeData = this.handleChangeData.bind(this);
 
-    this.state = {
+  state = {
       data: [
         { subject: 'Acousticness', A: 0 },
         { subject: 'Danceability', A: 0 },
-        { subject: 'Energy', A: 86, B: 130 },
-        { subject: 'Instrumentalness', A: 99, B: 100 },
-        { subject: 'Liveness', A: 85, B: 90 },
-        { subject: 'Valence', A: 65, B: 85 },
-      ],
+        { subject: 'Energy', A: 0},
+        { subject: 'Instrumentalness', A: 0 },
+        { subject: 'Liveness', A: 0 },
+        { subject: 'Valence', A: 0 }
+      ]
     };
-  }
+  
+
+// componentDidMount() {
+//   this.props.getCurrentSong(); 
+// }
+
   componentDidUpdate(prevProps) {
-    console.log('prevprops', prevProps);
-    if (this.props.features.acousticness !== prevProps.features.acousticness) {
+    console.log('PREVPROPS', prevProps);
+    console.log('features******', this.props.features)
+    if (this.props.features.id !== prevProps.features.id) {
       console.log('This is running');
       this.setState({
         data: [
           {
             subject: 'Acousticness',
-            A: this.props.features.acousticness * 100,
+            A: this.props.features.acousticness * 100
           },
           {
             subject: 'Danceability',
-            A: this.props.features.danceability * 100,
+            A: this.props.features.danceability * 100
           },
           { subject: 'Energy', A: this.props.features.energy * 100 },
           {
             subject: 'Instrumentalness',
-            A: this.props.features.instrumentalness * 100,
+            A: this.props.features.instrumentalness * 100
           },
           { subject: 'Liveness', A: this.props.features.liveness * 100 },
-          { subject: 'Valence', A: this.props.features.valence * 100 },
-        ],
+          { subject: 'Valence', A: this.props.features.valence * 100 }
+        ]
       });
     }
   }
@@ -70,7 +79,7 @@ class Chart extends Component {
 
   render() {
     // const { data } = this.state;
-    console.log('Chart Props', this.props.features.acousticness);
+    console.log('Chart Props', this.props);
 
     return (
       <div>
@@ -159,11 +168,11 @@ class Chart extends Component {
 }
 
 const mapStateToProps = state => ({
-  id: state.getCurrentSong,
-  trackInfo: state.getTrackInfo,
+  item: state.getCurrentSong,
+  trackInfo: state.getTrackInfo
 });
 
 export default connect(
   mapStateToProps,
-  { getTrackInfo, getCurrentSong },
+  { getTrackInfo, getCurrentSong }
 )(Chart);

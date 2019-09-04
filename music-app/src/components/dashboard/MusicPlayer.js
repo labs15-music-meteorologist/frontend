@@ -190,106 +190,109 @@ class MusicPlayer extends Component {
     console.log('Song props', this.props.imageUrl);
 
     return (
-      <Grid container direction='row' justify='center' alignItems='center'>
-        <div>
-          <Grid item>
-            {this.props.imageUrl[1] && (
-              <img ref='image' src={this.props.imageUrl[1].url} />
-            )}
-            {/* <p>Artist Name: {this.props.imageUrl[2]}</p> */}
-            <p>Artist: {artistName}</p>
-            <p>Track: {trackName}</p>
-            <p>Album: {albumName}</p>
+      <Grid
+        container
+        direction='row'
+        justify='center'
+        alignItems='center'
+        spacing={0}>
+        <Grid item xs={3}>
+          {this.props.imageUrl[1] && (
+            <img
+              ref='image'
+              src={this.props.imageUrl[1].url}
+              style={{ width: '100%', objectFit: 'scale-down' }}
+            />
+          )}
+          {/* <p>Artist Name: {this.props.imageUrl[2]}</p> */}
+          <p>Artist: {artistName}</p>
+          <p>Track: {trackName}</p>
+          <p>Album: {albumName}</p>
+        </Grid>
+
+        <Grid container direction='column' justify='center' alignItems='center'>
+          <Grid item xs={6}>
+            <Chart
+              features={this.props.traits}
+              style={{ width: '100%', objectFit: 'scale-down' }}
+            />
           </Grid>
-        </div>
-        <div>
+          <Grid item>
+            {window.Spotify !== undefined &&
+              this.state.imageUrl !== '' &&
+              artistName !== 'Artist Name' && (
+                <div className='album-art'>
+                  <h4 style={{ textAlign: 'center' }}>Now Playing</h4>
+                  <img src={this.state.imageUrl} alt='album-art' />
+                </div>
+              )}
+          </Grid>
+
+          {error && <p>Error: {error}</p>}
+
           <Grid
             container
-            direction='column'
+            direction='row'
             justify='center'
-            alignItems='center'>
-            <Grid item>
-              <Chart features={this.props.traits} />
-            </Grid>
-            <Grid item>
-              {/* {window.Spotify === undefined && (
-                <div className='spinning-loader-burning'>
-                  <img
-                    src={loadingSpinner}
-                    alt='Moving animation of a flame.'
-                  />
-                </div>
-              )} */}
-              {window.Spotify !== undefined &&
-                this.state.imageUrl !== '' &&
-                artistName !== 'Artist Name' && (
-                  <div className='album-art'>
-                    <h4 style={{ textAlign: 'center' }}>Now Playing</h4>
-                    <img src={this.state.imageUrl} alt='album-art' />
-                  </div>
-                )}
-            </Grid>
+            alignItems='center'
+            style={{ width: 300 }}>
+            <button
+              style={{
+                background: 'none',
+                border: 'none',
+                outline: 'none',
+              }}
+              onClick={() => this.onPrevClick()}>
+              <img
+                src={SkipLeft}
+                alt='White icon to skip to the previous song.'
+                style={{ maxHeight: 22 }}
+              />
+            </button>
 
-            {error && <p>Error: {error}</p>}
-
-            <Grid
-              container
-              direction='row'
-              justify='center'
-              alignItems='center'
-              style={{ width: 300 }}>
-              <button
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  outline: 'none',
-                }}
-                onClick={() => this.onPrevClick()}>
+            <button
+              style={{
+                background: 'none',
+                border: 'none',
+                outline: 'none',
+              }}
+              onClick={() => this.onPlayClick()}>
+              {playing ? (
                 <img
-                  src={SkipLeft}
-                  alt='White icon to skip to the previous song.'
-                  style={{ maxHeight: 22 }}
+                  src={Pause}
+                  alt='White icon to pause a song.'
+                  style={{ maxHeight: 35 }}
                 />
-              </button>
-
-              <button
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  outline: 'none',
-                }}
-                onClick={() => this.onPlayClick()}>
-                {playing ? (
-                  <img
-                    src={Pause}
-                    alt='White icon to pause a song.'
-                    style={{ maxHeight: 35 }}
-                  />
-                ) : (
-                  <img
-                    src={Play}
-                    alt='White icon to start a pause song.'
-                    style={{ maxHeight: 35 }}
-                  />
-                )}
-              </button>
-
-              <button
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  outline: 'none',
-                }}
-                onClick={() => this.onNextClick()}>
+              ) : (
                 <img
-                  src={SkipRight}
-                  alt='White icon to skip to the next song.'
-                  style={{ maxHeight: 22 }}
+                  src={Play}
+                  alt='White icon to start a pause song.'
+                  style={{ maxHeight: 35 }}
                 />
-              </button>
-            </Grid>
+              )}
+            </button>
+
+            <button
+              style={{
+                background: 'none',
+                border: 'none',
+                outline: 'none',
+              }}
+              onClick={() => this.onNextClick()}>
+              <img
+                src={SkipRight}
+                alt='White icon to skip to the next song.'
+                style={{ maxHeight: 22 }}
+              />
+            </button>
           </Grid>
-        </div>
+        </Grid>
+
+        <Grid item xs={3}>
+          <p>Hello</p>
+          <p>Hello</p>
+          <p>Hello</p>
+        </Grid>
       </Grid>
     );
   }

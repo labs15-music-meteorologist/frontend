@@ -67,19 +67,19 @@ class Chart extends Component {
         <RadarChart
           label={{ fill: 'white' }}
           value={{ color: 'white' }}
-          cx={300}
-          cy={250}
+          cx={250}
+          cy={200}
           outerRadius={150}
-          width={600}
-          height={500}
+          width={500}
+          height={400}
           data={this.state.data}>
           <PolarGrid />
           <PolarAngleAxis stroke='white' dataKey='subject' />
-          <Legend formatter={this.renderColorfulLegendText} />
+          {/* <Legend formatter={this.renderColorfulLegendText} /> */}
           <PolarRadiusAxis tick={{ fill: 'white' }} />
           <Radar
             tick={{ fill: 'white' }}
-            name='Audio Features'
+            // name='Audio Features'
             dataKey='A'
             stroke='#38b6ff'
             stroke-width='2%'

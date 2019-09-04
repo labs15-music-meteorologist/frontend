@@ -30,7 +30,7 @@ class NavBar extends React.Component {
         <Grid item>
           <img
             src={MusicLogo}
-            alt={'White text logo with a meteor on top of the last o.'}
+            alt={'Music Meteorologist logo with Meteor on last "o"'}
             style={{ height: 70 }}
           />
         </Grid>

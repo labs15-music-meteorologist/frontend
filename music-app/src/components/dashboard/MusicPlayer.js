@@ -10,6 +10,7 @@ import Play from '../../assets/player-start.png';
 import loadingSpinner from '../../assets/lava-lamp-preloader.svg';
 
 import Chart from '../Chart';
+import Characteristics from '../Characteristics.js';
 
 class MusicPlayer extends Component {
   constructor(props) {
@@ -296,11 +297,15 @@ class MusicPlayer extends Component {
         </div>
 
         <div style={{ width: '20%' }}>
-          <Grid item>
-            <p>Hello</p>
-            <p>Hello</p>
-            <p>Hello</p>
-          </Grid>
+          {/* <Grid item>
+            <p>Tempo</p>
+            <p>Key</p>
+            <p>Mode</p>
+            <p>Time Signature</p>
+            <p>Popularity</p>
+            
+          </Grid> */}
+          <Characteristics features={this.props.traits} />
         </div>
       </Grid>
     );

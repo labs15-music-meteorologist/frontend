@@ -93,12 +93,4 @@ class Chart extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  item: state.getCurrentSong,
-  trackInfo: state.getTrackInfo,
-});
-
-export default connect(
-  mapStateToProps,
-  { getTrackInfo, getCurrentSong },
-)(Chart);
+export default Chart;

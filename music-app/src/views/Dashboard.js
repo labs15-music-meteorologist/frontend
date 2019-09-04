@@ -7,8 +7,10 @@ import Paper from '@material-ui/core/Paper';
 import List from '@material-ui/core/List';
 
 import { getlikedSongs, getUsers, getSpotifyAccountDetails } from '../actions';
+
 import LikedSongs from '../components/dashboard/LikedSongs';
 import MusicPlayer from '../components/dashboard/MusicPlayer';
+
 import '../App.css';
 
 class Dashboard extends React.Component {
@@ -119,6 +121,9 @@ class Dashboard extends React.Component {
           <Grid item>
             <MusicPlayer />
           </Grid>
+          {/* <Grid item>
+            <Chart props={this.props} />
+          </Grid> */}
         </Grid>
       </div>
     );

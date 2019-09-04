@@ -35,6 +35,7 @@ class MusicPlayer extends Component {
 
   componentDidMount() {
     this.handleLogin();
+    this.currentSong();
   }
 
   handleLogin() {
@@ -95,7 +96,6 @@ class MusicPlayer extends Component {
 
     this.player.on('player_state_changed', state => {
       this.onStateChanged(state);
-      this.currentSong();
     });
 
     this.player.on('ready', async data => {
@@ -132,8 +132,13 @@ class MusicPlayer extends Component {
         console.log('searching...');
         this.props.getCurrentSong();
       } else {
+        await this.props.getTrackInfo(this.props.song.id);
         console.log('Current Song:', this.props.song.id);
         console.log('Song Traits:', this.props.traits);
+        this.setState({
+          id: this.props.song.id,
+          songFeatures: this.props.traits
+        });
       }
     } catch (e) {
       console.log(e);

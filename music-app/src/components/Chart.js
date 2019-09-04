@@ -26,10 +26,10 @@ class Chart extends Component {
       data: [
         { subject: 'Acousticness', A: 0 },
         { subject: 'Danceability', A: 0 },
-        { subject: 'Energy', A: 86, B: 130 },
-        { subject: 'Instrumentalness', A: 99, B: 100 },
-        { subject: 'Liveness', A: 85, B: 90 },
-        { subject: 'Valence', A: 65, B: 85 }
+        { subject: 'Energy', A: 0 },
+        { subject: 'Instrumentalness', A: 0 },
+        { subject: 'Liveness', A: 0 },
+        { subject: 'Valence', A: 0 }
       ]
     };
   }
@@ -159,8 +159,7 @@ class Chart extends Component {
 }
 
 const mapStateToProps = state => ({
-  id: state.getCurrentSong,
-  trackInfo: state.getTrackInfo
+  id: state.getCurrentSong
 });
 
 export default connect(

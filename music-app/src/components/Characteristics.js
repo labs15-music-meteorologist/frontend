@@ -22,20 +22,6 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-// function createData(name, value) {
-//   return { name, value };
-// }
-
-// const rows = [
-//   //   createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-//   //   createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-//   //   createData('Eclair', 262, 16.0, 24, 6.0),
-//   //   createData('Cupcake', 305, 3.7, 67, 4.3),
-//   //   createData('Gingerbread', 356, 16.0, 49, 3.9),
-// ];
-
-// const classes = useStyles();
-
 class Characteristics extends React.Component {
   state = {
     tempo: '',
@@ -62,7 +48,11 @@ class Characteristics extends React.Component {
     console.log('This.state', this.state);
     return (
       <div className={useStyles.root}>
-        <Paper className={useStyles.paper}>
+        <Paper
+          className={useStyles.paper}
+          style={{
+            backgroundColor: `rgba(${255}, ${255}, ${255}, ${0.5})`,
+          }}>
           <Table className={useStyles.table} size='small'>
             <TableHead>
               <TableRow>

@@ -206,9 +206,9 @@ class MusicPlayer extends Component {
                 style={{ width: '100%', objectFit: 'scale-down' }}
               />
             )}
-            <p>Artist: {artistName}</p>
-            <p>Track: {trackName}</p>
-            <p>Album: {albumName}</p>
+            <p style={{ fontWeight: 'bold' }}>{trackName}</p>
+            <p>{artistName}</p>
+            <p>{albumName}</p>
           </Grid>
         </div>
 
@@ -297,14 +297,6 @@ class MusicPlayer extends Component {
         </div>
 
         <div style={{ width: '20%' }}>
-          {/* <Grid item>
-            <p>Tempo</p>
-            <p>Key</p>
-            <p>Mode</p>
-            <p>Time Signature</p>
-            <p>Popularity</p>
-            
-          </Grid> */}
           <Characteristics features={this.props.traits} />
         </div>
       </Grid>

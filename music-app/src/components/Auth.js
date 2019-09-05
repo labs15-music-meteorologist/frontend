@@ -44,7 +44,7 @@ export class Auth extends Component {
   render() {
     return (
       <div className='auth'>
-        <img src={HeaderImage} style={{ width: '63%', margin: 20 }} />
+        <img src={HeaderImage} alt="An orange background." style={{ width: '63%', margin: 20 }} />
         <Paper
           style={{
             // backgroundColor: `rgba(${20}, ${20}, ${20}, ${0.85})`

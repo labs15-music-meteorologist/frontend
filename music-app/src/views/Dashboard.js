@@ -28,12 +28,10 @@ class Dashboard extends React.Component {
   }
 
   componentDidUpdate() {
-    this.props.spotifyUser.id &&
-      this.props.persistUser(this.props.spotifyUser.id);
+    this.props.spotifyUser.id && this.props.persistUser(this.props.spotifyUser);
   }
 
   onClick() {
-    console.log(this.state.collapse);
     this.setState({
       collapse: !this.state.collapse,
     });

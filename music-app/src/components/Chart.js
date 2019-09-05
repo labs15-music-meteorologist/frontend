@@ -1,20 +1,11 @@
 import React, { Component } from 'react';
 import {
-  Surface,
   Radar,
   RadarChart,
   PolarGrid,
-  Legend,
-  Tooltip,
   PolarAngleAxis,
   PolarRadiusAxis,
-  ResponsiveContainer,
-  LabelList,
-  Label,
 } from 'recharts';
-
-import { getCurrentSong, getTrackInfo } from '../actions';
-import { connect } from 'react-redux';
 
 class Chart extends Component {
   static displayName = 'RadarChartDemo';
@@ -32,7 +23,6 @@ class Chart extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.features.id !== prevProps.features.id) {
-      console.log('This is running');
       this.setState({
         data: [
           {
@@ -55,9 +45,7 @@ class Chart extends Component {
     }
   }
 
-  handleMouseEnter(props) {
-    console.log(props);
-  }
+  handleMouseEnter(props) {}
 
   render() {
     return (

@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import { Grid } from '@material-ui/core';
-import { createStyles, styleManager } from '@material-ui/styles';
 import { getCurrentSong, getTrackInfo } from '../../actions';
 import SkipLeft from '../../assets/skip-left.png';
 import SkipRight from '../../assets/skip-right.png';
 import Pause from '../../assets/player-stop.png';
 import Play from '../../assets/player-start.png';
-import loadingSpinner from '../../assets/lava-lamp-preloader.svg';
-import '../../App.css'; 
+import '../../App.css';
 
 import Chart from '../Chart';
 import Characteristics from '../Characteristics.js';
@@ -48,8 +45,6 @@ class MusicPlayer extends Component {
     // this will later be set by setInterval
     this.playerCheckInterval = null;
   }
-
-  
 
   componentDidMount() {
     this.handleLogin();
@@ -147,18 +142,11 @@ class MusicPlayer extends Component {
   async currentSong() {
     try {
       await this.props.getCurrentSong();
-      if (
-        this.props.song === this.props.song ||
-        this.props.song === undefined
-      ) {
-        console.log('searching...');
+      if (this.props.song === undefined) {
         this.props.getCurrentSong();
       } else {
-        console.log('Current Song:', this.props.song.id);
       }
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   }
 
   getCurrentSongFeatures = id => {
@@ -205,7 +193,6 @@ class MusicPlayer extends Component {
 
   render() {
     const { trackName, artistName, albumName, error, playing } = this.state;
-    console.log('Song props', this.props.imageUrl);
 
     return (
       // <Grid
@@ -215,12 +202,13 @@ class MusicPlayer extends Component {
       //   alignItems='center'
       //   spacing={6}>
       <div className='music-player'>
-        <div classname='music-component' >
+        <div classname='music-component'>
           <Grid item>
             {this.props.imageUrl[1] && (
               <img
                 ref='image'
                 src={this.props.imageUrl[1].url}
+                alt='Album artwork cover.'
                 style={{ width: '100%', objectFit: 'scale-down' }}
               />
             )}
@@ -242,7 +230,7 @@ class MusicPlayer extends Component {
                 style={{ width: '100%', objectFit: 'scale-down' }}
               />
             </Grid>
-            <Grid item >
+            <Grid item>
               {window.Spotify !== undefined &&
                 this.state.imageUrl !== '' &&
                 artistName !== 'Artist Name' && (
@@ -317,7 +305,7 @@ class MusicPlayer extends Component {
         <div classname='music-component'>
           <Characteristics features={this.props.traits} />
         </div>
-        </div>
+      </div>
     );
   }
 }

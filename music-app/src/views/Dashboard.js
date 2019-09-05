@@ -6,7 +6,12 @@ import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import List from '@material-ui/core/List';
 
-import { getlikedSongs, getUsers, getSpotifyAccountDetails } from '../actions';
+import {
+  getlikedSongs,
+  getUsers,
+  getSpotifyAccountDetails,
+  persistUser,
+} from '../actions';
 
 import LikedSongs from '../components/dashboard/LikedSongs';
 import MusicPlayer from '../components/dashboard/MusicPlayer';
@@ -17,6 +22,15 @@ class Dashboard extends React.Component {
   state = {
     collapse: false,
   };
+
+  componentDidMount() {
+    this.props.getSpotifyAccountDetails();
+  }
+
+  componentDidUpdate() {
+    this.props.spotifyUser.id &&
+      this.props.persistUser(this.props.spotifyUser.id);
+  }
 
   onClick() {
     console.log(this.state.collapse);
@@ -129,5 +143,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getlikedSongs, getUsers, getSpotifyAccountDetails },
+  { getlikedSongs, getUsers, getSpotifyAccountDetails, persistUser },
 )(Dashboard);

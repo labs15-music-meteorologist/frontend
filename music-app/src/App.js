@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
+import {ProtectedRoute} from './components/protected.route'
 
 import ReactGA from 'react-ga';
 
@@ -43,10 +44,10 @@ class App extends Component {
           <Route exact path='/logout' component={Logout} />
           <Route exact path='/info' render={props => <Info {...props} />} />
           <Route exact path='/player' component={MusicPlayer} />
-          <Route
+          <ProtectedRoute
             exact
             path='/dashboard'
-            render={props => <Dashboard {...props} />}
+            component={Dashboard}
           />
           <Footer />
         </Router>

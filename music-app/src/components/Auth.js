@@ -81,7 +81,7 @@ export class Auth extends Component {
                 margin: 30,
                 fontWeight: 'bold',
                 fontSize: 18,
-                backgroundColor: `rgba(${255}, ${189}, ${89}, ${0.75})`,
+                backgroundColor: `rgba(${56}, ${182}, ${255}, ${0.6})`,
               }}
               href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${encodeURIComponent(
                 scopes,

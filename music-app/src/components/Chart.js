@@ -10,169 +10,87 @@ import {
   PolarRadiusAxis,
   ResponsiveContainer,
   LabelList,
-  Label
+  Label,
 } from 'recharts';
+
 import { getCurrentSong, getTrackInfo } from '../actions';
 import { connect } from 'react-redux';
 
 class Chart extends Component {
   static displayName = 'RadarChartDemo';
 
-  // componentDidMount() {
-  //   this.props.getCurrentSong(); 
-  //   this.props.getTrackInfo(this.props.id);
-  // }
-
-    // this.handleChangeData = this.handleChangeData.bind(this);
-
   state = {
-      data: [
-        { subject: 'Acousticness', A: 0 },
-        { subject: 'Danceability', A: 0 },
-        { subject: 'Energy', A: 0},
-        { subject: 'Instrumentalness', A: 0 },
-        { subject: 'Liveness', A: 0 },
-        { subject: 'Valence', A: 0 }
-      ]
-    };
-  
-
-// componentDidMount() {
-//   this.props.getCurrentSong(); 
-// }
+    data: [
+      { subject: 'Acousticness', A: 0 },
+      { subject: 'Danceability', A: 0 },
+      { subject: 'Energy', A: 0 },
+      { subject: 'Instrumentalness', A: 0 },
+      { subject: 'Liveness', A: 0 },
+      { subject: 'Valence', A: 0 },
+    ],
+  };
 
   componentDidUpdate(prevProps) {
-    console.log('PREVPROPS', prevProps);
-    console.log('features******', this.props.features)
     if (this.props.features.id !== prevProps.features.id) {
       console.log('This is running');
       this.setState({
         data: [
           {
             subject: 'Acousticness',
-            A: this.props.features.acousticness * 100
+            A: this.props.features.acousticness * 100,
           },
           {
             subject: 'Danceability',
-            A: this.props.features.danceability * 100
+            A: this.props.features.danceability * 100,
           },
           { subject: 'Energy', A: this.props.features.energy * 100 },
           {
             subject: 'Instrumentalness',
-            A: this.props.features.instrumentalness * 100
+            A: this.props.features.instrumentalness * 100,
           },
           { subject: 'Liveness', A: this.props.features.liveness * 100 },
-          { subject: 'Valence', A: this.props.features.valence * 100 }
-        ]
+          { subject: 'Valence', A: this.props.features.valence * 100 },
+        ],
       });
     }
   }
-
-  // handleChangeData() {
-  //   // this.setState(() => _.mapValues(initialState, changeNumberOfData));
-  //   this.setState(data);
-  // }
 
   handleMouseEnter(props) {
     console.log(props);
   }
 
   render() {
-    // const { data } = this.state;
-    console.log('Chart Props', this.props);
-
     return (
       <div>
-        {/* <a
-          href='javascript: void(0);'
-          className='btn update'
-          onClick={this.handleChangeData}>
-          change data
-        </a>
-        <br />
-        <p>A simple RadarChart</p> */}
-
         {/* Specify chart elements from import list to use them ex. PolarAngleAxis are the subjects */}
-
+        {/* <ResponsiveContainer width='99%' height='99%'> */}
         <RadarChart
           label={{ fill: 'white' }}
           value={{ color: 'white' }}
-          cx={300}
-          cy={250}
+          cx={225}
+          cy={200}
           outerRadius={150}
-          width={600}
-          height={500}
+          width={450}
+          height={400}
           data={this.state.data}>
           <PolarGrid />
           <PolarAngleAxis stroke='white' dataKey='subject' />
-          <Legend formatter={this.renderColorfulLegendText} />
+          {/* <Legend formatter={this.renderColorfulLegendText} /> */}
           <PolarRadiusAxis tick={{ fill: 'white' }} />
           <Radar
             tick={{ fill: 'white' }}
-            name='Audio Features'
+            // name='Audio Features'
             dataKey='A'
-            stroke='red'
-            fill='white'
-            fillOpacity={0.6}
+            stroke='#38b6ff'
+            stroke-width='2%'
+            fill='#5ce1e6'
+            fillOpacity={0.7}
           />
-          {/* <Label fill="white" /> */}
         </RadarChart>
-
-        {/* <p>A RadarChart of two students' score</p>
-        <RadarChart
-          cx={300}
-          cy={250}
-          outerRadius={150}
-          width={600}
-          height={500}
-          data={data}
-        >
-          <PolarGrid />
-          <Tooltip />
-          <Radar
-            name="Mike"
-            dataKey="A"
-            stroke="#8884d8"
-            fill="#8884d8"
-            fillOpacity={0.6}
-            onMouseEnter={this.handleMouseEnter}
-          />
-          <Radar
-            name="Lily"
-            dataKey="B"
-            stroke="#82ca9d"
-            fill="#82ca9d"
-            fillOpacity={0.6}
-            animationBegin={180}
-          />
-          <Legend />
-          <PolarRadiusAxis domain={[0, 150]} label="score"/>
-        </RadarChart> */}
-        {/* <p>RadarChart wrapped by ResponsiveContainer</p> */}
-        {/* <div style={{ width: '100%', height: '100%' }}>
-          <ResponsiveContainer>
-            <RadarChart data={data}>
-              <PolarGrid />
-              <PolarAngleAxis dataKey="subject" />
-              <PolarRadiusAxis />
-              <Tooltip />
-              <Radar name="Mike" dataKey="A" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6}>
-                <LabelList />
-              </Radar>
-            </RadarChart>
-          </ResponsiveContainer>
-        </div> */}
+        {/* </ResponsiveContainer> */}
       </div>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  item: state.getCurrentSong,
-  trackInfo: state.getTrackInfo
-});
-
-export default connect(
-  mapStateToProps,
-  { getTrackInfo, getCurrentSong }
-)(Chart);
+export default Chart;

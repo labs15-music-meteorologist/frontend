@@ -25,6 +25,7 @@ export class Info extends React.Component {
               <img
                 className='crying-cloud'
                 src={CryingCloud}
+                alt='A blue cloud that is crying.'
                 style={{ width: '73%', margin: 20, transform: 'rotate(20deg)' }}
               />
             </Grid>

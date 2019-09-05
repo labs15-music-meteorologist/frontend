@@ -4,11 +4,7 @@ import { connect } from 'react-redux';
 /* import { Mixpanel } from '../analytics/Mixpanel'; */
 import { Grid, Typography } from '@material-ui/core';
 
-import {
-  getlikedSongs,
-  getUsers,
-  getSpotifyAccountDetails,
-} from '../../actions';
+import { getlikedSongs, getUsers } from '../../actions';
 import Song from './Song.js';
 
 class LikedSongs extends React.Component {
@@ -18,7 +14,7 @@ class LikedSongs extends React.Component {
     // this.props.mixpanel.track('Spotify Login'); // Removed temp tracking
 
     // Example tracking once implemented
-    this.props.getSpotifyAccountDetails();
+    /* this.props.getSpotifyAccountDetails(); */
     /*     Mixpanel.track('Spotify Login'); */
 
     // // Mixpanel Tracking
@@ -68,5 +64,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getlikedSongs, getUsers, getSpotifyAccountDetails },
+  { getlikedSongs, getUsers },
 )(LikedSongs);

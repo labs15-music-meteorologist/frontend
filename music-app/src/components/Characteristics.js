@@ -32,8 +32,6 @@ class Characteristics extends React.Component {
   };
   componentDidUpdate(prevProps) {
     if (this.props.features.id !== prevProps.features.id) {
-      console.log('This is running Characteristics');
-
       this.setState({
         tempo: this.props.features.tempo,
         key: this.props.features.key,
@@ -45,7 +43,6 @@ class Characteristics extends React.Component {
   }
 
   render() {
-    console.log('This.state', this.state);
     return (
       <div className={useStyles.root}>
         <Paper

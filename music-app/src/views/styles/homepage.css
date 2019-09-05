@@ -42,6 +42,15 @@ div.main-wrapper {
   margin-left: 15px;
 }
 
+.cta-text {
+  text-align: center;
+}
+
+.main-cta img {
+  width: 500px;
+  height: 400px;
+}
+
 .cta-signup {
   align-content: center;
   display: flex;

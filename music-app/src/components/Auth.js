@@ -10,6 +10,7 @@ import '../views/styles/homepage.css';
 import walking_city from '../assets/walking_city.svg';
 import weather_sitting from '../assets/weather_sitting.svg';
 import music_notes from '../assets/music_notes.svg';
+import user_gif from '../assets/user_gif.gif';
 
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
 
@@ -70,10 +71,10 @@ export class Auth extends Component {
         {/* <img src={HeaderImage} style={{ width: '63%', margin: 20 }} /> */}
         <div class='main-wrapper'>
           <div class='main-cta'>
-            <h1>Ever wonder why you love the songs you do?</h1>
+            <img src={user_gif} alt='' class='bd-box' />
             <p class='cta-text'>
-              Check out song characteristics from your spotify account. Our
-              machine learning algorithm will predict if you like it.
+              Listen and rate songs from your Spotify playlists. Our machine
+              learning model will predict if you like a song before you hear it!
             </p>
             <div class='cta-signup'>
               <Button
@@ -99,22 +100,28 @@ export class Auth extends Component {
           <div class='features fullwidth first'>
             <img src={walking_city} alt='' class='bd-box' />
             <div class='text-content'>
-              <h2>See song characteristics.</h2>
-              <p>See all the good bits that make up the songs you love.</p>
+              <h2>What makes you move?</h2>
+              <p>See what makes the songs you love awesome.</p>
             </div>
           </div>
           <div class='features second'>
             <img src={weather_sitting} alt='' class='baloon-woman' />
             <div class='text-content'>
-              <h2>Some cool text here.</h2>
-              <p>Music is rad find out why.</p>
+              <h2>Prediction at it's finest.</h2>
+              <p>
+                The more songs you rate the more accurate your predictions will
+                be.
+              </p>
             </div>
           </div>
           <div class='features fullwidth third'>
             <img src={music_notes} alt='' class='party' />
             <div class='text-content'>
               <h2>Are you smarter than a machine?</h2>
-              <p>More cool text here. Bada Bing.</p>
+              <p>
+                Put us to the test! See if we can predict if you like a song
+                before you hear it.
+              </p>
             </div>
           </div>
         </div>

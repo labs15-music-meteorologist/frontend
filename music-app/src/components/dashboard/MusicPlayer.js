@@ -2,15 +2,30 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { Grid } from '@material-ui/core';
+import { createStyles, styleManager } from '@material-ui/styles';
 import { getCurrentSong, getTrackInfo } from '../../actions';
 import SkipLeft from '../../assets/skip-left.png';
 import SkipRight from '../../assets/skip-right.png';
 import Pause from '../../assets/player-stop.png';
 import Play from '../../assets/player-start.png';
 import loadingSpinner from '../../assets/lava-lamp-preloader.svg';
+import '../../App.css'; 
 
 import Chart from '../Chart';
 import Characteristics from '../Characteristics.js';
+
+// const styleSheet = createStyles('test', theme => ({
+//   gridItem: {
+//     direction: 'row',
+//   },
+//   [theme.breakpoint.down('md')]: {
+//    gridItem: {
+//      direction: 'column'
+//    }
+//   },
+// }));
+
+// const classes = styleManager.render(styleSheet);
 
 class MusicPlayer extends Component {
   constructor(props) {
@@ -33,6 +48,8 @@ class MusicPlayer extends Component {
     // this will later be set by setInterval
     this.playerCheckInterval = null;
   }
+
+  
 
   componentDidMount() {
     this.handleLogin();
@@ -191,13 +208,14 @@ class MusicPlayer extends Component {
     console.log('Song props', this.props.imageUrl);
 
     return (
-      <Grid
-        container
-        direction='row'
-        justify='center'
-        alignItems='center'
-        spacing={6}>
-        <div style={{ width: '20%' }}>
+      // <Grid
+      //   container
+      //   direction='row'
+      //   justify='center'
+      //   alignItems='center'
+      //   spacing={6}>
+      <div className='music-player'>
+        <div classname='music-component' >
           <Grid item>
             {this.props.imageUrl[1] && (
               <img
@@ -212,7 +230,7 @@ class MusicPlayer extends Component {
           </Grid>
         </div>
 
-        <div style={{ width: '40%' }}>
+        <div classname='music-component music-chart'>
           <Grid
             container
             direction='column'
@@ -224,7 +242,7 @@ class MusicPlayer extends Component {
                 style={{ width: '100%', objectFit: 'scale-down' }}
               />
             </Grid>
-            <Grid item>
+            <Grid item >
               {window.Spotify !== undefined &&
                 this.state.imageUrl !== '' &&
                 artistName !== 'Artist Name' && (
@@ -242,7 +260,7 @@ class MusicPlayer extends Component {
               direction='row'
               justify='center'
               alignItems='center'
-              style={{ width: 300 }}>
+              style={{ width: 300, marginBottom: '5%' }}>
               <button
                 style={{
                   background: 'none',
@@ -296,10 +314,10 @@ class MusicPlayer extends Component {
           </Grid>
         </div>
 
-        <div style={{ width: '20%' }}>
+        <div classname='music-component'>
           <Characteristics features={this.props.traits} />
         </div>
-      </Grid>
+        </div>
     );
   }
 }

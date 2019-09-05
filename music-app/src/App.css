@@ -37,15 +37,6 @@
   background-color: rgba(56, 182, 255, 0.55);
 }
 
-.auth {
-  height: 100vh;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  justify-content: space-around;
-  margin-top: 3%;
-}
-
 .dashboard {
   height: 100vh;
 }

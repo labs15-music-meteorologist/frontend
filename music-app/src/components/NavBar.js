@@ -28,11 +28,19 @@ class NavBar extends React.Component {
           </Button>
         </Grid>
         <Grid item>
-          <img
-            src={MusicLogo}
-            alt={'Music Meteorologist logo with Meteor on last "o"'}
-            style={{ height: 70 }}
-          />
+          {(window.location = '/dashboard') ? (
+            <img
+              src={MusicLogo}
+              alt={'Music Meteorologist logo with Meteor on last "o"'}
+              style={{ height: 70 }}
+            />
+          ) : (
+            <img
+              src={MusicLogo}
+              alt={'Music Meteorologist logo with Meteor on last "o"'}
+              style={{ height: 70, display: 'none' }}
+            />
+          )}
         </Grid>
       </Grid>
     );

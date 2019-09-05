@@ -10,6 +10,7 @@ import Play from '../../assets/player-start.png';
 import loadingSpinner from '../../assets/lava-lamp-preloader.svg';
 
 import Chart from '../Chart';
+import Characteristics from '../Characteristics.js';
 
 class MusicPlayer extends Component {
   constructor(props) {
@@ -27,7 +28,7 @@ class MusicPlayer extends Component {
       position: 0,
       duration: 1,
       id: '',
-      songFeatures: []
+      songFeatures: [],
     };
     // this will later be set by setInterval
     this.playerCheckInterval = null;
@@ -51,7 +52,7 @@ class MusicPlayer extends Component {
       const {
         current_track: currentTrack,
         position,
-        duration
+        duration,
       } = state.track_window;
       const trackName = currentTrack.name;
       const albumName = currentTrack.album.name;
@@ -65,12 +66,12 @@ class MusicPlayer extends Component {
         trackName,
         albumName,
         artistName,
-        playing
+        playing,
       });
     } else {
       // state was null, user might have swapped to another device
       this.setState({
-        error: 'Looks like you might have swapped to another device?'
+        error: 'Looks like you might have swapped to another device?',
       });
     }
   }
@@ -96,7 +97,7 @@ class MusicPlayer extends Component {
     this.player.on('player_state_changed', state => {
       this.onStateChanged(state);
       this.currentSong();
-      this.getCurrentSongFeatures(this.props.song.id); 
+      this.getCurrentSongFeatures(this.props.song.id);
     });
 
     this.player.on('ready', async data => {
@@ -117,7 +118,7 @@ class MusicPlayer extends Component {
         name: 'Music Meteorologist Spotify Player',
         getOAuthToken: cb => {
           cb(token);
-        }
+        },
       });
 
       this.createEventHandlers();
@@ -129,39 +130,23 @@ class MusicPlayer extends Component {
   async currentSong() {
     try {
       await this.props.getCurrentSong();
-      if ((this.props.song === this.props.song) || (this.props.song === undefined)) {
+      if (
+        this.props.song === this.props.song ||
+        this.props.song === undefined
+      ) {
         console.log('searching...');
         this.props.getCurrentSong();
       } else {
         console.log('Current Song:', this.props.song.id);
-        
       }
     } catch (e) {
       console.log(e);
     }
   }
-  // getCurrentSong() {
-  //   const config = {
-  //     headers: { Authorization: 'Bearer ' + this.state.token },
-  //   };
-  //   axios
-  //     .get('https://api.spotify.com/v1/me/player/currently-playing', config)
-  //     .then(res => {
-  //       this.setState({
-  //         imageUrl: res.data.item.album.images[1].url,
-  //         id: res.data.item.id
-  //       });
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // }
 
-
-
-  getCurrentSongFeatures = (id) => {
-   this.props.getTrackInfo(id); 
-  }
+  getCurrentSongFeatures = id => {
+    this.props.getTrackInfo(id);
+  };
 
   // SDK Player Song playback controls
   onPrevClick() {
@@ -184,113 +169,136 @@ class MusicPlayer extends Component {
         method: 'PUT',
         headers: {
           authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           // This is where we will control what music is fed to the user
           // If we want to direct them to a specific playlist,artist or album we will pass in "context_uri" with its respective uri
           context_uri:
-            'spotify:user:spotifycharts:playlist:37i9dQZEVXbMDoHDwVN2tF' //Directs User to Global Top 50 playlist curated by spotify
+            'spotify:user:spotifycharts:playlist:37i9dQZEVXbMDoHDwVN2tF', //Directs User to Global Top 50 playlist curated by spotify
 
           // In order manipulate the user's queue and feed them a more fluid and unique array of songs we would instead
           // pass an array of song uris through the "uris" key
           // The example below if uncommented will direct the user to 3 songs (make sure to comment out the context_uri)
           // uris:["spotify:track:0aULRU35N9kTj6O1xMULRR","spotify:track:0VgkVdmE4gld66l8iyGjgx","spotify:track:5ry2OE6R2zPQFDO85XkgRb"]
-        })
-      }
+        }),
+      },
     );
   }
 
   render() {
     const { trackName, artistName, albumName, error, playing } = this.state;
-    console.log('Player state', this.state);
-    console.log('Player Props', this.props);
-    console.log('Song Traits:', this.props.traits);
+    console.log('Song props', this.props.imageUrl);
+
     return (
-      <Grid container direction='column' justify='center' alignItems='center'>
-        <Grid item>
-          {window.Spotify === undefined && (
-            <div className='spinning-loader-burning'>
-              <img src={loadingSpinner} alt='Moving animation of a flame.' />
-            </div>
-          )}
-          {window.Spotify !== undefined &&
-            this.state.imageUrl !== '' &&
-            artistName !== 'Artist Name' && (
-              <div className='album-art'>
-                <h4 style={{ textAlign: 'center' }}>Now Playing</h4>
-                <img src={this.state.imageUrl} alt='album-art' />
-              </div>
-            )}
-        </Grid>
-
-        {error && <p>Error: {error}</p>}
-
-        <Grid item>
-          <div>Artist: {artistName}</div>
-          <p>Track: {trackName}</p>
-          <p>Album: {albumName}</p>
-        </Grid>
-
-        <Grid
-          container
-          direction='row'
-          justify='center'
-          alignItems='center'
-          style={{ width: 300 }}>
-          <button
-            style={{
-              background: 'none',
-              border: 'none',
-              outline: 'none'
-            }}
-            onClick={() => this.onPrevClick()}>
-            <img
-              src={SkipLeft}
-              alt='White icon to skip to the previous song.'
-              style={{ maxHeight: 22 }}
-            />
-          </button>
-
-          <button
-            style={{
-              background: 'none',
-              border: 'none',
-              outline: 'none'
-            }}
-            onClick={() => this.onPlayClick()}>
-            {playing ? (
+      <Grid
+        container
+        direction='row'
+        justify='center'
+        alignItems='center'
+        spacing={6}>
+        <div style={{ width: '20%' }}>
+          <Grid item>
+            {this.props.imageUrl[1] && (
               <img
-                src={Pause}
-                alt='White icon to pause a song.'
-                style={{ maxHeight: 35 }}
-              />
-            ) : (
-              <img
-                src={Play}
-                alt='White icon to start a pause song.'
-                style={{ maxHeight: 35 }}
+                ref='image'
+                src={this.props.imageUrl[1].url}
+                style={{ width: '100%', objectFit: 'scale-down' }}
               />
             )}
-          </button>
+            <p style={{ fontWeight: 'bold' }}>{trackName}</p>
+            <p>{artistName}</p>
+            <p>{albumName}</p>
+          </Grid>
+        </div>
 
-          <button
-            style={{
-              background: 'none',
-              border: 'none',
-              outline: 'none'
-            }}
-            onClick={() => this.onNextClick()}>
-            <img
-              src={SkipRight}
-              alt='White icon to skip to the next song.'
-              style={{ maxHeight: 22 }}
-            />
-          </button>
-        </Grid>
-        <Grid item>
-          <Chart features={this.props.traits} />
-        </Grid>
+        <div style={{ width: '40%' }}>
+          <Grid
+            container
+            direction='column'
+            justify='center'
+            alignItems='center'>
+            <Grid item>
+              <Chart
+                features={this.props.traits}
+                style={{ width: '100%', objectFit: 'scale-down' }}
+              />
+            </Grid>
+            <Grid item>
+              {window.Spotify !== undefined &&
+                this.state.imageUrl !== '' &&
+                artistName !== 'Artist Name' && (
+                  <div className='album-art'>
+                    <h4 style={{ textAlign: 'center' }}>Now Playing</h4>
+                    <img src={this.state.imageUrl} alt='album-art' />
+                  </div>
+                )}
+            </Grid>
+
+            {error && <p>Error: {error}</p>}
+
+            <Grid
+              container
+              direction='row'
+              justify='center'
+              alignItems='center'
+              style={{ width: 300 }}>
+              <button
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  outline: 'none',
+                }}
+                onClick={() => this.onPrevClick()}>
+                <img
+                  src={SkipLeft}
+                  alt='White icon to skip to the previous song.'
+                  style={{ maxHeight: 22 }}
+                />
+              </button>
+
+              <button
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  outline: 'none',
+                }}
+                onClick={() => this.onPlayClick()}>
+                {playing ? (
+                  <img
+                    src={Pause}
+                    alt='White icon to pause a song.'
+                    style={{ maxHeight: 35 }}
+                  />
+                ) : (
+                  <img
+                    src={Play}
+                    alt='White icon to start a pause song.'
+                    style={{ maxHeight: 35 }}
+                  />
+                )}
+              </button>
+
+              <button
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  outline: 'none',
+                }}
+                onClick={() => this.onNextClick()}>
+                <img
+                  src={SkipRight}
+                  alt='White icon to skip to the next song.'
+                  style={{ maxHeight: 22 }}
+                />
+              </button>
+            </Grid>
+          </Grid>
+        </div>
+
+        <div style={{ width: '20%' }}>
+          <Characteristics features={this.props.traits} />
+        </div>
       </Grid>
     );
   }
@@ -298,10 +306,11 @@ class MusicPlayer extends Component {
 
 const mapStateToProps = state => ({
   song: state.currentSongReducer.item,
-  traits: state.getTrackInfoReducer
+  imageUrl: state.currentSongReducer.imageUrl,
+  traits: state.getTrackInfoReducer,
 });
 
 export default connect(
   mapStateToProps,
-  { getTrackInfo, getCurrentSong }
+  { getTrackInfo, getCurrentSong },
 )(MusicPlayer);

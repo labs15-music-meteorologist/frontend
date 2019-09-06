@@ -41,7 +41,7 @@ class LikedSongs extends React.Component {
             <Song song={song} id={song.track.id} key={song.track.id} />
           ))}
         </Grid>
-        <Grid item>
+        {/* <Grid item>
           <Typography
             style={{ fontWeight: 'bold', fontSize: 18, textAlign: 'center' }}>
             Users
@@ -51,7 +51,7 @@ class LikedSongs extends React.Component {
               <p>{user.display_name}</p>
             </div>
           ))}
-        </Grid>
+        </Grid> */}
       </Grid>
     );
   }

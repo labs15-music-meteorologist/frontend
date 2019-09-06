@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 
 import Button from '@material-ui/core/Button';
-import { Paper, Grid, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 
 import '../App.css';
 import '../views/styles/homepage.css';
@@ -38,23 +36,6 @@ const hash = window.location.hash
   }, {});
 
 window.location.hash = '';
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: '100%',
-  },
-  grid: {
-    marginTop: theme.spacing(3),
-    width: '100%',
-    overflowX: 'auto',
-    marginBottom: theme.spacing(2),
-    backgroundColor: 'gray',
-    marginBottom: '200px',
-  },
-  table: {
-    minWidth: 650,
-  },
-}));
 
 export class Auth extends Component {
   componentDidMount() {

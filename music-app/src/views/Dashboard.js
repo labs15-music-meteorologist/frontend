@@ -6,7 +6,12 @@ import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import List from '@material-ui/core/List';
 
-import { getlikedSongs, getUsers, getSpotifyAccountDetails } from '../actions';
+import {
+  getlikedSongs,
+  getUsers,
+  getSpotifyAccountDetails,
+  persistUser,
+} from '../actions';
 
 import LikedSongs from '../components/dashboard/LikedSongs';
 import MusicPlayer from '../components/dashboard/MusicPlayer';
@@ -18,8 +23,15 @@ class Dashboard extends React.Component {
     collapse: false,
   };
 
+  componentDidMount() {
+    this.props.getSpotifyAccountDetails();
+  }
+
+  componentDidUpdate() {
+    this.props.spotifyUser.id && this.props.persistUser(this.props.spotifyUser);
+  }
+
   onClick() {
-    console.log(this.state.collapse);
     this.setState({
       collapse: !this.state.collapse,
     });
@@ -86,7 +98,8 @@ class Dashboard extends React.Component {
             variant='contained'
             onClick={e => this.logout(e)}
             style={{
-              backgroundColor: `rgba(${255}, ${189}, ${89}, ${0.75})`,
+              color: 'white',
+              backgroundColor: `rgba(${56}, ${182}, ${255}, ${0.6})`,
               fontWeight: '600',
               letterSpacing: '1.5px',
               position: 'absolute',
@@ -105,25 +118,16 @@ class Dashboard extends React.Component {
                 maxHeight: 450,
                 width: 280,
                 overflow: 'auto',
-                backgroundColor: `rgba(${20}, ${20}, ${20}, ${0.85})`,
+                backgroundColor: `rgba(${20}, ${20}, ${20}, ${0.9})`,
                 color: 'white',
               }}>
               <LikedSongs props={this.props} />
             </Paper>
           </List>
         </div>
-        <Grid
-          className='dashboard-grid'
-          container
-          direction='row'
-          justify='space-around'
-          alignItems='center'>
-          <Grid item>
-            <MusicPlayer />
-          </Grid>
-          {/* <Grid item>
-            <Chart props={this.props} />
-          </Grid> */}
+
+        <Grid item>
+          <MusicPlayer />
         </Grid>
       </div>
     );
@@ -137,5 +141,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getlikedSongs, getUsers, getSpotifyAccountDetails },
+  { getlikedSongs, getUsers, getSpotifyAccountDetails, persistUser },
 )(Dashboard);

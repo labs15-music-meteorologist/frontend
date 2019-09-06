@@ -3,34 +3,40 @@ import React from 'react';
 import { Grid } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 
-import MusicLogo from '../assets/music-logo-new.png';
+import '../views/styles/navbar.css';
+
+import MusicLogo from '../assets/logo-music-new.png';
 
 class NavBar extends React.Component {
   homeButton = e => {
     e.preventDefault();
     window.location.href = '/';
   };
+
   render() {
     return (
-      <Grid
-        container
-        direction='row'
-        justify='space-between'
-        alignItems='center'>
-        <Grid item>
-          <Button
+      <div class='navwrapper'>
+        {/* <div class='home-button-wrapper'>
+          <button
             to='/'
-            style={{ color: 'inherit' }}
+            class='home-button'
             onClick={e => {
               this.homeButton(e);
             }}>
             Home
-          </Button>
-        </Grid>
-        <Grid item>
-          <img src={MusicLogo} alt={"White text logo with a meteor on top of the last o."} style={{ height: 70 }} />
-        </Grid>
-      </Grid>
+          </button>
+        </div> */}
+        <div class='navcontainer'>
+          <img
+            class='navlogo'
+            src={MusicLogo}
+            alt={'Music Meteorologist logo with Meteor on last "o"'}
+            style={{ height: 70 }}
+            onClick={e => {
+              this.homeButton(e);
+            }}></img>
+        </div>
+      </div>
     );
   }
 }

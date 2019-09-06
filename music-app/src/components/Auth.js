@@ -2,9 +2,15 @@ import React, { Component } from 'react';
 
 import Button from '@material-ui/core/Button';
 import { Paper, Grid, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 import '../App.css';
-import HeaderImage from '../assets/header.jpg';
+import '../views/styles/homepage.css';
+
+import walking_city from '../assets/walking_city.svg';
+import weather_sitting from '../assets/weather_sitting.svg';
+import music_notes from '../assets/music_notes.svg';
+import user_gif from '../assets/user_gif.gif';
 
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
 
@@ -33,6 +39,23 @@ const hash = window.location.hash
 
 window.location.hash = '';
 
+const useStyles = makeStyles(theme => ({
+  root: {
+    width: '100%',
+  },
+  grid: {
+    marginTop: theme.spacing(3),
+    width: '100%',
+    overflowX: 'auto',
+    marginBottom: theme.spacing(2),
+    backgroundColor: 'gray',
+    marginBottom: '200px',
+  },
+  table: {
+    minWidth: 650,
+  },
+}));
+
 export class Auth extends Component {
   componentDidMount() {
     let token = hash.access_token;
@@ -41,55 +64,67 @@ export class Auth extends Component {
       this.props.history.push('/dashboard');
     }
   }
+
   render() {
     return (
       <div className='auth'>
-        <img src={HeaderImage} style={{ width: '63%', margin: 20 }} />
-        <Paper
-          style={{
-            // backgroundColor: `rgba(${20}, ${20}, ${20}, ${0.85})`
-            backgroundColor: `rgba(${20}, ${20}, ${20}, ${0.0})`,
-          }}>
-          <Grid
-            container
-            direction='column'
-            justify='space-between'
-            alignItems='center'>
-            <Typography
-              variant='h4'
-              style={{ color: 'white', margin: 10, fontWeight: 'bold' }}>
-              Create your own Spotify Playlists
-            </Typography>
-            <Typography
-              variant='h6'
-              style={{
-                color: 'white',
-              }}>
-              Based on your mood, musical preferences, or if you just want to
-              hear new music
-            </Typography>
-            <Typography variant='h6' style={{ color: 'white', margin: 10 }}>
-              Please Login below to continue...
-            </Typography>
-            <Button
-              variant='contained'
-              style={{
-                paddingTop: 10,
-                paddingBottom: 10,
-                paddingLeft: 20,
-                paddingRight: 20,
-                margin: 30,
-                fontWeight: 'bold',
-                fontSize: 18,
-                backgroundColor: `rgba(${255}, ${189}, ${89}, ${0.75})`,
-              }}
-              href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${encodeURIComponent(
-                scopes,
-              )}&response_type=token&show_dialog=true`}>
-              Login
-            </Button>
-          </Grid>
-        </Paper>
+        {/* <img src={HeaderImage} style={{ width: '63%', margin: 20 }} /> */}
+        <div class='main-wrapper'>
+          <div class='main-cta'>
+            <img src={user_gif} alt='' class='bd-box' />
+            <p class='cta-text'>
+              Listen and rate songs from your Spotify playlists. Our machine
+              learning model will predict if you like a song before you hear it!
+            </p>
+            <div class='cta-signup'>
+              <Button
+                variant='contained'
+                style={{
+                  paddingTop: 10,
+                  paddingBottom: 10,
+                  paddingLeft: 20,
+                  paddingRight: 20,
+                  margin: 30,
+                  fontWeight: 'bold',
+                  fontSize: 18,
+                  color: 'white',
+                  backgroundColor: '#1DB954',
+                }}
+                href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${encodeURIComponent(
+                  scopes,
+                )}&response_type=token&show_dialog=true`}>
+                Login With Spotify
+              </Button>
+            </div>
+          </div>
+          <div class='features fullwidth first'>
+            <img src={walking_city} alt='' class='bd-box' />
+            <div class='text-content'>
+              <h2>What makes you move?</h2>
+              <p>See what makes the songs you love awesome.</p>
+            </div>
+          </div>
+          <div class='features second'>
+            <img src={weather_sitting} alt='' class='baloon-woman' />
+            <div class='text-content'>
+              <h2>Prediction at it's finest.</h2>
+              <p>
+                The more songs you rate the more accurate your predictions will
+                be.
+              </p>
+            </div>
+          </div>
+          <div class='features fullwidth third'>
+            <img src={music_notes} alt='' class='party' />
+            <div class='text-content'>
+              <h2>Are you smarter than a machine?</h2>
+              <p>
+                Put us to the test! See if we can predict if you like a song
+                before you hear it.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

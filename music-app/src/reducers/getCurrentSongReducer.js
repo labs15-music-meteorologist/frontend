@@ -1,12 +1,13 @@
 import {
   GET_CURRENT_SONG_FETCHING,
   GET_CURRENT_SONG_SUCCESS,
-  GET_CURRENT_SONG_FAILURE
+  GET_CURRENT_SONG_FAILURE,
 } from '../actions';
 
 const initialState = {
   item: [],
-  fetchingSongError: ''
+  imageUrl: [],
+  fetchingSongError: '',
 };
 
 const currentSongReducer = (state = initialState, action) => {
@@ -14,18 +15,19 @@ const currentSongReducer = (state = initialState, action) => {
     case GET_CURRENT_SONG_FETCHING:
       return {
         ...state,
-        fetchingSongError: ''
+        fetchingSongError: '',
       };
     case GET_CURRENT_SONG_SUCCESS:
       return {
         ...state,
         item: action.payload,
-        fetchingSongError: ''
+        imageUrl: action.payload.album.images,
+        fetchingSongError: '',
       };
     case GET_CURRENT_SONG_FAILURE:
       return {
         ...state,
-        fetchingSongError: action.payload
+        fetchingSongError: action.payload,
       };
     default:
       return state;

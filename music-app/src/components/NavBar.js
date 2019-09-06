@@ -1,8 +1,5 @@
 import React from 'react';
 
-import { Grid } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
-
 import '../views/styles/navbar.css';
 
 import MusicLogo from '../assets/logo-music-new.png';

@@ -1,68 +1,44 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Music Meteorologist Frontend
 
-## Available Scripts
+View this site at - https://music-meteorologist.com/
 
-In the project directory, you can run:
+Music Meteorologist is a fullstack web application that has been built during the Labs15 (1st August 2019 - 30 September 2019) by
+[LambdaSchool](https://lambdaschool.com/) students. Each student fulfills a role in the project to collectively build the application. (Roles listed below)
 
-### `npm start`
+Music Meteorologist provides a web application where users can play a guessing game and get to know themself better. A sophisticated Machine Learning model will try to predict better than the user itself if a certain music song will be liked or not. For that a lot of different characteristics of a songs are considered. At the end the user can revisit the assessment of the model and give feedback about its correctness. To deliver this experience a Node.JS Backend and a React.JS Frontend were built.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Example
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+![](src/assets/user_gif.gif)
 
-### `npm test`
+## Built With
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- [JavaScript](https://en.wikipedia.org/wiki/JavaScript) - Language used to make the webpage interactive
+- [React](https://reactjs.org/) - Front end framework for building single page apps
+- [React-Router](https://reacttraining.com/react-router/) - Used for routing in react projects
+- [Redux](https://redux.js.org/) - State management for React
+- [Recharts](http://recharts.org/en-US/) - Data Visualization tool
+- [Material-UI](https://material-ui.com/) - Component Library/ Style Guide
+- [JWT](https://jwt.io/) - JSON Web Token for authorization and client side tokens for security
 
-### `npm run build`
+## Authors
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**Role: Team Lead**
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+- **[Daniel Starling](https://github.com/Dstar4)**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**Role: Full Stack Web Developer**
 
-### `npm run eject`
+- **[Ben Feole](https://github.com/Zurglots)**
+- **[Sascha Majewsky](https://github.com/SaschaWebDev)**
+- **[Justin Chen](https://github.com/justiny2c)**
+- **[Rushi Arumalla](https://github.com/rushi444)**
+- **[Jean Lafontant](https://github.com/jrl508)**
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+**Role: Data Scientist**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- **[Tom Higgins](https://github.com/Higgins2718)**
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## License
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details

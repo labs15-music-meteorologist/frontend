@@ -129,5 +129,8 @@
   .music-component {
     width: 90%;
   }
+  .dashboard {
+    height: initial;   
+  }
 }
 

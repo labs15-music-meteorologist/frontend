@@ -1,0 +1,31 @@
+.navcontainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.navlogo {
+  display: flex;
+  align-self: center;
+}
+
+.navwrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.home-button {
+  display: flex;
+  flex-direction: row;
+  justify-self: start;
+  align-self: center;
+}
+
+.home-button-wrapper {
+  display: flex;
+  position: absolute;
+  left: 0;
+  margin-left: 5%;
+  margin-top: 2.8%;
+}

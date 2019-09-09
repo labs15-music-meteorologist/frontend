@@ -227,7 +227,7 @@ class MusicPlayer extends Component {
             justify='center'
             alignItems='center'>
             <Grid item>
-              <h3 style={{textAlign: 'right', margin: 0}}>?</h3>
+              <h2 style={{ textAlign: 'right', margin: 0 }}>?</h2>
               <Chart
                 features={this.props.traits}
                 style={{ width: '100%', objectFit: 'scale-down' }}
@@ -252,39 +252,47 @@ class MusicPlayer extends Component {
               justify='center'
               alignItems='center'
               style={{ width: 300, marginBottom: '5%' }}>
-              <button
-              className='dislike'
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  outline: 'none',
-                }}
-                onClick={() => this.onPrevClick()}>
-                <img
-                  src={Meteor}
-                  alt='Dislike Button'
-                  style={{ maxHeight: 70 }}
-                />
-              </button>
-
               <div>
-                <h4>Prediction: 100%</h4>
+                <button
+                  className='like-dislike dislike'
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    outline: 'none',
+                  }}
+                  onClick={() => this.onPrevClick()}>
+                  <img
+                    src={Meteor}
+                    alt='Dislike Button'
+                    style={{ maxHeight: 70 }}
+                  />
+                </button>
+                <h5 style={{ textAlign: 'center', marginTop: '10px' }}>
+                  DISLIKE
+                </h5>
               </div>
 
-              <button
-              className='like'
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  outline: 'none',
-                }}
-                onClick={() => this.onNextClick()}>
-                <img
-                  src={Rocket}
-                  alt='Like Button'
-                  style={{ maxHeight: 70 }}
-                />
-              </button>
+              <div style={{ padding: '0px 15px 0px 15px' }}>
+                <h5 style={{textAlign: 'center'}}>Prediction: </h5>
+                <h3 style={{textAlign: 'center'}}>100% </h3>
+              </div>
+              <div>
+                <button
+                  className='like-dislike like'
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    outline: 'none',
+                  }}
+                  onClick={() => this.onNextClick()}>
+                  <img
+                    src={Rocket}
+                    alt='Like Button'
+                    style={{ maxHeight: 70 }}
+                  />
+                </button>
+                <h5 style={{ textAlign: 'center', marginTop: '10px' }}>LIKE</h5>
+              </div>
             </Grid>
 
             <Grid

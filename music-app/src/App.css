@@ -134,3 +134,20 @@
   }
 }
 
+.like:hover {
+ 
+   -moz-transform: translate(5px, -5px);
+    -ms-transform: translate(5px, -5px);
+    -o-transform: translate(5px, -5px);
+    -webkit-transform: translate(5px, -5px);
+    transform: translate(5px, -5px)
+}
+
+.dislike:hover {
+   -moz-transform: translate(-5px, 5px);
+    -ms-transform: translate(-5px, 5px);
+    -o-transform: translate(-5px, 5px);
+    -webkit-transform: translate(-5px, 5px);
+    transform: translate(-5px, 5px)
+}
+

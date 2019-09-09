@@ -4,6 +4,8 @@ import { Grid } from '@material-ui/core';
 import { getCurrentSong, getTrackInfo } from '../../actions';
 import SkipLeft from '../../assets/skip-left.png';
 import SkipRight from '../../assets/skip-right.png';
+import Rocket from '../../assets/rocket-like.png';
+import Meteor from '../../assets/meteor-dislike.png';
 import Pause from '../../assets/player-stop.png';
 import Play from '../../assets/player-start.png';
 import '../../App.css';
@@ -225,6 +227,7 @@ class MusicPlayer extends Component {
             justify='center'
             alignItems='center'>
             <Grid item>
+              <h3 style={{textAlign: 'right', margin: 0}}>?</h3>
               <Chart
                 features={this.props.traits}
                 style={{ width: '100%', objectFit: 'scale-down' }}
@@ -242,6 +245,47 @@ class MusicPlayer extends Component {
             </Grid>
 
             {error && <p>Error: {error}</p>}
+
+            <Grid
+              container
+              direction='row'
+              justify='center'
+              alignItems='center'
+              style={{ width: 300, marginBottom: '5%' }}>
+              <button
+              className='dislike'
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  outline: 'none',
+                }}
+                onClick={() => this.onPrevClick()}>
+                <img
+                  src={Meteor}
+                  alt='Dislike Button'
+                  style={{ maxHeight: 70 }}
+                />
+              </button>
+
+              <div>
+                <h4>Prediction: 100%</h4>
+              </div>
+
+              <button
+              className='like'
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  outline: 'none',
+                }}
+                onClick={() => this.onNextClick()}>
+                <img
+                  src={Rocket}
+                  alt='Like Button'
+                  style={{ maxHeight: 70 }}
+                />
+              </button>
+            </Grid>
 
             <Grid
               container

@@ -205,18 +205,19 @@ class MusicPlayer extends Component {
       //   spacing={6}>
       <div className='music-player'>
         <div classname='music-component'>
-          <Grid item>
+          <Grid item style={{maxWidth: '300px'}}>
             {this.props.imageUrl[1] && (
               <img
                 ref='image'
                 src={this.props.imageUrl[1].url}
                 alt='Album artwork cover.'
-                style={{ width: '100%', objectFit: 'scale-down' }}
+                style={{ maxWidth: '300px', objectFit: 'scale-down' }}
               />
             )}
             <p style={{ fontWeight: 'bold' }}>{trackName}</p>
             <p>{artistName}</p>
             <p>{albumName}</p>
+            
           </Grid>
         </div>
 
@@ -226,7 +227,7 @@ class MusicPlayer extends Component {
             direction='column'
             justify='center'
             alignItems='center'>
-            <Grid item>
+            <Grid item className='grid-chart'>
               <h2 style={{ textAlign: 'right', margin: 0 }}>?</h2>
               <Chart
                 features={this.props.traits}

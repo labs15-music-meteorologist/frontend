@@ -134,6 +134,14 @@
   }
 }
 
+@media (max-width: 500px) {
+  .grid-chart {
+    transform: scale(.85)
+  }
+}
+
+
+
 
 .like:hover {
  

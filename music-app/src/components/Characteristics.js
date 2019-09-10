@@ -43,6 +43,7 @@ class Characteristics extends React.Component {
   }
 
   render() {
+    var roundTempo = Math.round(this.state.tempo);
     return (
       <div className={useStyles.root}>
         <Paper
@@ -62,7 +63,7 @@ class Characteristics extends React.Component {
                 <TableCell component='th' scope='row'>
                   Tempo
                 </TableCell>
-                <TableCell align='right'>{this.state.tempo}</TableCell>
+                <TableCell align='right'>{roundTempo}</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell component='th' scope='row'>

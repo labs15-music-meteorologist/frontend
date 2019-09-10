@@ -42,6 +42,40 @@ class Characteristics extends React.Component {
     }
   }
 
+  keyToTonal(key) {
+    if (key === 0) {
+      return 'C';
+    } else if (key === 1) {
+      return 'C♯ / D♭';
+    } else if (key === 2) {
+      return 'D';
+    } else if (key === 3) {
+      return 'D♯ / E♭';
+    } else if (key === 4) {
+      return 'E';
+    } else if (key === 5) {
+      return 'F';
+    } else if (key === 6) {
+      return 'F♯ / G♭ ';
+    } else if (key === 7) {
+      return 'G';
+    } else if (key === 8) {
+      return 'G♯ / A♭';
+    } else if (key === 9) {
+      return 'A';
+    } else if (key === 10) {
+      return 'A♯ / B♭';
+    } else if (key === 11) {
+      return 'B';
+    } else {
+      return '-1';
+    }
+  }
+
+  modeToModality(mode) {
+    return mode === 1 ? 'major' : 'minor';
+  }
+
   render() {
     var roundTempo = Math.round(this.state.tempo);
     return (
@@ -69,13 +103,17 @@ class Characteristics extends React.Component {
                 <TableCell component='th' scope='row'>
                   Key
                 </TableCell>
-                <TableCell align='right'>{this.state.key}</TableCell>
+                <TableCell align='right'>
+                  {this.keyToTonal(this.state.key)}
+                </TableCell>
               </TableRow>
               <TableRow>
                 <TableCell component='th' scope='row'>
                   Mode
                 </TableCell>
-                <TableCell align='right'>{this.state.mode}</TableCell>
+                <TableCell align='right'>
+                  {this.modeToModality(this.state.mode)}
+                </TableCell>
               </TableRow>
               <TableRow>
                 <TableCell component='th' scope='row'>

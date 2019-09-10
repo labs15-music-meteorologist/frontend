@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Grid } from '@material-ui/core';
+import { Grid, LinearProgress } from '@material-ui/core';
 import { getCurrentSong, getTrackInfo } from '../../actions';
 import SkipLeft from '../../assets/skip-left.png';
 import SkipRight from '../../assets/skip-right.png';
 import Pause from '../../assets/player-stop.png';
 import Play from '../../assets/player-start.png';
 import '../../App.css';
-
+import LinearDeterminate from '../LinearDeterminate';
 import Chart from '../Chart';
 import Characteristics from '../Characteristics.js';
 
@@ -301,6 +301,11 @@ class MusicPlayer extends Component {
               </button>
             </Grid>
           </Grid>
+        </div>
+
+        <div>
+          <h3>Song Progress</h3>
+          <LinearDeterminate player={this.player} />
         </div>
 
         <div classname='music-component'>

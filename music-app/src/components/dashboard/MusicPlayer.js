@@ -4,6 +4,8 @@ import { Grid } from '@material-ui/core';
 import { getCurrentSong, getTrackInfo } from '../../actions';
 import SkipLeft from '../../assets/skip-left.png';
 import SkipRight from '../../assets/skip-right.png';
+import Rocket from '../../assets/rocket-like.png';
+import Meteor from '../../assets/meteor-dislike.png';
 import Pause from '../../assets/player-stop.png';
 import Play from '../../assets/player-start.png';
 import '../../App.css';
@@ -203,18 +205,19 @@ class MusicPlayer extends Component {
       //   spacing={6}>
       <div className='music-player'>
         <div classname='music-component'>
-          <Grid item>
+          <Grid item style={{maxWidth: '300px'}}>
             {this.props.imageUrl[1] && (
               <img
                 ref='image'
                 src={this.props.imageUrl[1].url}
                 alt='Album artwork cover.'
-                style={{ width: '100%', objectFit: 'scale-down' }}
+                style={{ maxWidth: '300px', objectFit: 'scale-down' }}
               />
             )}
             <p style={{ fontWeight: 'bold' }}>{trackName}</p>
             <p>{artistName}</p>
             <p>{albumName}</p>
+            
           </Grid>
         </div>
 
@@ -224,7 +227,8 @@ class MusicPlayer extends Component {
             direction='column'
             justify='center'
             alignItems='center'>
-            <Grid item>
+            <Grid item className='grid-chart'>
+              <h2 style={{ textAlign: 'right', margin: 0 }}>?</h2>
               <Chart
                 features={this.props.traits}
                 style={{ width: '100%', objectFit: 'scale-down' }}
@@ -242,6 +246,55 @@ class MusicPlayer extends Component {
             </Grid>
 
             {error && <p>Error: {error}</p>}
+
+            <Grid
+              container
+              direction='row'
+              justify='center'
+              alignItems='center'
+              style={{ width: 300, marginBottom: '5%' }}>
+              <div>
+                <button
+                  className='like-dislike dislike'
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    outline: 'none',
+                  }}
+                  onClick={() => this.onPrevClick()}>
+                  <img
+                    src={Meteor}
+                    alt='Dislike Button'
+                    style={{ maxHeight: 70 }}
+                  />
+                </button>
+                <h5 style={{ textAlign: 'center', marginTop: '10px' }}>
+                  DISLIKE
+                </h5>
+              </div>
+
+              <div style={{ padding: '0px 15px 0px 15px' }}>
+                <h5 style={{textAlign: 'center'}}>Prediction: </h5>
+                <h3 style={{textAlign: 'center'}}>100% </h3>
+              </div>
+              <div>
+                <button
+                  className='like-dislike like'
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    outline: 'none',
+                  }}
+                  onClick={() => this.onNextClick()}>
+                  <img
+                    src={Rocket}
+                    alt='Like Button'
+                    style={{ maxHeight: 70 }}
+                  />
+                </button>
+                <h5 style={{ textAlign: 'center', marginTop: '10px' }}>LIKE</h5>
+              </div>
+            </Grid>
 
             <Grid
               container

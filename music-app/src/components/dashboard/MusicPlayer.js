@@ -205,7 +205,7 @@ class MusicPlayer extends Component {
       //   spacing={6}>
       <div className='music-player'>
         <div classname='music-component'>
-          <Grid item style={{maxWidth: '300px'}}>
+          <Grid item style={{ maxWidth: '300px' }}>
             {this.props.imageUrl[1] && (
               <img
                 ref='image'
@@ -217,7 +217,6 @@ class MusicPlayer extends Component {
             <p style={{ fontWeight: 'bold' }}>{trackName}</p>
             <p>{artistName}</p>
             <p>{albumName}</p>
-            
           </Grid>
         </div>
 
@@ -228,7 +227,12 @@ class MusicPlayer extends Component {
             justify='center'
             alignItems='center'>
             <Grid item className='grid-chart'>
-              <h2 style={{ textAlign: 'right', margin: 0 }}>?</h2>
+              <h2
+                className='grid-question'
+                title='Click for Audio Features details'
+                style={{ textAlign: 'right', margin: 0 }}>
+                ?
+              </h2>
               <Chart
                 features={this.props.traits}
                 style={{ width: '100%', objectFit: 'scale-down' }}
@@ -274,8 +278,8 @@ class MusicPlayer extends Component {
               </div>
 
               <div style={{ padding: '0px 15px 0px 15px' }}>
-                <h5 style={{textAlign: 'center'}}>Prediction: </h5>
-                <h3 style={{textAlign: 'center'}}>100% </h3>
+                <h5 style={{ textAlign: 'center' }}>Prediction: </h5>
+                <h3 style={{ textAlign: 'center' }}>100% </h3>
               </div>
               <div>
                 <button

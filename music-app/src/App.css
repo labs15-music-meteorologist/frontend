@@ -104,33 +104,59 @@
 }
 
 .music-player {
-  display: flex; 
-  flex-flow: row; 
-  justify-content:space-evenly; 
-  align-items: center; 
+  display: flex;
+  flex-flow: row;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
-.music-component{
+.music-component {
   width: 20%;
-  margin: 10px;  
+  margin: 10px;
 }
 
 .music-chart {
-  width: 40%
+  width: 40%;
 }
 
-@media (max-width: 600px){
+@media (max-width: 600px) {
   .music-player {
-  display: flex; 
-  flex-flow: column; 
-  justify-content: space-around; 
-  align-items: center;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    align-items: center;
   }
   .music-component {
     width: 90%;
   }
   .dashboard {
-    height: initial;   
+    height: initial;
   }
 }
 
+@media (max-width: 500px) {
+  .grid-chart {
+    transform: scale(0.85);
+  }
+}
+
+.like,
+.dislike {
+  transition: 0.9s ease;
+}
+
+.like:hover {
+  -moz-transform: translate(5px, -5px);
+  -ms-transform: translate(5px, -5px);
+  -o-transform: translate(5px, -5px);
+  -webkit-transform: translate(5px, -5px);
+  transform: translate(5px, -5px);
+}
+
+.dislike:hover {
+  -moz-transform: translate(-5px, 5px);
+  -ms-transform: translate(-5px, 5px);
+  -o-transform: translate(-5px, 5px);
+  -webkit-transform: translate(-5px, 5px);
+  transform: translate(-5px, 5px);
+}

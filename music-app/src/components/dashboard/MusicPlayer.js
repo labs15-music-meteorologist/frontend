@@ -242,7 +242,8 @@ class MusicPlayer extends Component {
                     maxHeight: 510,
                     width: 450,
                     overflow: 'auto',
-                    backgroundColor: `rgba(${20}, ${20}, ${20}, ${0.95})`,
+                    backgroundColor: '#1a567a',
+                    // backgroundColor: `rgba(${34}, ${109}, ${155}, ${0.98})`,
                     color: 'lightgray',
                   }}>
                   <AudioDetails />

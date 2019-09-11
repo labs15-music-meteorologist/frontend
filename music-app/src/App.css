@@ -134,6 +134,13 @@
   }
 }
 
+.grid-question {
+  font-size: 0.85rem;
+}
+.grid-question:hover {
+  background: #216b98;
+}
+
 @media (max-width: 500px) {
   .grid-chart {
     transform: scale(0.85);
@@ -159,4 +166,29 @@
   -o-transform: translate(-5px, 5px);
   -webkit-transform: translate(-5px, 5px);
   transform: translate(-5px, 5px);
+}
+
+.audio-details-open {
+  position: absolute;
+  z-index: 1;
+  top: 40px;
+  margin-left: 0px;
+  padding-left: 0px;
+}
+
+.audio-details-closed {
+  display: none;
+}
+
+.audio-detail {
+  margin: 2%;
+}
+.audio-detail h4 {
+  display: inline;
+  color: white;
+}
+.audio-detail p {
+  display: inline;
+  margin-left: 5px;
+  font-size: 0.93rem;
 }

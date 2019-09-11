@@ -5,6 +5,7 @@ import { Grid } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import List from '@material-ui/core/List';
+import Joyride from 'react-joyride';
 
 import {
   getlikedSongs,
@@ -22,6 +23,43 @@ import '../App.css';
 class Dashboard extends React.Component {
   state = {
     collapse: false,
+    steps: [
+      {
+        target: '.joyride-logo-1',
+        content:
+          'Welcome to Music Meteorologist! Here you will be able to rate songs based on characteristics and recieve song recommendations',
+      },
+      {
+        target: '.joyride-player-2',
+        content:
+          'Here you can view what song you will be rating and the characteristics for that song',
+      },
+      {
+        target: '.joyride-3',
+        content: 'Tap here to view more details on each of the characteristics',
+        placement: 'right',
+      },
+      // {
+      //   target: '.joyride-prediction-5',
+      //   content:
+      //     'Review the characteristics and let us know if you think you would like this song, when you decide the music will start playing',
+      // },
+      {
+        target: '.joyride-dislike-4',
+        content:
+          'Click this button, and we will take this song out of your queue, and go to the next song',
+        placement: 'right',
+      },
+      {
+        target: '.joyride-prediction-5',
+        content:
+          'This our level of confidence that you will like this song based on your rating',
+      },
+      {
+        target: '.joyride-like-6',
+        content: 'Click to add to your liked songs on Spotify, and move you to the next song',
+      },
+    ],
     popout: false,
   };
 
@@ -70,8 +108,25 @@ class Dashboard extends React.Component {
     if (this.checkPremiumUser() || this.checkNoIOS()) {
       this.props.history.push('/info');
     }
+
     return (
       <div className='dashboard'>
+        <Joyride
+          steps={this.state.steps}
+          continuous={true}
+          scrollToFirstStep={true}
+          styles={{
+            beaconInner: {
+              backgroundColor: '#5ce1e6',
+            },
+            beaconOuter: {
+              border: '2px solid #5ce1e6',
+            },
+            options: {
+              primaryColor: '#5ce1e6',
+            },
+          }}
+        />
         <div>
           <Button
             className='burger'

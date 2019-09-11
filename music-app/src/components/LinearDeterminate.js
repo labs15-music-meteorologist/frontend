@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getCurrentSong } from '../actions';
-import { makeStyles } from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
 class LinearDeterminate extends Component {
@@ -11,11 +10,6 @@ class LinearDeterminate extends Component {
   };
   checkPlayer = (player, song) => {
     if (player !== undefined && song.length !== 0) {
-      //   console.log('PLAYER:', player);
-
-      //   let song = this.props.song;
-      //   console.log('SONG CAPTURE', song);
-      //   return song;
       player.getCurrentState().then(state => {
         if (!state) {
           console.error(
@@ -26,23 +20,10 @@ class LinearDeterminate extends Component {
 
         let { position, duration } = state;
         this.checkPosistion(position, duration);
-        // console.log('Current State:', state);
-        // console.log('Currently Playing', state.track_window.current_track);
-        // console.log('Playing Next', state.track_window.next_track);
       });
     }
   };
-  //Timer Setup
 
-  //   startCounting() {
-  //     setInterval(this.countUp, 1000);
-  //   }
-
-  //   countUp() {
-  //     this.setState(({ position }) => ({ position: position + 1000 }));
-  //   }
-
-  //Timer end
   checkPosistion = (song_posistion, song_length) => {
     for (; song_posistion < song_length; ) {
       this.setState({
@@ -53,17 +34,6 @@ class LinearDeterminate extends Component {
       return progress;
     }
   };
-
-  //   componentDidUpdate() {
-  //     if (
-  //       this.props.player !== undefined &&
-  //       this.props.song !== 0 &&
-  //       this.state.position === 0
-  //     ) {
-  //       console.log('Its WORKING!');
-  //     }
-  //     console.log('SCREW YOU');
-  //   }
 
   render() {
     const player = this.props.player;

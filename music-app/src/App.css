@@ -134,8 +134,11 @@
   }
 }
 
+.grid-question {
+  font-size: 0.85rem;
+}
 .grid-question:hover {
-  background: #38b6ff;
+  background: #216b98;
 }
 
 @media (max-width: 500px) {

@@ -14,11 +14,7 @@ import '../../App.css';
 
 import Chart from '../Chart';
 import Characteristics from '../Characteristics.js';
-<<<<<<< HEAD
-
-=======
 import AudioDetails from './AudioDetails';
->>>>>>> ade4d94ea936a451eacf856e7d6b56b5586cdc4b
 
 class MusicPlayer extends Component {
   constructor(props) {

@@ -224,13 +224,15 @@ class MusicPlayer extends Component {
             justify='center'
             alignItems='center'>
             <Grid item className='grid-chart'>
-              <h2
-                onClick={() => this.openAudioDetails()}
-                className='grid-question'
-                title='Click for Audio Features details'
-                style={{ textAlign: 'right', margin: 0 }}>
-                ?
-              </h2>
+              <div style={{ textAlign: 'right' }}>
+                <button
+                  onClick={() => this.openAudioDetails()}
+                  className='grid-question'
+                  title='Click for Audio Features details'
+                  style={{ margin: 0, borderRadius: '25px' }}>
+                  ?
+                </button>
+              </div>
               <List>
                 <Paper
                   className={

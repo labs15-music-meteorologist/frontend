@@ -135,7 +135,7 @@
 }
 
 .grid-question:hover {
-  color: #38b6ff;
+  background: #38b6ff;
 }
 
 @media (max-width: 500px) {

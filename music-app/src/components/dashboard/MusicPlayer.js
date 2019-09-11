@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Grid } from '@material-ui/core';
+import Paper from '@material-ui/core/Paper';
+import List from '@material-ui/core/List';
 import { getCurrentSong, getTrackInfo } from '../../actions';
 import SkipLeft from '../../assets/skip-left.png';
 import SkipRight from '../../assets/skip-right.png';
@@ -12,19 +14,7 @@ import '../../App.css';
 
 import Chart from '../Chart';
 import Characteristics from '../Characteristics.js';
-
-// const styleSheet = createStyles('test', theme => ({
-//   gridItem: {
-//     direction: 'row',
-//   },
-//   [theme.breakpoint.down('md')]: {
-//    gridItem: {
-//      direction: 'column'
-//    }
-//   },
-// }));
-
-// const classes = styleManager.render(styleSheet);
+import AudioDetails from './AudioDetails';
 
 class MusicPlayer extends Component {
   constructor(props) {
@@ -43,6 +33,7 @@ class MusicPlayer extends Component {
       duration: 1,
       id: '',
       songFeatures: [],
+      collapse: false,
     };
     // this will later be set by setInterval
     this.playerCheckInterval = null;
@@ -57,6 +48,12 @@ class MusicPlayer extends Component {
       this.setState({ loggedIn: true });
       this.playerCheckInterval = setInterval(() => this.checkForPlayer(), 1000);
     }
+  }
+
+  openAudioDetails() {
+    this.setState({
+      collapse: !this.state.collapse,
+    });
   }
 
   // when we receive a new update from the player
@@ -228,11 +225,29 @@ class MusicPlayer extends Component {
             alignItems='center'>
             <Grid item className='grid-chart'>
               <h2
+                onClick={() => this.openAudioDetails()}
                 className='grid-question'
                 title='Click for Audio Features details'
                 style={{ textAlign: 'right', margin: 0 }}>
                 ?
               </h2>
+              <List>
+                <Paper
+                  className={
+                    this.state.collapse
+                      ? 'audio-details-open'
+                      : 'audio-details-closed'
+                  }
+                  style={{
+                    maxHeight: 510,
+                    width: 450,
+                    overflow: 'auto',
+                    backgroundColor: `rgba(${20}, ${20}, ${20}, ${0.95})`,
+                    color: 'lightgray',
+                  }}>
+                  <AudioDetails />
+                </Paper>
+              </List>
               <Chart
                 features={this.props.traits}
                 style={{ width: '100%', objectFit: 'scale-down' }}

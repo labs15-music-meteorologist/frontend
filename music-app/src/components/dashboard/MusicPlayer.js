@@ -11,7 +11,7 @@ import Meteor from '../../assets/meteor-dislike.png';
 import Pause from '../../assets/player-stop.png';
 import Play from '../../assets/player-start.png';
 import '../../App.css';
-
+import LinearDeterminate from '../LinearDeterminate';
 import Chart from '../Chart';
 import Characteristics from '../Characteristics.js';
 import AudioDetails from './AudioDetails';
@@ -33,7 +33,7 @@ class MusicPlayer extends Component {
       duration: 1,
       id: '',
       songFeatures: [],
-      collapse: false,
+      collapse: false
     };
     // this will later be set by setInterval
     this.playerCheckInterval = null;
@@ -52,7 +52,7 @@ class MusicPlayer extends Component {
 
   openAudioDetails() {
     this.setState({
-      collapse: !this.state.collapse,
+      collapse: !this.state.collapse
     });
   }
 
@@ -63,7 +63,7 @@ class MusicPlayer extends Component {
       const {
         current_track: currentTrack,
         position,
-        duration,
+        duration
       } = state.track_window;
       const trackName = currentTrack.name;
       const albumName = currentTrack.album.name;
@@ -77,12 +77,12 @@ class MusicPlayer extends Component {
         trackName,
         albumName,
         artistName,
-        playing,
+        playing
       });
     } else {
       // state was null, user might have swapped to another device
       this.setState({
-        error: 'Looks like you might have swapped to another device?',
+        error: 'Looks like you might have swapped to another device?'
       });
     }
   }
@@ -129,7 +129,7 @@ class MusicPlayer extends Component {
         name: 'Music Meteorologist Spotify Player',
         getOAuthToken: cb => {
           cb(token);
-        },
+        }
       });
 
       this.createEventHandlers();
@@ -173,20 +173,20 @@ class MusicPlayer extends Component {
         method: 'PUT',
         headers: {
           authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           // This is where we will control what music is fed to the user
           // If we want to direct them to a specific playlist,artist or album we will pass in "context_uri" with its respective uri
           context_uri:
-            'spotify:user:spotifycharts:playlist:37i9dQZEVXbMDoHDwVN2tF', //Directs User to Global Top 50 playlist curated by spotify
+            'spotify:user:spotifycharts:playlist:37i9dQZEVXbMDoHDwVN2tF' //Directs User to Global Top 50 playlist curated by spotify
 
           // In order manipulate the user's queue and feed them a more fluid and unique array of songs we would instead
           // pass an array of song uris through the "uris" key
           // The example below if uncommented will direct the user to 3 songs (make sure to comment out the context_uri)
           // uris:["spotify:track:0aULRU35N9kTj6O1xMULRR","spotify:track:0VgkVdmE4gld66l8iyGjgx","spotify:track:5ry2OE6R2zPQFDO85XkgRb"]
-        }),
-      },
+        })
+      }
     );
   }
 
@@ -211,7 +211,9 @@ class MusicPlayer extends Component {
                 style={{ maxWidth: '300px', objectFit: 'scale-down' }}
               />
             )}
-            <p className='p' style={{ fontWeight: 'bold' }}>{trackName}</p>
+            <p className='p' style={{ fontWeight: 'bold' }}>
+              {trackName}
+            </p>
             <p>{artistName}</p>
             <p>{albumName}</p>
           </Grid>
@@ -246,7 +248,7 @@ class MusicPlayer extends Component {
                     overflow: 'auto',
                     backgroundColor: '#1a567a',
                     // backgroundColor: `rgba(${34}, ${109}, ${155}, ${0.98})`,
-                    color: 'lightgray',
+                    color: 'lightgray'
                   }}>
                   <AudioDetails />
                 </Paper>
@@ -281,7 +283,7 @@ class MusicPlayer extends Component {
                   style={{
                     background: 'none',
                     border: 'none',
-                    outline: 'none',
+                    outline: 'none'
                   }}
                   onClick={() => this.onPrevClick()}>
                   <img
@@ -295,9 +297,11 @@ class MusicPlayer extends Component {
                 </h5>
               </div>
 
-              <div style={{ padding: '0px 15px 0px 15px' }} className='joyride-prediction-5'>
-                <h5 style={{textAlign: 'center'}}>Prediction: </h5>
-                <h3 style={{textAlign: 'center'}}>100% </h3>
+              <div
+                style={{ padding: '0px 15px 0px 15px' }}
+                className='joyride-prediction-5'>
+                <h5 style={{ textAlign: 'center' }}>Prediction: </h5>
+                <h3 style={{ textAlign: 'center' }}>100% </h3>
               </div>
               <div className='joyride-like-6'>
                 <button
@@ -305,7 +309,7 @@ class MusicPlayer extends Component {
                   style={{
                     background: 'none',
                     border: 'none',
-                    outline: 'none',
+                    outline: 'none'
                   }}
                   onClick={() => this.onNextClick()}>
                   <img
@@ -320,59 +324,64 @@ class MusicPlayer extends Component {
 
             <Grid
               container
-              direction='row'
+              direction='column'
               justify='center'
               alignItems='center'
               style={{ width: 300, marginBottom: '5%' }}>
-              <button
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  outline: 'none',
-                }}
-                onClick={() => this.onPrevClick()}>
-                <img
-                  src={SkipLeft}
-                  alt='White icon to skip to the previous song.'
-                  style={{ maxHeight: 22 }}
-                />
-              </button>
-
-              <button
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  outline: 'none',
-                }}
-                onClick={() => this.onPlayClick()}>
-                {playing ? (
+              <div>
+                <LinearDeterminate player={this.player} />
+              </div>
+              <div style={{ display: 'flex' }}>
+                <button
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    outline: 'none'
+                  }}
+                  onClick={() => this.onPrevClick()}>
                   <img
-                    src={Pause}
-                    alt='White icon to pause a song.'
-                    style={{ maxHeight: 35 }}
+                    src={SkipLeft}
+                    alt='White icon to skip to the previous song.'
+                    style={{ maxHeight: 22 }}
                   />
-                ) : (
-                  <img
-                    src={Play}
-                    alt='White icon to start a pause song.'
-                    style={{ maxHeight: 35 }}
-                  />
-                )}
-              </button>
+                </button>
 
-              <button
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  outline: 'none',
-                }}
-                onClick={() => this.onNextClick()}>
-                <img
-                  src={SkipRight}
-                  alt='White icon to skip to the next song.'
-                  style={{ maxHeight: 22 }}
-                />
-              </button>
+                <button
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    outline: 'none'
+                  }}
+                  onClick={() => this.onPlayClick()}>
+                  {playing ? (
+                    <img
+                      src={Pause}
+                      alt='White icon to pause a song.'
+                      style={{ maxHeight: 35 }}
+                    />
+                  ) : (
+                    <img
+                      src={Play}
+                      alt='White icon to start a pause song.'
+                      style={{ maxHeight: 35 }}
+                    />
+                  )}
+                </button>
+
+                <button
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    outline: 'none'
+                  }}
+                  onClick={() => this.onNextClick()}>
+                  <img
+                    src={SkipRight}
+                    alt='White icon to skip to the next song.'
+                    style={{ maxHeight: 22 }}
+                  />
+                </button>
+              </div>
             </Grid>
           </Grid>
         </div>
@@ -388,10 +397,10 @@ class MusicPlayer extends Component {
 const mapStateToProps = state => ({
   song: state.currentSongReducer.item,
   imageUrl: state.currentSongReducer.imageUrl,
-  traits: state.getTrackInfoReducer,
+  traits: state.getTrackInfoReducer
 });
 
 export default connect(
   mapStateToProps,
-  { getTrackInfo, getCurrentSong },
+  { getTrackInfo, getCurrentSong }
 )(MusicPlayer);

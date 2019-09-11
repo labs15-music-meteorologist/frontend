@@ -13,18 +13,6 @@ import '../../App.css';
 import Chart from '../Chart';
 import Characteristics from '../Characteristics.js';
 
-// const styleSheet = createStyles('test', theme => ({
-//   gridItem: {
-//     direction: 'row',
-//   },
-//   [theme.breakpoint.down('md')]: {
-//    gridItem: {
-//      direction: 'column'
-//    }
-//   },
-// }));
-
-// const classes = styleManager.render(styleSheet);
 
 class MusicPlayer extends Component {
   constructor(props) {
@@ -214,7 +202,7 @@ class MusicPlayer extends Component {
                 style={{ maxWidth: '300px', objectFit: 'scale-down' }}
               />
             )}
-            <p style={{ fontWeight: 'bold' }}>{trackName}</p>
+            <p className='p' style={{ fontWeight: 'bold' }}>{trackName}</p>
             <p>{artistName}</p>
             <p>{albumName}</p>
             

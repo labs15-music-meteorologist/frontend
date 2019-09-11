@@ -5,6 +5,7 @@ import { Grid } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import List from '@material-ui/core/List';
+import Joyride from 'react-joyride'; 
 
 import {
   getlikedSongs,
@@ -21,6 +22,7 @@ import '../App.css';
 class Dashboard extends React.Component {
   state = {
     collapse: false,
+    steps: [{ target: '.test-joyride', content: 'this is the burger menu' }],
   };
 
   componentDidMount() {
@@ -62,8 +64,11 @@ class Dashboard extends React.Component {
     if (this.checkPremiumUser() || this.checkNoIOS()) {
       this.props.history.push('/info');
     }
+
     return (
+      
       <div className='dashboard'>
+        <Joyride steps={this.state.steps} />
         <div>
           <Button
             className='burger'

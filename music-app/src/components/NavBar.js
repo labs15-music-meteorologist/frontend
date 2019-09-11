@@ -25,7 +25,7 @@ class NavBar extends React.Component {
         </div> */}
         <div class='navcontainer'>
           <img
-            class='navlogo'
+            className='navlogo test-joyride'
             src={MusicLogo}
             alt={'Music Meteorologist logo with Meteor on last "o"'}
             style={{ height: 70 }}

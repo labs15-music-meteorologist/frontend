@@ -5,7 +5,7 @@ import { Grid } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import List from '@material-ui/core/List';
-import Joyride from 'react-joyride'; 
+import Joyride from 'react-joyride';
 
 import {
   getlikedSongs,
@@ -22,7 +22,34 @@ import '../App.css';
 class Dashboard extends React.Component {
   state = {
     collapse: false,
-    steps: [{ target: '.test-joyride', content: 'this is the burger menu' }],
+    steps: [
+      {
+        target: '.joyride-logo-1',
+        content: 'this is the burger menu',
+      },
+      {
+        target: '.joyride-player-2',
+        content: 'Player and Characteristics',
+      },
+      {
+        target: '.joyride-3',
+        content: 'More info on Characteristics',
+        placement: 'right',
+      },
+      {
+        target: '.joyride-dislike-4',
+        content: 'These are the like and dislike buttons',
+        placement: 'right',
+      },
+      {
+        target: '.joyride-prediction-5',
+        content: 'This is the level of confidence in our AI',
+      },
+      {
+        target: '.joyride-like-6',
+        content: 'This is the like button',
+      },
+    ],
   };
 
   componentDidMount() {
@@ -66,9 +93,24 @@ class Dashboard extends React.Component {
     }
 
     return (
-      
       <div className='dashboard'>
-        <Joyride steps={this.state.steps} />
+        <Joyride
+          steps={this.state.steps}
+          continuous={true}
+          scrollToFirstStep={true}
+          styles={{
+            beaconInner: {
+              backgroundColor: '#5ce1e6',
+            },
+            beaconOuter: {
+              border: '2px solid #5ce1e6'
+            },
+            options: {
+              primaryColor: '#5ce1e6',
+            }
+
+          }}
+        />
         <div>
           <Button
             className='burger'

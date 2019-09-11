@@ -246,66 +246,66 @@ class MusicPlayer extends Component {
 
             <Grid
               container
-              direction='row'
+              direction='column'
               justify='center'
               alignItems='center'
               style={{ width: 300, marginBottom: '5%' }}>
-              <button
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  outline: 'none'
-                }}
-                onClick={() => this.onPrevClick()}>
-                <img
-                  src={SkipLeft}
-                  alt='White icon to skip to the previous song.'
-                  style={{ maxHeight: 22 }}
-                />
-              </button>
-
-              <button
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  outline: 'none'
-                }}
-                onClick={() => this.onPlayClick()}>
-                {playing ? (
+              <div>
+                <LinearDeterminate player={this.player} />
+              </div>
+              <div style={{ display: 'flex' }}>
+                <button
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    outline: 'none'
+                  }}
+                  onClick={() => this.onPrevClick()}>
                   <img
-                    src={Pause}
-                    alt='White icon to pause a song.'
-                    style={{ maxHeight: 35 }}
+                    src={SkipLeft}
+                    alt='White icon to skip to the previous song.'
+                    style={{ maxHeight: 22 }}
                   />
-                ) : (
-                  <img
-                    src={Play}
-                    alt='White icon to start a pause song.'
-                    style={{ maxHeight: 35 }}
-                  />
-                )}
-              </button>
+                </button>
 
-              <button
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  outline: 'none'
-                }}
-                onClick={() => this.onNextClick()}>
-                <img
-                  src={SkipRight}
-                  alt='White icon to skip to the next song.'
-                  style={{ maxHeight: 22 }}
-                />
-              </button>
+                <button
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    outline: 'none'
+                  }}
+                  onClick={() => this.onPlayClick()}>
+                  {playing ? (
+                    <img
+                      src={Pause}
+                      alt='White icon to pause a song.'
+                      style={{ maxHeight: 35 }}
+                    />
+                  ) : (
+                    <img
+                      src={Play}
+                      alt='White icon to start a pause song.'
+                      style={{ maxHeight: 35 }}
+                    />
+                  )}
+                </button>
+
+                <button
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    outline: 'none'
+                  }}
+                  onClick={() => this.onNextClick()}>
+                  <img
+                    src={SkipRight}
+                    alt='White icon to skip to the next song.'
+                    style={{ maxHeight: 22 }}
+                  />
+                </button>
+              </div>
             </Grid>
           </Grid>
-        </div>
-
-        <div>
-          <h3>Song Progress</h3>
-          <LinearDeterminate player={this.player} />
         </div>
 
         <div classname='music-component'>

@@ -223,8 +223,7 @@ class MusicPlayer extends Component {
             direction='column'
             justify='center'
             alignItems='center'>
-            <Grid item className='grid-chart'>
-              <h2 className='joyride-3' style={{ textAlign: 'right', margin: 0 }}>?</h2>
+            <Grid item className='grid-chart joyride-3'>
               <div style={{ textAlign: 'right' }}>
                 <button
                   onClick={() => this.openAudioDetails()}

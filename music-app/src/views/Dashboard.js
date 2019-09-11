@@ -16,6 +16,7 @@ import {
 
 import LikedSongs from '../components/dashboard/LikedSongs';
 import MusicPlayer from '../components/dashboard/MusicPlayer';
+import AudioDetails from '../components/dashboard/AudioDetails';
 
 import '../App.css';
 
@@ -59,6 +60,7 @@ class Dashboard extends React.Component {
         content: 'Click to add to your liked songs on Spotify, and move you to the next song',
       },
     ],
+    popout: false,
   };
 
   componentDidMount() {
@@ -69,9 +71,15 @@ class Dashboard extends React.Component {
     this.props.spotifyUser.id && this.props.persistUser(this.props.spotifyUser);
   }
 
-  onClick() {
+  openPlaylist() {
     this.setState({
       collapse: !this.state.collapse,
+    });
+  }
+
+  openAudioDetails() {
+    this.setState({
+      popout: !this.state.popout,
     });
   }
 
@@ -123,7 +131,7 @@ class Dashboard extends React.Component {
           <Button
             className='burger'
             style={{ color: 'white' }}
-            onClick={() => this.onClick()}>
+            onClick={() => this.openPlaylist()}>
             <Grid container direction='column'>
               <div
                 className={

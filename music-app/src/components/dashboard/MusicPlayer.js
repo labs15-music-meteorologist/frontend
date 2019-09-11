@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Grid } from '@material-ui/core';
+import Paper from '@material-ui/core/Paper';
+import List from '@material-ui/core/List';
 import { getCurrentSong, getTrackInfo } from '../../actions';
 import SkipLeft from '../../assets/skip-left.png';
 import SkipRight from '../../assets/skip-right.png';
@@ -12,7 +14,11 @@ import '../../App.css';
 
 import Chart from '../Chart';
 import Characteristics from '../Characteristics.js';
+<<<<<<< HEAD
 
+=======
+import AudioDetails from './AudioDetails';
+>>>>>>> ade4d94ea936a451eacf856e7d6b56b5586cdc4b
 
 class MusicPlayer extends Component {
   constructor(props) {
@@ -31,6 +37,7 @@ class MusicPlayer extends Component {
       duration: 1,
       id: '',
       songFeatures: [],
+      collapse: false,
     };
     // this will later be set by setInterval
     this.playerCheckInterval = null;
@@ -45,6 +52,12 @@ class MusicPlayer extends Component {
       this.setState({ loggedIn: true });
       this.playerCheckInterval = setInterval(() => this.checkForPlayer(), 1000);
     }
+  }
+
+  openAudioDetails() {
+    this.setState({
+      collapse: !this.state.collapse,
+    });
   }
 
   // when we receive a new update from the player
@@ -193,7 +206,7 @@ class MusicPlayer extends Component {
       //   spacing={6}>
       <div className='music-player joyride-player-2'>
         <div classname='music-component'>
-          <Grid item style={{maxWidth: '300px'}}>
+          <Grid item style={{ maxWidth: '300px' }}>
             {this.props.imageUrl[1] && (
               <img
                 ref='image'
@@ -205,7 +218,6 @@ class MusicPlayer extends Component {
             <p className='p' style={{ fontWeight: 'bold' }}>{trackName}</p>
             <p>{artistName}</p>
             <p>{albumName}</p>
-            
           </Grid>
         </div>
 
@@ -217,6 +229,33 @@ class MusicPlayer extends Component {
             alignItems='center'>
             <Grid item className='grid-chart'>
               <h2 className='joyride-3' style={{ textAlign: 'right', margin: 0 }}>?</h2>
+              <div style={{ textAlign: 'right' }}>
+                <button
+                  onClick={() => this.openAudioDetails()}
+                  className='grid-question'
+                  title='Click for Audio Features details'
+                  style={{ margin: 0, borderRadius: '25px' }}>
+                  ?
+                </button>
+              </div>
+              <List>
+                <Paper
+                  className={
+                    this.state.collapse
+                      ? 'audio-details-open'
+                      : 'audio-details-closed'
+                  }
+                  style={{
+                    maxHeight: 510,
+                    width: 450,
+                    overflow: 'auto',
+                    backgroundColor: '#1a567a',
+                    // backgroundColor: `rgba(${34}, ${109}, ${155}, ${0.98})`,
+                    color: 'lightgray',
+                  }}>
+                  <AudioDetails />
+                </Paper>
+              </List>
               <Chart
                 features={this.props.traits}
                 style={{ width: '100%', objectFit: 'scale-down' }}

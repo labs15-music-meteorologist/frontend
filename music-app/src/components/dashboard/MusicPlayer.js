@@ -200,7 +200,7 @@ class MusicPlayer extends Component {
       //   justify='center'
       //   alignItems='center'
       //   spacing={6}>
-      <div className='music-player'>
+      <div className='music-player joyride-player-2'>
         <div classname='music-component'>
           <Grid item style={{ maxWidth: '300px' }}>
             {this.props.imageUrl[1] && (
@@ -211,7 +211,7 @@ class MusicPlayer extends Component {
                 style={{ maxWidth: '300px', objectFit: 'scale-down' }}
               />
             )}
-            <p style={{ fontWeight: 'bold' }}>{trackName}</p>
+            <p className='p' style={{ fontWeight: 'bold' }}>{trackName}</p>
             <p>{artistName}</p>
             <p>{albumName}</p>
           </Grid>
@@ -223,7 +223,7 @@ class MusicPlayer extends Component {
             direction='column'
             justify='center'
             alignItems='center'>
-            <Grid item className='grid-chart'>
+            <Grid item className='grid-chart joyride-3'>
               <div style={{ textAlign: 'right' }}>
                 <button
                   onClick={() => this.openAudioDetails()}
@@ -275,7 +275,7 @@ class MusicPlayer extends Component {
               justify='center'
               alignItems='center'
               style={{ width: 300, marginBottom: '5%' }}>
-              <div>
+              <div className='joyride-dislike-4'>
                 <button
                   className='like-dislike dislike'
                   style={{
@@ -295,11 +295,11 @@ class MusicPlayer extends Component {
                 </h5>
               </div>
 
-              <div style={{ padding: '0px 15px 0px 15px' }}>
-                <h5 style={{ textAlign: 'center' }}>Prediction: </h5>
-                <h3 style={{ textAlign: 'center' }}>100% </h3>
+              <div style={{ padding: '0px 15px 0px 15px' }} className='joyride-prediction-5'>
+                <h5 style={{textAlign: 'center'}}>Prediction: </h5>
+                <h3 style={{textAlign: 'center'}}>100% </h3>
               </div>
-              <div>
+              <div className='joyride-like-6'>
                 <button
                   className='like-dislike like'
                   style={{

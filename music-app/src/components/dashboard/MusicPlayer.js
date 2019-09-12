@@ -397,10 +397,12 @@ class MusicPlayer extends Component {
 const mapStateToProps = state => ({
   song: state.currentSongReducer.item,
   imageUrl: state.currentSongReducer.imageUrl,
-  traits: state.getTrackInfoReducer
+  traits: state.getTrackInfoReducer,
+  ds_songs: state.queuReducer.ds_songs,
+  first_track: state.queuReducer.first_track
 });
 
 export default connect(
   mapStateToProps,
-  { getTrackInfo, getCurrentSong }
+  { getTrackInfo, getCurrentSong, postDSSong, getTrackById }
 )(MusicPlayer);

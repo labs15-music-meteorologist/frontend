@@ -34,6 +34,7 @@ class MusicPlayer extends Component {
       id: '',
       songFeatures: [],
       collapse: false,
+      predictionPrompt: true,
     };
     // this will later be set by setInterval
     this.playerCheckInterval = null;
@@ -155,7 +156,8 @@ class MusicPlayer extends Component {
     this.props.getTrackInfo(id);
   };
 
-  // SDK Player Song playback controls
+  // -- SDK Player Song playback controls --
+
   onPrevClick() {
     this.player.previousTrack();
     this.player.setVolume(0);
@@ -176,6 +178,7 @@ class MusicPlayer extends Component {
       this.player.pause();
       this.player.setVolume(0.5);
     }, 1000);
+    this.togglePredictionPrompt();
   }
 
   transferPlaybackHere() {
@@ -204,6 +207,14 @@ class MusicPlayer extends Component {
     this.player.setVolume(0);
     setTimeout(() => this.player.pause(), 1000);
     this.player.setVolume(0.5);
+  }
+
+  // -- Prediction Prompt Logic --
+
+  togglePredictionPrompt() {
+    this.setState({
+      predictionPrompt: !this.state.predictionPrompt,
+    });
   }
 
   render() {
@@ -287,54 +298,90 @@ class MusicPlayer extends Component {
 
             {error && <p>Error: {error}</p>}
 
+            {/* When predictionPrompt === true show className='yes-no-active' 
+            On Yes/No click invoke onPlayclick();
+            On Yes/No click enable 'yes-no-active' on Like/Dislike wrapper
+          */}
+
             <Grid
               container
               direction='row'
               justify='center'
               alignItems='center'
               style={{ width: 300, marginBottom: '5%' }}>
-              <div className='joyride-dislike-4'>
-                <button
-                  className='like-dislike dislike'
-                  style={{
-                    background: 'none',
-                    border: 'none',
-                    outline: 'none',
-                  }}
-                  onClick={() => this.onPrevClick()}>
-                  <img
-                    src={Meteor}
-                    alt='Dislike Button'
-                    style={{ maxHeight: 70 }}
-                  />
-                </button>
-                <h5 style={{ textAlign: 'center', marginTop: '10px' }}>
-                  DISLIKE
-                </h5>
-              </div>
-
+              {/* YES NO */}
               <div
-                style={{ padding: '0px 15px 0px 15px' }}
-                className='joyride-prediction-5'>
-                <h5 style={{ textAlign: 'center' }}>Prediction: </h5>
-                <h3 style={{ textAlign: 'center' }}>100% </h3>
+                className={
+                  this.state.predictionPrompt
+                    ? 'yes-no-wrapper yes-no-active'
+                    : 'yes-no-wrapper yes-no-deactivated'
+                }>
+                <div className='yes-no-prompt'>
+                  <p>Do you like it?</p>
+                </div>
+                <div className='yes-button'>
+                  <button onClick={() => this.togglePredictionPrompt()}>
+                    Yes
+                  </button>
+                </div>
+                <div className='no-button'>
+                  <button onClick={() => this.togglePredictionPrompt()}>
+                    No
+                  </button>
+                </div>
               </div>
-              <div className='joyride-like-6'>
-                <button
-                  className='like-dislike like'
-                  style={{
-                    background: 'none',
-                    border: 'none',
-                    outline: 'none',
-                  }}
-                  onClick={() => this.onNextClick()}>
-                  <img
-                    src={Rocket}
-                    alt='Like Button'
-                    style={{ maxHeight: 70 }}
-                  />
-                </button>
-                <h5 style={{ textAlign: 'center', marginTop: '10px' }}>LIKE</h5>
+              {/* LIKE DISLIKE */}
+              <div
+                className={
+                  this.state.predictionPrompt
+                    ? 'like-dislike-wrapper yes-no-deactivated'
+                    : 'like-dislike-wrapper yes-no-active'
+                }>
+                <div className='joyride-dislike-4'>
+                  <button
+                    className='like-dislike dislike'
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      outline: 'none',
+                    }}
+                    onClick={() => this.togglePredictionPrompt()}>
+                    <img
+                      src={Meteor}
+                      alt='Dislike Button'
+                      style={{ maxHeight: 70 }}
+                    />
+                  </button>
+                  <h5 style={{ textAlign: 'center', marginTop: '10px' }}>
+                    DISLIKE
+                  </h5>
+                </div>
+
+                <div
+                  style={{ padding: '0px 15px 0px 15px' }}
+                  className='joyride-prediction-5'>
+                  <h5 style={{ textAlign: 'center' }}>Prediction: </h5>
+                  <h3 style={{ textAlign: 'center' }}>100% </h3>
+                </div>
+                <div className='joyride-like-6'>
+                  <button
+                    className='like-dislike like'
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      outline: 'none',
+                    }}
+                    onClick={() => this.onNextClick()}>
+                    <img
+                      src={Rocket}
+                      alt='Like Button'
+                      style={{ maxHeight: 70 }}
+                    />
+                  </button>
+                  <h5 style={{ textAlign: 'center', marginTop: '10px' }}>
+                    LIKE
+                  </h5>
+                </div>
               </div>
             </Grid>
 

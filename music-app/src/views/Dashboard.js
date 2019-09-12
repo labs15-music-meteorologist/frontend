@@ -39,13 +39,19 @@ class Dashboard extends React.Component {
         content: 'Tap here to view more details on each of the characteristics',
         placement: 'right',
       },
-      // {
-      //   target: '.joyride-prediction-5',
-      //   content:
-      //     'Review the characteristics and let us know if you think you would like this song, when you decide the music will start playing',
-      // },
       {
-        target: '.joyride-dislike-4',
+        target: '.joyride-prediction-7',
+        content:
+          'Review the characteristics and let us know if you think you would like this song, when you decide the music will start playing',
+        // disableBeacon: true,
+        disableOverlayClose: true,
+        hideCloseButton: true,
+        // hideFooter: true,
+        placement: 'right',
+        spotlightClicks: true,
+      },
+      {
+        target: '.like-dislike-wrapper .joyride-dislike-4',
         content:
           'Click this button, and we will take this song out of your queue, and go to the next song',
         placement: 'right',
@@ -57,7 +63,8 @@ class Dashboard extends React.Component {
       },
       {
         target: '.joyride-like-6',
-        content: 'Click to add to your liked songs on Spotify, and move you to the next song',
+        content:
+          'Click to add to your liked songs on Spotify, and move you to the next song',
       },
     ],
     popout: false,

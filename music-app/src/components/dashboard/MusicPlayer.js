@@ -177,7 +177,7 @@ class MusicPlayer extends Component {
     setTimeout(() => {
       this.player.pause();
       this.player.setVolume(0.5);
-    }, 1000);
+    }, 2000);
     this.togglePredictionPrompt();
   }
 
@@ -205,13 +205,19 @@ class MusicPlayer extends Component {
       },
     );
     this.player.setVolume(0);
-    setTimeout(() => this.player.pause(), 1000);
+    setTimeout(() => this.player.pause(), 2000);
     this.player.setVolume(0.5);
   }
 
   // -- Prediction Prompt Logic --
 
   togglePredictionPrompt() {
+    this.player.nextTrack();
+    this.player.setVolume(0);
+    setTimeout(() => {
+      this.player.pause();
+      this.player.setVolume(0.5);
+    }, 2000);
     this.setState({
       predictionPrompt: !this.state.predictionPrompt,
     });
@@ -252,11 +258,11 @@ class MusicPlayer extends Component {
             direction='column'
             justify='center'
             alignItems='center'>
-            <Grid item className='grid-chart joyride-3'>
+            <Grid item>
               <div style={{ textAlign: 'right' }}>
                 <button
                   onClick={() => this.openAudioDetails()}
-                  className='grid-question'
+                  className='grid-question grid-chart joyride-3'
                   title='Click for Audio Features details'
                   style={{ margin: 0, borderRadius: '25px' }}>
                   ?
@@ -313,23 +319,26 @@ class MusicPlayer extends Component {
               <div
                 className={
                   this.state.predictionPrompt
-                    ? 'yes-no-wrapper yes-no-active'
+                    ? 'yes-no-wrapper yes-no-active joyride-prediction-7'
                     : 'yes-no-wrapper yes-no-deactivated'
                 }>
                 <div className='yes-no-prompt'>
                   <p>Do you like it?</p>
                 </div>
-                <div className='yes-button'>
-                  <button onClick={() => this.togglePredictionPrompt()}>
-                    Yes
-                  </button>
-                </div>
-                <div className='no-button'>
-                  <button onClick={() => this.togglePredictionPrompt()}>
-                    No
-                  </button>
+                <div className='yes-no-button-wrapper'>
+                  <div className='yes-button'>
+                    <button onClick={() => this.togglePredictionPrompt()}>
+                      Yes
+                    </button>
+                  </div>
+                  <div className='no-button'>
+                    <button onClick={() => this.togglePredictionPrompt()}>
+                      No
+                    </button>
+                  </div>
                 </div>
               </div>
+
               {/* LIKE DISLIKE */}
               <div
                 className={
@@ -339,7 +348,7 @@ class MusicPlayer extends Component {
                 }>
                 <div className='joyride-dislike-4'>
                   <button
-                    className='like-dislike dislike'
+                    className='like-dislike dislike joyride-dislike-4'
                     style={{
                       background: 'none',
                       border: 'none',

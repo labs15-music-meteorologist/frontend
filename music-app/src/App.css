@@ -177,6 +177,10 @@
 
 /* LIKE/DISLIKE BUTTON STYLES */
 
+.like-dislike-wrapper {
+  display: flex;
+}
+
 .like,
 .dislike {
   transition: 0.9s ease;
@@ -199,6 +203,19 @@
 }
 
 /*  YES / NO BUTTON STYLES */
+
+.yes-no-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.yes-no-button-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* justify-items: center; */
+}
 
 .yes-no-deactivated {
   display: none;

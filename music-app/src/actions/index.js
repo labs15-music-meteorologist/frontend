@@ -229,8 +229,9 @@ export const postDSSong = () => dispatch => {
     }
   };
   axios
-    .post('http://localhost:5500/v1/recommender', audio)
+    .post('http://localhost:5000/v1/recommender', audio)
     .then(res => {
+      console.log('UNIQUESONGS', res);
       dispatch({
         type: POST_DS_SONGS_SUCCESS,
         payload: res.data
@@ -248,7 +249,8 @@ export const GET_TRACK_ID_FETCHING = 'GET_TRACK_ID_FETCHING';
 export const GET_TRACK_ID_SUCCESS = 'GET_TRACK_ID_SUCCESS';
 export const GET_TRACK_ID_FAILURE = 'GET_TRACK_ID_FAILURE';
 
-export const getTrackById = () => dispatch => {
+export const getTrackById = id => dispatch => {
+  console.log('IT HAS STARTED!');
   dispatch({
     type: GET_TRACK_ID_FETCHING
   });

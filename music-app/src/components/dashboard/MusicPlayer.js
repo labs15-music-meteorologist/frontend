@@ -3,7 +3,12 @@ import { connect } from 'react-redux';
 import { Grid } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import List from '@material-ui/core/List';
-import { getCurrentSong, getTrackInfo } from '../../actions';
+import {
+  getCurrentSong,
+  getTrackInfo,
+  getTrackById,
+  postDSSong
+} from '../../actions';
 import SkipLeft from '../../assets/skip-left.png';
 import SkipRight from '../../assets/skip-right.png';
 import Rocket from '../../assets/rocket-like.png';
@@ -41,6 +46,7 @@ class MusicPlayer extends Component {
 
   componentDidMount() {
     this.handleLogin();
+    this.props.postDSSong();
   }
 
   handleLogin() {
@@ -192,7 +198,10 @@ class MusicPlayer extends Component {
 
   render() {
     const { trackName, artistName, albumName, error, playing } = this.state;
-
+    if (this.props.ds_songs && this.props.ds_songs.songs) {
+      console.log('MY TRIGGER EXECUTED');
+      this.props.getTrackById(this.props.ds_songs.songs[0].values);
+    }
     return (
       // <Grid
       //   container
@@ -398,8 +407,8 @@ const mapStateToProps = state => ({
   song: state.currentSongReducer.item,
   imageUrl: state.currentSongReducer.imageUrl,
   traits: state.getTrackInfoReducer,
-  ds_songs: state.queuReducer.ds_songs,
-  first_track: state.queuReducer.first_track
+  ds_songs: state.queueReducer.ds_songs,
+  first_track: state.queueReducer.first_track
 });
 
 export default connect(

@@ -14,7 +14,7 @@ const initialState = {
   fetchingError: ''
 };
 
-export const postDSSong = (state = initialState, action) => {
+const queueReducer = (state = initialState, action) => {
   switch (action.type) {
     case POST_DS_SONGS_FETCHING:
       return {
@@ -32,13 +32,7 @@ export const postDSSong = (state = initialState, action) => {
         ...state,
         postingingSongError: action.payload
       };
-    default:
-      return state;
-  }
-};
 
-export const getTrackByID = (state = initialState, action) => {
-  switch (action.type) {
     case GET_TRACK_ID_FETCHING:
       return {
         ...state,
@@ -55,7 +49,10 @@ export const getTrackByID = (state = initialState, action) => {
         ...state,
         fetchingError: action.payload
       };
+
     default:
       return state;
   }
 };
+
+export default queueReducer;

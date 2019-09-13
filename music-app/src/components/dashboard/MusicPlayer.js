@@ -39,6 +39,7 @@ class MusicPlayer extends Component {
       id: '',
       songFeatures: [],
       collapse: false,
+      currentTrack: '',
     };
     // this will later be set by setInterval
     this.playerCheckInterval = null;
@@ -46,23 +47,6 @@ class MusicPlayer extends Component {
 
   componentDidMount() {
     this.handleLogin();
-    this.props.postDSSong();
-  }
-
-  // componentDidUpdate() {
-
-  // }
-
-  componentWillUnmount() {
-    this.props.ds_songs.songs &&
-      this.props.getSeveralTracks(
-        this.concenateSongIds(this.props.ds_songs.songs),
-      );
-  }
-
-  concenateSongIds(array) {
-    console.log('ARRAY', array);
-    return array.map(song => song.values).join(',');
   }
 
   handleLogin() {
@@ -129,8 +113,18 @@ class MusicPlayer extends Component {
 
     this.player.on('player_state_changed', state => {
       this.onStateChanged(state);
-      this.currentSong();
-      this.getCurrentSongFeatures(this.props.song.id);
+      // CONDITIONAL WHEN NEW SONG
+      if (state.track_window.current_track.id !== this.state.currentTrack) {
+        this.currentSong();
+        this.getCurrentSongFeatures(this.props.song.id);
+        this.setState({ currentTrack: state.track_window.current_track.id });
+        this.player.setVolume(0);
+        setTimeout(() => {
+          this.player.pause();
+          this.player.seek(1);
+          this.player.setVolume(0.5);
+        }, 5000);
+      }
     });
 
     this.player.on('ready', async data => {
@@ -171,6 +165,7 @@ class MusicPlayer extends Component {
   }
 
   getCurrentSongFeatures = id => {
+    console.log('AM I THE PROBLEM?', id);
     this.props.getTrackInfo(id);
   };
 

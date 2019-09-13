@@ -12,6 +12,8 @@ import {
   getUsers,
   getSpotifyAccountDetails,
   persistUser,
+  postDSSong,
+  getSeveralTracks,
 } from '../actions';
 
 import LikedSongs from '../components/dashboard/LikedSongs';
@@ -57,7 +59,8 @@ class Dashboard extends React.Component {
       },
       {
         target: '.joyride-like-6',
-        content: 'Click to add to your liked songs on Spotify, and move you to the next song',
+        content:
+          'Click to add to your liked songs on Spotify, and move you to the next song',
       },
     ],
     popout: false,
@@ -65,6 +68,8 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     this.props.getSpotifyAccountDetails();
+    this.props.postDSSong();
+    this.getPlaylistTracks();
   }
 
   componentDidUpdate() {
@@ -88,6 +93,20 @@ class Dashboard extends React.Component {
     localStorage.removeItem('token');
     this.props.history.push('/logout');
   };
+
+  getPlaylistTracks = () => {
+    console.log('TRIGGERED GET PLAYLIST');
+    this.props.ds_songs.songs &&
+      this.props.ds_songs.songs.length === 0 &&
+      this.props.getSeveralTracks(
+        this.concatenateSongIds(this.props.ds_songs.songs),
+      );
+  };
+
+  concatenateSongIds(array) {
+    console.log('ARRAY', array);
+    return array.map(song => song.values).join(',');
+  }
 
   checkPremiumUser = () => {
     return this.props.spotifyUser.product &&
@@ -200,9 +219,18 @@ class Dashboard extends React.Component {
 const mapStateToProps = state => ({
   spotifyUser: state.getUsersReducer.spotifyUser,
   fetchingSpotifyUser: state.getUsersReducer.fetchingSpotifyUser,
+  ds_songs: state.queueReducer.ds_songs,
+  several_tracks: state.queueReducer.several_tracks,
 });
 
 export default connect(
   mapStateToProps,
-  { getlikedSongs, getUsers, getSpotifyAccountDetails, persistUser },
+  {
+    getlikedSongs,
+    getUsers,
+    getSpotifyAccountDetails,
+    persistUser,
+    postDSSong,
+    getSeveralTracks,
+  },
 )(Dashboard);

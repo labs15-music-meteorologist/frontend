@@ -356,13 +356,17 @@ class MusicPlayer extends Component {
                   <p>Do you like it?</p>
                 </div>
                 <div className='yes-no-button-wrapper joyride-prediction-7'>
-                  <div className='yes-button'>
-                    <button onClick={() => this.togglePredictionPrompt()}>
+                  <div className='yes-button-wrapper'>
+                    <button
+                      className='yes-button'
+                      onClick={() => this.togglePredictionPrompt()}>
                       Yes
                     </button>
                   </div>
-                  <div className='no-button'>
-                    <button onClick={() => this.togglePredictionPrompt()}>
+                  <div className='no-button-wrapper'>
+                    <button
+                      className='no-button'
+                      onClick={() => this.togglePredictionPrompt()}>
                       No
                     </button>
                   </div>

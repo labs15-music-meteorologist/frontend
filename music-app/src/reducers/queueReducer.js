@@ -2,16 +2,16 @@ import {
   POST_DS_SONGS_FETCHING,
   POST_DS_SONGS_SUCCESS,
   POST_DS_SONGS_FAILURE,
-  GET_TRACK_ID_FETCHING,
-  GET_TRACK_ID_SUCCESS,
-  GET_TRACK_ID_FAILURE
+  GET_SEVERAL_TRACKS_FETCHING,
+  GET_SEVERAL_TRACKS_SUCCESS,
+  GET_SEVERAL_TRACKS_FAILURE,
 } from '../actions';
 
 const initialState = {
   ds_songs: [],
   postingingSongError: '',
-  first_track: [],
-  fetchingError: ''
+  several_tracks: [],
+  fetchingError: '',
 };
 
 const queueReducer = (state = initialState, action) => {
@@ -19,35 +19,35 @@ const queueReducer = (state = initialState, action) => {
     case POST_DS_SONGS_FETCHING:
       return {
         ...state,
-        postingingSongError: ''
+        postingingSongError: '',
       };
     case POST_DS_SONGS_SUCCESS:
       return {
         ...state,
         ds_songs: action.payload,
-        postingingSongError: ''
+        postingingSongError: '',
       };
     case POST_DS_SONGS_FAILURE:
       return {
         ...state,
-        postingingSongError: action.payload
+        postingingSongError: action.payload,
       };
 
-    case GET_TRACK_ID_FETCHING:
+    case GET_SEVERAL_TRACKS_FETCHING:
       return {
         ...state,
-        fetchingError: ''
+        fetchingError: '',
       };
-    case GET_TRACK_ID_SUCCESS:
+    case GET_SEVERAL_TRACKS_SUCCESS:
       return {
         ...state,
-        first_track: action.payload,
-        fetchingError: ''
+        several_tracks: action.payload,
+        fetchingError: '',
       };
-    case GET_TRACK_ID_FAILURE:
+    case GET_SEVERAL_TRACKS_FAILURE:
       return {
         ...state,
-        fetchingError: action.payload
+        fetchingError: action.payload,
       };
 
     default:

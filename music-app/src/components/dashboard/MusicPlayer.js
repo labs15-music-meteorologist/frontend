@@ -6,8 +6,8 @@ import List from '@material-ui/core/List';
 import {
   getCurrentSong,
   getTrackInfo,
-  getTrackById,
-  postDSSong
+  getSeveralTracks,
+  postDSSong,
 } from '../../actions';
 import SkipLeft from '../../assets/skip-left.png';
 import SkipRight from '../../assets/skip-right.png';
@@ -38,7 +38,7 @@ class MusicPlayer extends Component {
       duration: 1,
       id: '',
       songFeatures: [],
-      collapse: false
+      collapse: false,
     };
     // this will later be set by setInterval
     this.playerCheckInterval = null;
@@ -47,6 +47,22 @@ class MusicPlayer extends Component {
   componentDidMount() {
     this.handleLogin();
     this.props.postDSSong();
+  }
+
+  // componentDidUpdate() {
+
+  // }
+
+  componentWillUnmount() {
+    this.props.ds_songs.songs &&
+      this.props.getSeveralTracks(
+        this.concenateSongIds(this.props.ds_songs.songs),
+      );
+  }
+
+  concenateSongIds(array) {
+    console.log('ARRAY', array);
+    return array.map(song => song.values).join(',');
   }
 
   handleLogin() {
@@ -58,7 +74,7 @@ class MusicPlayer extends Component {
 
   openAudioDetails() {
     this.setState({
-      collapse: !this.state.collapse
+      collapse: !this.state.collapse,
     });
   }
 
@@ -69,7 +85,7 @@ class MusicPlayer extends Component {
       const {
         current_track: currentTrack,
         position,
-        duration
+        duration,
       } = state.track_window;
       const trackName = currentTrack.name;
       const albumName = currentTrack.album.name;
@@ -83,12 +99,12 @@ class MusicPlayer extends Component {
         trackName,
         albumName,
         artistName,
-        playing
+        playing,
       });
     } else {
       // state was null, user might have swapped to another device
       this.setState({
-        error: 'Looks like you might have swapped to another device?'
+        error: 'Looks like you might have swapped to another device?',
       });
     }
   }
@@ -135,7 +151,7 @@ class MusicPlayer extends Component {
         name: 'Music Meteorologist Spotify Player',
         getOAuthToken: cb => {
           cb(token);
-        }
+        },
       });
 
       this.createEventHandlers();
@@ -179,29 +195,26 @@ class MusicPlayer extends Component {
         method: 'PUT',
         headers: {
           authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           // This is where we will control what music is fed to the user
           // If we want to direct them to a specific playlist,artist or album we will pass in "context_uri" with its respective uri
           context_uri:
-            'spotify:user:spotifycharts:playlist:37i9dQZEVXbMDoHDwVN2tF' //Directs User to Global Top 50 playlist curated by spotify
+            'spotify:user:spotifycharts:playlist:37i9dQZEVXbMDoHDwVN2tF', //Directs User to Global Top 50 playlist curated by spotify
 
           // In order manipulate the user's queue and feed them a more fluid and unique array of songs we would instead
           // pass an array of song uris through the "uris" key
           // The example below if uncommented will direct the user to 3 songs (make sure to comment out the context_uri)
           // uris:["spotify:track:0aULRU35N9kTj6O1xMULRR","spotify:track:0VgkVdmE4gld66l8iyGjgx","spotify:track:5ry2OE6R2zPQFDO85XkgRb"]
-        })
-      }
+        }),
+      },
     );
   }
 
   render() {
     const { trackName, artistName, albumName, error, playing } = this.state;
-    if (this.props.ds_songs && this.props.ds_songs.songs) {
-      console.log('MY TRIGGER EXECUTED');
-      this.props.getTrackById(this.props.ds_songs.songs[0].values);
-    }
+
     return (
       // <Grid
       //   container
@@ -257,7 +270,7 @@ class MusicPlayer extends Component {
                     overflow: 'auto',
                     backgroundColor: '#1a567a',
                     // backgroundColor: `rgba(${34}, ${109}, ${155}, ${0.98})`,
-                    color: 'lightgray'
+                    color: 'lightgray',
                   }}>
                   <AudioDetails />
                 </Paper>
@@ -292,7 +305,7 @@ class MusicPlayer extends Component {
                   style={{
                     background: 'none',
                     border: 'none',
-                    outline: 'none'
+                    outline: 'none',
                   }}
                   onClick={() => this.onPrevClick()}>
                   <img
@@ -318,7 +331,7 @@ class MusicPlayer extends Component {
                   style={{
                     background: 'none',
                     border: 'none',
-                    outline: 'none'
+                    outline: 'none',
                   }}
                   onClick={() => this.onNextClick()}>
                   <img
@@ -345,7 +358,7 @@ class MusicPlayer extends Component {
                   style={{
                     background: 'none',
                     border: 'none',
-                    outline: 'none'
+                    outline: 'none',
                   }}
                   onClick={() => this.onPrevClick()}>
                   <img
@@ -359,7 +372,7 @@ class MusicPlayer extends Component {
                   style={{
                     background: 'none',
                     border: 'none',
-                    outline: 'none'
+                    outline: 'none',
                   }}
                   onClick={() => this.onPlayClick()}>
                   {playing ? (
@@ -381,7 +394,7 @@ class MusicPlayer extends Component {
                   style={{
                     background: 'none',
                     border: 'none',
-                    outline: 'none'
+                    outline: 'none',
                   }}
                   onClick={() => this.onNextClick()}>
                   <img
@@ -408,10 +421,10 @@ const mapStateToProps = state => ({
   imageUrl: state.currentSongReducer.imageUrl,
   traits: state.getTrackInfoReducer,
   ds_songs: state.queueReducer.ds_songs,
-  first_track: state.queueReducer.first_track
+  several_tracks: state.queueReducer.several_tracks,
 });
 
 export default connect(
   mapStateToProps,
-  { getTrackInfo, getCurrentSong, postDSSong, getTrackById }
+  { getTrackInfo, getCurrentSong, postDSSong, getSeveralTracks },
 )(MusicPlayer);

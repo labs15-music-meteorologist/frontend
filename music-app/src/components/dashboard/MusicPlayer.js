@@ -47,6 +47,7 @@ class MusicPlayer extends Component {
 
   componentDidMount() {
     this.handleLogin();
+    this.props.postDSSong();
   }
 
   handleLogin() {
@@ -111,12 +112,17 @@ class MusicPlayer extends Component {
       console.error(e);
     });
 
+    // ONLY WHEN PLAYER STATE CHANGED
     this.player.on('player_state_changed', state => {
       this.onStateChanged(state);
-      // CONDITIONAL WHEN NEW SONG
+
+      // ONLY WHEN NEW SONG
       if (state.track_window.current_track.id !== this.state.currentTrack) {
         this.currentSong();
-        this.getCurrentSongFeatures(this.props.song.id);
+        if (this.props.song.id) {
+          this.getCurrentSongFeatures(this.props.song.id);
+        }
+
         this.setState({ currentTrack: state.track_window.current_track.id });
         this.player.setVolume(0);
         setTimeout(() => {
@@ -124,6 +130,9 @@ class MusicPlayer extends Component {
           this.player.seek(1);
           this.player.setVolume(0.5);
         }, 5000);
+        if (this.props.ds_songs.songs) {
+          this.getDataScienceSongArray();
+        }
       }
     });
 
@@ -133,6 +142,17 @@ class MusicPlayer extends Component {
       await this.setState({ deviceId: device_id, loggedIn: true });
       this.transferPlaybackHere();
     });
+  }
+
+  getDataScienceSongArray = () => {
+    this.props.ds_songs.songs &&
+      this.props.getSeveralTracks(
+        this.concatenateSongIds(this.props.ds_songs.songs),
+      );
+  };
+
+  concatenateSongIds(array) {
+    return array.map(song => song.values).join(',');
   }
 
   checkForPlayer() {
@@ -165,7 +185,6 @@ class MusicPlayer extends Component {
   }
 
   getCurrentSongFeatures = id => {
-    console.log('AM I THE PROBLEM?', id);
     this.props.getTrackInfo(id);
   };
 

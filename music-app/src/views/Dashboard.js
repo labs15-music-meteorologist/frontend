@@ -18,7 +18,6 @@ import {
 
 import LikedSongs from '../components/dashboard/LikedSongs';
 import MusicPlayer from '../components/dashboard/MusicPlayer';
-import AudioDetails from '../components/dashboard/AudioDetails';
 
 import '../App.css';
 
@@ -68,8 +67,6 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     this.props.getSpotifyAccountDetails();
-    this.props.postDSSong();
-    this.getPlaylistTracks();
   }
 
   componentDidUpdate() {
@@ -93,21 +90,6 @@ class Dashboard extends React.Component {
     localStorage.removeItem('token');
     this.props.history.push('/logout');
   };
-
-  getPlaylistTracks = () => {
-    console.log('TRIGGERED GET PLAYLIST');
-    this.props.ds_songs.songs &&
-      this.props.ds_songs.songs.length === 0 &&
-      this.props.getSeveralTracks(
-        this.concatenateSongIds(this.props.ds_songs.songs),
-      );
-  };
-
-  concatenateSongIds(array) {
-    console.log('ARRAY', array);
-    return array.map(song => song.values).join(',');
-  }
-
   checkPremiumUser = () => {
     return this.props.spotifyUser.product &&
       this.props.fetchingSpotifyUser === false &&

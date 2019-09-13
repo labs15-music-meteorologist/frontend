@@ -35,11 +35,13 @@ class LikedSongs extends React.Component {
         <Grid item>
           <Typography
             style={{ fontWeight: 'bold', fontSize: 18, textAlign: 'center' }}>
-            Liked Songs
+            Queue
           </Typography>
-          {this.props.songs.map(song => (
-            <Song song={song} id={song.track.id} key={song.track.id} />
-          ))}
+
+          {this.props.several_tracks.tracks &&
+            this.props.several_tracks.tracks.map(song => (
+              <Song song={song} id={song.id} key={song.id} />
+            ))}
         </Grid>
         {/* <Grid item>
           <Typography
@@ -60,6 +62,7 @@ class LikedSongs extends React.Component {
 const mapStateToProps = state => ({
   songs: state.likedSongsReducer.songs,
   users: state.getUsersReducer.users,
+  several_tracks: state.queueReducer.several_tracks,
 });
 
 export default connect(

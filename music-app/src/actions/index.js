@@ -60,6 +60,7 @@ export const GET_TRACK_INFO_SUCCESS = 'GET_TRACK_INFO_SUCCESS';
 export const GET_TRACK_INFO_FAILURE = 'GET_TRACK_INFO_FAILURE';
 
 export const getTrackInfo = id => dispatch => {
+  console.log('AM I STILL UNDEFINED', id);
   dispatch({
     type: GET_TRACK_INFO_FETCHING,
   });
@@ -231,7 +232,6 @@ export const postDSSong = () => dispatch => {
   axios
     .post('http://localhost:5000/v1/recommender', audio)
     .then(res => {
-      console.log('UNIQUESONGS', res);
       dispatch({
         type: POST_DS_SONGS_SUCCESS,
         payload: res.data,
@@ -250,7 +250,6 @@ export const GET_SEVERAL_TRACKS_SUCCESS = 'GET_SEVERAL_TRACKS_SUCCESS';
 export const GET_SEVERAL_TRACKS_FAILURE = 'GET_SEVERAL_TRACKS_FAILURE';
 
 export const getSeveralTracks = ids => dispatch => {
-  console.log('IT HAS STARTED!', ids);
   dispatch({
     type: GET_SEVERAL_TRACKS_FETCHING,
   });
@@ -260,7 +259,6 @@ export const getSeveralTracks = ids => dispatch => {
   axios
     .get(`https://api.spotify.com/v1/tracks/?ids=${ids}`, config)
     .then(res => {
-      console.log('Results', res.data);
       dispatch({
         type: GET_SEVERAL_TRACKS_SUCCESS,
         payload: res.data,

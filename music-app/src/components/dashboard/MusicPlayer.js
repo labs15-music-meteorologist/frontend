@@ -49,17 +49,6 @@ class MusicPlayer extends Component {
     this.props.postDSSong();
   }
 
-  // componentDidUpdate() {
-
-  // }
-
-  componentWillUnmount() {
-    this.props.ds_songs.songs &&
-      this.props.getSeveralTracks(
-        this.concenateSongIds(this.props.ds_songs.songs),
-      );
-  }
-
   concenateSongIds(array) {
     console.log('ARRAY', array);
     return array.map(song => song.values).join(',');
@@ -215,6 +204,10 @@ class MusicPlayer extends Component {
   render() {
     const { trackName, artistName, albumName, error, playing } = this.state;
 
+    this.props.ds_songs.songs &&
+      this.props.getSeveralTracks(
+        this.concenateSongIds(this.props.ds_songs.songs),
+      );
     return (
       // <Grid
       //   container
@@ -223,7 +216,7 @@ class MusicPlayer extends Component {
       //   alignItems='center'
       //   spacing={6}>
       <div className='music-player joyride-player-2'>
-        <div classname='music-component'>
+        <div className='music-component'>
           <Grid item style={{ maxWidth: '300px' }}>
             {this.props.imageUrl[1] && (
               <img
@@ -241,7 +234,7 @@ class MusicPlayer extends Component {
           </Grid>
         </div>
 
-        <div classname='music-component music-chart'>
+        <div className='music-component music-chart'>
           <Grid
             container
             direction='column'
@@ -408,7 +401,7 @@ class MusicPlayer extends Component {
           </Grid>
         </div>
 
-        <div classname='music-component'>
+        <div className='music-component'>
           <Characteristics features={this.props.traits} />
         </div>
       </div>

@@ -4,13 +4,19 @@ import { Grid } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import List from '@material-ui/core/List';
 import { getCurrentSong, getTrackInfo } from '../../actions';
+
+// Images
 import SkipLeft from '../../assets/skip-left.png';
 import SkipRight from '../../assets/skip-right.png';
 import Rocket from '../../assets/rocket-like.png';
 import Meteor from '../../assets/meteor-dislike.png';
 import Pause from '../../assets/player-stop.png';
 import Play from '../../assets/player-start.png';
+
+// Styles
 import '../../App.css';
+
+// Features
 import LinearDeterminate from '../LinearDeterminate';
 import Chart from '../Chart';
 import Characteristics from '../Characteristics.js';
@@ -174,6 +180,7 @@ class MusicPlayer extends Component {
   onNextClick() {
     this.player.nextTrack();
     this.player.setVolume(0);
+    this.player.playing && this.player.pause();
     setTimeout(() => {
       this.player.pause();
       this.player.setVolume(0.5);
@@ -184,7 +191,7 @@ class MusicPlayer extends Component {
   transferPlaybackHere() {
     const { token } = this.state;
     fetch(
-      `https://api.spotify.com/v1/me/player/play?device_id=${this.state.deviceId}`,
+      `https://api.spotify.com/v1/me/player/play/?device_id=${this.state.deviceId}`,
       {
         method: 'PUT',
         headers: {
@@ -212,6 +219,33 @@ class MusicPlayer extends Component {
   // -- Prediction Prompt Logic --
 
   togglePredictionPrompt() {
+    this.player.resume();
+    this.player.setVolume(0.5);
+    this.setState({
+      predictionPrompt: !this.state.predictionPrompt,
+    });
+  }
+  // BF
+  // Once playlist or queue format is decided
+  // ADD function to add current song to liked songs on spotify
+  // Send input to BE
+  toggleLikeButton() {
+    this.player.nextTrack();
+    this.player.setVolume(0);
+    setTimeout(() => {
+      this.player.pause();
+      this.player.setVolume(0.5);
+    }, 2000);
+    this.setState({
+      predictionPrompt: !this.state.predictionPrompt,
+    });
+  }
+
+  // BF
+  // Once playlist or queue format is decided
+  // ADD functionality to REMOVE current song from playlist/queue
+  // Send input to BE
+  toggleDislikeButton() {
     this.player.nextTrack();
     this.player.setVolume(0);
     setTimeout(() => {
@@ -226,13 +260,9 @@ class MusicPlayer extends Component {
   render() {
     const { trackName, artistName, albumName, error, playing } = this.state;
 
+    // console.log('DEVICE ID ________________', this.state.deviceId);
+
     return (
-      // <Grid
-      //   container
-      //   direction='row'
-      //   justify='center'
-      //   alignItems='center'
-      //   spacing={6}>
       <div className='music-player joyride-player-2'>
         <div classname='music-component'>
           <Grid item style={{ maxWidth: '300px' }}>
@@ -319,13 +349,13 @@ class MusicPlayer extends Component {
               <div
                 className={
                   this.state.predictionPrompt
-                    ? 'yes-no-wrapper yes-no-active joyride-prediction-7'
+                    ? 'yes-no-wrapper yes-no-active '
                     : 'yes-no-wrapper yes-no-deactivated'
                 }>
                 <div className='yes-no-prompt'>
                   <p>Do you like it?</p>
                 </div>
-                <div className='yes-no-button-wrapper'>
+                <div className='yes-no-button-wrapper joyride-prediction-7'>
                   <div className='yes-button'>
                     <button onClick={() => this.togglePredictionPrompt()}>
                       Yes
@@ -354,7 +384,7 @@ class MusicPlayer extends Component {
                       border: 'none',
                       outline: 'none',
                     }}
-                    onClick={() => this.togglePredictionPrompt()}>
+                    onClick={() => this.toggleDislikeButton()}>
                     <img
                       src={Meteor}
                       alt='Dislike Button'
@@ -380,7 +410,7 @@ class MusicPlayer extends Component {
                       border: 'none',
                       outline: 'none',
                     }}
-                    onClick={() => this.onNextClick()}>
+                    onClick={() => this.toggleLikeButton()}>
                     <img
                       src={Rocket}
                       alt='Like Button'

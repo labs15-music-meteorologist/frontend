@@ -179,6 +179,7 @@
 
 .like-dislike-wrapper {
   display: flex;
+  height: 125px;
 }
 
 .like,
@@ -208,6 +209,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 125px;
 }
 
 .yes-no-button-wrapper {

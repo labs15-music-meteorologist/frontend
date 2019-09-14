@@ -134,7 +134,10 @@ class MusicPlayer extends Component {
     this.player.on('ready', async data => {
       let { device_id } = data;
 
-      await this.setState({ deviceId: device_id, loggedIn: true });
+      await this.setState({
+        deviceId: device_id,
+        loggedIn: true,
+      });
       this.transferPlaybackHere();
     });
   }
@@ -187,6 +190,11 @@ class MusicPlayer extends Component {
   // SDK Player Song playback controls
   onPrevClick() {
     this.player.previousTrack();
+    this.player.setVolume(0);
+    setTimeout(() => {
+      this.player.pause();
+      this.player.setVolume(0.5);
+    }, 1000);
   }
 
   onPlayClick() {
@@ -195,6 +203,11 @@ class MusicPlayer extends Component {
 
   onNextClick() {
     this.player.nextTrack();
+    this.player.setVolume(0);
+    setTimeout(() => {
+      this.player.pause();
+      this.player.setVolume(0.5);
+    }, 1000);
   }
 
   transferPlaybackHere() {
@@ -226,6 +239,9 @@ class MusicPlayer extends Component {
         }),
       },
     );
+    this.player.setVolume(0);
+    setTimeout(() => this.player.pause(), 1000);
+    this.player.setVolume(0.5);
   }
 
   render() {
@@ -392,12 +408,14 @@ class MusicPlayer extends Component {
                   onClick={() => this.onPlayClick()}>
                   {playing ? (
                     <img
+                      ref={input => (this.inputElement = input)}
                       src={Pause}
                       alt='White icon to pause a song.'
                       style={{ maxHeight: 35 }}
                     />
                   ) : (
                     <img
+                      /* ref={this.simulateClick} */
                       src={Play}
                       alt='White icon to start a pause song.'
                       style={{ maxHeight: 35 }}

@@ -48,7 +48,6 @@ class Chart extends Component {
   handleMouseEnter(props) {}
 
   render() {
-    console.log('FIND ME', this.props);
     return (
       <div>
         {/* Specify chart elements from import list to use them ex. PolarAngleAxis are the subjects */}

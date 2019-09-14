@@ -95,22 +95,15 @@ class MusicPlayer extends Component {
   }
 
   createEventHandlers() {
-    this.player.on('initialization_error', e => {
-      console.error(e);
-    });
+    this.player.on('initialization_error', e => {});
 
     this.player.on('authentication_error', e => {
-      console.error(e);
       this.setState({ loggedIn: false });
     });
 
-    this.player.on('account_error', e => {
-      console.error(e);
-    });
+    this.player.on('account_error', e => {});
 
-    this.player.on('playback_error', e => {
-      console.error(e);
-    });
+    this.player.on('playback_error', e => {});
 
     // ONLY WHEN PLAYER STATE CHANGED
     this.player.on('player_state_changed', state => {
@@ -157,9 +150,9 @@ class MusicPlayer extends Component {
     return array.map(song => song.values).join(',');
   }
 
-  /*  createSpotifyUriArray(array) {
-    return array.map(song => song.values).join('spotify:track:');
-  } */
+  createSpotifyUriArray(array) {
+    return array.map(song => 'spotify:track:' + song.values);
+  }
 
   checkForPlayer() {
     const { token } = this.state;
@@ -188,7 +181,6 @@ class MusicPlayer extends Component {
   }
 
   getCurrentSongFeatures = id => {
-    console.log('ARE YOU SURE?', id);
     this.props.getTrackInfo(id);
   };
 
@@ -219,10 +211,11 @@ class MusicPlayer extends Component {
           // This is where we will control what music is fed to the user
           // If we want to direct them to a specific playlist,artist or album we will pass in "context_uri" with its respective uri
           /* context_uri:  */
-          uris: [
+          uris: this.createSpotifyUriArray(this.props.ds_songs.songs),
+          /*  [
             'spotify:track:5d4zl1SVfjPykq0yfsdil6',
             'spotify:track:32bZwIZbRYe4ImC7PJ8s2A',
-          ],
+          ], */
           /* this.props.ds_songs.songs */
           /* 'spotify:user:spotifycharts:playlist:37i9dQZEVXbMDoHDwVN2tF' */ //Directs User to Global Top 50 playlist curated by spotify
 
@@ -237,7 +230,6 @@ class MusicPlayer extends Component {
 
   render() {
     const { trackName, artistName, albumName, error, playing } = this.state;
-    console.log('OMG WHAT IS HAPPENING', this.props);
     return (
       // <Grid
       //   container
@@ -246,7 +238,7 @@ class MusicPlayer extends Component {
       //   alignItems='center'
       //   spacing={6}>
       <div className='music-player joyride-player-2'>
-        <div classname='music-component'>
+        <div className='music-component'>
           <Grid item style={{ maxWidth: '300px' }}>
             {this.props.imageUrl[1] && (
               <img
@@ -264,7 +256,7 @@ class MusicPlayer extends Component {
           </Grid>
         </div>
 
-        <div classname='music-component music-chart'>
+        <div className='music-component music-chart'>
           <Grid
             container
             direction='column'
@@ -431,7 +423,7 @@ class MusicPlayer extends Component {
           </Grid>
         </div>
 
-        <div classname='music-component'>
+        <div className='music-component'>
           <Characteristics features={this.props.traits} />
         </div>
       </div>

@@ -60,7 +60,6 @@ export const GET_TRACK_INFO_SUCCESS = 'GET_TRACK_INFO_SUCCESS';
 export const GET_TRACK_INFO_FAILURE = 'GET_TRACK_INFO_FAILURE';
 
 export const getTrackInfo = id => dispatch => {
-  console.log('AM I STILL UNDEFINED', id);
   dispatch({
     type: GET_TRACK_INFO_FETCHING,
   });

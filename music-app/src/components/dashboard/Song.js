@@ -7,12 +7,6 @@ import { getTrackInfo } from '../../actions';
 import '../../App.css';
 
 class Song extends React.Component {
-  componentDidMount() {
-    if (!this.props.tracksInfo[this.props.id]) {
-      this.props.getTrackInfo(this.props.id);
-    }
-  }
-
   render() {
     /*     const tf = this.props.tracksInfo[this.props.id]; */
     /*    const loadingTf = !tf || tf.fetching; */

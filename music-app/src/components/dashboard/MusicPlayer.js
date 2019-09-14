@@ -115,13 +115,15 @@ class MusicPlayer extends Component {
     // ONLY WHEN PLAYER STATE CHANGED
     this.player.on('player_state_changed', state => {
       this.onStateChanged(state);
-
+      if (this.props.song.id) {
+        this.getCurrentSongFeatures(this.props.song.id);
+      }
       // ONLY WHEN NEW SONG
       if (state.track_window.current_track.id !== this.state.currentTrack) {
         this.currentSong();
-        if (this.props.song.id) {
+        /*   if (this.props.song.id) {
           this.getCurrentSongFeatures(this.props.song.id);
-        }
+        } */
 
         this.setState({ currentTrack: state.track_window.current_track.id });
         this.player.setVolume(0);
@@ -129,7 +131,7 @@ class MusicPlayer extends Component {
           this.player.pause();
           this.player.seek(1);
           this.player.setVolume(0.5);
-        }, 5000);
+        }, 2000);
         if (this.props.ds_songs.songs) {
           this.getDataScienceSongArray();
         }
@@ -155,6 +157,10 @@ class MusicPlayer extends Component {
     return array.map(song => song.values).join(',');
   }
 
+  /*  createSpotifyUriArray(array) {
+    return array.map(song => song.values).join('spotify:track:');
+  } */
+
   checkForPlayer() {
     const { token } = this.state;
 
@@ -174,17 +180,15 @@ class MusicPlayer extends Component {
     }
   }
 
-  async currentSong() {
-    try {
-      await this.props.getCurrentSong();
-      if (this.props.song === undefined) {
-        this.props.getCurrentSong();
-      } else {
-      }
-    } catch (e) {}
+  currentSong() {
+    this.props.getCurrentSong();
+    if (this.props.song === undefined) {
+      this.props.getCurrentSong();
+    }
   }
 
   getCurrentSongFeatures = id => {
+    console.log('ARE YOU SURE?', id);
     this.props.getTrackInfo(id);
   };
 
@@ -214,8 +218,13 @@ class MusicPlayer extends Component {
         body: JSON.stringify({
           // This is where we will control what music is fed to the user
           // If we want to direct them to a specific playlist,artist or album we will pass in "context_uri" with its respective uri
-          context_uri:
-            'spotify:user:spotifycharts:playlist:37i9dQZEVXbMDoHDwVN2tF', //Directs User to Global Top 50 playlist curated by spotify
+          /* context_uri:  */
+          uris: [
+            'spotify:track:5d4zl1SVfjPykq0yfsdil6',
+            'spotify:track:32bZwIZbRYe4ImC7PJ8s2A',
+          ],
+          /* this.props.ds_songs.songs */
+          /* 'spotify:user:spotifycharts:playlist:37i9dQZEVXbMDoHDwVN2tF' */ //Directs User to Global Top 50 playlist curated by spotify
 
           // In order manipulate the user's queue and feed them a more fluid and unique array of songs we would instead
           // pass an array of song uris through the "uris" key
@@ -228,7 +237,7 @@ class MusicPlayer extends Component {
 
   render() {
     const { trackName, artistName, albumName, error, playing } = this.state;
-
+    console.log('OMG WHAT IS HAPPENING', this.props);
     return (
       // <Grid
       //   container

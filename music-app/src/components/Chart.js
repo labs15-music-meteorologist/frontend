@@ -4,7 +4,7 @@ import {
   RadarChart,
   PolarGrid,
   PolarAngleAxis,
-  PolarRadiusAxis
+  PolarRadiusAxis,
 } from 'recharts';
 
 class Chart extends Component {
@@ -17,8 +17,8 @@ class Chart extends Component {
       { subject: 'Energy', A: 0 },
       { subject: 'Instrumentalness', A: 0 },
       { subject: 'Liveness', A: 0 },
-      { subject: 'Valence', A: 0 }
-    ]
+      { subject: 'Valence', A: 0 },
+    ],
   };
 
   componentDidUpdate(prevProps) {
@@ -27,20 +27,20 @@ class Chart extends Component {
         data: [
           {
             subject: 'Acousticness',
-            A: this.props.features.acousticness * 100
+            A: this.props.features.acousticness * 100,
           },
           {
             subject: 'Danceability',
-            A: this.props.features.danceability * 100
+            A: this.props.features.danceability * 100,
           },
           { subject: 'Energy', A: this.props.features.energy * 100 },
           {
             subject: 'Instrumentalness',
-            A: this.props.features.instrumentalness * 100
+            A: this.props.features.instrumentalness * 100,
           },
           { subject: 'Liveness', A: this.props.features.liveness * 100 },
-          { subject: 'Valence', A: this.props.features.valence * 100 }
-        ]
+          { subject: 'Valence', A: this.props.features.valence * 100 },
+        ],
       });
     }
   }
@@ -48,6 +48,7 @@ class Chart extends Component {
   handleMouseEnter(props) {}
 
   render() {
+    console.log('FIND ME', this.props);
     return (
       <div>
         {/* Specify chart elements from import list to use them ex. PolarAngleAxis are the subjects */}

@@ -270,3 +270,41 @@ export const getSeveralTracks = ids => dispatch => {
       });
     });
 };
+
+export const CREATE_PLAYLIST_FETCHING = 'CREATE_PLAYLIST_FETCHING';
+export const CREATE_PLAYLIST_SUCCESS = 'CREATE_PLAYLIST_SUCCESS';
+export const CREATE_PLAYLIST_FAILURE = 'CREATE_PLAYLIST_FAILURE';
+
+export const createPlaylist = spotifyId => dispatch => {
+  dispatch({
+    type: CREATE_PLAYLIST_FETCHING,
+  });
+  var config = {
+    headers: {
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+      ContentType: 'application/json',
+    },
+  };
+  var playlistName = {
+    name: 'Music-Meteorologist',
+    description: 'A playlist of songs curated by Music Meteorologist',
+  };
+  axios
+    .post(
+      `https://api.spotify.com/v1/users/${spotifyId}/playlists`,
+      config,
+      playlistName,
+    )
+    .then(res => {
+      dispatch({
+        type: CREATE_PLAYLIST_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: CREATE_PLAYLIST_FAILURE,
+        payload: err.data,
+      });
+    });
+};

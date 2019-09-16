@@ -14,6 +14,7 @@ import {
   persistUser,
   postDSSong,
   getSeveralTracks,
+  createPlaylist
 } from '../actions';
 
 import LikedSongs from '../components/dashboard/LikedSongs';
@@ -102,10 +103,13 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     this.props.getSpotifyAccountDetails();
+    console.log('what is this', this.props)
+    
   }
 
   componentDidUpdate() {
-    this.props.spotifyUser.id && this.props.persistUser(this.props.spotifyUser);
+    this.props.spotifyUser.id && this.props.persistUser(this.props.spotifyUser); 
+    if(this.props.spotifyUser.id === undefined) { this.props.createPlaylist(this.props.spotifyUser.id)}
   }
 
   openPlaylist() {
@@ -226,7 +230,7 @@ class Dashboard extends React.Component {
         </div>
 
         <Grid item>
-          <MusicPlayer />
+          <MusicPlayer spotifyId={this.props.spotifyUser} />
         </Grid>
       </div>
     );
@@ -238,6 +242,7 @@ const mapStateToProps = state => ({
   fetchingSpotifyUser: state.getUsersReducer.fetchingSpotifyUser,
   ds_songs: state.queueReducer.ds_songs,
   several_tracks: state.queueReducer.several_tracks,
+  playlistId: state.createPlaylistReducer.playlistId,
 });
 
 export default connect(
@@ -249,5 +254,6 @@ export default connect(
     persistUser,
     postDSSong,
     getSeveralTracks,
+    createPlaylist
   },
 )(Dashboard);

@@ -8,6 +8,7 @@ import {
   getTrackInfo,
   getSeveralTracks,
   postDSSong,
+  createPlaylist,
 } from '../../actions';
 import SkipLeft from '../../assets/skip-left.png';
 import SkipRight from '../../assets/skip-right.png';
@@ -113,6 +114,7 @@ class MusicPlayer extends Component {
     // ONLY WHEN PLAYER STATE CHANGED
     this.player.on('player_state_changed', state => {
       this.onStateChanged(state);
+
       if (this.props.song.id) {
         this.getCurrentSongFeatures(this.props.song.id);
       }
@@ -541,9 +543,16 @@ const mapStateToProps = state => ({
   traits: state.getTrackInfoReducer,
   ds_songs: state.queueReducer.ds_songs,
   several_tracks: state.queueReducer.several_tracks,
+  playlistId: state.createPlaylistReducer,
 });
 
 export default connect(
   mapStateToProps,
-  { getTrackInfo, getCurrentSong, postDSSong, getSeveralTracks },
+  {
+    getTrackInfo,
+    getCurrentSong,
+    postDSSong,
+    getSeveralTracks,
+    createPlaylist,
+  },
 )(MusicPlayer);

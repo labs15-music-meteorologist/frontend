@@ -15,7 +15,11 @@ import Rocket from '../../assets/rocket-like.png';
 import Meteor from '../../assets/meteor-dislike.png';
 import Pause from '../../assets/player-stop.png';
 import Play from '../../assets/player-start.png';
+
+// Styles
 import '../../App.css';
+
+// Features
 import LinearDeterminate from '../LinearDeterminate';
 import Chart from '../Chart';
 import Characteristics from '../Characteristics.js';
@@ -40,6 +44,7 @@ class MusicPlayer extends Component {
       songFeatures: [],
       collapse: false,
       currentTrack: '',
+      predictionPrompt: true,
     };
     // this will later be set by setInterval
     this.playerCheckInterval = null;
@@ -187,7 +192,8 @@ class MusicPlayer extends Component {
     this.props.getTrackInfo(id);
   };
 
-  // SDK Player Song playback controls
+  // -- SDK Player Song playback controls --
+
   onPrevClick() {
     this.player.previousTrack();
     this.player.setVolume(0);
@@ -204,16 +210,18 @@ class MusicPlayer extends Component {
   onNextClick() {
     this.player.nextTrack();
     this.player.setVolume(0);
+    this.player.playing && this.player.pause();
     setTimeout(() => {
       this.player.pause();
       this.player.setVolume(0.5);
-    }, 1000);
+    }, 2000);
+    this.togglePredictionPrompt();
   }
 
   transferPlaybackHere() {
     const { token } = this.state;
     fetch(
-      `https://api.spotify.com/v1/me/player/play?device_id=${this.state.deviceId}`,
+      `https://api.spotify.com/v1/me/player/play/?device_id=${this.state.deviceId}`,
       {
         method: 'PUT',
         headers: {
@@ -240,19 +248,54 @@ class MusicPlayer extends Component {
       },
     );
     this.player.setVolume(0);
-    setTimeout(() => this.player.pause(), 1000);
+    setTimeout(() => this.player.pause(), 2000);
     this.player.setVolume(0.5);
+  }
+
+  // -- Prediction Prompt Logic --
+
+  togglePredictionPrompt() {
+    this.player.resume();
+    this.player.setVolume(0.5);
+    this.setState({
+      predictionPrompt: !this.state.predictionPrompt,
+    });
+  }
+  // BF
+  // Once playlist or queue format is decided
+  // ADD function to add current song to liked songs on spotify
+  // Send input to BE
+  toggleLikeButton() {
+    this.player.nextTrack();
+    this.player.setVolume(0);
+    setTimeout(() => {
+      this.player.pause();
+      this.player.setVolume(0.5);
+    }, 2000);
+    this.setState({
+      predictionPrompt: !this.state.predictionPrompt,
+    });
+  }
+
+  // BF
+  // Once playlist or queue format is decided
+  // ADD functionality to REMOVE current song from playlist/queue
+  // Send input to BE
+  toggleDislikeButton() {
+    this.player.nextTrack();
+    this.player.setVolume(0);
+    setTimeout(() => {
+      this.player.pause();
+      this.player.setVolume(0.5);
+    }, 2000);
+    this.setState({
+      predictionPrompt: !this.state.predictionPrompt,
+    });
   }
 
   render() {
     const { trackName, artistName, albumName, error, playing } = this.state;
     return (
-      // <Grid
-      //   container
-      //   direction='row'
-      //   justify='center'
-      //   alignItems='center'
-      //   spacing={6}>
       <div className='music-player joyride-player-2'>
         <div className='music-component'>
           <Grid item style={{ maxWidth: '300px' }}>
@@ -278,11 +321,11 @@ class MusicPlayer extends Component {
             direction='column'
             justify='center'
             alignItems='center'>
-            <Grid item className='grid-chart joyride-3'>
+            <Grid item>
               <div style={{ textAlign: 'right' }}>
                 <button
                   onClick={() => this.openAudioDetails()}
-                  className='grid-question'
+                  className='grid-question grid-chart joyride-3'
                   title='Click for Audio Features details'
                   style={{ margin: 0, borderRadius: '25px' }}>
                   ?
@@ -324,54 +367,97 @@ class MusicPlayer extends Component {
 
             {error && <p>Error: {error}</p>}
 
+            {/* When predictionPrompt === true show className='yes-no-active' 
+            On Yes/No click invoke onPlayclick();
+            On Yes/No click enable 'yes-no-active' on Like/Dislike wrapper
+          */}
+
             <Grid
               container
               direction='row'
               justify='center'
               alignItems='center'
               style={{ width: 300, marginBottom: '5%' }}>
-              <div className='joyride-dislike-4'>
-                <button
-                  className='like-dislike dislike'
-                  style={{
-                    background: 'none',
-                    border: 'none',
-                    outline: 'none',
-                  }}
-                  onClick={() => this.onPrevClick()}>
-                  <img
-                    src={Meteor}
-                    alt='Dislike Button'
-                    style={{ maxHeight: 70 }}
-                  />
-                </button>
-                <h5 style={{ textAlign: 'center', marginTop: '10px' }}>
-                  DISLIKE
-                </h5>
+              {/* YES NO */}
+              <div
+                className={
+                  this.state.predictionPrompt
+                    ? 'yes-no-wrapper yes-no-active '
+                    : 'yes-no-wrapper yes-no-deactivated'
+                }>
+                <div className='yes-no-prompt'>
+                  <p>Do you like it?</p>
+                </div>
+                <div className='yes-no-button-wrapper joyride-prediction-7'>
+                  <div className='yes-button-wrapper'>
+                    <button
+                      className='yes-button'
+                      onClick={() => this.togglePredictionPrompt()}>
+                      Yes
+                    </button>
+                  </div>
+                  <div className='no-button-wrapper'>
+                    <button
+                      className='no-button'
+                      onClick={() => this.togglePredictionPrompt()}>
+                      No
+                    </button>
+                  </div>
+                </div>
               </div>
 
+              {/* LIKE DISLIKE */}
               <div
-                style={{ padding: '0px 15px 0px 15px' }}
-                className='joyride-prediction-5'>
-                <h5 style={{ textAlign: 'center' }}>Prediction: </h5>
-                <h3 style={{ textAlign: 'center' }}>100% </h3>
-              </div>
-              <div className='joyride-like-6'>
-                <button
-                  className='like-dislike like'
-                  style={{
-                    background: 'none',
-                    border: 'none',
-                    outline: 'none',
-                  }}
-                  onClick={() => this.onNextClick()}>
-                  <img
-                    src={Rocket}
-                    alt='Like Button'
-                    style={{ maxHeight: 70 }}
-                  />
-                </button>
-                <h5 style={{ textAlign: 'center', marginTop: '10px' }}>LIKE</h5>
+                className={
+                  this.state.predictionPrompt
+                    ? 'like-dislike-wrapper yes-no-deactivated'
+                    : 'like-dislike-wrapper yes-no-active'
+                }>
+                <div className='joyride-dislike-4'>
+                  <button
+                    className='like-dislike dislike joyride-dislike-4'
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      outline: 'none',
+                    }}
+                    onClick={() => this.toggleDislikeButton()}>
+                    <img
+                      src={Meteor}
+                      alt='Dislike Button'
+                      style={{ maxHeight: 70 }}
+                    />
+                  </button>
+                  <h5 style={{ textAlign: 'center', marginTop: '10px' }}>
+                    DISLIKE
+                  </h5>
+                </div>
+
+                <div
+                  style={{ padding: '0px 15px 0px 15px' }}
+                  className='joyride-prediction-5'>
+                  <h5 style={{ textAlign: 'center' }}>Prediction: </h5>
+                  <h3 style={{ textAlign: 'center' }}>100% </h3>
+                </div>
+                <div className='joyride-like-6'>
+                  <button
+                    className='like-dislike like'
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      outline: 'none',
+                    }}
+                    onClick={() => this.toggleLikeButton()}>
+                    <img
+                      src={Rocket}
+                      alt='Like Button'
+                      style={{ maxHeight: 70 }}
+                    />
+                  </button>
+                  <h5 style={{ textAlign: 'center', marginTop: '10px' }}>
+                    LIKE
+                  </h5>
+                </div>
               </div>
             </Grid>
 

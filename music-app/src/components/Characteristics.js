@@ -9,7 +9,7 @@ import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: '100%',
+    maxWidth: '255',
   },
   paper: {
     marginTop: theme.spacing(3),
@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(2),
   },
   table: {
-    minWidth: 650,
+    maxWidth: '255',
   },
 }));
 
@@ -46,25 +46,25 @@ class Characteristics extends React.Component {
     if (key === 0) {
       return 'C';
     } else if (key === 1) {
-      return 'C♯ / D♭';
+      return 'C♯/D♭';
     } else if (key === 2) {
       return 'D';
     } else if (key === 3) {
-      return 'D♯ / E♭';
+      return 'D♯/E♭';
     } else if (key === 4) {
       return 'E';
     } else if (key === 5) {
       return 'F';
     } else if (key === 6) {
-      return 'F♯ / G♭ ';
+      return 'F♯/G♭ ';
     } else if (key === 7) {
       return 'G';
     } else if (key === 8) {
-      return 'G♯ / A♭';
+      return 'G♯/A♭';
     } else if (key === 9) {
       return 'A';
     } else if (key === 10) {
-      return 'A♯ / B♭';
+      return 'A♯/B♭';
     } else if (key === 11) {
       return 'B';
     } else {

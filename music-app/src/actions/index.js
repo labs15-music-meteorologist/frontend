@@ -282,7 +282,7 @@ export const createPlaylist = spotifyId => dispatch => {
   var config = {
     headers: {
       Authorization: 'Bearer ' + localStorage.getItem('token'),
-      ContentType: 'application/json',
+      'Content-Type': 'application/json',
     },
   };
   var playlistName = {

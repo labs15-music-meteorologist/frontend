@@ -14,7 +14,7 @@ import {
   persistUser,
   postDSSong,
   getSeveralTracks,
-  createPlaylist
+  createPlaylist,
 } from '../actions';
 
 import LikedSongs from '../components/dashboard/LikedSongs';
@@ -62,7 +62,7 @@ class Dashboard extends React.Component {
         target: '.joyride-prediction-7',
         content: (
           <div>
-            <img src={JoyExample} />
+            <img src={JoyExample} alt='Click here' />
             <div>
               Click DISLIKE, and we will take this song out of your queue, and
               go to the next song
@@ -75,7 +75,7 @@ class Dashboard extends React.Component {
         target: '.joyride-prediction-7',
         content: (
           <div>
-            <img src={JoyExample} />
+            <img src={JoyExample} alt='Click here' />
             <div>
               The prediction score is our level of confidence that you will like
               this song based on your rating
@@ -88,7 +88,7 @@ class Dashboard extends React.Component {
         target: '.joyride-prediction-7',
         content: (
           <div>
-            <img src={JoyExample} />
+            <img src={JoyExample} alt='Click here' />
             <div>
               Click LIKE, to add the current songt to your liked songs on
               Spotify, and move on to the next song
@@ -103,13 +103,12 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     this.props.getSpotifyAccountDetails();
-    console.log('what is this', this.props)
-    
+    this.props.spotifyUser.id !== undefined &&
+      this.props.createPlaylist(this.props.spotifyUser.id);
   }
 
   componentDidUpdate() {
-    this.props.spotifyUser.id && this.props.persistUser(this.props.spotifyUser); 
-    if(this.props.spotifyUser.id === undefined) { this.props.createPlaylist(this.props.spotifyUser.id)}
+    this.props.spotifyUser.id && this.props.persistUser(this.props.spotifyUser);
   }
 
   openPlaylist() {
@@ -148,6 +147,8 @@ class Dashboard extends React.Component {
     if (this.checkPremiumUser() || this.checkNoIOS()) {
       this.props.history.push('/info');
     }
+
+    console.log('What is this', this.props);
 
     return (
       <div className='dashboard'>
@@ -254,6 +255,6 @@ export default connect(
     persistUser,
     postDSSong,
     getSeveralTracks,
-    createPlaylist
+    createPlaylist,
   },
 )(Dashboard);

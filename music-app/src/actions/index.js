@@ -307,3 +307,36 @@ export const transferPlaybackHere = deviceId => dispatch => {
       });
     });
 };
+
+export const LAUNCH_QUEUE_START = 'LAUNCH_QUEUE_START';
+export const LAUNCH_QUEUE_SUCCESS = 'LAUNCH_QUEUE_SUCCESS';
+export const LAUNCH_QUEUE__FAILURE = 'LAUNCH_QUEUE__FAILURE';
+
+export const launchQueue = songQ => dispatch => {
+  console.log('QUE LAUNCH STARTED');
+  dispatch({
+    type: LAUNCH_QUEUE_START
+  });
+
+  let data = {
+    uris: [songQ]
+  };
+  let config = {
+    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
+  };
+  // https://beta.developer.spotify.com/documentation/web-api/reference/player/transfer-a-users-playback/
+  axios
+    .put('https://api.spotify.com/v1/me/player', data, config)
+    .then(res => {
+      console.log('PLAYER TRANSFERED', res);
+      dispatch({
+        type: LAUNCH_QUEUE_SUCCESS
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch({
+        type: LAUNCH_QUEUE__FAILURE
+      });
+    });
+};

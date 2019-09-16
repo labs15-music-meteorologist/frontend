@@ -8,20 +8,20 @@ const url = process.env.REACT_APP_BACKEND_BASE_URL;
 
 export const getUsers = () => dispatch => {
   dispatch({
-    type: GET_USERS_FETCHING,
+    type: GET_USERS_FETCHING
   });
   axios
     .get(`${url}v1/users`)
     .then(res => {
       dispatch({
         type: GET_USERS_SUCCESS,
-        payload: res.data,
+        payload: res.data
       });
     })
     .catch(err => {
       dispatch({
         type: GET_USERS_FAILURE,
-        payload: err,
+        payload: err
       });
     });
 };
@@ -32,11 +32,11 @@ export const GET_LIKEDSONGS_FAILURE = 'GET_LIKEDSONGS_FAILURE';
 
 export const getlikedSongs = () => dispatch => {
   dispatch({
-    type: GET_LIKEDSONGS_FETCHING,
+    type: GET_LIKEDSONGS_FETCHING
   });
 
   var config = {
-    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
+    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
   };
 
   axios
@@ -44,13 +44,13 @@ export const getlikedSongs = () => dispatch => {
     .then(res => {
       dispatch({
         type: GET_LIKEDSONGS_SUCCESS,
-        payload: res.data,
+        payload: res.data
       });
     })
     .catch(err => {
       dispatch({
         type: GET_LIKEDSONGS_FAILURE,
-        payload: err,
+        payload: err
       });
     });
 };
@@ -61,11 +61,11 @@ export const GET_TRACK_INFO_FAILURE = 'GET_TRACK_INFO_FAILURE';
 
 export const getTrackInfo = id => dispatch => {
   dispatch({
-    type: GET_TRACK_INFO_FETCHING,
+    type: GET_TRACK_INFO_FETCHING
   });
 
   var config = {
-    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
+    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
   };
 
   axios
@@ -73,13 +73,13 @@ export const getTrackInfo = id => dispatch => {
     .then(res => {
       dispatch({
         type: GET_TRACK_INFO_SUCCESS,
-        payload: res.data,
+        payload: res.data
       });
     })
     .catch(err => {
       dispatch({
         type: GET_TRACK_INFO_FAILURE,
-        payload: err.data,
+        payload: err.data
       });
     });
 };
@@ -93,11 +93,11 @@ export const GET_SPOTIFY_PRIVATE_ACCOUNT_DETAILS_FAILURE =
 
 export const getSpotifyAccountDetails = () => dispatch => {
   dispatch({
-    type: GET_SPOTIFY_PRIVATE_ACCOUNT_DETAILS_FETCHING,
+    type: GET_SPOTIFY_PRIVATE_ACCOUNT_DETAILS_FETCHING
   });
 
   var config = {
-    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
+    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
   };
 
   axios
@@ -108,13 +108,13 @@ export const getSpotifyAccountDetails = () => dispatch => {
       }
       dispatch({
         type: GET_SPOTIFY_PRIVATE_ACCOUNT_DETAILS_SUCCESS,
-        payload: res.data,
+        payload: res.data
       });
     })
     .catch(err => {
       dispatch({
         type: GET_SPOTIFY_PRIVATE_ACCOUNT_DETAILS_FAILURE,
-        payload: err,
+        payload: err
       });
     });
 };
@@ -125,23 +125,23 @@ export const GET_CURRENT_SONG_FAILURE = 'GET_CURRENT_SONG_FAILURE';
 
 export const getCurrentSong = () => dispatch => {
   dispatch({
-    type: GET_CURRENT_SONG_FETCHING,
+    type: GET_CURRENT_SONG_FETCHING
   });
   var config = {
-    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
+    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
   };
   axios
     .get('https://api.spotify.com/v1/me/player/currently-playing', config)
     .then(res => {
       dispatch({
         type: GET_CURRENT_SONG_SUCCESS,
-        payload: res.data.item,
+        payload: res.data.item
       });
     })
     .catch(err => {
       dispatch({
         type: GET_CURRENT_SONG_FAILURE,
-        payload: err.data,
+        payload: err.data
       });
     });
 };
@@ -152,7 +152,7 @@ export const PERSIST_USER_FAILURE = 'GET_CURRENT_SONG_FAILURE';
 
 export const persistUser = spotifyUser => dispatch => {
   dispatch({
-    type: PERSIST_USER_FETCHING,
+    type: PERSIST_USER_FETCHING
   });
   axios
     .get(`${url}v1/users/spotify/${spotifyUser.id}`)
@@ -167,7 +167,7 @@ export const persistUser = spotifyUser => dispatch => {
             spotify_product_type: res.data.spotify_product_type,
             display_name: res.data.display_name,
             country: res.data.country,
-            profile_image_url: res.data.profile_image_url,
+            profile_image_url: res.data.profile_image_url
           })
           .then(res => {
             /*  dispatch({ type: PERSIST_USER_SUCCESS, payload: res.data }); */
@@ -191,7 +191,7 @@ export const persistUser = spotifyUser => dispatch => {
             spotify_product_type: spotifyUser.product,
             display_name: spotifyUser.display_name,
             country: spotifyUser.country,
-            profile_image_url: '',
+            profile_image_url: ''
           })
           .then(res => {
             /* dispatch({ type: PERSIST_USER_SUCCESS, payload: res.data }); */
@@ -210,7 +210,7 @@ export const POST_DS_SONGS_FAILURE = 'POST_DS_SONGS_FAILURE';
 
 export const postDSSong = () => dispatch => {
   dispatch({
-    type: POST_DS_SONGS_FETCHING,
+    type: POST_DS_SONGS_FETCHING
   });
   var audio = {
     audio_features: {
@@ -225,8 +225,8 @@ export const postDSSong = () => dispatch => {
       speechiness: 0.0347,
       tempo: 107.095,
       time_signature: 4,
-      valence: 0.149,
-    },
+      valence: 0.149
+    }
   };
   axios
     .post('http://localhost:5000/v1/recommender', audio)
@@ -234,13 +234,13 @@ export const postDSSong = () => dispatch => {
       console.log('UNIQUESONGS', res);
       dispatch({
         type: POST_DS_SONGS_SUCCESS,
-        payload: res.data,
+        payload: res.data
       });
     })
     .catch(err => {
       dispatch({
         type: POST_DS_SONGS_FAILURE,
-        payload: err.data,
+        payload: err.data
       });
     });
 };
@@ -252,10 +252,10 @@ export const GET_SEVERAL_TRACKS_FAILURE = 'GET_SEVERAL_TRACKS_FAILURE';
 export const getSeveralTracks = ids => dispatch => {
   console.log('IT HAS STARTED!', ids);
   dispatch({
-    type: GET_SEVERAL_TRACKS_FETCHING,
+    type: GET_SEVERAL_TRACKS_FETCHING
   });
   var config = {
-    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
+    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
   };
   axios
     .get(`https://api.spotify.com/v1/tracks/?ids=${ids}`, config)
@@ -263,13 +263,47 @@ export const getSeveralTracks = ids => dispatch => {
       console.log('Results', res.data);
       dispatch({
         type: GET_SEVERAL_TRACKS_SUCCESS,
-        payload: res.data,
+        payload: res.data
       });
     })
     .catch(err => {
       dispatch({
         type: GET_SEVERAL_TRACKS_FAILURE,
-        payload: err.data,
+        payload: err.data
+      });
+    });
+};
+
+export const PUT_PLAYER_START = 'PUT_PLAYER_START';
+export const PUT_PLAYER_SUCCESS = 'PUT_PLAYER_SUCCESS';
+export const PUT_PLAYER__FAILURE = 'PUT_PLAYER__FAILURE';
+
+export const transferPlaybackHere = deviceId => dispatch => {
+  console.log('PLAYER TRANSFER STARTED');
+  dispatch({
+    type: PUT_PLAYER_START
+  });
+
+  let data = {
+    device_ids: [deviceId],
+    play: false
+  };
+  let config = {
+    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
+  };
+  // https://beta.developer.spotify.com/documentation/web-api/reference/player/transfer-a-users-playback/
+  axios
+    .put('https://api.spotify.com/v1/me/player', data, config)
+    .then(res => {
+      console.log('PLAYER TRANSFERED', res);
+      dispatch({
+        type: PUT_PLAYER_SUCCESS
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch({
+        type: PUT_PLAYER__FAILURE
       });
     });
 };

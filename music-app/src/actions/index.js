@@ -203,3 +203,70 @@ export const persistUser = spotifyUser => dispatch => {
       /* dispatch({ type: PERSIST_USER_SUCCESS, payload: err }); */
     });
 };
+
+export const POST_DS_SONGS_FETCHING = 'POST_DS_SONGS_FETCHING';
+export const POST_DS_SONGS_SUCCESS = 'POST_DS_SONGS_SUCCESS';
+export const POST_DS_SONGS_FAILURE = 'POST_DS_SONGS_FAILURE';
+
+export const postDSSong = () => dispatch => {
+  dispatch({
+    type: POST_DS_SONGS_FETCHING,
+  });
+  var audio = {
+    audio_features: {
+      acousticness: 0.934,
+      danceability: 0.186,
+      energy: 0.107,
+      instrumentalness: 0,
+      key: 5,
+      liveness: 0.297,
+      loudness: -14.802,
+      mode: 1,
+      speechiness: 0.0347,
+      tempo: 107.095,
+      time_signature: 4,
+      valence: 0.149,
+    },
+  };
+  axios
+    .post('http://localhost:5000/v1/recommender', audio)
+    .then(res => {
+      dispatch({
+        type: POST_DS_SONGS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: POST_DS_SONGS_FAILURE,
+        payload: err.data,
+      });
+    });
+};
+
+export const GET_SEVERAL_TRACKS_FETCHING = 'GET_SEVERAL_TRACKS_FETCHING';
+export const GET_SEVERAL_TRACKS_SUCCESS = 'GET_SEVERAL_TRACKS_SUCCESS';
+export const GET_SEVERAL_TRACKS_FAILURE = 'GET_SEVERAL_TRACKS_FAILURE';
+
+export const getSeveralTracks = ids => dispatch => {
+  dispatch({
+    type: GET_SEVERAL_TRACKS_FETCHING,
+  });
+  var config = {
+    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
+  };
+  axios
+    .get(`https://api.spotify.com/v1/tracks/?ids=${ids}`, config)
+    .then(res => {
+      dispatch({
+        type: GET_SEVERAL_TRACKS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_SEVERAL_TRACKS_FAILURE,
+        payload: err.data,
+      });
+    });
+};

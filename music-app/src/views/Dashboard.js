@@ -12,11 +12,12 @@ import {
   getUsers,
   getSpotifyAccountDetails,
   persistUser,
+  postDSSong,
+  getSeveralTracks,
 } from '../actions';
 
 import LikedSongs from '../components/dashboard/LikedSongs';
 import MusicPlayer from '../components/dashboard/MusicPlayer';
-import AudioDetails from '../components/dashboard/AudioDetails';
 
 // Styling
 import '../App.css';
@@ -124,7 +125,6 @@ class Dashboard extends React.Component {
     localStorage.removeItem('token');
     this.props.history.push('/logout');
   };
-
   checkPremiumUser = () => {
     return this.props.spotifyUser.product &&
       this.props.fetchingSpotifyUser === false &&
@@ -236,9 +236,18 @@ class Dashboard extends React.Component {
 const mapStateToProps = state => ({
   spotifyUser: state.getUsersReducer.spotifyUser,
   fetchingSpotifyUser: state.getUsersReducer.fetchingSpotifyUser,
+  ds_songs: state.queueReducer.ds_songs,
+  several_tracks: state.queueReducer.several_tracks,
 });
 
 export default connect(
   mapStateToProps,
-  { getlikedSongs, getUsers, getSpotifyAccountDetails, persistUser },
+  {
+    getlikedSongs,
+    getUsers,
+    getSpotifyAccountDetails,
+    persistUser,
+    postDSSong,
+    getSeveralTracks,
+  },
 )(Dashboard);

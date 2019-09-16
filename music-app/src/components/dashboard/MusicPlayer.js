@@ -3,9 +3,12 @@ import { connect } from 'react-redux';
 import { Grid } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import List from '@material-ui/core/List';
-import { getCurrentSong, getTrackInfo } from '../../actions';
-
-// Images
+import {
+  getCurrentSong,
+  getTrackInfo,
+  getSeveralTracks,
+  postDSSong,
+} from '../../actions';
 import SkipLeft from '../../assets/skip-left.png';
 import SkipRight from '../../assets/skip-right.png';
 import Rocket from '../../assets/rocket-like.png';
@@ -40,6 +43,7 @@ class MusicPlayer extends Component {
       id: '',
       songFeatures: [],
       collapse: false,
+      currentTrack: '',
       predictionPrompt: true,
     };
     // this will later be set by setInterval
@@ -48,6 +52,7 @@ class MusicPlayer extends Component {
 
   componentDidMount() {
     this.handleLogin();
+    this.props.postDSSong();
   }
 
   handleLogin() {
@@ -95,27 +100,40 @@ class MusicPlayer extends Component {
   }
 
   createEventHandlers() {
-    this.player.on('initialization_error', e => {
-      console.error(e);
-    });
+    this.player.on('initialization_error', e => {});
 
     this.player.on('authentication_error', e => {
-      console.error(e);
       this.setState({ loggedIn: false });
     });
 
-    this.player.on('account_error', e => {
-      console.error(e);
-    });
+    this.player.on('account_error', e => {});
 
-    this.player.on('playback_error', e => {
-      console.error(e);
-    });
+    this.player.on('playback_error', e => {});
 
+    // ONLY WHEN PLAYER STATE CHANGED
     this.player.on('player_state_changed', state => {
       this.onStateChanged(state);
-      this.currentSong();
-      this.getCurrentSongFeatures(this.props.song.id);
+      if (this.props.song.id) {
+        this.getCurrentSongFeatures(this.props.song.id);
+      }
+      // ONLY WHEN NEW SONG
+      if (state.track_window.current_track.id !== this.state.currentTrack) {
+        this.currentSong();
+        /*   if (this.props.song.id) {
+          this.getCurrentSongFeatures(this.props.song.id);
+        } */
+
+        this.setState({ currentTrack: state.track_window.current_track.id });
+        this.player.setVolume(0);
+        setTimeout(() => {
+          this.player.pause();
+          this.player.seek(1);
+          this.player.setVolume(0.5);
+        }, 2000);
+        if (this.props.ds_songs.songs) {
+          this.getDataScienceSongArray();
+        }
+      }
     });
 
     this.player.on('ready', async data => {
@@ -127,6 +145,21 @@ class MusicPlayer extends Component {
       });
       this.transferPlaybackHere();
     });
+  }
+
+  getDataScienceSongArray = () => {
+    this.props.ds_songs.songs &&
+      this.props.getSeveralTracks(
+        this.concatenateSongIds(this.props.ds_songs.songs),
+      );
+  };
+
+  concatenateSongIds(array) {
+    return array.map(song => song.values).join(',');
+  }
+
+  createSpotifyUriArray(array) {
+    return array.map(song => 'spotify:track:' + song.values);
   }
 
   checkForPlayer() {
@@ -148,14 +181,11 @@ class MusicPlayer extends Component {
     }
   }
 
-  async currentSong() {
-    try {
-      await this.props.getCurrentSong();
-      if (this.props.song === undefined) {
-        this.props.getCurrentSong();
-      } else {
-      }
-    } catch (e) {}
+  currentSong() {
+    this.props.getCurrentSong();
+    if (this.props.song === undefined) {
+      this.props.getCurrentSong();
+    }
   }
 
   getCurrentSongFeatures = id => {
@@ -201,8 +231,14 @@ class MusicPlayer extends Component {
         body: JSON.stringify({
           // This is where we will control what music is fed to the user
           // If we want to direct them to a specific playlist,artist or album we will pass in "context_uri" with its respective uri
-          context_uri:
-            'spotify:user:spotifycharts:playlist:37i9dQZEVXbMDoHDwVN2tF', //Directs User to Global Top 50 playlist curated by spotify
+          /* context_uri:  */
+          uris: this.createSpotifyUriArray(this.props.ds_songs.songs),
+          /*  [
+            'spotify:track:5d4zl1SVfjPykq0yfsdil6',
+            'spotify:track:32bZwIZbRYe4ImC7PJ8s2A',
+          ], */
+          /* this.props.ds_songs.songs */
+          /* 'spotify:user:spotifycharts:playlist:37i9dQZEVXbMDoHDwVN2tF' */ //Directs User to Global Top 50 playlist curated by spotify
 
           // In order manipulate the user's queue and feed them a more fluid and unique array of songs we would instead
           // pass an array of song uris through the "uris" key
@@ -259,12 +295,9 @@ class MusicPlayer extends Component {
 
   render() {
     const { trackName, artistName, albumName, error, playing } = this.state;
-
-    // console.log('DEVICE ID ________________', this.state.deviceId);
-
     return (
       <div className='music-player joyride-player-2'>
-        <div classname='music-component'>
+        <div className='music-component'>
           <Grid item style={{ maxWidth: '300px' }}>
             {this.props.imageUrl[1] && (
               <img
@@ -282,7 +315,7 @@ class MusicPlayer extends Component {
           </Grid>
         </div>
 
-        <div classname='music-component music-chart'>
+        <div className='music-component music-chart'>
           <Grid
             container
             direction='column'
@@ -494,7 +527,7 @@ class MusicPlayer extends Component {
           </Grid>
         </div>
 
-        <div classname='music-component'>
+        <div className='music-component'>
           <Characteristics features={this.props.traits} />
         </div>
       </div>
@@ -506,9 +539,11 @@ const mapStateToProps = state => ({
   song: state.currentSongReducer.item,
   imageUrl: state.currentSongReducer.imageUrl,
   traits: state.getTrackInfoReducer,
+  ds_songs: state.queueReducer.ds_songs,
+  several_tracks: state.queueReducer.several_tracks,
 });
 
 export default connect(
   mapStateToProps,
-  { getTrackInfo, getCurrentSong },
+  { getTrackInfo, getCurrentSong, postDSSong, getSeveralTracks },
 )(MusicPlayer);

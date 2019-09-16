@@ -16,7 +16,11 @@ import Rocket from '../../assets/rocket-like.png';
 import Meteor from '../../assets/meteor-dislike.png';
 import Pause from '../../assets/player-stop.png';
 import Play from '../../assets/player-start.png';
+
+// Styles
 import '../../App.css';
+
+// Features
 import LinearDeterminate from '../LinearDeterminate';
 import Chart from '../Chart';
 import Characteristics from '../Characteristics.js';
@@ -39,7 +43,9 @@ class MusicPlayer extends Component {
       duration: 1,
       id: '',
       songFeatures: [],
-      collapse: false
+      collapse: false,
+      currentTrack: '',
+      predictionPrompt: true
     };
     // this will later be set by setInterval
     this.playerCheckInterval = null;
@@ -100,27 +106,40 @@ class MusicPlayer extends Component {
   }
 
   createEventHandlers() {
-    this.player.on('initialization_error', e => {
-      console.error(e);
-    });
+    this.player.on('initialization_error', e => {});
 
     this.player.on('authentication_error', e => {
-      console.error(e);
       this.setState({ loggedIn: false });
     });
 
-    this.player.on('account_error', e => {
-      console.error(e);
-    });
+    this.player.on('account_error', e => {});
 
-    this.player.on('playback_error', e => {
-      console.error(e);
-    });
+    this.player.on('playback_error', e => {});
 
+    // ONLY WHEN PLAYER STATE CHANGED
     this.player.on('player_state_changed', state => {
       this.onStateChanged(state);
-      this.currentSong();
-      this.getCurrentSongFeatures(this.props.song.id);
+      if (this.props.song.id) {
+        this.getCurrentSongFeatures(this.props.song.id);
+      }
+      // ONLY WHEN NEW SONG
+      if (state.track_window.current_track.id !== this.state.currentTrack) {
+        this.currentSong();
+        /*   if (this.props.song.id) {
+          this.getCurrentSongFeatures(this.props.song.id);
+        } */
+
+        this.setState({ currentTrack: state.track_window.current_track.id });
+        this.player.setVolume(0);
+        setTimeout(() => {
+          this.player.pause();
+          this.player.seek(1);
+          this.player.setVolume(0.5);
+        }, 2000);
+        if (this.props.ds_songs.songs) {
+          this.getDataScienceSongArray();
+        }
+      }
     });
 
     this.player.on('ready', async data => {
@@ -129,6 +148,21 @@ class MusicPlayer extends Component {
       await this.setState({ deviceId: device_id, loggedIn: true });
       this.props.transferPlaybackHere(device_id);
     });
+  }
+
+  getDataScienceSongArray = () => {
+    this.props.ds_songs.songs &&
+      this.props.getSeveralTracks(
+        this.concatenateSongIds(this.props.ds_songs.songs)
+      );
+  };
+
+  concatenateSongIds(array) {
+    return array.map(song => song.values).join(',');
+  }
+
+  createSpotifyUriArray(array) {
+    return array.map(song => 'spotify:track:' + song.values);
   }
 
   checkForPlayer() {
@@ -150,23 +184,26 @@ class MusicPlayer extends Component {
     }
   }
 
-  async currentSong() {
-    try {
-      await this.props.getCurrentSong();
-      if (this.props.song === undefined) {
-        this.props.getCurrentSong();
-      } else {
-      }
-    } catch (e) {}
+  currentSong() {
+    this.props.getCurrentSong();
+    if (this.props.song === undefined) {
+      this.props.getCurrentSong();
+    }
   }
 
   getCurrentSongFeatures = id => {
     this.props.getTrackInfo(id);
   };
 
-  // SDK Player Song playback controls
+  // -- SDK Player Song playback controls --
+
   onPrevClick() {
     this.player.previousTrack();
+    this.player.setVolume(0);
+    setTimeout(() => {
+      this.player.pause();
+      this.player.setVolume(0.5);
+    }, 1000);
   }
 
   onPlayClick() {
@@ -175,22 +212,59 @@ class MusicPlayer extends Component {
 
   onNextClick() {
     this.player.nextTrack();
+    this.player.setVolume(0);
+    this.player.playing && this.player.pause();
+    setTimeout(() => {
+      this.player.pause();
+      this.player.setVolume(0.5);
+    }, 2000);
+    this.togglePredictionPrompt();
+  }
+
+  // -- Prediction Prompt Logic --
+
+  togglePredictionPrompt() {
+    this.player.resume();
+    this.player.setVolume(0.5);
+    this.setState({
+      predictionPrompt: !this.state.predictionPrompt
+    });
+  }
+  // BF
+  // Once playlist or queue format is decided
+  // ADD function to add current song to liked songs on spotify
+  // Send input to BE
+  toggleLikeButton() {
+    this.player.nextTrack();
+    this.player.setVolume(0);
+    setTimeout(() => {
+      this.player.pause();
+      this.player.setVolume(0.5);
+    }, 2000);
+    this.setState({
+      predictionPrompt: !this.state.predictionPrompt
+    });
+  }
+
+  // BF
+  // Once playlist or queue format is decided
+  // ADD functionality to REMOVE current song from playlist/queue
+  // Send input to BE
+  toggleDislikeButton() {
+    this.player.nextTrack();
+    this.player.setVolume(0);
+    setTimeout(() => {
+      this.player.pause();
+      this.player.setVolume(0.5);
+    }, 2000);
+    this.setState({
+      predictionPrompt: !this.state.predictionPrompt
+    });
   }
 
   render() {
     const { trackName, artistName, albumName, error, playing } = this.state;
-
-    this.props.ds_songs.songs &&
-      this.props.getSeveralTracks(
-        this.concenateSongIds(this.props.ds_songs.songs)
-      );
     return (
-      // <Grid
-      //   container
-      //   direction='row'
-      //   justify='center'
-      //   alignItems='center'
-      //   spacing={6}>
       <div className='music-player joyride-player-2'>
         <div className='music-component'>
           <Grid item style={{ maxWidth: '300px' }}>
@@ -216,11 +290,11 @@ class MusicPlayer extends Component {
             direction='column'
             justify='center'
             alignItems='center'>
-            <Grid item className='grid-chart joyride-3'>
+            <Grid item>
               <div style={{ textAlign: 'right' }}>
                 <button
                   onClick={() => this.openAudioDetails()}
-                  className='grid-question'
+                  className='grid-question grid-chart joyride-3'
                   title='Click for Audio Features details'
                   style={{ margin: 0, borderRadius: '25px' }}>
                   ?
@@ -262,54 +336,97 @@ class MusicPlayer extends Component {
 
             {error && <p>Error: {error}</p>}
 
+            {/* When predictionPrompt === true show className='yes-no-active' 
+            On Yes/No click invoke onPlayclick();
+            On Yes/No click enable 'yes-no-active' on Like/Dislike wrapper
+          */}
+
             <Grid
               container
               direction='row'
               justify='center'
               alignItems='center'
               style={{ width: 300, marginBottom: '5%' }}>
-              <div className='joyride-dislike-4'>
-                <button
-                  className='like-dislike dislike'
-                  style={{
-                    background: 'none',
-                    border: 'none',
-                    outline: 'none'
-                  }}
-                  onClick={() => this.onPrevClick()}>
-                  <img
-                    src={Meteor}
-                    alt='Dislike Button'
-                    style={{ maxHeight: 70 }}
-                  />
-                </button>
-                <h5 style={{ textAlign: 'center', marginTop: '10px' }}>
-                  DISLIKE
-                </h5>
+              {/* YES NO */}
+              <div
+                className={
+                  this.state.predictionPrompt
+                    ? 'yes-no-wrapper yes-no-active '
+                    : 'yes-no-wrapper yes-no-deactivated'
+                }>
+                <div className='yes-no-prompt'>
+                  <p>Do you like it?</p>
+                </div>
+                <div className='yes-no-button-wrapper joyride-prediction-7'>
+                  <div className='yes-button-wrapper'>
+                    <button
+                      className='yes-button'
+                      onClick={() => this.togglePredictionPrompt()}>
+                      Yes
+                    </button>
+                  </div>
+                  <div className='no-button-wrapper'>
+                    <button
+                      className='no-button'
+                      onClick={() => this.togglePredictionPrompt()}>
+                      No
+                    </button>
+                  </div>
+                </div>
               </div>
 
+              {/* LIKE DISLIKE */}
               <div
-                style={{ padding: '0px 15px 0px 15px' }}
-                className='joyride-prediction-5'>
-                <h5 style={{ textAlign: 'center' }}>Prediction: </h5>
-                <h3 style={{ textAlign: 'center' }}>100% </h3>
-              </div>
-              <div className='joyride-like-6'>
-                <button
-                  className='like-dislike like'
-                  style={{
-                    background: 'none',
-                    border: 'none',
-                    outline: 'none'
-                  }}
-                  onClick={() => this.onNextClick()}>
-                  <img
-                    src={Rocket}
-                    alt='Like Button'
-                    style={{ maxHeight: 70 }}
-                  />
-                </button>
-                <h5 style={{ textAlign: 'center', marginTop: '10px' }}>LIKE</h5>
+                className={
+                  this.state.predictionPrompt
+                    ? 'like-dislike-wrapper yes-no-deactivated'
+                    : 'like-dislike-wrapper yes-no-active'
+                }>
+                <div className='joyride-dislike-4'>
+                  <button
+                    className='like-dislike dislike joyride-dislike-4'
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      outline: 'none'
+                    }}
+                    onClick={() => this.toggleDislikeButton()}>
+                    <img
+                      src={Meteor}
+                      alt='Dislike Button'
+                      style={{ maxHeight: 70 }}
+                    />
+                  </button>
+                  <h5 style={{ textAlign: 'center', marginTop: '10px' }}>
+                    DISLIKE
+                  </h5>
+                </div>
+
+                <div
+                  style={{ padding: '0px 15px 0px 15px' }}
+                  className='joyride-prediction-5'>
+                  <h5 style={{ textAlign: 'center' }}>Prediction: </h5>
+                  <h3 style={{ textAlign: 'center' }}>100% </h3>
+                </div>
+                <div className='joyride-like-6'>
+                  <button
+                    className='like-dislike like'
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      outline: 'none'
+                    }}
+                    onClick={() => this.toggleLikeButton()}>
+                    <img
+                      src={Rocket}
+                      alt='Like Button'
+                      style={{ maxHeight: 70 }}
+                    />
+                  </button>
+                  <h5 style={{ textAlign: 'center', marginTop: '10px' }}>
+                    LIKE
+                  </h5>
+                </div>
               </div>
             </Grid>
 
@@ -346,12 +463,14 @@ class MusicPlayer extends Component {
                   onClick={() => this.onPlayClick()}>
                   {playing ? (
                     <img
+                      ref={input => (this.inputElement = input)}
                       src={Pause}
                       alt='White icon to pause a song.'
                       style={{ maxHeight: 35 }}
                     />
                   ) : (
                     <img
+                      /* ref={this.simulateClick} */
                       src={Play}
                       alt='White icon to start a pause song.'
                       style={{ maxHeight: 35 }}

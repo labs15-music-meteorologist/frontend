@@ -12,13 +12,18 @@ import {
   getUsers,
   getSpotifyAccountDetails,
   persistUser,
+  postDSSong,
+  getSeveralTracks,
 } from '../actions';
 
 import LikedSongs from '../components/dashboard/LikedSongs';
 import MusicPlayer from '../components/dashboard/MusicPlayer';
-import AudioDetails from '../components/dashboard/AudioDetails';
 
+// Styling
 import '../App.css';
+
+// Images
+import JoyExample from '../assets/dislike.PNG';
 
 class Dashboard extends React.Component {
   state = {
@@ -33,31 +38,63 @@ class Dashboard extends React.Component {
         target: '.joyride-player-2',
         content:
           'Here you can view what song you will be rating and the characteristics for that song',
+        placement: 'center',
       },
       {
         target: '.joyride-3',
         content: 'Tap here to view more details on each of the characteristics',
         placement: 'right',
       },
-      // {
-      //   target: '.joyride-prediction-5',
-      //   content:
-      //     'Review the characteristics and let us know if you think you would like this song, when you decide the music will start playing',
-      // },
       {
-        target: '.joyride-dislike-4',
-        content:
-          'Click this button, and we will take this song out of your queue, and go to the next song',
+        target: '.joyride-prediction-7',
+        content: (
+          <div>
+            <div>
+              After you review the chart, click YES or NO. When you decide the
+              music will start playing
+            </div>
+          </div>
+        ),
+      },
+
+      {
+        target: '.joyride-prediction-7',
+        content: (
+          <div>
+            <img src={JoyExample} />
+            <div>
+              Click DISLIKE, and we will take this song out of your queue, and
+              go to the next song
+            </div>
+          </div>
+        ),
         placement: 'right',
       },
       {
-        target: '.joyride-prediction-5',
-        content:
-          'This our level of confidence that you will like this song based on your rating',
+        target: '.joyride-prediction-7',
+        content: (
+          <div>
+            <img src={JoyExample} />
+            <div>
+              The prediction score is our level of confidence that you will like
+              this song based on your rating
+            </div>
+          </div>
+        ),
+        placement: 'right',
       },
       {
-        target: '.joyride-like-6',
-        content: 'Click to add to your liked songs on Spotify, and move you to the next song',
+        target: '.joyride-prediction-7',
+        content: (
+          <div>
+            <img src={JoyExample} />
+            <div>
+              Click LIKE, to add the current songt to your liked songs on
+              Spotify, and move on to the next song
+            </div>
+          </div>
+        ),
+        placement: 'right',
       },
     ],
     popout: false,
@@ -88,7 +125,6 @@ class Dashboard extends React.Component {
     localStorage.removeItem('token');
     this.props.history.push('/logout');
   };
-
   checkPremiumUser = () => {
     return this.props.spotifyUser.product &&
       this.props.fetchingSpotifyUser === false &&
@@ -200,9 +236,18 @@ class Dashboard extends React.Component {
 const mapStateToProps = state => ({
   spotifyUser: state.getUsersReducer.spotifyUser,
   fetchingSpotifyUser: state.getUsersReducer.fetchingSpotifyUser,
+  ds_songs: state.queueReducer.ds_songs,
+  several_tracks: state.queueReducer.several_tracks,
 });
 
 export default connect(
   mapStateToProps,
-  { getlikedSongs, getUsers, getSpotifyAccountDetails, persistUser },
+  {
+    getlikedSongs,
+    getUsers,
+    getSpotifyAccountDetails,
+    persistUser,
+    postDSSong,
+    getSeveralTracks,
+  },
 )(Dashboard);

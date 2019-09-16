@@ -6,14 +6,14 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 class LinearDeterminate extends Component {
   state = {
     position: 0,
-    duration: 1
+    duration: 1,
   };
   checkPlayer = (player, song) => {
     if (player !== undefined && song.length !== 0) {
       player.getCurrentState().then(state => {
         if (!state) {
           console.error(
-            'User is not playing music through the Web Playback SDK'
+            'User is not playing music through the Web Playback SDK',
           );
           return;
         }
@@ -28,7 +28,7 @@ class LinearDeterminate extends Component {
     for (; song_posistion < song_length; ) {
       this.setState({
         duration: song_length,
-        position: song_posistion
+        position: song_posistion,
       });
       let progress = (song_posistion / song_length) * 100;
       return progress;
@@ -40,15 +40,15 @@ class LinearDeterminate extends Component {
     const song = this.props.song;
     this.checkPlayer(player, song);
     const tvalue = Math.floor(
-      (this.state.position / this.state.duration) * 100
+      (this.state.position / this.state.duration) * 100,
     );
     const minutesPosition = Math.floor(this.state.position / 60000);
     const remainingSecondsPosition = Math.floor(
-      this.state.position / 1000 - minutesPosition * 60
+      this.state.position / 1000 - minutesPosition * 60,
     );
     const minutesDuration = Math.floor(this.state.duration / 60000);
     const remainingSecondsDuration = Math.floor(
-      this.state.duration / 1000 - minutesDuration * 60
+      this.state.duration / 1000 - minutesDuration * 60,
     );
     return (
       <div style={{ width: '10rem' }}>
@@ -73,10 +73,10 @@ class LinearDeterminate extends Component {
 }
 
 const mapStateToProps = state => ({
-  song: state.currentSongReducer.item
+  song: state.currentSongReducer.item,
 });
 
 export default connect(
   mapStateToProps,
-  { getCurrentSong }
+  { getCurrentSong },
 )(LinearDeterminate);

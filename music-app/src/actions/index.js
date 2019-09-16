@@ -229,7 +229,7 @@ export const postDSSong = () => dispatch => {
     },
   };
   axios
-    .post('http://localhost:5000/v1/recommender', audio)
+    .post(`${url}v1/recommender`, audio)
     .then(res => {
       dispatch({
         type: POST_DS_SONGS_SUCCESS,

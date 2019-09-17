@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { connect } from 'react-redux';
 import { Grid } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
@@ -9,6 +10,7 @@ import {
   getSeveralTracks,
   postDSSong,
   createPlaylist,
+  addToPlaylist,
 } from '../../actions';
 import SkipLeft from '../../assets/skip-left.png';
 import SkipRight from '../../assets/skip-right.png';
@@ -53,7 +55,73 @@ class MusicPlayer extends Component {
 
   componentDidMount() {
     this.handleLogin();
-    this.props.postDSSong();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.song_id !== prevProps.song_id) {
+      this.dsDelivery();
+      console.log('SONG ID', this.props.song_id);
+    }
+
+    if (this.props.song.id === null || this.props.song.id !== prevProps.song.id){
+      this.props.addToPlaylist(
+        {
+          uris: [
+            'spotify:track:5d4zl1SVfjPykq0yfsdil6',
+            'spotify:track:32bZwIZbRYe4ImC7PJ8s2A',
+          ],
+        },
+        this.props.playlistId,
+      );
+    
+    }
+
+    // spotify:track:5d4zl1SVfjPykq0yfsdil6, spotify:track:32bZwIZbRYe4ImC7PJ8s2A
+  }
+
+  async dsDelivery() {
+    var config = {
+      headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
+    };
+
+    let response = await axios.get(
+      `https://api.spotify.com/v1/audio-features/${this.props.song_id}`,
+      config,
+    );
+    if (response.status === 200) {
+      let {
+        acousticness,
+        danceability,
+        energy,
+        instrumentalness,
+        key,
+        liveness,
+        loudness,
+        mode,
+        speechiness,
+        tempo,
+        time_signature,
+        valence,
+      } = response.data;
+      let obj = {
+        audio_features: {
+          acousticness,
+          danceability,
+          energy,
+          instrumentalness,
+          key,
+          liveness,
+          loudness,
+          mode,
+          speechiness,
+          tempo,
+          time_signature,
+          valence,
+        },
+      };
+      this.props.postDSSong(obj);
+      console.log('RESPONSE', response.data);
+    }
   }
 
   handleLogin() {
@@ -150,10 +218,8 @@ class MusicPlayer extends Component {
   }
 
   getDataScienceSongArray = () => {
-    this.props.ds_songs.songs &&
-      this.props.getSeveralTracks(
-        this.concatenateSongIds(this.props.ds_songs.songs),
-      );
+    this.props.ds_songs &&
+      this.props.getSeveralTracks(this.concatenateSongIds(this.props.ds_songs));
   };
 
   concatenateSongIds(array) {
@@ -161,6 +227,7 @@ class MusicPlayer extends Component {
   }
 
   createSpotifyUriArray(array) {
+    console.log('ARRAY', array);
     return array.map(song => 'spotify:track:' + song.values);
   }
 
@@ -234,7 +301,7 @@ class MusicPlayer extends Component {
           // This is where we will control what music is fed to the user
           // If we want to direct them to a specific playlist,artist or album we will pass in "context_uri" with its respective uri
           /* context_uri:  */
-          uris: this.createSpotifyUriArray(this.props.ds_songs.songs),
+          uris: this.createSpotifyUriArray(this.props.ds_songs),
           /*  [
             'spotify:track:5d4zl1SVfjPykq0yfsdil6',
             'spotify:track:32bZwIZbRYe4ImC7PJ8s2A',
@@ -297,6 +364,7 @@ class MusicPlayer extends Component {
 
   render() {
     const { trackName, artistName, albumName, error, playing } = this.state;
+
     return (
       <div className='music-player joyride-player-2'>
         <div className='music-component'>
@@ -541,9 +609,10 @@ const mapStateToProps = state => ({
   song: state.currentSongReducer.item,
   imageUrl: state.currentSongReducer.imageUrl,
   traits: state.getTrackInfoReducer,
-  ds_songs: state.queueReducer.ds_songs,
+  ds_songs: state.queueReducer.ds_songs.songs,
   several_tracks: state.queueReducer.several_tracks,
-  playlistId: state.createPlaylistReducer,
+  playlistId: state.createPlaylistReducer.playlistId,
+  song_id: state.likedSongsReducer.song_id,
 });
 
 export default connect(
@@ -554,5 +623,6 @@ export default connect(
     postDSSong,
     getSeveralTracks,
     createPlaylist,
+    addToPlaylist,
   },
 )(MusicPlayer);

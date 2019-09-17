@@ -33,7 +33,7 @@ class LikedSongs extends React.Component {
     // console.log('PREVIOUS PROPS', prevProps);
 
     if (this.state.getList === false) {
-      this.props.getPlaylist('4SzEKPufT9vDk1t3yWwlR4');
+      this.props.getPlaylist(this.props.playlistId);
       this.setState({
         getList: true,
       });

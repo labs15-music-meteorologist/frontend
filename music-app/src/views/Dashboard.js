@@ -104,6 +104,7 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     this.props.getSpotifyAccountDetails();
+    this.props.getlikedSongs();
   }
 
   componentDidUpdate(prevProps) {

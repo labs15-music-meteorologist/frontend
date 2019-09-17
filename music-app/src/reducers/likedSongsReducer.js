@@ -5,7 +5,7 @@ import {
 } from '../actions';
 
 const initialState = {
-  songs: [],
+  song_id: '',
   fetchingLikedSongs: false,
   fetchingLikedSongsError: '',
 };
@@ -21,7 +21,7 @@ const likedSongsReducer = (state = initialState, action) => {
     case GET_LIKEDSONGS_SUCCESS:
       return {
         ...state,
-        songs: action.payload.items,
+        song_id: action.payload,
         fetchingLikedSongs: false,
         fetchingLikedSongsError: '',
       };

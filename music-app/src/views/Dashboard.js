@@ -114,9 +114,6 @@ class Dashboard extends React.Component {
     // console.log('Current Props', this.props);
 
     if (this.state.playlistCreated === false && this.props.spotifyUser.id) {
-      console.log('This.state', this.state.playlistCreated);
-      console.log('This.ID', this.props.spotifyUser.id);
-
       this.props.persistUser(this.props.spotifyUser);
       this.props.createPlaylist(this.props.spotifyUser.id);
       this.setState({
@@ -161,8 +158,7 @@ class Dashboard extends React.Component {
     if (this.checkPremiumUser() || this.checkNoIOS()) {
       this.props.history.push('/info');
     }
-
-    console.log('What is this', this.props);
+    console.log('WHAT IS THIS', this.props);
 
     return (
       <div className='dashboard'>

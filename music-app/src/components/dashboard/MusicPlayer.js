@@ -161,7 +161,8 @@ class MusicPlayer extends Component {
   }
 
   createSpotifyUriArray(array) {
-    return array.map(song => 'spotify:track:' + song.values);
+    console.log("164 array",array)
+    // return array.map(song => 'spotify:track:' + song.values);
   }
 
   checkForPlayer() {
@@ -369,7 +370,7 @@ class MusicPlayer extends Component {
 
             {error && <p>Error: {error}</p>}
 
-            {/* When predictionPrompt === true show className='yes-no-active' 
+            {/* When predictionPrompt === true show className='yes-no-active'
             On Yes/No click invoke onPlayclick();
             On Yes/No click enable 'yes-no-active' on Like/Dislike wrapper
           */}

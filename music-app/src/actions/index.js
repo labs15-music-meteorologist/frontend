@@ -26,6 +26,31 @@ export const getUsers = () => dispatch => {
     });
 };
 
+export const GET_LOGGED_IN_FETCHING = 'GET_LOGGED_IN_FETCHING';
+export const GET_LOGGED_IN_SUCCESS = 'GET_LOGGED_IN_SUCCESS';
+export const GET_LOGGED_IN_FAILURE = 'GET_LOGGED_IN_FAILURE';
+
+export const getCurrentUser = spotifyId => dispatch => {
+  console.log('GETCURRENTUSER', spotifyId);
+  dispatch({
+    type: GET_LOGGED_IN_FETCHING,
+  });
+  axios
+    .get(`${url}v1/users/spotify/${spotifyId}`)
+    .then(res => {
+      dispatch({
+        type: GET_LOGGED_IN_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_LOGGED_IN_FAILURE,
+        payload: err,
+      });
+    });
+};
+
 export const GET_LIKEDSONGS_FETCHING = 'GET_LIKEDSONGS_FETCHING';
 export const GET_LIKEDSONGS_SUCCESS = 'GET_LIKEDSONGS_SUCCESS';
 export const GET_LIKEDSONGS_FAILURE = 'GET_LIKEDSONGS_FAILURE';

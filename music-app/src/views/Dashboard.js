@@ -15,6 +15,7 @@ import {
   postDSSong,
   getSeveralTracks,
   createPlaylist,
+  getCurrentUser,
 } from '../actions';
 
 import LikedSongs from '../components/dashboard/LikedSongs';
@@ -100,6 +101,7 @@ class Dashboard extends React.Component {
     ],
     popout: false,
     playlistCreated: false,
+    userDataFetching: false,
   };
 
   componentDidMount() {
@@ -112,9 +114,24 @@ class Dashboard extends React.Component {
     // console.log('Previous Props', prevProps);
     // console.log('Current Props', this.props);
 
+    // Check to see if a MM playlist has been saved to BE user
+    // -- in order to do this pull in user data from BE specifically playlist.id
+
+    // If not - Create a playlist and save to BE user table
+    // If it has - do nothing
+
+    if (this.state.userDataFetching === false && this.props.spotifyUser.id) {
+      this.props.getCurrentUser(this.props.spotifyUser.id);
+      this.setState({
+        userDataFetching: true,
+      });
+    }
+
+    // if (this.props.currentUser.playlist)
     if (this.state.playlistCreated === false && this.props.spotifyUser.id) {
       console.log('This.state', this.state.playlistCreated);
       console.log('This.ID', this.props.spotifyUser.id);
+      console.log('dashboard props', this.props);
 
       this.props.persistUser(this.props.spotifyUser);
       this.props.createPlaylist(this.props.spotifyUser.id);
@@ -141,6 +158,7 @@ class Dashboard extends React.Component {
     localStorage.removeItem('token');
     this.props.history.push('/logout');
   };
+
   checkPremiumUser = () => {
     return this.props.spotifyUser.product &&
       this.props.fetchingSpotifyUser === false &&
@@ -161,7 +179,10 @@ class Dashboard extends React.Component {
       this.props.history.push('/info');
     }
 
+    // console.log('getSpotifyAccountDetails ! _ 0', this.props);
+
     console.log('What is this', this.props);
+    console.log('current USER OBJ ______', this.props.currentUser);
 
     return (
       <div className='dashboard'>
@@ -253,6 +274,7 @@ class Dashboard extends React.Component {
 
 const mapStateToProps = state => ({
   spotifyUser: state.getUsersReducer.spotifyUser,
+  currentUser: state.getCurrentUserReducer.currentUser,
   fetchingSpotifyUser: state.getUsersReducer.fetchingSpotifyUser,
   ds_songs: state.queueReducer.ds_songs,
   several_tracks: state.queueReducer.several_tracks,
@@ -269,5 +291,6 @@ export default connect(
     postDSSong,
     getSeveralTracks,
     createPlaylist,
+    getCurrentUser,
   },
 )(Dashboard);

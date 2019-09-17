@@ -281,15 +281,15 @@ export const createPlaylist = spotifyId => dispatch => {
   });
   var config = {
     headers: {
-      'Authorization': 'Bearer ' + localStorage.getItem('token'),
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
       'Content-Type': 'application/json',
-    }
+    },
   };
   var playlistName = {
     name: 'Music Meteorologist Created 2.0',
     description: 'A playlist of songs curated by Music Meteorologist',
   };
-  console.log("spotifyId",spotifyId)
+  console.log('spotifyId', spotifyId);
   axios
     .post(
       `https://api.spotify.com/v1/users/${spotifyId}/playlists`,
@@ -349,19 +349,22 @@ export const removeTrack = (playlistId, currentlyPlayingSong) => dispatch => {
   });
 
   var config = {
-    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
+    headers: {
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+      'Content-Type': 'application/json',
+    },
+  };
+  var body = {
+    tracks: [{ uri: `spotify:track:${currentlyPlayingSong}` }]
   };
 
-  var body = {
-    "tracks": [{
-      
-    }]
-  }
-
   axios
-    .get(
-      `https://api.spotify.com/v1/playlists/${playlistId}`, config
-      )
+    .delete(
+      `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
+      config,
+      body,
+      
+    )
     .then(res => {
       dispatch({
         type: REMOVE_TRACK_SUCCESS,
@@ -375,3 +378,4 @@ export const removeTrack = (playlistId, currentlyPlayingSong) => dispatch => {
       });
     });
 };
+

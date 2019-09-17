@@ -15,6 +15,7 @@ import {
   postDSSong,
   getSeveralTracks,
   createPlaylist,
+  removeTrack,
 } from '../actions';
 
 import LikedSongs from '../components/dashboard/LikedSongs';
@@ -104,6 +105,7 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     this.props.getSpotifyAccountDetails();
+    
   }
 
   componentDidUpdate(prevProps) {
@@ -160,9 +162,10 @@ class Dashboard extends React.Component {
     if (this.checkPremiumUser() || this.checkNoIOS()) {
       this.props.history.push('/info');
     }
-
     console.log('What is this', this.props);
 
+    
+    
     return (
       <div className='dashboard'>
         <Joyride
@@ -257,6 +260,7 @@ const mapStateToProps = state => ({
   ds_songs: state.queueReducer.ds_songs,
   several_tracks: state.queueReducer.several_tracks,
   playlistId: state.createPlaylistReducer.playlistId,
+  status: state.removeTrackReducer.status
 });
 
 export default connect(
@@ -269,5 +273,6 @@ export default connect(
     postDSSong,
     getSeveralTracks,
     createPlaylist,
+    removeTrack
   },
 )(Dashboard);

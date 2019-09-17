@@ -9,6 +9,7 @@ import {
   getSeveralTracks,
   postDSSong,
   createPlaylist,
+  removeTrack
 } from '../../actions';
 import SkipLeft from '../../assets/skip-left.png';
 import SkipRight from '../../assets/skip-right.png';
@@ -54,6 +55,7 @@ class MusicPlayer extends Component {
   componentDidMount() {
     this.handleLogin();
     this.props.postDSSong();
+    
   }
 
   handleLogin() {
@@ -161,8 +163,7 @@ class MusicPlayer extends Component {
   }
 
   createSpotifyUriArray(array) {
-    console.log("164 array",array)
-    // return array.map(song => 'spotify:track:' + song.values);
+    return array.map(song => 'spotify:track:' + song.values);
   }
 
   checkForPlayer() {
@@ -285,12 +286,14 @@ class MusicPlayer extends Component {
   // ADD functionality to REMOVE current song from playlist/queue
   // Send input to BE
   toggleDislikeButton() {
+    
     this.player.nextTrack();
     this.player.setVolume(0);
     setTimeout(() => {
       this.player.pause();
       this.player.setVolume(0.5);
     }, 2000);
+    this.props.removeTrack('4SzEKPufT9vDk1t3yWwlR4', '1n8wr8tRHs5jmBxNWXedcn');
     this.setState({
       predictionPrompt: !this.state.predictionPrompt,
     });
@@ -298,6 +301,7 @@ class MusicPlayer extends Component {
 
   render() {
     const { trackName, artistName, albumName, error, playing } = this.state;
+    console.log('MYPROPS', this.props)
     return (
       <div className='music-player joyride-player-2'>
         <div className='music-component'>
@@ -545,6 +549,7 @@ const mapStateToProps = state => ({
   ds_songs: state.queueReducer.ds_songs,
   several_tracks: state.queueReducer.several_tracks,
   playlistId: state.createPlaylistReducer,
+  status: state.removeTrackReducer.status
 });
 
 export default connect(
@@ -555,5 +560,6 @@ export default connect(
     postDSSong,
     getSeveralTracks,
     createPlaylist,
+    removeTrack
   },
 )(MusicPlayer);

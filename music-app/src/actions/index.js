@@ -11,7 +11,7 @@ export const getUsers = () => dispatch => {
     type: GET_USERS_FETCHING
   });
   axios
-    .get(`${url}v1/users`)
+    .get(`${url}/v1/users`)
     .then(res => {
       dispatch({
         type: GET_USERS_SUCCESS,
@@ -155,11 +155,11 @@ export const persistUser = spotifyUser => dispatch => {
     type: PERSIST_USER_FETCHING
   });
   axios
-    .get(`${url}v1/users/spotify/${spotifyUser.id}`)
+    .get(`${url}/v1/users/spotify/${spotifyUser.id}`)
     .then(res => {
       if (res.status === 200) {
         axios
-          .put(`${url}v1/users/${res.data.id}`, {
+          .put(`${url}/v1/users/${res.data.id}`, {
             email: res.data.email,
             spotify_user_id: res.data.spotify_user_id,
             user_spotify_api_key: localStorage.getItem('token'),
@@ -183,7 +183,7 @@ export const persistUser = spotifyUser => dispatch => {
     .catch(err => {
       if (err.message === 'Request failed with status code 404') {
         axios
-          .post(`${url}v1/users/register`, {
+          .post(`${url}/v1/users/register`, {
             email: spotifyUser.email,
             spotify_user_id: spotifyUser.id,
             user_spotify_api_key: localStorage.getItem('token'),
@@ -213,7 +213,7 @@ export const postDSSong = song => dispatch => {
     type: POST_DS_SONGS_FETCHING
   });
   axios
-    .post(`${url}v1/recommender`, song)
+    .post(`${url}/v1/recommender`, song)
     .then(res => {
       dispatch({
         type: POST_DS_SONGS_SUCCESS,

@@ -4,14 +4,14 @@ import {
   POST_DS_SONGS_FAILURE,
   GET_SEVERAL_TRACKS_FETCHING,
   GET_SEVERAL_TRACKS_SUCCESS,
-  GET_SEVERAL_TRACKS_FAILURE,
+  GET_SEVERAL_TRACKS_FAILURE
 } from '../actions';
 
 const initialState = {
   ds_songs: [],
-  postingingSongError: '',
+  postingError: '',
   several_tracks: [],
-  fetchingError: '',
+  fetchingError: ''
 };
 
 const queueReducer = (state = initialState, action) => {
@@ -19,35 +19,35 @@ const queueReducer = (state = initialState, action) => {
     case POST_DS_SONGS_FETCHING:
       return {
         ...state,
-        postingingSongError: '',
+        postingSongError: ''
       };
     case POST_DS_SONGS_SUCCESS:
       return {
         ...state,
         ds_songs: action.payload,
-        postingingSongError: '',
+        postingSongError: ''
       };
     case POST_DS_SONGS_FAILURE:
       return {
         ...state,
-        postingingSongError: action.payload,
+        postingSongError: action.payload
       };
 
     case GET_SEVERAL_TRACKS_FETCHING:
       return {
         ...state,
-        fetchingError: '',
+        fetchingError: ''
       };
     case GET_SEVERAL_TRACKS_SUCCESS:
       return {
         ...state,
         several_tracks: action.payload,
-        fetchingError: '',
+        fetchingError: ''
       };
     case GET_SEVERAL_TRACKS_FAILURE:
       return {
         ...state,
-        fetchingError: action.payload,
+        fetchingError: action.payload
       };
 
     default:

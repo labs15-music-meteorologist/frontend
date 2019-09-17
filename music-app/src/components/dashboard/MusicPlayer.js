@@ -77,7 +77,38 @@ class MusicPlayer extends Component {
       config
     );
     if (response.status == 200) {
-      console.log(response);
+      let {
+        acousticness,
+        danceability,
+        energy,
+        instrumentalness,
+        key,
+        liveness,
+        loudness,
+        mode,
+        speechiness,
+        tempo,
+        time_signature,
+        valence
+      } = response.data;
+      let obj = {
+        audio_features: {
+          acousticness,
+          danceability,
+          energy,
+          instrumentalness,
+          key,
+          liveness,
+          loudness,
+          mode,
+          speechiness,
+          tempo,
+          time_signature,
+          valence
+        }
+      };
+      console.log('DS PACKAGE', obj);
+      this.props.postDSSong(obj);
     }
   }
 

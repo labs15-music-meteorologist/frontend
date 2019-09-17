@@ -339,3 +339,40 @@ export const getPlaylist = playlistId => dispatch => {
       });
     });
 };
+
+export const REMOVE_TRACK_FETCHING = 'REMOVE_TRACK_FETCHING';
+export const REMOVE_TRACK_SUCCESS = 'REMOVE_TRACK_SUCCESS';
+export const REMOVE_TRACK_FAILURE = 'REMOVE_TRACK_FAILURE';
+
+export const removeTrack = (playlistId, currentlyPlayingSong) => dispatch => {
+  dispatch({
+    type: REMOVE_TRACK_FETCHING,
+  });
+
+  var config = {
+    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
+  };
+
+  var body = {
+    "tracks": [{
+      
+    }]
+  }
+
+  axios
+    .get(
+      `https://api.spotify.com/v1/playlists/${playlistId}`, config
+      )
+    .then(res => {
+      dispatch({
+        type: REMOVE_TRACK_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: REMOVE_TRACK_FAILURE,
+        payload: err,
+      });
+    });
+};

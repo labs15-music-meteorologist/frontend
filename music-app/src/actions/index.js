@@ -338,36 +338,6 @@ export const getPlaylist = playlistId => dispatch => {
       });
     });
 };
-export const GET_PLAYLIST_FETCHING = 'GET_PLAYLIST_FETCHING';
-export const GET_PLAYLIST_SUCCESS = 'GET_PLAYLIST_SUCCESS';
-export const GET_PLAYLIST_FAILURE = 'GET_PLAYLIST_FAILURE';
-
-export const getPlaylist = playlistId => dispatch => {
-  dispatch({
-    type: GET_PLAYLIST_FETCHING,
-  });
-
-  var config = {
-    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
-  };
-
-  axios
-    .get(
-      `https://api.spotify.com/v1/playlists/${playlistId}`, config
-      )
-    .then(res => {
-      dispatch({
-        type: GET_PLAYLIST_SUCCESS,
-        payload: res.data,
-      });
-    })
-    .catch(err => {
-      dispatch({
-        type: GET_PLAYLIST_FAILURE,
-        payload: err,
-      });
-    });
-};
 
 export const REMOVE_TRACK_FETCHING = 'REMOVE_TRACK_FETCHING';
 export const REMOVE_TRACK_SUCCESS = 'REMOVE_TRACK_SUCCESS';

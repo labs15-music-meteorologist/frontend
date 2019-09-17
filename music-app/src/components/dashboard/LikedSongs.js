@@ -4,11 +4,7 @@ import { connect } from 'react-redux';
 /* import { Mixpanel } from '../analytics/Mixpanel'; */
 import { Grid, Typography } from '@material-ui/core';
 
-<<<<<<< HEAD
-import { getlikedSongs, getPlaylist, getUsers,getSpotifyAccountDetails } from '../../actions';
-=======
 import { getlikedSongs, getUsers, getPlaylist } from '../../actions';
->>>>>>> 52c545fce36f7b2144a88b47ec51f0f75f641a2f
 import Song from './Song.js';
 
 class LikedSongs extends React.Component {
@@ -16,20 +12,8 @@ class LikedSongs extends React.Component {
     getList: false,
   };
   componentDidMount() {
-<<<<<<< HEAD
-    // if (this.props){
-      // console.log("Spotify User",this.props.spotifyUser.id)
-    // }
-
-    // console.log(this.props.getlikedSongs());
-    // this.props.getUsers();
-    // this.props.getSpotifyAccountDetails()
-    this.props.getPlaylist('37i9dQZF1DWUmZGnAEphmT')
-
-=======
     // this.props.getlikedSongs();
     this.props.getUsers();
->>>>>>> 52c545fce36f7b2144a88b47ec51f0f75f641a2f
     // this.props.mixpanel.track('Spotify Login'); // Removed temp tracking
 
     // Example tracking once implemented

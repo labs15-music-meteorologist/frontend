@@ -5,6 +5,7 @@ import getTrackInfoReducer from './getTrackInfoReducer';
 import currentSongReducer from './getCurrentSongReducer';
 import queueReducer from './queueReducer';
 import createPlaylistReducer from './createPlaylistReducer';
+import getPlaylistReducer from './getPlaylistReducer';
 
 export default combineReducers({
   getUsersReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
   getTrackInfoReducer,
   currentSongReducer,
   queueReducer,
-  createPlaylistReducer
+  createPlaylistReducer,
+  getPlaylistReducer,
 });

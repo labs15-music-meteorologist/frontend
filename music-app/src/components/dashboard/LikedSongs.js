@@ -4,12 +4,15 @@ import { connect } from 'react-redux';
 /* import { Mixpanel } from '../analytics/Mixpanel'; */
 import { Grid, Typography } from '@material-ui/core';
 
-import { getlikedSongs, getUsers } from '../../actions';
+import { getlikedSongs, getUsers, getPlaylist } from '../../actions';
 import Song from './Song.js';
 
 class LikedSongs extends React.Component {
+  state = {
+    getList: false,
+  };
   componentDidMount() {
-    this.props.getlikedSongs();
+    // this.props.getlikedSongs();
     this.props.getUsers();
     // this.props.mixpanel.track('Spotify Login'); // Removed temp tracking
 
@@ -26,7 +29,20 @@ class LikedSongs extends React.Component {
     // });
   }
 
+  componentDidUpdate(prevProps) {
+    // console.log('PREVIOUS PROPS', prevProps);
+
+    if (this.state.getList === false) {
+      this.props.getPlaylist('4SzEKPufT9vDk1t3yWwlR4');
+      this.setState({
+        getList: true,
+      });
+    }
+  }
+
   render() {
+    console.log('PLAYLIST ID', this.props.playlistId);
+    console.log('PLAYLIST TRACKS', this.props.playlistTracks);
     if (this.props.fetchingLikedSongs) {
       return <h1>Loading...</h1>;
     }
@@ -38,9 +54,13 @@ class LikedSongs extends React.Component {
             Queue
           </Typography>
 
-          {this.props.several_tracks.tracks &&
+          {/* {this.props.several_tracks.tracks &&
             this.props.several_tracks.tracks.map(song => (
               <Song song={song} id={song.id} key={song.id} />
+            ))} */}
+          {this.props.playlistTracks &&
+            this.props.playlistTracks.map(song => (
+              <Song song={song.track} id={song.track.id} key={song.track.id} />
             ))}
         </Grid>
         {/* <Grid item>
@@ -63,9 +83,11 @@ const mapStateToProps = state => ({
   songs: state.likedSongsReducer.songs,
   users: state.getUsersReducer.users,
   several_tracks: state.queueReducer.several_tracks,
+  playlistTracks: state.getPlaylistReducer.playlistTracks.items,
+  playlistId: state.createPlaylistReducer.playlistId,
 });
 
 export default connect(
   mapStateToProps,
-  { getlikedSongs, getUsers },
+  { getlikedSongs, getUsers, getPlaylist },
 )(LikedSongs);

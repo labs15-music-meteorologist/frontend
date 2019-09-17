@@ -99,16 +99,29 @@ class Dashboard extends React.Component {
       },
     ],
     popout: false,
+    playlistCreated: false,
   };
 
   componentDidMount() {
     this.props.getSpotifyAccountDetails();
-    this.props.spotifyUser.id !== undefined &&
-      this.props.createPlaylist(this.props.spotifyUser.id);
   }
 
-  componentDidUpdate() {
-    this.props.spotifyUser.id && this.props.persistUser(this.props.spotifyUser);
+  componentDidUpdate(prevProps) {
+    // this.props.spotifyUser.id &&
+
+    // console.log('Previous Props', prevProps);
+    // console.log('Current Props', this.props);
+
+    if (this.state.playlistCreated === false && this.props.spotifyUser.id) {
+      console.log('This.state', this.state.playlistCreated);
+      console.log('This.ID', this.props.spotifyUser.id);
+
+      this.props.persistUser(this.props.spotifyUser);
+      this.props.createPlaylist(this.props.spotifyUser.id);
+      this.setState({
+        playlistCreated: true,
+      });
+    }
   }
 
   openPlaylist() {

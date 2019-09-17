@@ -5,8 +5,8 @@ import {
 } from '../actions';
 
 const initialState = {
-  playlistId: '',
-  error: ''
+  playlistTracks: {},
+  error: '',
 };
 
 const getPlaylistReducer = (state = initialState, action) => {
@@ -18,12 +18,12 @@ const getPlaylistReducer = (state = initialState, action) => {
     case GET_PLAYLIST_SUCCESS:
       return {
         ...state,
-        playlist: action.payload,
+        playlistTracks: action.payload,
       };
     case GET_PLAYLIST_FAILURE:
       return {
         ...state,
-        error: action.payload
+        error: action.payload,
       };
     default:
       return state;

@@ -6,7 +6,7 @@ import {
 
 const initialState = {
   playlistId: '',
-  error: ''
+  error: '',
 };
 
 const createPlaylistReducer = (state = initialState, action) => {
@@ -18,12 +18,12 @@ const createPlaylistReducer = (state = initialState, action) => {
     case CREATE_PLAYLIST_SUCCESS:
       return {
         ...state,
-        playlistId: action.payload,
+        playlistId: action.payload.id,
       };
     case CREATE_PLAYLIST_FAILURE:
       return {
         ...state,
-        error: action.payload
+        error: action.payload,
       };
     default:
       return state;

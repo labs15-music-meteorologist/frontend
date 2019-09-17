@@ -4,11 +4,19 @@ import { connect } from 'react-redux';
 /* import { Mixpanel } from '../analytics/Mixpanel'; */
 import { Grid, Typography } from '@material-ui/core';
 
+<<<<<<< HEAD
 import { getlikedSongs, getPlaylist, getUsers,getSpotifyAccountDetails } from '../../actions';
+=======
+import { getlikedSongs, getUsers, getPlaylist } from '../../actions';
+>>>>>>> 52c545fce36f7b2144a88b47ec51f0f75f641a2f
 import Song from './Song.js';
 
 class LikedSongs extends React.Component {
+  state = {
+    getList: false,
+  };
   componentDidMount() {
+<<<<<<< HEAD
     // if (this.props){
       // console.log("Spotify User",this.props.spotifyUser.id)
     // }
@@ -18,6 +26,10 @@ class LikedSongs extends React.Component {
     // this.props.getSpotifyAccountDetails()
     this.props.getPlaylist('37i9dQZF1DWUmZGnAEphmT')
 
+=======
+    // this.props.getlikedSongs();
+    this.props.getUsers();
+>>>>>>> 52c545fce36f7b2144a88b47ec51f0f75f641a2f
     // this.props.mixpanel.track('Spotify Login'); // Removed temp tracking
 
     // Example tracking once implemented
@@ -33,9 +45,20 @@ class LikedSongs extends React.Component {
     // });
   }
 
-  render() {
-    console.log("Spotify User",this.props)
+  componentDidUpdate(prevProps) {
+    // console.log('PREVIOUS PROPS', prevProps);
 
+    if (this.state.getList === false) {
+      this.props.getPlaylist('4SzEKPufT9vDk1t3yWwlR4');
+      this.setState({
+        getList: true,
+      });
+    }
+  }
+
+  render() {
+    console.log('PLAYLIST ID', this.props.playlistId);
+    console.log('PLAYLIST TRACKS', this.props.playlistTracks);
     if (this.props.fetchingLikedSongs) {
       return <h1>Loading...</h1>;
     }
@@ -47,9 +70,13 @@ class LikedSongs extends React.Component {
             Playlist
           </Typography>
 
-          {this.props.several_tracks.tracks &&
+          {/* {this.props.several_tracks.tracks &&
             this.props.several_tracks.tracks.map(song => (
               <Song song={song} id={song.id} key={song.id} />
+            ))} */}
+          {this.props.playlistTracks &&
+            this.props.playlistTracks.map(song => (
+              <Song song={song.track} id={song.track.id} key={song.track.id} />
             ))}
         </Grid>
         {/* <Grid item>
@@ -73,10 +100,11 @@ const mapStateToProps = state => ({
   users: state.getUsersReducer.users,
   spotifyUser: state.getUsersReducer.spotifyUser,
   several_tracks: state.queueReducer.several_tracks,
-  playlist: state.getPlaylistReducer
+  playlistTracks: state.getPlaylistReducer.playlistTracks.items,
+  playlistId: state.createPlaylistReducer.playlistId,
 });
 
 export default connect(
   mapStateToProps,
-  { getlikedSongs, getPlaylist, getUsers, getSpotifyAccountDetails },
+  { getlikedSongs, getUsers, getPlaylist },
 )(LikedSongs);

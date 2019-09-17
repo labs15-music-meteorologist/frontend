@@ -1,13 +1,13 @@
 import {
   GET_LIKEDSONGS_FETCHING,
   GET_LIKEDSONGS_SUCCESS,
-  GET_LIKEDSONGS_FAILURE,
+  GET_LIKEDSONGS_FAILURE
 } from '../actions';
 
 const initialState = {
-  songs: [],
+  song_id: '',
   fetchingLikedSongs: false,
-  fetchingLikedSongsError: '',
+  fetchingLikedSongsError: ''
 };
 
 const likedSongsReducer = (state = initialState, action) => {
@@ -16,20 +16,20 @@ const likedSongsReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchingLikedSongs: true,
-        fetchingLikedSongsError: '',
+        fetchingLikedSongsError: ''
       };
     case GET_LIKEDSONGS_SUCCESS:
       return {
         ...state,
-        songs: action.payload.items,
+        song_id: action.payload,
         fetchingLikedSongs: false,
-        fetchingLikedSongsError: '',
+        fetchingLikedSongsError: ''
       };
     case GET_LIKEDSONGS_FAILURE:
       return {
         ...state,
         fetchingLikedSongs: false,
-        fetchingLikedSongsError: action.payload,
+        fetchingLikedSongsError: action.payload
       };
     default:
       return state;

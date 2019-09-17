@@ -40,11 +40,11 @@ export const getlikedSongs = () => dispatch => {
   };
 
   axios
-    .get('https://api.spotify.com/v1/me/tracks', config)
+    .get('https://api.spotify.com/v1/me/tracks?limit=1', config)
     .then(res => {
       dispatch({
         type: GET_LIKEDSONGS_SUCCESS,
-        payload: res.data
+        payload: res.data.items[0].track.id
       });
     })
     .catch(err => {
@@ -208,28 +208,12 @@ export const POST_DS_SONGS_FETCHING = 'POST_DS_SONGS_FETCHING';
 export const POST_DS_SONGS_SUCCESS = 'POST_DS_SONGS_SUCCESS';
 export const POST_DS_SONGS_FAILURE = 'POST_DS_SONGS_FAILURE';
 
-export const postDSSong = () => dispatch => {
+export const postDSSong = song => dispatch => {
   dispatch({
     type: POST_DS_SONGS_FETCHING
   });
-  var audio = {
-    audio_features: {
-      acousticness: 0.934,
-      danceability: 0.186,
-      energy: 0.107,
-      instrumentalness: 0,
-      key: 5,
-      liveness: 0.297,
-      loudness: -14.802,
-      mode: 1,
-      speechiness: 0.0347,
-      tempo: 107.095,
-      time_signature: 4,
-      valence: 0.149
-    }
-  };
   axios
-    .post(`${url}v1/recommender`, audio)
+    .post(`${url}v1/recommender`, song)
     .then(res => {
       dispatch({
         type: POST_DS_SONGS_SUCCESS,

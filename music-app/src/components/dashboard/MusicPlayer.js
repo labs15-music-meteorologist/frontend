@@ -8,7 +8,8 @@ import {
   getTrackInfo,
   getSeveralTracks,
   postDSSong,
-  transferPlaybackHere
+  transferPlaybackHere,
+  getlikedSongs
 } from '../../actions';
 import SkipLeft from '../../assets/skip-left.png';
 import SkipRight from '../../assets/skip-right.png';
@@ -16,6 +17,7 @@ import Rocket from '../../assets/rocket-like.png';
 import Meteor from '../../assets/meteor-dislike.png';
 import Pause from '../../assets/player-stop.png';
 import Play from '../../assets/player-start.png';
+import axios from 'axios';
 
 // Styles
 import '../../App.css';
@@ -25,6 +27,7 @@ import LinearDeterminate from '../LinearDeterminate';
 import Chart from '../Chart';
 import Characteristics from '../Characteristics.js';
 import AudioDetails from './AudioDetails';
+import { async } from 'q';
 
 class MusicPlayer extends Component {
   constructor(props) {
@@ -54,6 +57,28 @@ class MusicPlayer extends Component {
   componentDidMount() {
     this.handleLogin();
     this.props.postDSSong();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.song_id !== prevProps.song_id) {
+      const id = this.props.song_id;
+      console.log('FIRST LIKED', id);
+      this.dsDelivery();
+    }
+  }
+
+  async dsDelivery() {
+    var config = {
+      headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
+    };
+
+    let response = await axios.get(
+      `https://api.spotify.com/v1/audio-features/${this.props.song_id}`,
+      config
+    );
+    if (response.status == 200) {
+      console.log(response);
+    }
   }
 
   concenateSongIds(array) {
@@ -509,7 +534,9 @@ const mapStateToProps = state => ({
   imageUrl: state.currentSongReducer.imageUrl,
   traits: state.getTrackInfoReducer,
   ds_songs: state.queueReducer.ds_songs,
-  several_tracks: state.queueReducer.several_tracks
+  several_tracks: state.queueReducer.several_tracks,
+  playerReady: state.playerReducer.playerReady,
+  song_id: state.likedSongsReducer.song_id
 });
 
 export default connect(
@@ -519,6 +546,7 @@ export default connect(
     getCurrentSong,
     postDSSong,
     getSeveralTracks,
-    transferPlaybackHere
+    transferPlaybackHere,
+    getlikedSongs
   }
 )(MusicPlayer);

@@ -19,11 +19,11 @@ class Song extends React.Component {
           wrap='wrap'
           className='song'>
           <Grid item style={{ padding: 5 }}>
-            {/* <img
+            <img
               src={this.props.song.album.images[2].url}
               alt='album art'
               width='64px'
-            /> */}
+            />
           </Grid>
           <Grid item xs style={{ padding: 5 }}>
             <Typography

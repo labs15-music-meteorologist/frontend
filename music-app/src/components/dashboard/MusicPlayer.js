@@ -63,17 +63,17 @@ class MusicPlayer extends Component {
       console.log('SONG ID', this.props.song_id);
     }
 
-    if (this.props.song.id === null || this.props.song.id !== prevProps.song.id){
+    if (
+      this.props.song.id === null ||
+      this.props.song.id !== prevProps.song.id
+    ) {
+      console.log('This dot props', this.props.ds_songs);
       this.props.addToPlaylist(
         {
-          uris: [
-            'spotify:track:5d4zl1SVfjPykq0yfsdil6',
-            'spotify:track:32bZwIZbRYe4ImC7PJ8s2A',
-          ],
+          uris: this.createSpotifyUriArray(this.props.ds_songs),
         },
         this.props.playlistId,
       );
-    
     }
 
     // spotify:track:5d4zl1SVfjPykq0yfsdil6, spotify:track:32bZwIZbRYe4ImC7PJ8s2A
@@ -227,7 +227,6 @@ class MusicPlayer extends Component {
   }
 
   createSpotifyUriArray(array) {
-    console.log('ARRAY', array);
     return array.map(song => 'spotify:track:' + song.values);
   }
 

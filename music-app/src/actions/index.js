@@ -270,7 +270,7 @@ export const createPlaylist = spotifyId => dispatch => {
     },
   };
   var playlistName = {
-    name: 'Music Meteorologist Created (A BETTER TEST)',
+    name: 'Music Meteorologist (DYNAMIC)',
     description: 'A playlist of songs curated by Music Meteorologist',
   };
   axios

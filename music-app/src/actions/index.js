@@ -281,19 +281,20 @@ export const createPlaylist = spotifyId => dispatch => {
   });
   var config = {
     headers: {
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
-      ContentType: 'application/json',
-    },
+      'Authorization': 'Bearer ' + localStorage.getItem('token'),
+      'Content-Type': 'application/json',
+    }
   };
   var playlistName = {
     name: 'Music-Meteorologist',
     description: 'A playlist of songs curated by Music Meteorologist',
   };
+  console.log("spotifyId",spotifyId)
   axios
     .post(
-      `https://api.spotify.com/v1/users/${spotifyId}/playlists`,
-      config,
+      `https://api.spotify.com/v1/users/xvi46o1edt38mzkijt6zzvpdh/playlists`,
       playlistName,
+      config
     )
     .then(res => {
       dispatch({
@@ -305,6 +306,36 @@ export const createPlaylist = spotifyId => dispatch => {
       dispatch({
         type: CREATE_PLAYLIST_FAILURE,
         payload: err.data,
+      });
+    });
+};
+export const GET_PLAYLIST_FETCHING = 'GET_PLAYLIST_FETCHING';
+export const GET_PLAYLIST_SUCCESS = 'GET_PLAYLIST_SUCCESS';
+export const GET_PLAYLIST_FAILURE = 'GET_PLAYLIST_FAILURE';
+
+export const getPlaylist = playlistId => dispatch => {
+  dispatch({
+    type: GET_PLAYLIST_FETCHING,
+  });
+
+  var config = {
+    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
+  };
+
+  axios
+    .get(
+      `https://api.spotify.com/v1/playlists/${playlistId}`, config
+      )
+    .then(res => {
+      dispatch({
+        type: GET_PLAYLIST_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_PLAYLIST_FAILURE,
+        payload: err,
       });
     });
 };

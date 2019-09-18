@@ -122,6 +122,7 @@ class Dashboard extends React.Component {
     // If it has - do nothing
 
     if (this.state.userDataFetching === false && this.props.spotifyUser.id) {
+      console.log('FIRED OFF');
       this.props.getCurrentUser(this.props.spotifyUser.id);
       this.setState({
         userDataFetching: true,
@@ -131,14 +132,23 @@ class Dashboard extends React.Component {
     // Check user obj for playlist ID
     if (
       !this.state.playlistCreated &&
-      this.props.spotifyUser.id &&
-      !this.props.currentUser.spotify_playlist_id
+      /* this.props.spotifyUser.id && */
+      !this.props.fetchingCreatePlaylist &&
+      this.props.playlistId === null
     ) {
       console.log('INSIDE BIG BRAIN FUNCTION', this.props);
       this.props.createPlaylist(this.props.spotifyUser.id);
+    }
+
+    if (this.props.playlistId && !this.state.playlistCreated) {
+      this.props.persistUser(this.props.spotifyUser, this.props.playlistId);
+      console.log('DID IT HAPPEN?', this.props.playlistId);
       this.setState({
         playlistCreated: true,
       });
+      setTimeout(() => {
+        this.props.getCurrentUser(this.props.spotifyUser.id);
+      }, 4000);
     }
 
     // if no have then run createplaylist
@@ -204,7 +214,8 @@ class Dashboard extends React.Component {
     // console.log('getSpotifyAccountDetails ! _ 0', this.props);
 
     console.log('What is this', this.props);
-    console.log('current USER OBJ ______', this.props.currentUser);
+    console.log('HERE I AM ', this.props.playlistId);
+    console.log('DAY AFTER TOMORROW', this.props.currentUser);
 
     return (
       <div className='dashboard'>
@@ -301,6 +312,7 @@ const mapStateToProps = state => ({
   ds_songs: state.queueReducer.ds_songs,
   several_tracks: state.queueReducer.several_tracks,
   playlistId: state.createPlaylistReducer.playlistId,
+  fetchingCreatePlaylist: state.createPlaylistReducer.fetchingPlaylist,
 });
 
 export default connect(

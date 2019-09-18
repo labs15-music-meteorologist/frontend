@@ -38,6 +38,7 @@ export const getCurrentUser = spotifyId => dispatch => {
   axios
     .get(`${url}v1/users/spotify/${spotifyId}`)
     .then(res => {
+      console.log('CURRENT USER RESPONSE', res.data);
       dispatch({
         type: GET_LOGGED_IN_SUCCESS,
         payload: res.data,
@@ -176,6 +177,7 @@ export const PERSIST_USER_SUCCESS = 'GET_CURRENT_SONG_SUCCESS';
 export const PERSIST_USER_FAILURE = 'GET_CURRENT_SONG_FAILURE';
 
 export const persistUser = (spotifyUser, playlistId) => dispatch => {
+  console.log('THIS IS WHAT I AM USING', spotifyUser, playlistId);
   dispatch({
     type: PERSIST_USER_FETCHING,
   });
@@ -183,26 +185,30 @@ export const persistUser = (spotifyUser, playlistId) => dispatch => {
     .get(`${url}v1/users/spotify/${spotifyUser.id}`)
     .then(res => {
       if (res.status === 200) {
+        const user = {
+          id: res.data.id,
+          email: res.data.email,
+          spotify_user_id: res.data.spotify_user_id,
+          user_spotify_api_key: 'mocked',
+          date_of_birth: res.data.date_of_birth,
+          spotify_product_type: res.data.spotify_product_type,
+          display_name: res.data.display_name,
+          country: res.data.country,
+          profile_image_url: res.data.profile_image_url,
+          spotify_playlist_id: playlistId,
+        };
+        console.log('THIS IS MY USER', JSON.stringify(user));
         axios
-          .put(`${url}v1/users/${res.data.id}`, {
-            email: res.data.email,
-            spotify_user_id: res.data.spotify_user_id,
-            user_spotify_api_key: localStorage.getItem('token'),
-            date_of_birth: res.data.date_of_birth,
-            spotify_product_type: res.data.spotify_product_type,
-            display_name: res.data.display_name,
-            country: res.data.country,
-            profile_image_url: res.data.profile_image_url,
-            spotify_playlist_id: playlistId,
-          })
+          .put(`${url}v1/users/${res.data.id}`, user)
           .then(res => {
-            /*  dispatch({ type: PERSIST_USER_SUCCESS, payload: res.data }); */
+            console.log('SUCCESSFULL IT WAS MY MAN', res);
+            dispatch({ type: PERSIST_USER_SUCCESS });
           })
           .catch(err => {
-            /*  dispatch({
+            console.log('BUT WHYYYYY', err);
+            dispatch({
               type: PERSIST_USER_FAILURE,
-              payload: err,
-            }); */
+            });
           });
       }
     })
@@ -218,6 +224,7 @@ export const persistUser = (spotifyUser, playlistId) => dispatch => {
             display_name: spotifyUser.display_name,
             country: spotifyUser.country,
             profile_image_url: '',
+            spotify_playlist_id: null,
           })
           .then(res => {
             /* dispatch({ type: PERSIST_USER_SUCCESS, payload: res.data }); */

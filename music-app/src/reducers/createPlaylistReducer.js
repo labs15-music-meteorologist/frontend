@@ -6,6 +6,7 @@ import {
 
 const initialState = {
   playlistId: null,
+  fetchingPlaylist: false,
   error: '',
 };
 
@@ -14,16 +15,19 @@ const createPlaylistReducer = (state = initialState, action) => {
     case CREATE_PLAYLIST_FETCHING:
       return {
         ...state,
+        fetchingPlaylist: true,
       };
     case CREATE_PLAYLIST_SUCCESS:
       return {
         ...state,
         playlistId: action.payload.id,
+        fetchingPlaylist: false,
       };
     case CREATE_PLAYLIST_FAILURE:
       return {
         ...state,
         error: action.payload,
+        fetchingPlaylist: false,
       };
     default:
       return state;

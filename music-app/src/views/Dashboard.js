@@ -106,6 +106,7 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     this.props.getSpotifyAccountDetails();
+    this.props.getCurrentUser(this.props.spotifyUser.id);
   }
 
   componentDidUpdate(prevProps) {
@@ -127,19 +128,39 @@ class Dashboard extends React.Component {
       });
     }
 
+    // Check user obj for playlist ID
     if (
-      !this.props.currentUser.spotify_playlist_id &&
-      this.state.playlistCreated === false &&
-      this.props.spotifyUser.id
+      !this.state.playlistCreated &&
+      this.props.spotifyUser.id &&
+      !this.props.currentUser.spotify_playlist_id
     ) {
       console.log('INSIDE BIG BRAIN FUNCTION', this.props);
-      this.props.persistUser(this.props.spotifyUser);
       this.props.createPlaylist(this.props.spotifyUser.id);
-      this.props.persistUser(this.props.spotifyUser, 'whatever');
       this.setState({
         playlistCreated: true,
       });
     }
+
+    // if no have then run createplaylist
+    // update component state with flag to false
+
+    // save playlist id through persistuser
+
+    //   if (this.props.playlistId) {
+    //     if (
+    //       this.props.spotifyUser.id &&
+    //       // this.props.playlistId &&
+    //       !this.props.currentUser.spotify_playlist_id &&
+    //       ) {
+    //     // this.props.persistUser(this.props.spotifyUser);
+    //     this.props.createPlaylist(this.props.spotifyUser.id);
+    //     this.setState({
+    //       playlistCreated: true,
+    //     });
+    //     console.log('INSIDE BIG BRAIN FUNCTION', this.props);
+    //   }
+    // }
+    console.log('OUTSIDE BIGGER BRAIN FUNCTION', this.props);
   }
 
   openPlaylist() {

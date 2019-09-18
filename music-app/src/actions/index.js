@@ -175,7 +175,7 @@ export const PERSIST_USER_FETCHING = 'GET_CURRENT_SONG_FETCHING';
 export const PERSIST_USER_SUCCESS = 'GET_CURRENT_SONG_SUCCESS';
 export const PERSIST_USER_FAILURE = 'GET_CURRENT_SONG_FAILURE';
 
-export const persistUser = spotifyUser => dispatch => {
+export const persistUser = (spotifyUser, playlistId) => dispatch => {
   dispatch({
     type: PERSIST_USER_FETCHING,
   });
@@ -193,7 +193,7 @@ export const persistUser = spotifyUser => dispatch => {
             display_name: res.data.display_name,
             country: res.data.country,
             profile_image_url: res.data.profile_image_url,
-            spotify_playlist_id: playListId,
+            spotify_playlist_id: playlistId,
           })
           .then(res => {
             /*  dispatch({ type: PERSIST_USER_SUCCESS, payload: res.data }); */
@@ -321,6 +321,11 @@ export const createPlaylist = spotifyId => dispatch => {
       playlistName,
       config,
     )
+    //   console.log('CREATE PLAYLIST ACTION RES PAYLOAD', res.data);
+    //   axios.put(`${url}v1/users/spotify/${res.data.owner.id}`, {
+    //     spotify_playlist_id: res.data.id,
+    //   });
+
     .then(res => {
       dispatch({
         type: CREATE_PLAYLIST_SUCCESS,
@@ -334,7 +339,6 @@ export const createPlaylist = spotifyId => dispatch => {
       });
     });
 };
-
 export const GET_PLAYLIST_FETCHING = 'GET_PLAYLIST_FETCHING';
 export const GET_PLAYLIST_SUCCESS = 'GET_PLAYLIST_SUCCESS';
 export const GET_PLAYLIST_FAILURE = 'GET_PLAYLIST_FAILURE';

@@ -105,7 +105,7 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     this.props.getSpotifyAccountDetails();
-    
+    this.props.getlikedSongs();
   }
 
   componentDidUpdate(prevProps) {
@@ -115,9 +115,6 @@ class Dashboard extends React.Component {
     // console.log('Current Props', this.props);
 
     if (this.state.playlistCreated === false && this.props.spotifyUser.id) {
-      console.log('This.state', this.state.playlistCreated);
-      console.log('This.ID', this.props.spotifyUser.id);
-
       this.props.persistUser(this.props.spotifyUser);
       this.props.createPlaylist(this.props.spotifyUser.id);
       this.setState({
@@ -162,10 +159,8 @@ class Dashboard extends React.Component {
     if (this.checkPremiumUser() || this.checkNoIOS()) {
       this.props.history.push('/info');
     }
-    console.log('What is this', this.props);
+    console.log('WHAT IS THIS', this.props);
 
-    
-    
     return (
       <div className='dashboard'>
         <Joyride
@@ -260,7 +255,7 @@ const mapStateToProps = state => ({
   ds_songs: state.queueReducer.ds_songs,
   several_tracks: state.queueReducer.several_tracks,
   playlistId: state.createPlaylistReducer.playlistId,
-  status: state.removeTrackReducer.status
+  status: state.removeTrackReducer.status,
 });
 
 export default connect(
@@ -273,6 +268,6 @@ export default connect(
     postDSSong,
     getSeveralTracks,
     createPlaylist,
-    removeTrack
+    removeTrack,
   },
 )(Dashboard);

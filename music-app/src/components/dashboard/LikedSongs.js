@@ -30,10 +30,8 @@ class LikedSongs extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    // console.log('PREVIOUS PROPS', prevProps);
-
-    if (this.state.getList === false) {
-      this.props.getPlaylist('4SzEKPufT9vDk1t3yWwlR4');
+    if (this.props.addedTo === true && this.state.getList === false) {
+      this.props.getPlaylist(this.props.playlistId);
       this.setState({
         getList: true,
       });
@@ -41,8 +39,7 @@ class LikedSongs extends React.Component {
   }
 
   render() {
-    console.log('PLAYLIST ID', this.props.playlistId);
-    console.log('PLAYLIST TRACKS', this.props.playlistTracks);
+    console.log('PLAYLIST ID PROPS', this.props.playlistId);
     if (this.props.fetchingLikedSongs) {
       return <h1>Loading...</h1>;
     }
@@ -86,6 +83,8 @@ const mapStateToProps = state => ({
   several_tracks: state.queueReducer.several_tracks,
   playlistTracks: state.getPlaylistReducer.playlistTracks.items,
   playlistId: state.createPlaylistReducer.playlistId,
+  playlistCreated: state.createPlaylistReducer.playlistCreated,
+  addedTo: state.addToPlaylistReducer.addedTo,
 });
 
 export default connect(

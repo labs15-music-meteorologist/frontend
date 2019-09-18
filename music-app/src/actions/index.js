@@ -344,72 +344,34 @@ export const REMOVE_TRACK_SUCCESS = 'REMOVE_TRACK_SUCCESS';
 export const REMOVE_TRACK_FAILURE = 'REMOVE_TRACK_FAILURE';
 
 export const removeTrack = (playlistId, currentlyPlayingSong) => dispatch => {
-  console.log('IN THE ACTION', playlistId, currentlyPlayingSong);
-  const songToDelete = `spotify:track:${currentlyPlayingSong}`;
-  console.log('songToDelete', songToDelete);
   dispatch({
     type: REMOVE_TRACK_FETCHING,
   });
-
-
-  // var config = {
-  //   headers: {
-  //     "Authorization": 'Bearer ' + localStorage.getItem('token'),
-  //     'Content-Type': 'application/json',
-  //   },
-  // };
-  var body = JSON.stringify({ 
-    tracks:[{
-      uri: "spotify:track:6uFn47ACjqYkc0jADwEdj1"
-    }]
-  })
-  console.log("BODY", body)
-
   axios({
     method: 'delete',
-    url: "https://api.spotify.com/v1/playlists/4SzEKPufT9vDk1t3yWwlR4/tracks",
+    url: `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
     headers: {
-      "Authorization": 'Bearer ' + localStorage.getItem('token'),
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
       'Content-Type': 'application/json',
-'Accept': 'application/json'
     },
-    data: JSON.stringify({tracks:[{
-      uri: "spotify:track:6uFn47ACjqYkc0jADwEdj1"
-    },{
-      uri: "spotify:track:2gwkD6igEhQbDQegRCcdoB"
-    }]})
+    data: {
+      tracks: [
+        {
+          uri: `spotify:track:${currentlyPlayingSong}`,
+        },
+      ],
+    },
   })
-
-
-
-  // axios
-  //   .delete(
-  //     "https://api.spotify.com/v1/playlists/4SzEKPufT9vDk1t3yWwlR4/tracks",
-  //     {
-  //       headers: {
-  //         "Authorization": 'Bearer ' + localStorage.getItem('token'),
-  //         'Content-Type': 'application/json',
-  //  'Accept': 'application/json'
-  //       }
-  //     },
-  //     { 
-  //      data: {tracks:[{
-  //         uri: "spotify:track:6uFn47ACjqYkc0jADwEdj1"
-  //       },{
-  //         uri: "spotify:track:2gwkD6igEhQbDQegRCcdoB"
-  //       }]}
-  //     }
-  //   )
-  //   .then(res => {
-  //     dispatch({
-  //       type: REMOVE_TRACK_SUCCESS,
-  //       payload: res.data,
-  //     });
-  //   })
-  //   .catch(err => {
-  //     dispatch({
-  //       type: REMOVE_TRACK_FAILURE,
-  //       payload: err,
-  //     });
-  //   });
+    .then(res => {
+      dispatch({
+        type: REMOVE_TRACK_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: REMOVE_TRACK_FAILURE,
+        payload: err,
+      });
+    });
 };

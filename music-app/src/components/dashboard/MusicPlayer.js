@@ -293,7 +293,7 @@ class MusicPlayer extends Component {
       this.player.pause();
       this.player.setVolume(0.5);
     }, 2000);
-    this.props.removeTrack('4SzEKPufT9vDk1t3yWwlR4', '2IRZnDFmlqMuOrYOLnZZyc');
+    this.props.removeTrack('4SzEKPufT9vDk1t3yWwlR4', '2FdQ4hkbqZ1X930oxxgZZy'); // Hardcoded for testing, make dynamic when ready
     this.setState({
       predictionPrompt: !this.state.predictionPrompt,
     });

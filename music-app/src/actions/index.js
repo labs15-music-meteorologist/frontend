@@ -323,6 +323,7 @@ export const getPlaylist = playlistId => dispatch => {
     });
 };
 
+<<<<<<< HEAD
 export const ADD_TO_PLAYLIST_FETCHING = 'ADD_TO_PLAYLIST_FETCHING';
 export const ADD_TO_PLAYLIST_SUCCESS = 'ADD_TO_PLAYLIST_SUCCESS';
 export const ADD_TO_PLAYLIST_FAILURE = 'ADD_TO_PLAYLIST_FAILURE';
@@ -357,6 +358,8 @@ export const addToPlaylist = (songs, playlistId) => dispatch => {
     });
 };
 
+=======
+>>>>>>> 7789d01915597e0ac4a0ce964ced89a842203ec2
 export const REMOVE_TRACK_FETCHING = 'REMOVE_TRACK_FETCHING';
 export const REMOVE_TRACK_SUCCESS = 'REMOVE_TRACK_SUCCESS';
 export const REMOVE_TRACK_FAILURE = 'REMOVE_TRACK_FAILURE';

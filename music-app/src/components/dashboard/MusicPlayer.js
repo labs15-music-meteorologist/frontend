@@ -11,7 +11,7 @@ import {
   postDSSong,
   createPlaylist,
   addToPlaylist,
-  removeTrack
+  removeTrack,
 } from '../../actions';
 import SkipLeft from '../../assets/skip-left.png';
 import SkipRight from '../../assets/skip-right.png';
@@ -351,7 +351,6 @@ class MusicPlayer extends Component {
   // ADD functionality to REMOVE current song from playlist/queue
   // Send input to BE
   toggleDislikeButton() {
-    
     this.player.nextTrack();
     this.player.setVolume(0);
     setTimeout(() => {
@@ -366,10 +365,14 @@ class MusicPlayer extends Component {
 
   render() {
     const { trackName, artistName, albumName, error, playing } = this.state;
+    console.log('MYPROPS', this.props);
     return (
       <div className='music-player joyride-player-2'>
         <div className='music-component'>
-          <Grid item className='music-component-album-info' style={{ maxWidth: '300px' }}>
+          <Grid
+            item
+            className='music-component-album-info'
+            style={{ maxWidth: '300px' }}>
             {this.props.imageUrl[1] && (
               <img
                 ref='image'
@@ -625,6 +628,6 @@ export default connect(
     getSeveralTracks,
     createPlaylist,
     addToPlaylist,
-    removeTrack
+    removeTrack,
   },
 )(MusicPlayer);

@@ -105,7 +105,7 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     this.props.getSpotifyAccountDetails();
-    this.props.getlikedSongs();     
+    this.props.getlikedSongs();
   }
 
   componentDidUpdate(prevProps) {
@@ -161,8 +161,6 @@ class Dashboard extends React.Component {
     }
     console.log('WHAT IS THIS', this.props);
 
-    
-    
     return (
       <div className='dashboard'>
         <Joyride
@@ -257,7 +255,7 @@ const mapStateToProps = state => ({
   ds_songs: state.queueReducer.ds_songs,
   several_tracks: state.queueReducer.several_tracks,
   playlistId: state.createPlaylistReducer.playlistId,
-  status: state.removeTrackReducer.status
+  status: state.removeTrackReducer.status,
 });
 
 export default connect(
@@ -270,6 +268,6 @@ export default connect(
     postDSSong,
     getSeveralTracks,
     createPlaylist,
-    removeTrack
+    removeTrack,
   },
 )(Dashboard);

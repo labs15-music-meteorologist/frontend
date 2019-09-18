@@ -7,7 +7,7 @@ import queueReducer from './queueReducer';
 import createPlaylistReducer from './createPlaylistReducer';
 import getPlaylistReducer from './getPlaylistReducer';
 import addToPlaylistReducer from './addToPlaylistReducer';
-import removeTrackReducer from './removeTrackReducer'; 
+import removeTrackReducer from './removeTrackReducer';
 
 export default combineReducers({
   getUsersReducer,
@@ -18,5 +18,5 @@ export default combineReducers({
   createPlaylistReducer,
   getPlaylistReducer,
   addToPlaylistReducer,
-  removeTrackReducer
+  removeTrackReducer,
 });

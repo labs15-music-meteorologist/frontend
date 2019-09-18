@@ -105,11 +105,7 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     this.props.getSpotifyAccountDetails();
-<<<<<<< HEAD
-    this.props.getlikedSongs();
-=======
-    
->>>>>>> 7789d01915597e0ac4a0ce964ced89a842203ec2
+    this.props.getlikedSongs();     
   }
 
   componentDidUpdate(prevProps) {
@@ -163,11 +159,7 @@ class Dashboard extends React.Component {
     if (this.checkPremiumUser() || this.checkNoIOS()) {
       this.props.history.push('/info');
     }
-<<<<<<< HEAD
     console.log('WHAT IS THIS', this.props);
-=======
-    console.log('What is this', this.props);
->>>>>>> 7789d01915597e0ac4a0ce964ced89a842203ec2
 
     
     

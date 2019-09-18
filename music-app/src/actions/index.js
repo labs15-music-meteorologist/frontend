@@ -323,7 +323,6 @@ export const getPlaylist = playlistId => dispatch => {
     });
 };
 
-<<<<<<< HEAD
 export const ADD_TO_PLAYLIST_FETCHING = 'ADD_TO_PLAYLIST_FETCHING';
 export const ADD_TO_PLAYLIST_SUCCESS = 'ADD_TO_PLAYLIST_SUCCESS';
 export const ADD_TO_PLAYLIST_FAILURE = 'ADD_TO_PLAYLIST_FAILURE';
@@ -347,7 +346,17 @@ export const addToPlaylist = (songs, playlistId) => dispatch => {
     .then(res => {
       dispatch({
         type: ADD_TO_PLAYLIST_SUCCESS,
-=======
+        payload: res.data,
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: ADD_TO_PLAYLIST_FAILURE,
+        payload: err,
+      });
+    });
+};
+
 export const REMOVE_TRACK_FETCHING = 'REMOVE_TRACK_FETCHING';
 export const REMOVE_TRACK_SUCCESS = 'REMOVE_TRACK_SUCCESS';
 export const REMOVE_TRACK_FAILURE = 'REMOVE_TRACK_FAILURE';
@@ -374,17 +383,12 @@ export const removeTrack = (playlistId, currentlyPlayingSong) => dispatch => {
     .then(res => {
       dispatch({
         type: REMOVE_TRACK_SUCCESS,
->>>>>>> 7789d01915597e0ac4a0ce964ced89a842203ec2
         payload: res.data,
       });
     })
     .catch(err => {
       dispatch({
-<<<<<<< HEAD
-        type: ADD_TO_PLAYLIST_FAILURE,
-=======
         type: REMOVE_TRACK_FAILURE,
->>>>>>> 7789d01915597e0ac4a0ce964ced89a842203ec2
         payload: err,
       });
     });

@@ -10,11 +10,8 @@ import {
   getSeveralTracks,
   postDSSong,
   createPlaylist,
-<<<<<<< HEAD
   addToPlaylist,
-=======
   removeTrack
->>>>>>> 7789d01915597e0ac4a0ce964ced89a842203ec2
 } from '../../actions';
 import SkipLeft from '../../assets/skip-left.png';
 import SkipRight from '../../assets/skip-right.png';
@@ -59,7 +56,6 @@ class MusicPlayer extends Component {
 
   componentDidMount() {
     this.handleLogin();
-<<<<<<< HEAD
   }
 
   componentDidUpdate(prevProps) {
@@ -127,10 +123,6 @@ class MusicPlayer extends Component {
       this.props.postDSSong(obj);
       console.log('RESPONSE', response.data);
     }
-=======
-    this.props.postDSSong();
-    
->>>>>>> 7789d01915597e0ac4a0ce964ced89a842203ec2
   }
 
   handleLogin() {
@@ -374,11 +366,6 @@ class MusicPlayer extends Component {
 
   render() {
     const { trackName, artistName, albumName, error, playing } = this.state;
-<<<<<<< HEAD
-
-=======
-    console.log('MYPROPS', this.props)
->>>>>>> 7789d01915597e0ac4a0ce964ced89a842203ec2
     return (
       <div className='music-player joyride-player-2'>
         <div className='music-component'>
@@ -625,13 +612,8 @@ const mapStateToProps = state => ({
   traits: state.getTrackInfoReducer,
   ds_songs: state.queueReducer.ds_songs.songs,
   several_tracks: state.queueReducer.several_tracks,
-<<<<<<< HEAD
   playlistId: state.createPlaylistReducer.playlistId,
   song_id: state.likedSongsReducer.song_id,
-=======
-  playlistId: state.createPlaylistReducer,
-  status: state.removeTrackReducer.status
->>>>>>> 7789d01915597e0ac4a0ce964ced89a842203ec2
 });
 
 export default connect(
@@ -642,10 +624,7 @@ export default connect(
     postDSSong,
     getSeveralTracks,
     createPlaylist,
-<<<<<<< HEAD
     addToPlaylist,
-=======
     removeTrack
->>>>>>> 7789d01915597e0ac4a0ce964ced89a842203ec2
   },
 )(MusicPlayer);

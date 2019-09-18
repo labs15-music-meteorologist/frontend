@@ -355,7 +355,7 @@ export const removeTrack = (playlistId, currentlyPlayingSong) => dispatch => {
     },
   };
   var body = {
-    tracks: [{ uri: `spotify:track:${currentlyPlayingSong}` }]
+    tracks: [{ uri:`spotify:track:${currentlyPlayingSong}` }]
   };
 
   axios

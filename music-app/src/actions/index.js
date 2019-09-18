@@ -193,6 +193,7 @@ export const persistUser = spotifyUser => dispatch => {
             display_name: res.data.display_name,
             country: res.data.country,
             profile_image_url: res.data.profile_image_url,
+            spotify_playlist_id: playListId,
           })
           .then(res => {
             /*  dispatch({ type: PERSIST_USER_SUCCESS, payload: res.data }); */

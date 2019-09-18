@@ -5,7 +5,7 @@ import {
 } from '../actions';
 
 const initialState = {
-  currentUser: [],
+  currentUser: {},
   currentUserFetching: false,
   error: '',
 };

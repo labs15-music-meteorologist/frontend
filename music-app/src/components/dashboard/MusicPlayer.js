@@ -10,7 +10,11 @@ import {
   getSeveralTracks,
   postDSSong,
   createPlaylist,
+<<<<<<< HEAD
   addToPlaylist,
+=======
+  removeTrack
+>>>>>>> 7789d01915597e0ac4a0ce964ced89a842203ec2
 } from '../../actions';
 import SkipLeft from '../../assets/skip-left.png';
 import SkipRight from '../../assets/skip-right.png';
@@ -55,6 +59,7 @@ class MusicPlayer extends Component {
 
   componentDidMount() {
     this.handleLogin();
+<<<<<<< HEAD
   }
 
   componentDidUpdate(prevProps) {
@@ -122,6 +127,10 @@ class MusicPlayer extends Component {
       this.props.postDSSong(obj);
       console.log('RESPONSE', response.data);
     }
+=======
+    this.props.postDSSong();
+    
+>>>>>>> 7789d01915597e0ac4a0ce964ced89a842203ec2
   }
 
   handleLogin() {
@@ -350,12 +359,14 @@ class MusicPlayer extends Component {
   // ADD functionality to REMOVE current song from playlist/queue
   // Send input to BE
   toggleDislikeButton() {
+    
     this.player.nextTrack();
     this.player.setVolume(0);
     setTimeout(() => {
       this.player.pause();
       this.player.setVolume(0.5);
     }, 2000);
+    this.props.removeTrack('4SzEKPufT9vDk1t3yWwlR4', '2FdQ4hkbqZ1X930oxxgZZy'); // Hardcoded for testing, make dynamic when ready
     this.setState({
       predictionPrompt: !this.state.predictionPrompt,
     });
@@ -363,11 +374,15 @@ class MusicPlayer extends Component {
 
   render() {
     const { trackName, artistName, albumName, error, playing } = this.state;
+<<<<<<< HEAD
 
+=======
+    console.log('MYPROPS', this.props)
+>>>>>>> 7789d01915597e0ac4a0ce964ced89a842203ec2
     return (
       <div className='music-player joyride-player-2'>
         <div className='music-component'>
-          <Grid item style={{ maxWidth: '300px' }}>
+          <Grid item className='music-component-album-info' style={{ maxWidth: '300px' }}>
             {this.props.imageUrl[1] && (
               <img
                 ref='image'
@@ -436,7 +451,7 @@ class MusicPlayer extends Component {
 
             {error && <p>Error: {error}</p>}
 
-            {/* When predictionPrompt === true show className='yes-no-active' 
+            {/* When predictionPrompt === true show className='yes-no-active'
             On Yes/No click invoke onPlayclick();
             On Yes/No click enable 'yes-no-active' on Like/Dislike wrapper
           */}
@@ -610,8 +625,13 @@ const mapStateToProps = state => ({
   traits: state.getTrackInfoReducer,
   ds_songs: state.queueReducer.ds_songs.songs,
   several_tracks: state.queueReducer.several_tracks,
+<<<<<<< HEAD
   playlistId: state.createPlaylistReducer.playlistId,
   song_id: state.likedSongsReducer.song_id,
+=======
+  playlistId: state.createPlaylistReducer,
+  status: state.removeTrackReducer.status
+>>>>>>> 7789d01915597e0ac4a0ce964ced89a842203ec2
 });
 
 export default connect(
@@ -622,6 +642,10 @@ export default connect(
     postDSSong,
     getSeveralTracks,
     createPlaylist,
+<<<<<<< HEAD
     addToPlaylist,
+=======
+    removeTrack
+>>>>>>> 7789d01915597e0ac4a0ce964ced89a842203ec2
   },
 )(MusicPlayer);

@@ -273,6 +273,7 @@ export const createPlaylist = spotifyId => dispatch => {
     name: 'Music Meteorologist (DYNAMIC)',
     description: 'A playlist of songs curated by Music Meteorologist',
   };
+  console.log('spotifyId', spotifyId);
   axios
     .post(
       `https://api.spotify.com/v1/users/${spotifyId}/playlists`,
@@ -322,6 +323,7 @@ export const getPlaylist = playlistId => dispatch => {
     });
 };
 
+<<<<<<< HEAD
 export const ADD_TO_PLAYLIST_FETCHING = 'ADD_TO_PLAYLIST_FETCHING';
 export const ADD_TO_PLAYLIST_SUCCESS = 'ADD_TO_PLAYLIST_SUCCESS';
 export const ADD_TO_PLAYLIST_FAILURE = 'ADD_TO_PLAYLIST_FAILURE';
@@ -345,12 +347,44 @@ export const addToPlaylist = (songs, playlistId) => dispatch => {
     .then(res => {
       dispatch({
         type: ADD_TO_PLAYLIST_SUCCESS,
+=======
+export const REMOVE_TRACK_FETCHING = 'REMOVE_TRACK_FETCHING';
+export const REMOVE_TRACK_SUCCESS = 'REMOVE_TRACK_SUCCESS';
+export const REMOVE_TRACK_FAILURE = 'REMOVE_TRACK_FAILURE';
+
+export const removeTrack = (playlistId, currentlyPlayingSong) => dispatch => {
+  dispatch({
+    type: REMOVE_TRACK_FETCHING,
+  });
+  axios({
+    method: 'delete',
+    url: `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
+    headers: {
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+      'Content-Type': 'application/json',
+    },
+    data: {
+      tracks: [
+        {
+          uri: `spotify:track:${currentlyPlayingSong}`,
+        },
+      ],
+    },
+  })
+    .then(res => {
+      dispatch({
+        type: REMOVE_TRACK_SUCCESS,
+>>>>>>> 7789d01915597e0ac4a0ce964ced89a842203ec2
         payload: res.data,
       });
     })
     .catch(err => {
       dispatch({
+<<<<<<< HEAD
         type: ADD_TO_PLAYLIST_FAILURE,
+=======
+        type: REMOVE_TRACK_FAILURE,
+>>>>>>> 7789d01915597e0ac4a0ce964ced89a842203ec2
         payload: err,
       });
     });

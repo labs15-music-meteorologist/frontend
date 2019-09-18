@@ -48,7 +48,7 @@ class LikedSongs extends React.Component {
         <Grid item>
           <Typography
             style={{ fontWeight: 'bold', fontSize: 18, textAlign: 'center' }}>
-            Queue
+            Playlist
           </Typography>
 
           {/* {this.props.several_tracks.tracks &&
@@ -79,6 +79,7 @@ class LikedSongs extends React.Component {
 const mapStateToProps = state => ({
   songs: state.likedSongsReducer.songs,
   users: state.getUsersReducer.users,
+  spotifyUser: state.getUsersReducer.spotifyUser,
   several_tracks: state.queueReducer.several_tracks,
   playlistTracks: state.getPlaylistReducer.playlistTracks.items,
   playlistId: state.createPlaylistReducer.playlistId,

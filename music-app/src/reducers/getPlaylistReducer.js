@@ -29,5 +29,4 @@ const getPlaylistReducer = (state = initialState, action) => {
       return state;
   }
 };
-
 export default getPlaylistReducer;

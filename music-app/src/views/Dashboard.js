@@ -130,15 +130,18 @@ class Dashboard extends React.Component {
     }
 
     // Check user obj for playlist ID
-    if (
-      !this.state.playlistCreated &&
-      /* this.props.spotifyUser.id && */
-      !this.props.fetchingCreatePlaylist &&
-      this.props.playlistId === null
-    ) {
-      console.log('INSIDE BIG BRAIN FUNCTION', this.props);
-      this.props.createPlaylist(this.props.spotifyUser.id);
-    }
+    setTimeout(() => {
+      if (
+        !this.state.playlistCreated &&
+        /* this.props.spotifyUser.id && */
+        !this.props.fetchingCreatePlaylist &&
+        this.props.playlistId === null &&
+        this.props.currentUser.spotify_playlist_id === null
+      ) {
+        console.log('INSIDE BIG BRAIN FUNCTION', this.props);
+        this.props.createPlaylist(this.props.spotifyUser.id);
+      }
+    }, 5000);
 
     if (this.props.playlistId && !this.state.playlistCreated) {
       this.props.persistUser(this.props.spotifyUser, this.props.playlistId);

@@ -30,7 +30,7 @@ class LikedSongs extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.playlistCreated === true && this.state.getList === false) {
+    if (this.props.addedTo === true && this.state.getList === false) {
       this.props.getPlaylist(this.props.playlistId);
       this.setState({
         getList: true,
@@ -83,6 +83,7 @@ const mapStateToProps = state => ({
   playlistTracks: state.getPlaylistReducer.playlistTracks.items,
   playlistId: state.createPlaylistReducer.playlistId,
   playlistCreated: state.createPlaylistReducer.playlistCreated,
+  addedTo: state.addToPlaylistReducer.addedTo,
 });
 
 export default connect(

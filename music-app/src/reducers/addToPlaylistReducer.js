@@ -5,6 +5,7 @@ import {
 } from '../actions';
 
 const initialState = {
+  addedTo: false,
   error: '',
 };
 
@@ -17,6 +18,7 @@ const addToPlaylistReducer = (state = initialState, action) => {
     case ADD_TO_PLAYLIST_SUCCESS:
       return {
         ...state,
+        addedTo: true,
       };
     case ADD_TO_PLAYLIST_FAILURE:
       return {

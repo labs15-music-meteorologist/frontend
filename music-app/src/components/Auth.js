@@ -55,7 +55,7 @@ export class Auth extends Component {
         <div class='main-wrapper'>
           <div class='main-cta'>
             <img src={user_gif} alt='' class='bd-box' />
-            <p class='cta-text'>
+            <p className='cta-text'>
               Listen and rate songs from your Spotify playlists. Our machine
               learning model will predict if you like a song before you hear it!
             </p>
@@ -80,16 +80,16 @@ export class Auth extends Component {
               </Button>
             </div>
           </div>
-          <div class='features fullwidth first'>
+          <div className='features full-width first'>
             <img src={walking_city} alt='' class='bd-box' />
             <div class='text-content'>
               <h2>What makes you move?</h2>
               <p>See what makes the songs you love awesome.</p>
             </div>
           </div>
-          <div class='features second'>
+          <div className='features second'>
             <img src={weather_sitting} alt='' class='baloon-woman' />
-            <div class='text-content'>
+            <div className='text-content'>
               <h2>Prediction at it's finest.</h2>
               <p>
                 The more songs you rate the more accurate your predictions will
@@ -97,7 +97,7 @@ export class Auth extends Component {
               </p>
             </div>
           </div>
-          <div class='features fullwidth third'>
+          <div className='features full-width third'>
             <img src={music_notes} alt='' class='party' />
             <div class='text-content'>
               <h2>Are you smarter than a machine?</h2>

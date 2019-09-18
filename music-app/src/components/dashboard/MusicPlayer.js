@@ -305,7 +305,7 @@ class MusicPlayer extends Component {
     return (
       <div className='music-player joyride-player-2'>
         <div className='music-component'>
-          <Grid item style={{ maxWidth: '300px' }}>
+          <Grid item className='music-component-album-info' style={{ maxWidth: '300px' }}>
             {this.props.imageUrl[1] && (
               <img
                 ref='image'

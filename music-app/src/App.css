@@ -122,6 +122,29 @@
   width: 40%;
 }
 
+@media (max-width: 1200px) {
+  .music-player {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .music-component {
+    width: 90%;
+    display: flex; 
+    flex-flow: row; 
+    justify-content: center;
+  }
+  .dashboard {
+    height: initial;
+  }
+  .music-component-album-info {
+    margin-right: 0;
+    width: 100%;
+     
+  }
+}
+
 @media (max-width: 600px) {
   .music-player {
     display: flex;

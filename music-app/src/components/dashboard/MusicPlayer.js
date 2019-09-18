@@ -8,6 +8,8 @@ import {
   getTrackInfo,
   getSeveralTracks,
   postDSSong,
+  createPlaylist,
+  removeTrack
 } from '../../actions';
 import SkipLeft from '../../assets/skip-left.png';
 import SkipRight from '../../assets/skip-right.png';
@@ -53,6 +55,7 @@ class MusicPlayer extends Component {
   componentDidMount() {
     this.handleLogin();
     this.props.postDSSong();
+    
   }
 
   handleLogin() {
@@ -113,6 +116,7 @@ class MusicPlayer extends Component {
     // ONLY WHEN PLAYER STATE CHANGED
     this.player.on('player_state_changed', state => {
       this.onStateChanged(state);
+
       if (this.props.song.id) {
         this.getCurrentSongFeatures(this.props.song.id);
       }
@@ -282,12 +286,14 @@ class MusicPlayer extends Component {
   // ADD functionality to REMOVE current song from playlist/queue
   // Send input to BE
   toggleDislikeButton() {
+    
     this.player.nextTrack();
     this.player.setVolume(0);
     setTimeout(() => {
       this.player.pause();
       this.player.setVolume(0.5);
     }, 2000);
+    this.props.removeTrack('4SzEKPufT9vDk1t3yWwlR4', '2FdQ4hkbqZ1X930oxxgZZy'); // Hardcoded for testing, make dynamic when ready
     this.setState({
       predictionPrompt: !this.state.predictionPrompt,
     });
@@ -295,6 +301,7 @@ class MusicPlayer extends Component {
 
   render() {
     const { trackName, artistName, albumName, error, playing } = this.state;
+    console.log('MYPROPS', this.props)
     return (
       <div className='music-player joyride-player-2'>
         <div className='music-component'>
@@ -367,7 +374,7 @@ class MusicPlayer extends Component {
 
             {error && <p>Error: {error}</p>}
 
-            {/* When predictionPrompt === true show className='yes-no-active' 
+            {/* When predictionPrompt === true show className='yes-no-active'
             On Yes/No click invoke onPlayclick();
             On Yes/No click enable 'yes-no-active' on Like/Dislike wrapper
           */}
@@ -541,9 +548,18 @@ const mapStateToProps = state => ({
   traits: state.getTrackInfoReducer,
   ds_songs: state.queueReducer.ds_songs,
   several_tracks: state.queueReducer.several_tracks,
+  playlistId: state.createPlaylistReducer,
+  status: state.removeTrackReducer.status
 });
 
 export default connect(
   mapStateToProps,
-  { getTrackInfo, getCurrentSong, postDSSong, getSeveralTracks },
+  {
+    getTrackInfo,
+    getCurrentSong,
+    postDSSong,
+    getSeveralTracks,
+    createPlaylist,
+    removeTrack
+  },
 )(MusicPlayer);

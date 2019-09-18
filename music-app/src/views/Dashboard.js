@@ -14,6 +14,8 @@ import {
   persistUser,
   postDSSong,
   getSeveralTracks,
+  createPlaylist,
+  removeTrack,
 } from '../actions';
 
 import LikedSongs from '../components/dashboard/LikedSongs';
@@ -61,7 +63,7 @@ class Dashboard extends React.Component {
         target: '.joyride-prediction-7',
         content: (
           <div>
-            <img src={JoyExample} />
+            <img src={JoyExample} alt='Click here' />
             <div>
               Click DISLIKE, and we will take this song out of your queue, and
               go to the next song
@@ -74,7 +76,7 @@ class Dashboard extends React.Component {
         target: '.joyride-prediction-7',
         content: (
           <div>
-            <img src={JoyExample} />
+            <img src={JoyExample} alt='Click here' />
             <div>
               The prediction score is our level of confidence that you will like
               this song based on your rating
@@ -87,7 +89,7 @@ class Dashboard extends React.Component {
         target: '.joyride-prediction-7',
         content: (
           <div>
-            <img src={JoyExample} />
+            <img src={JoyExample} alt='Click here' />
             <div>
               Click LIKE, to add the current songt to your liked songs on
               Spotify, and move on to the next song
@@ -98,14 +100,30 @@ class Dashboard extends React.Component {
       },
     ],
     popout: false,
+    playlistCreated: false,
   };
 
   componentDidMount() {
     this.props.getSpotifyAccountDetails();
+    
   }
 
-  componentDidUpdate() {
-    this.props.spotifyUser.id && this.props.persistUser(this.props.spotifyUser);
+  componentDidUpdate(prevProps) {
+    // this.props.spotifyUser.id &&
+
+    // console.log('Previous Props', prevProps);
+    // console.log('Current Props', this.props);
+
+    if (this.state.playlistCreated === false && this.props.spotifyUser.id) {
+      console.log('This.state', this.state.playlistCreated);
+      console.log('This.ID', this.props.spotifyUser.id);
+
+      this.props.persistUser(this.props.spotifyUser);
+      this.props.createPlaylist(this.props.spotifyUser.id);
+      this.setState({
+        playlistCreated: true,
+      });
+    }
   }
 
   openPlaylist() {
@@ -144,7 +162,10 @@ class Dashboard extends React.Component {
     if (this.checkPremiumUser() || this.checkNoIOS()) {
       this.props.history.push('/info');
     }
+    console.log('What is this', this.props);
 
+    
+    
     return (
       <div className='dashboard'>
         <Joyride
@@ -226,7 +247,7 @@ class Dashboard extends React.Component {
         </div>
 
         <Grid item>
-          <MusicPlayer />
+          <MusicPlayer spotifyId={this.props.spotifyUser} />
         </Grid>
       </div>
     );
@@ -238,6 +259,8 @@ const mapStateToProps = state => ({
   fetchingSpotifyUser: state.getUsersReducer.fetchingSpotifyUser,
   ds_songs: state.queueReducer.ds_songs,
   several_tracks: state.queueReducer.several_tracks,
+  playlistId: state.createPlaylistReducer.playlistId,
+  status: state.removeTrackReducer.status
 });
 
 export default connect(
@@ -249,5 +272,7 @@ export default connect(
     persistUser,
     postDSSong,
     getSeveralTracks,
+    createPlaylist,
+    removeTrack
   },
 )(Dashboard);

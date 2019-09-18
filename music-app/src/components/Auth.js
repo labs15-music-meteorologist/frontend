@@ -22,6 +22,8 @@ const scopes = [
   'user-modify-playback-state',
   'user-read-email',
   'user-read-private',
+  'playlist-modify-public',
+  'playlist-modify-private',
 ];
 
 const hash = window.location.hash

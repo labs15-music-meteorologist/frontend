@@ -66,11 +66,11 @@ export const getlikedSongs = () => dispatch => {
   };
 
   axios
-    .get('https://api.spotify.com/v1/me/tracks', config)
+    .get('https://api.spotify.com/v1/me/tracks?limit=1', config)
     .then(res => {
       dispatch({
         type: GET_LIKEDSONGS_SUCCESS,
-        payload: res.data,
+        payload: res.data.items[0].track.id,
       });
     })
     .catch(err => {
@@ -241,28 +241,12 @@ export const POST_DS_SONGS_FETCHING = 'POST_DS_SONGS_FETCHING';
 export const POST_DS_SONGS_SUCCESS = 'POST_DS_SONGS_SUCCESS';
 export const POST_DS_SONGS_FAILURE = 'POST_DS_SONGS_FAILURE';
 
-export const postDSSong = () => dispatch => {
+export const postDSSong = obj => dispatch => {
   dispatch({
     type: POST_DS_SONGS_FETCHING,
   });
-  var audio = {
-    audio_features: {
-      acousticness: 0.934,
-      danceability: 0.186,
-      energy: 0.107,
-      instrumentalness: 0,
-      key: 5,
-      liveness: 0.297,
-      loudness: -14.802,
-      mode: 1,
-      speechiness: 0.0347,
-      tempo: 107.095,
-      time_signature: 4,
-      valence: 0.149,
-    },
-  };
   axios
-    .post(`${url}v1/recommender`, audio)
+    .post(`${url}v1/recommender`, obj)
     .then(res => {
       dispatch({
         type: POST_DS_SONGS_SUCCESS,
@@ -319,9 +303,10 @@ export const createPlaylist = spotifyId => dispatch => {
     },
   };
   var playlistName = {
-    name: 'Music Meteorologist Created 2.0',
+    name: 'Music Meteorologist (DYNAMIC)',
     description: 'A playlist of songs curated by Music Meteorologist',
   };
+  console.log('spotifyId', spotifyId);
   axios
     .post(
       `https://api.spotify.com/v1/users/${spotifyId}/playlists`,
@@ -370,6 +355,77 @@ export const getPlaylist = playlistId => dispatch => {
     .catch(err => {
       dispatch({
         type: GET_PLAYLIST_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const ADD_TO_PLAYLIST_FETCHING = 'ADD_TO_PLAYLIST_FETCHING';
+export const ADD_TO_PLAYLIST_SUCCESS = 'ADD_TO_PLAYLIST_SUCCESS';
+export const ADD_TO_PLAYLIST_FAILURE = 'ADD_TO_PLAYLIST_FAILURE';
+
+export const addToPlaylist = (songs, playlistId) => dispatch => {
+  dispatch({
+    type: ADD_TO_PLAYLIST_FETCHING,
+  });
+
+  var config = {
+    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
+    'Content-Type': 'application/json',
+  };
+
+  axios
+    .post(
+      `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
+      songs,
+      config,
+    )
+    .then(res => {
+      dispatch({
+        type: ADD_TO_PLAYLIST_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: ADD_TO_PLAYLIST_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const REMOVE_TRACK_FETCHING = 'REMOVE_TRACK_FETCHING';
+export const REMOVE_TRACK_SUCCESS = 'REMOVE_TRACK_SUCCESS';
+export const REMOVE_TRACK_FAILURE = 'REMOVE_TRACK_FAILURE';
+
+export const removeTrack = (playlistId, currentlyPlayingSong) => dispatch => {
+  dispatch({
+    type: REMOVE_TRACK_FETCHING,
+  });
+  axios({
+    method: 'delete',
+    url: `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
+    headers: {
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+      'Content-Type': 'application/json',
+    },
+    data: {
+      tracks: [
+        {
+          uri: `spotify:track:${currentlyPlayingSong}`,
+        },
+      ],
+    },
+  })
+    .then(res => {
+      dispatch({
+        type: REMOVE_TRACK_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: REMOVE_TRACK_FAILURE,
         payload: err,
       });
     });

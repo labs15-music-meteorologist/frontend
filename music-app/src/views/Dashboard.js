@@ -16,6 +16,7 @@ import {
   getSeveralTracks,
   createPlaylist,
   getCurrentUser,
+  removeTrack,
 } from '../actions';
 
 import LikedSongs from '../components/dashboard/LikedSongs';
@@ -107,6 +108,7 @@ class Dashboard extends React.Component {
   componentDidMount() {
     this.props.getSpotifyAccountDetails();
     this.props.getCurrentUser(this.props.spotifyUser.id);
+    this.props.getlikedSongs();
   }
 
   componentDidUpdate(prevProps) {
@@ -316,6 +318,7 @@ const mapStateToProps = state => ({
   several_tracks: state.queueReducer.several_tracks,
   playlistId: state.createPlaylistReducer.playlistId,
   fetchingCreatePlaylist: state.createPlaylistReducer.fetchingPlaylist,
+  status: state.removeTrackReducer.status,
 });
 
 export default connect(
@@ -329,5 +332,6 @@ export default connect(
     getSeveralTracks,
     createPlaylist,
     getCurrentUser,
+    removeTrack,
   },
 )(Dashboard);

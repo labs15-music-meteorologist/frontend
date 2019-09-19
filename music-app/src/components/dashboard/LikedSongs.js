@@ -30,10 +30,8 @@ class LikedSongs extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    // console.log('PREVIOUS PROPS', prevProps);
-
-    if (this.state.getList === false) {
-      this.props.getPlaylist('4SzEKPufT9vDk1t3yWwlR4');
+    if (this.props.addedTo === true && this.state.getList === false) {
+      this.props.getPlaylist(this.props.playlistId);
       this.setState({
         getList: true,
       });
@@ -41,8 +39,7 @@ class LikedSongs extends React.Component {
   }
 
   render() {
-    console.log('PLAYLIST ID', this.props.playlistId);
-    console.log('PLAYLIST TRACKS', this.props.playlistTracks);
+    console.log('PLAYLIST ID PROPS', this.props.playlistId);
     if (this.props.fetchingLikedSongs) {
       return <h1>Loading...</h1>;
     }
@@ -51,7 +48,7 @@ class LikedSongs extends React.Component {
         <Grid item>
           <Typography
             style={{ fontWeight: 'bold', fontSize: 18, textAlign: 'center' }}>
-            Queue
+            Playlist
           </Typography>
 
           {/* {this.props.several_tracks.tracks &&
@@ -82,9 +79,12 @@ class LikedSongs extends React.Component {
 const mapStateToProps = state => ({
   songs: state.likedSongsReducer.songs,
   users: state.getUsersReducer.users,
+  spotifyUser: state.getUsersReducer.spotifyUser,
   several_tracks: state.queueReducer.several_tracks,
   playlistTracks: state.getPlaylistReducer.playlistTracks.items,
   playlistId: state.createPlaylistReducer.playlistId,
+  playlistCreated: state.createPlaylistReducer.playlistCreated,
+  addedTo: state.addToPlaylistReducer.addedTo,
 });
 
 export default connect(

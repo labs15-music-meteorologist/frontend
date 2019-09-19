@@ -372,10 +372,7 @@ class MusicPlayer extends Component {
 
   let similarityPrediction = (this.props.ds_songs && this.props.song) && this.props.ds_songs.filter(song => 
     song.values === this.props.song.id)
-  console.log("songId", this.props.song.id)
-    console.log("similar", similarityPrediction)
-
-
+    let trueSimilarity = similarityPrediction && similarityPrediction[0]
     return (
       <div className='music-player joyride-player-2'>
         <div className='music-component'>
@@ -522,7 +519,7 @@ class MusicPlayer extends Component {
                   className='joyride-prediction-5'>
                   <h5 style={{ textAlign: 'center' }}>Prediction: </h5>
                   <h3 style={{ textAlign: 'center' }}>
-                    {}
+                    {trueSimilarity && trueSimilarity.similarity}
                   </h3>
                 </div>
                 <div className='joyride-like-6'>

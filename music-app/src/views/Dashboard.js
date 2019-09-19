@@ -15,6 +15,7 @@ import {
   postDSSong,
   getSeveralTracks,
   createPlaylist,
+  getCurrentUser,
   removeTrack,
 } from '../actions';
 
@@ -101,10 +102,13 @@ class Dashboard extends React.Component {
     ],
     popout: false,
     playlistCreated: false,
+    userDataFetching: false,
   };
 
   componentDidMount() {
     this.props.getSpotifyAccountDetails();
+    // this.props.getCurrentUser(this.props.spotifyUser.id);
+    // this.props.persistUser(this.props.spotifyUser);
     this.props.getlikedSongs();
   }
 
@@ -114,13 +118,74 @@ class Dashboard extends React.Component {
     // console.log('Previous Props', prevProps);
     // console.log('Current Props', this.props);
 
-    if (this.state.playlistCreated === false && this.props.spotifyUser.id) {
-      this.props.persistUser(this.props.spotifyUser);
-      this.props.createPlaylist(this.props.spotifyUser.id);
+    // Check to see if a MM playlist has been saved to BE user
+    // -- in order to do this pull in user data from BE specifically playlist.id
+
+    // If not - Create a playlist and save to BE user table
+    // If it has - do nothing
+
+    // if (this.props.spotifyUser) {
+    //   console.log('I EXIST SPOTID', this.props.spotifyUser);
+    //   this.props.persistUser(this.props.spotifyUser);
+    // }
+
+    if (this.state.userDataFetching === false && this.props.spotifyUser.id) {
+      console.log('FIRED OFF');
+      this.props.getCurrentUser(this.props.spotifyUser.id);
+      this.setState({
+        userDataFetching: true,
+      });
+    }
+    console.log('FETCHINGCREATE PLAYLIST', !this.props.fetchingCreatePlaylist);
+    console.log(
+      'CURRENTUSER SPOT_PLAY',
+      !this.props.currentUser.spotify_playlist_id,
+    );
+    // Check user obj for playlist ID
+    setTimeout(() => {
+      if (
+        !this.state.playlistCreated &&
+        /* this.props.spotifyUser.id && */
+        !this.props.fetchingCreatePlaylist &&
+        // this.props.playlistId === null &&
+        !this.props.currentUser.spotify_playlist_id
+      ) {
+        console.log('INSIDE BIG BRAIN FUNCTION', this.props);
+        this.props.createPlaylist(this.props.spotifyUser.id);
+      }
+    }, 4000);
+
+    if (this.props.playlistId && !this.state.playlistCreated) {
+      this.props.persistUser(this.props.spotifyUser, this.props.playlistId);
+      console.log('DID IT HAPPEN?', this.props.playlistId);
       this.setState({
         playlistCreated: true,
       });
+      setTimeout(() => {
+        this.props.getCurrentUser(this.props.spotifyUser.id);
+      }, 5000);
     }
+
+    // if no have then run createplaylist
+    // update component state with flag to false
+
+    // save playlist id through persistuser
+
+    //   if (this.props.playlistId) {
+    //     if (
+    //       this.props.spotifyUser.id &&
+    //       // this.props.playlistId &&
+    //       !this.props.currentUser.spotify_playlist_id &&
+    //       ) {
+    //     // this.props.persistUser(this.props.spotifyUser);
+    //     this.props.createPlaylist(this.props.spotifyUser.id);
+    //     this.setState({
+    //       playlistCreated: true,
+    //     });
+    //     console.log('INSIDE BIG BRAIN FUNCTION', this.props);
+    //   }
+    // }
+    console.log('OUTSIDE BIGGER BRAIN FUNCTION', this.props);
   }
 
   openPlaylist() {
@@ -140,6 +205,7 @@ class Dashboard extends React.Component {
     localStorage.removeItem('token');
     this.props.history.push('/logout');
   };
+
   checkPremiumUser = () => {
     return this.props.spotifyUser.product &&
       this.props.fetchingSpotifyUser === false &&
@@ -159,7 +225,12 @@ class Dashboard extends React.Component {
     if (this.checkPremiumUser() || this.checkNoIOS()) {
       this.props.history.push('/info');
     }
-    console.log('WHAT IS THIS', this.props);
+
+    // console.log('getSpotifyAccountDetails ! _ 0', this.props);
+
+    console.log('What is this', this.props);
+    console.log('HERE I AM ', this.props.playlistId);
+    console.log('DAY AFTER TOMORROW', this.props.currentUser);
 
     return (
       <div className='dashboard'>
@@ -251,10 +322,12 @@ class Dashboard extends React.Component {
 
 const mapStateToProps = state => ({
   spotifyUser: state.getUsersReducer.spotifyUser,
+  currentUser: state.getCurrentUserReducer.currentUser,
   fetchingSpotifyUser: state.getUsersReducer.fetchingSpotifyUser,
   ds_songs: state.queueReducer.ds_songs,
   several_tracks: state.queueReducer.several_tracks,
   playlistId: state.createPlaylistReducer.playlistId,
+  fetchingCreatePlaylist: state.createPlaylistReducer.fetchingPlaylist,
   status: state.removeTrackReducer.status,
 });
 
@@ -268,6 +341,7 @@ export default connect(
     postDSSong,
     getSeveralTracks,
     createPlaylist,
+    getCurrentUser,
     removeTrack,
   },
 )(Dashboard);

@@ -190,7 +190,9 @@ export const persistUser = (spotifyUser, playlistId) => dispatch => {
           id: res.data.id,
           email: res.data.email,
           spotify_user_id: res.data.spotify_user_id,
-          user_spotify_api_key: 'mocked',
+          user_spotify_api_key: Math.floor(
+            Math.random() * 99999999999 + 1,
+          ).toString(),
           date_of_birth: res.data.date_of_birth,
           spotify_product_type: res.data.spotify_product_type,
           display_name: res.data.display_name,
@@ -214,14 +216,14 @@ export const persistUser = (spotifyUser, playlistId) => dispatch => {
       }
     })
     .catch(err => {
-      let count = 0;
-      count++;
       if (err.message === 'Request failed with status code 404') {
         axios
           .post(`${url}v1/users/register`, {
             email: spotifyUser.email,
             spotify_user_id: spotifyUser.id,
-            user_spotify_api_key: 'mocked' + count,
+            user_spotify_api_key: Math.floor(
+              Math.random() * 99999999999 + 1,
+            ).toString(),
             date_of_birth: '2019-07-29',
             spotify_product_type: spotifyUser.product,
             display_name: spotifyUser.display_name,

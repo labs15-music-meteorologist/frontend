@@ -107,7 +107,7 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     this.props.getSpotifyAccountDetails();
-    this.props.getCurrentUser(this.props.spotifyUser.id);
+    // this.props.getCurrentUser(this.props.spotifyUser.id);
     // this.props.persistUser(this.props.spotifyUser);
     this.props.getlikedSongs();
   }
@@ -124,10 +124,10 @@ class Dashboard extends React.Component {
     // If not - Create a playlist and save to BE user table
     // If it has - do nothing
 
-    if (this.props.spotifyUser) {
-      console.log('I EXIST SPOTID', this.props.spotifyUser);
-      this.props.persistUser(this.props.spotifyUser);
-    }
+    // if (this.props.spotifyUser) {
+    //   console.log('I EXIST SPOTID', this.props.spotifyUser);
+    //   this.props.persistUser(this.props.spotifyUser);
+    // }
 
     if (this.state.userDataFetching === false && this.props.spotifyUser.id) {
       console.log('FIRED OFF');

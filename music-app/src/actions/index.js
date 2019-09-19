@@ -8,20 +8,20 @@ const url = process.env.REACT_APP_BACKEND_BASE_URL;
 
 export const getUsers = () => dispatch => {
   dispatch({
-    type: GET_USERS_FETCHING,
+    type: GET_USERS_FETCHING
   });
   axios
     .get(`${url}v1/users`)
     .then(res => {
       dispatch({
         type: GET_USERS_SUCCESS,
-        payload: res.data,
+        payload: res.data
       });
     })
     .catch(err => {
       dispatch({
         type: GET_USERS_FAILURE,
-        payload: err,
+        payload: err
       });
     });
 };
@@ -59,11 +59,11 @@ export const GET_LIKEDSONGS_FAILURE = 'GET_LIKEDSONGS_FAILURE';
 
 export const getlikedSongs = () => dispatch => {
   dispatch({
-    type: GET_LIKEDSONGS_FETCHING,
+    type: GET_LIKEDSONGS_FETCHING
   });
 
   var config = {
-    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
+    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
   };
 
   axios
@@ -71,13 +71,13 @@ export const getlikedSongs = () => dispatch => {
     .then(res => {
       dispatch({
         type: GET_LIKEDSONGS_SUCCESS,
-        payload: res.data.items[0].track.id,
+        payload: res.data.items[0].track.id
       });
     })
     .catch(err => {
       dispatch({
         type: GET_LIKEDSONGS_FAILURE,
-        payload: err,
+        payload: err
       });
     });
 };
@@ -88,11 +88,11 @@ export const GET_TRACK_INFO_FAILURE = 'GET_TRACK_INFO_FAILURE';
 
 export const getTrackInfo = id => dispatch => {
   dispatch({
-    type: GET_TRACK_INFO_FETCHING,
+    type: GET_TRACK_INFO_FETCHING
   });
 
   var config = {
-    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
+    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
   };
 
   axios
@@ -100,13 +100,13 @@ export const getTrackInfo = id => dispatch => {
     .then(res => {
       dispatch({
         type: GET_TRACK_INFO_SUCCESS,
-        payload: res.data,
+        payload: res.data
       });
     })
     .catch(err => {
       dispatch({
         type: GET_TRACK_INFO_FAILURE,
-        payload: err.data,
+        payload: err.data
       });
     });
 };
@@ -120,11 +120,11 @@ export const GET_SPOTIFY_PRIVATE_ACCOUNT_DETAILS_FAILURE =
 
 export const getSpotifyAccountDetails = () => dispatch => {
   dispatch({
-    type: GET_SPOTIFY_PRIVATE_ACCOUNT_DETAILS_FETCHING,
+    type: GET_SPOTIFY_PRIVATE_ACCOUNT_DETAILS_FETCHING
   });
 
   var config = {
-    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
+    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
   };
 
   axios
@@ -135,13 +135,13 @@ export const getSpotifyAccountDetails = () => dispatch => {
       }
       dispatch({
         type: GET_SPOTIFY_PRIVATE_ACCOUNT_DETAILS_SUCCESS,
-        payload: res.data,
+        payload: res.data
       });
     })
     .catch(err => {
       dispatch({
         type: GET_SPOTIFY_PRIVATE_ACCOUNT_DETAILS_FAILURE,
-        payload: err,
+        payload: err
       });
     });
 };
@@ -152,23 +152,23 @@ export const GET_CURRENT_SONG_FAILURE = 'GET_CURRENT_SONG_FAILURE';
 
 export const getCurrentSong = () => dispatch => {
   dispatch({
-    type: GET_CURRENT_SONG_FETCHING,
+    type: GET_CURRENT_SONG_FETCHING
   });
   var config = {
-    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
+    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
   };
   axios
     .get('https://api.spotify.com/v1/me/player/currently-playing', config)
     .then(res => {
       dispatch({
         type: GET_CURRENT_SONG_SUCCESS,
-        payload: res.data.item,
+        payload: res.data.item
       });
     })
     .catch(err => {
       dispatch({
         type: GET_CURRENT_SONG_FAILURE,
-        payload: err.data,
+        payload: err.data
       });
     });
 };
@@ -180,7 +180,7 @@ export const PERSIST_USER_FAILURE = 'GET_CURRENT_SONG_FAILURE';
 export const persistUser = (spotifyUser, playlistId) => dispatch => {
   console.log('THIS IS WHAT I AM USING', spotifyUser, playlistId);
   dispatch({
-    type: PERSIST_USER_FETCHING,
+    type: PERSIST_USER_FETCHING
   });
   axios
     .get(`${url}v1/users/spotify/${spotifyUser.id}`)
@@ -250,20 +250,20 @@ export const POST_DS_SONGS_FAILURE = 'POST_DS_SONGS_FAILURE';
 
 export const postDSSong = obj => dispatch => {
   dispatch({
-    type: POST_DS_SONGS_FETCHING,
+    type: POST_DS_SONGS_FETCHING
   });
   axios
     .post(`${url}v1/recommender`, obj)
     .then(res => {
       dispatch({
         type: POST_DS_SONGS_SUCCESS,
-        payload: res.data,
+        payload: res.data
       });
     })
     .catch(err => {
       dispatch({
         type: POST_DS_SONGS_FAILURE,
-        payload: err.data,
+        payload: err.data
       });
     });
 };
@@ -274,23 +274,23 @@ export const GET_SEVERAL_TRACKS_FAILURE = 'GET_SEVERAL_TRACKS_FAILURE';
 
 export const getSeveralTracks = ids => dispatch => {
   dispatch({
-    type: GET_SEVERAL_TRACKS_FETCHING,
+    type: GET_SEVERAL_TRACKS_FETCHING
   });
   var config = {
-    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
+    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
   };
   axios
     .get(`https://api.spotify.com/v1/tracks/?ids=${ids}`, config)
     .then(res => {
       dispatch({
         type: GET_SEVERAL_TRACKS_SUCCESS,
-        payload: res.data,
+        payload: res.data
       });
     })
     .catch(err => {
       dispatch({
         type: GET_SEVERAL_TRACKS_FAILURE,
-        payload: err.data,
+        payload: err.data
       });
     });
 };
@@ -301,24 +301,24 @@ export const CREATE_PLAYLIST_FAILURE = 'CREATE_PLAYLIST_FAILURE';
 
 export const createPlaylist = spotifyId => dispatch => {
   dispatch({
-    type: CREATE_PLAYLIST_FETCHING,
+    type: CREATE_PLAYLIST_FETCHING
   });
   var config = {
     headers: {
       Authorization: 'Bearer ' + localStorage.getItem('token'),
-      'Content-Type': 'application/json',
-    },
+      'Content-Type': 'application/json'
+    }
   };
   var playlistName = {
     name: 'Music Meteorologist (DYNAMIC)',
-    description: 'A playlist of songs curated by Music Meteorologist',
+    description: 'A playlist of songs curated by Music Meteorologist'
   };
   console.log('spotifyId', spotifyId);
   axios
     .post(
       `https://api.spotify.com/v1/users/${spotifyId}/playlists`,
       playlistName,
-      config,
+      config
     )
     //   console.log('CREATE PLAYLIST ACTION RES PAYLOAD', res.data);
     //   axios.put(`${url}v1/users/spotify/${res.data.owner.id}`, {
@@ -328,13 +328,13 @@ export const createPlaylist = spotifyId => dispatch => {
     .then(res => {
       dispatch({
         type: CREATE_PLAYLIST_SUCCESS,
-        payload: res.data,
+        payload: res.data
       });
     })
     .catch(err => {
       dispatch({
         type: CREATE_PLAYLIST_FAILURE,
-        payload: err,
+        payload: err
       });
     });
 };
@@ -344,11 +344,11 @@ export const GET_PLAYLIST_FAILURE = 'GET_PLAYLIST_FAILURE';
 
 export const getPlaylist = playlistId => dispatch => {
   dispatch({
-    type: GET_PLAYLIST_FETCHING,
+    type: GET_PLAYLIST_FETCHING
   });
 
   var config = {
-    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
+    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
   };
 
   axios
@@ -356,13 +356,13 @@ export const getPlaylist = playlistId => dispatch => {
     .then(res => {
       dispatch({
         type: GET_PLAYLIST_SUCCESS,
-        payload: res.data,
+        payload: res.data
       });
     })
     .catch(err => {
       dispatch({
         type: GET_PLAYLIST_FAILURE,
-        payload: err,
+        payload: err
       });
     });
 };
@@ -373,30 +373,30 @@ export const ADD_TO_PLAYLIST_FAILURE = 'ADD_TO_PLAYLIST_FAILURE';
 
 export const addToPlaylist = (songs, playlistId) => dispatch => {
   dispatch({
-    type: ADD_TO_PLAYLIST_FETCHING,
+    type: ADD_TO_PLAYLIST_FETCHING
   });
 
   var config = {
     headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
-    'Content-Type': 'application/json',
+    'Content-Type': 'application/json'
   };
 
   axios
     .post(
       `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
       songs,
-      config,
+      config
     )
     .then(res => {
       dispatch({
         type: ADD_TO_PLAYLIST_SUCCESS,
-        payload: res.data,
+        payload: res.data
       });
     })
     .catch(err => {
       dispatch({
         type: ADD_TO_PLAYLIST_FAILURE,
-        payload: err,
+        payload: err
       });
     });
 };
@@ -407,33 +407,64 @@ export const REMOVE_TRACK_FAILURE = 'REMOVE_TRACK_FAILURE';
 
 export const removeTrack = (playlistId, currentlyPlayingSong) => dispatch => {
   dispatch({
-    type: REMOVE_TRACK_FETCHING,
+    type: REMOVE_TRACK_FETCHING
   });
   axios({
     method: 'delete',
     url: `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
     headers: {
       Authorization: 'Bearer ' + localStorage.getItem('token'),
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     },
     data: {
       tracks: [
         {
-          uri: `spotify:track:${currentlyPlayingSong}`,
-        },
-      ],
-    },
+          uri: `spotify:track:${currentlyPlayingSong}`
+        }
+      ]
+    }
   })
     .then(res => {
       dispatch({
         type: REMOVE_TRACK_SUCCESS,
-        payload: res.data,
+        payload: res.data
       });
     })
     .catch(err => {
       dispatch({
         type: REMOVE_TRACK_FAILURE,
-        payload: err,
+        payload: err
+      });
+    });
+};
+
+export const PUT_LIKEDSONG_START = 'PUT_LIKEDSONG_START';
+export const PUT_LIKEDSONG__SUCCESS = 'PUT_LIKEDSONG__SUCCESS';
+export const PUT_LIKEDSONG__FAILURE = 'PUT_LIKEDSONG__FAILURE';
+
+export const saveLikedSong = songId => dispatch => {
+  dispatch({
+    type: PUT_LIKEDSONG_START
+  });
+
+  axios({
+    method: 'put',
+    url: `https://api.spotify.com/v1/me/tracks?ids=${songId}`,
+    headers: {
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(res => {
+      dispatch({
+        type: PUT_LIKEDSONG__SUCCESS,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: PUT_LIKEDSONG__FAILURE,
+        payload: err
       });
     });
 };

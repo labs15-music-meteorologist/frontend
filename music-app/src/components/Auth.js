@@ -19,11 +19,12 @@ const scopes = [
   'user-read-currently-playing',
   'user-read-playback-state',
   'user-library-read',
+  'user-library-modify',
   'user-modify-playback-state',
   'user-read-email',
   'user-read-private',
   'playlist-modify-public',
-  'playlist-modify-private',
+  'playlist-modify-private'
 ];
 
 const hash = window.location.hash
@@ -71,10 +72,10 @@ export class Auth extends Component {
                   fontWeight: 'bold',
                   fontSize: 18,
                   color: 'white',
-                  backgroundColor: '#1DB954',
+                  backgroundColor: '#1DB954'
                 }}
                 href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${encodeURIComponent(
-                  scopes,
+                  scopes
                 )}&response_type=token&show_dialog=true`}>
                 Login With Spotify
               </Button>

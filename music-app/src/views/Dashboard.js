@@ -136,7 +136,11 @@ class Dashboard extends React.Component {
         userDataFetching: true,
       });
     }
-
+    console.log('FETCHINGCREATE PLAYLIST', !this.props.fetchingCreatePlaylist);
+    console.log(
+      'CURRENTUSER SPOT_PLAY',
+      !this.props.currentUser.spotify_playlist_id,
+    );
     // Check user obj for playlist ID
     setTimeout(() => {
       if (
@@ -144,7 +148,7 @@ class Dashboard extends React.Component {
         /* this.props.spotifyUser.id && */
         !this.props.fetchingCreatePlaylist &&
         // this.props.playlistId === null &&
-        this.props.currentUser.spotify_playlist_id === null
+        !this.props.currentUser.spotify_playlist_id
       ) {
         console.log('INSIDE BIG BRAIN FUNCTION', this.props);
         this.props.createPlaylist(this.props.spotifyUser.id);

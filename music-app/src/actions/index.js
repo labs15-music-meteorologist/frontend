@@ -229,7 +229,7 @@ export const persistUser = (spotifyUser, playlistId) => dispatch => {
             display_name: spotifyUser.display_name,
             country: spotifyUser.country,
             profile_image_url: '',
-            spotify_playlist_id: null,
+            spotify_playlist_id: playlistId,
           })
           .then(res => {
             console.log('POST PERSIST SUCCESS');

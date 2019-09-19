@@ -108,6 +108,7 @@ class Dashboard extends React.Component {
   componentDidMount() {
     this.props.getSpotifyAccountDetails();
     this.props.getCurrentUser(this.props.spotifyUser.id);
+    // this.props.persistUser(this.props.spotifyUser);
     this.props.getlikedSongs();
   }
 
@@ -123,6 +124,11 @@ class Dashboard extends React.Component {
     // If not - Create a playlist and save to BE user table
     // If it has - do nothing
 
+    if (this.props.spotifyUser) {
+      console.log('I EXIST SPOTID', this.props.spotifyUser);
+      this.props.persistUser(this.props.spotifyUser);
+    }
+
     if (this.state.userDataFetching === false && this.props.spotifyUser.id) {
       console.log('FIRED OFF');
       this.props.getCurrentUser(this.props.spotifyUser.id);
@@ -137,13 +143,13 @@ class Dashboard extends React.Component {
         !this.state.playlistCreated &&
         /* this.props.spotifyUser.id && */
         !this.props.fetchingCreatePlaylist &&
-        this.props.playlistId === null &&
+        // this.props.playlistId === null &&
         this.props.currentUser.spotify_playlist_id === null
       ) {
         console.log('INSIDE BIG BRAIN FUNCTION', this.props);
         this.props.createPlaylist(this.props.spotifyUser.id);
       }
-    }, 5000);
+    }, 4000);
 
     if (this.props.playlistId && !this.state.playlistCreated) {
       this.props.persistUser(this.props.spotifyUser, this.props.playlistId);
@@ -153,7 +159,7 @@ class Dashboard extends React.Component {
       });
       setTimeout(() => {
         this.props.getCurrentUser(this.props.spotifyUser.id);
-      }, 4000);
+      }, 5000);
     }
 
     // if no have then run createplaylist

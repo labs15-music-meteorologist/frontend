@@ -45,6 +45,7 @@ export const getCurrentUser = spotifyId => dispatch => {
       });
     })
     .catch(err => {
+      console.log('GET CURRENT FAIL spotify', spotifyId);
       dispatch({
         type: GET_LOGGED_IN_FAILURE,
         payload: err,
@@ -213,12 +214,14 @@ export const persistUser = (spotifyUser, playlistId) => dispatch => {
       }
     })
     .catch(err => {
+      let count = 0;
+      count++;
       if (err.message === 'Request failed with status code 404') {
         axios
           .post(`${url}v1/users/register`, {
             email: spotifyUser.email,
             spotify_user_id: spotifyUser.id,
-            user_spotify_api_key: localStorage.getItem('token'),
+            user_spotify_api_key: 'mocked' + count,
             date_of_birth: '2019-07-29',
             spotify_product_type: spotifyUser.product,
             display_name: spotifyUser.display_name,
@@ -227,11 +230,13 @@ export const persistUser = (spotifyUser, playlistId) => dispatch => {
             spotify_playlist_id: null,
           })
           .then(res => {
+            console.log('POST PERSIST SUCCESS');
             /* dispatch({ type: PERSIST_USER_SUCCESS, payload: res.data }); */
           })
           .catch(err => {
             /* dispatch({ type: PERSIST_USER_SUCCESS, payload: err }); */
           });
+        console.log('inside err persist', spotifyUser);
       }
       /* dispatch({ type: PERSIST_USER_SUCCESS, payload: err }); */
     });

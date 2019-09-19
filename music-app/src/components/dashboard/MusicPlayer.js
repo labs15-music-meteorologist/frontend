@@ -373,6 +373,9 @@ class MusicPlayer extends Component {
   let similarityPrediction = (this.props.ds_songs && this.props.song) && this.props.ds_songs.filter(song => 
     song.values === this.props.song.id)
     let trueSimilarity = similarityPrediction && similarityPrediction[0]
+    console.log('trueSimilarity', trueSimilarity)
+    let roundedSimilarity = trueSimilarity && trueSimilarity
+    console.log('ROUNDEDSIM', roundedSimilarity)
     return (
       <div className='music-player joyride-player-2'>
         <div className='music-component'>
@@ -519,7 +522,7 @@ class MusicPlayer extends Component {
                   className='joyride-prediction-5'>
                   <h5 style={{ textAlign: 'center' }}>Prediction: </h5>
                   <h3 style={{ textAlign: 'center' }}>
-                    {trueSimilarity && trueSimilarity.similarity}
+                    {trueSimilarity && ((trueSimilarity.similarity*100).toFixed(4))} %
                   </h3>
                 </div>
                 <div className='joyride-like-6'>

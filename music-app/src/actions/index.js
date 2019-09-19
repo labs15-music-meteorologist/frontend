@@ -403,12 +403,14 @@ export const saveLikedSong = songId => dispatch => {
     type: PUT_LIKEDSONG_START
   });
 
-  var config = {
-    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
-  };
-
-  axios
-    .put(`https://api.spotify.com/v1/me/tracks?ids=${songId}`, config)
+  axios({
+    method: 'put',
+    url: `https://api.spotify.com/v1/me/tracks?ids=${songId}`,
+    headers: {
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+      'Content-Type': 'application/json'
+    }
+  })
     .then(res => {
       dispatch({
         type: PUT_LIKEDSONG__SUCCESS,

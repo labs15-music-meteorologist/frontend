@@ -13,6 +13,7 @@ import {
   addToPlaylist,
   removeTrack,
   saveLikedSong,
+  getCurrentUser
 } from '../../actions';
 import SkipLeft from '../../assets/skip-left.png';
 import SkipRight from '../../assets/skip-right.png';
@@ -73,7 +74,7 @@ class MusicPlayer extends Component {
         {
           uris: this.createSpotifyUriArray(this.props.ds_songs),
         },
-        this.props.playlistId,
+        this.props.currentUser.spotify_playlist_id,
       );
     }
 
@@ -305,7 +306,8 @@ class MusicPlayer extends Component {
           // This is where we will control what music is fed to the user
           // If we want to direct them to a specific playlist,artist or album we will pass in "context_uri" with its respective uri
           /* context_uri:  */
-          uris: this.createSpotifyUriArray(this.props.ds_songs),
+          // uris: this.createSpotifyUriArray(this.props.ds_songs),
+          context_uri: `spotify:playlist:${this.props.currentUser.spotify_playlist_id}`
           /*  [
             'spotify:track:5d4zl1SVfjPykq0yfsdil6',
             'spotify:track:32bZwIZbRYe4ImC7PJ8s2A',
@@ -633,6 +635,7 @@ const mapStateToProps = state => ({
   several_tracks: state.queueReducer.several_tracks,
   playlistId: state.createPlaylistReducer.playlistId,
   song_id: state.likedSongsReducer.song_id,
+  currentUser: state.getCurrentUserReducer.currentUser
 });
 
 export default connect(
@@ -646,5 +649,6 @@ export default connect(
     addToPlaylist,
     removeTrack,
     saveLikedSong,
+    getCurrentUser
   },
 )(MusicPlayer);

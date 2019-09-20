@@ -31,21 +31,18 @@ export const GET_LOGGED_IN_SUCCESS = 'GET_LOGGED_IN_SUCCESS';
 export const GET_LOGGED_IN_FAILURE = 'GET_LOGGED_IN_FAILURE';
 
 export const getCurrentUser = spotifyId => dispatch => {
-  console.log('GETCURRENTUSER', spotifyId);
   dispatch({
     type: GET_LOGGED_IN_FETCHING,
   });
   axios
     .get(`${url}v1/users/spotify/${spotifyId}`)
     .then(res => {
-      console.log('CURRENT USER RESPONSE', res.data);
       dispatch({
         type: GET_LOGGED_IN_SUCCESS,
         payload: res.data,
       });
     })
     .catch(err => {
-      console.log('GET CURRENT FAIL spotify', spotifyId);
       dispatch({
         type: GET_LOGGED_IN_FAILURE,
         payload: err,
@@ -178,7 +175,6 @@ export const PERSIST_USER_SUCCESS = 'GET_CURRENT_SONG_SUCCESS';
 export const PERSIST_USER_FAILURE = 'GET_CURRENT_SONG_FAILURE';
 
 export const persistUser = (spotifyUser, playlistId) => dispatch => {
-  console.log('THIS IS WHAT I AM USING', spotifyUser, playlistId);
   dispatch({
     type: PERSIST_USER_FETCHING
   });
@@ -200,15 +196,12 @@ export const persistUser = (spotifyUser, playlistId) => dispatch => {
           profile_image_url: res.data.profile_image_url,
           spotify_playlist_id: playlistId,
         };
-        console.log('THIS IS MY USER', JSON.stringify(user));
         axios
           .put(`${url}v1/users/${res.data.id}`, user)
           .then(res => {
-            console.log('SUCCESSFULL IT WAS MY MAN', res);
             dispatch({ type: PERSIST_USER_SUCCESS });
           })
           .catch(err => {
-            console.log('BUT WHYYYYY', err);
             dispatch({
               type: PERSIST_USER_FAILURE,
             });
@@ -232,13 +225,11 @@ export const persistUser = (spotifyUser, playlistId) => dispatch => {
             spotify_playlist_id: playlistId,
           })
           .then(res => {
-            console.log('POST PERSIST SUCCESS');
             /* dispatch({ type: PERSIST_USER_SUCCESS, payload: res.data }); */
           })
           .catch(err => {
             /* dispatch({ type: PERSIST_USER_SUCCESS, payload: err }); */
           });
-        console.log('inside err persist', spotifyUser);
       }
       /* dispatch({ type: PERSIST_USER_SUCCESS, payload: err }); */
     });
@@ -313,7 +304,6 @@ export const createPlaylist = spotifyId => dispatch => {
     name: 'Music Meteorologist (DYNAMIC)',
     description: 'A playlist of songs curated by Music Meteorologist'
   };
-  console.log('spotifyId', spotifyId);
   axios
     .post(
       `https://api.spotify.com/v1/users/${spotifyId}/playlists`,

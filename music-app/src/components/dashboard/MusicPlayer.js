@@ -12,7 +12,7 @@ import {
   createPlaylist,
   addToPlaylist,
   removeTrack,
-  saveLikedSong
+  saveLikedSong,
 } from '../../actions';
 import SkipLeft from '../../assets/skip-left.png';
 import SkipRight from '../../assets/skip-right.png';
@@ -41,6 +41,7 @@ class MusicPlayer extends Component {
       trackName: 'Track Name',
       artistName: 'Artist Name',
       albumName: 'Album Name',
+      imageSpotify: '',
       imageUrl: '',
       playing: false,
       position: 0,
@@ -49,7 +50,7 @@ class MusicPlayer extends Component {
       songFeatures: [],
       collapse: false,
       currentTrack: '',
-      predictionPrompt: true
+      predictionPrompt: true,
     };
     // this will later be set by setInterval
     this.playerCheckInterval = null;
@@ -62,19 +63,17 @@ class MusicPlayer extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.song_id !== prevProps.song_id) {
       this.dsDelivery();
-      console.log('SONG ID', this.props.song_id);
     }
 
     if (
       this.props.song.id === null ||
       this.props.song.id !== prevProps.song.id
     ) {
-      console.log('This dot props', this.props.ds_songs);
       this.props.addToPlaylist(
         {
-          uris: this.createSpotifyUriArray(this.props.ds_songs)
+          uris: this.createSpotifyUriArray(this.props.ds_songs),
         },
-        this.props.playlistId
+        this.props.playlistId,
       );
     }
 
@@ -83,12 +82,12 @@ class MusicPlayer extends Component {
 
   async dsDelivery() {
     var config = {
-      headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
+      headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
     };
 
     let response = await axios.get(
       `https://api.spotify.com/v1/audio-features/${this.props.song_id}`,
-      config
+      config,
     );
     if (response.status === 200) {
       let {
@@ -103,7 +102,7 @@ class MusicPlayer extends Component {
         speechiness,
         tempo,
         time_signature,
-        valence
+        valence,
       } = response.data;
       let obj = {
         audio_features: {
@@ -118,11 +117,10 @@ class MusicPlayer extends Component {
           speechiness,
           tempo,
           time_signature,
-          valence
-        }
+          valence,
+        },
       };
       this.props.postDSSong(obj);
-      console.log('RESPONSE', response.data);
     }
   }
 
@@ -135,7 +133,7 @@ class MusicPlayer extends Component {
 
   openAudioDetails() {
     this.setState({
-      collapse: !this.state.collapse
+      collapse: !this.state.collapse,
     });
   }
 
@@ -146,13 +144,17 @@ class MusicPlayer extends Component {
       const {
         current_track: currentTrack,
         position,
-        duration
+        duration,
       } = state.track_window;
       const trackName = currentTrack.name;
       const albumName = currentTrack.album.name;
       const artistName = currentTrack.artists
+
         .map(artist => artist.name)
         .join(', ');
+      const imageSpotify = currentTrack.album.images[2].url
+        // .map(image => image.url)
+        
       const playing = !state.paused;
       this.setState({
         position,
@@ -160,12 +162,13 @@ class MusicPlayer extends Component {
         trackName,
         albumName,
         artistName,
-        playing
+        playing,
+        imageSpotify
       });
     } else {
       // state was null, user might have swapped to another device
       this.setState({
-        error: 'Looks like you might have swapped to another device?'
+        error: 'Looks like you might have swapped to another device?',
       });
     }
   }
@@ -178,7 +181,7 @@ class MusicPlayer extends Component {
     });
 
     this.player.on('account_error', e => {});
-gi
+
     this.player.on('playback_error', e => {});
 
     // ONLY WHEN PLAYER STATE CHANGED
@@ -202,7 +205,7 @@ gi
           this.player.seek(1);
           this.player.setVolume(0.5);
         }, 2000);
-        if (this.props.ds_songs.songs) {
+        if (this.props.ds_songs) {
           this.getDataScienceSongArray();
         }
       }
@@ -213,7 +216,7 @@ gi
 
       await this.setState({
         deviceId: device_id,
-        loggedIn: true
+        loggedIn: true,
       });
       this.transferPlaybackHere();
     });
@@ -242,7 +245,7 @@ gi
         name: 'Music Meteorologist Spotify Player',
         getOAuthToken: cb => {
           cb(token);
-        }
+        },
       });
 
       this.createEventHandlers();
@@ -296,13 +299,13 @@ gi
         method: 'PUT',
         headers: {
           authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           // This is where we will control what music is fed to the user
           // If we want to direct them to a specific playlist,artist or album we will pass in "context_uri" with its respective uri
           /* context_uri:  */
-          uris: this.createSpotifyUriArray(this.props.ds_songs)
+          uris: this.createSpotifyUriArray(this.props.ds_songs),
           /*  [
             'spotify:track:5d4zl1SVfjPykq0yfsdil6',
             'spotify:track:32bZwIZbRYe4ImC7PJ8s2A',
@@ -314,9 +317,10 @@ gi
           // pass an array of song uris through the "uris" key
           // The example below if uncommented will direct the user to 3 songs (make sure to comment out the context_uri)
           // uris:["spotify:track:0aULRU35N9kTj6O1xMULRR","spotify:track:0VgkVdmE4gld66l8iyGjgx","spotify:track:5ry2OE6R2zPQFDO85XkgRb"]
-        })
-      }
+        }),
+      },
     );
+    console.log('SONG LOADED INTO PLAYER');
     this.player.setVolume(0);
     setTimeout(() => this.player.pause(), 2000);
     this.player.setVolume(0.5);
@@ -328,7 +332,7 @@ gi
     this.player.resume();
     this.player.setVolume(0.5);
     this.setState({
-      predictionPrompt: !this.state.predictionPrompt
+      predictionPrompt: !this.state.predictionPrompt,
     });
   }
   // BF
@@ -344,7 +348,7 @@ gi
       this.player.setVolume(0.5);
     }, 2000);
     this.setState({
-      predictionPrompt: !this.state.predictionPrompt
+      predictionPrompt: !this.state.predictionPrompt,
     });
   }
 
@@ -361,13 +365,13 @@ gi
     }, 2000);
     this.props.removeTrack('4SzEKPufT9vDk1t3yWwlR4', '2FdQ4hkbqZ1X930oxxgZZy'); // Hardcoded for testing, make dynamic when ready
     this.setState({
-      predictionPrompt: !this.state.predictionPrompt
+      predictionPrompt: !this.state.predictionPrompt,
     });
   }
 
   render() {
-    const { trackName, artistName, albumName, error, playing } = this.state;
-    console.log('MYPROPS', this.props);
+    const { trackName, artistName, albumName, error, playing, imageSpotify } = this.state;
+    console.log('imageurl', this.state.imageSpotify)
     return (
       <div className='music-player joyride-player-2'>
         <div className='music-component'>
@@ -375,14 +379,14 @@ gi
             item
             className='music-component-album-info'
             style={{ maxWidth: '300px' }}>
-            {this.props.imageUrl[1] && (
+            {/* {this.props.imageUrl[1] && ( */}
               <img
                 ref='image'
-                src={this.props.imageUrl[1].url}
+                src={imageSpotify}
                 alt='Album artwork cover.'
                 style={{ maxWidth: '300px', objectFit: 'scale-down' }}
               />
-            )}
+            {/* )} */}
             <p className='p' style={{ fontWeight: 'bold' }}>
               {trackName}
             </p>
@@ -420,7 +424,7 @@ gi
                     overflow: 'auto',
                     backgroundColor: '#1a567a',
                     // backgroundColor: `rgba(${34}, ${109}, ${155}, ${0.98})`,
-                    color: 'lightgray'
+                    color: 'lightgray',
                   }}>
                   <AudioDetails />
                 </Paper>
@@ -495,7 +499,7 @@ gi
                     style={{
                       background: 'none',
                       border: 'none',
-                      outline: 'none'
+                      outline: 'none',
                     }}
                     onClick={() => this.toggleDislikeButton()}>
                     <img
@@ -521,7 +525,7 @@ gi
                     style={{
                       background: 'none',
                       border: 'none',
-                      outline: 'none'
+                      outline: 'none',
                     }}
                     onClick={() => this.toggleLikeButton()}>
                     <img
@@ -551,7 +555,7 @@ gi
                   style={{
                     background: 'none',
                     border: 'none',
-                    outline: 'none'
+                    outline: 'none',
                   }}
                   onClick={() => this.onPrevClick()}>
                   <img
@@ -565,7 +569,7 @@ gi
                   style={{
                     background: 'none',
                     border: 'none',
-                    outline: 'none'
+                    outline: 'none',
                   }}
                   onClick={() => this.onPlayClick()}>
                   {playing ? (
@@ -589,7 +593,7 @@ gi
                   style={{
                     background: 'none',
                     border: 'none',
-                    outline: 'none'
+                    outline: 'none',
                   }}
                   onClick={() => this.onNextClick()}>
                   <img
@@ -618,7 +622,7 @@ const mapStateToProps = state => ({
   ds_songs: state.queueReducer.ds_songs.songs,
   several_tracks: state.queueReducer.several_tracks,
   playlistId: state.createPlaylistReducer.playlistId,
-  song_id: state.likedSongsReducer.song_id
+  song_id: state.likedSongsReducer.song_id,
 });
 
 export default connect(
@@ -631,6 +635,6 @@ export default connect(
     createPlaylist,
     addToPlaylist,
     removeTrack,
-    saveLikedSong
-  }
+    saveLikedSong,
+  },
 )(MusicPlayer);

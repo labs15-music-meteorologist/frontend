@@ -130,18 +130,11 @@ class Dashboard extends React.Component {
     // }
 
     if (this.state.userDataFetching === false && this.props.spotifyUser.id) {
-      console.log('FIRED OFF');
       this.props.getCurrentUser(this.props.spotifyUser.id);
       this.setState({
         userDataFetching: true,
       });
     }
-    console.log('FETCHINGCREATE PLAYLIST', !this.props.fetchingCreatePlaylist);
-    console.log(
-      'CURRENTUSER SPOT_PLAY',
-      !this.props.currentUser.spotify_playlist_id,
-    );
-    // Check user obj for playlist ID
     setTimeout(() => {
       if (
         !this.state.playlistCreated &&
@@ -150,14 +143,12 @@ class Dashboard extends React.Component {
         // this.props.playlistId === null &&
         !this.props.currentUser.spotify_playlist_id
       ) {
-        console.log('INSIDE BIG BRAIN FUNCTION', this.props);
         this.props.createPlaylist(this.props.spotifyUser.id);
       }
     }, 4000);
 
     if (this.props.playlistId && !this.state.playlistCreated) {
       this.props.persistUser(this.props.spotifyUser, this.props.playlistId);
-      console.log('DID IT HAPPEN?', this.props.playlistId);
       this.setState({
         playlistCreated: true,
       });
@@ -185,7 +176,6 @@ class Dashboard extends React.Component {
     //     console.log('INSIDE BIG BRAIN FUNCTION', this.props);
     //   }
     // }
-    console.log('OUTSIDE BIGGER BRAIN FUNCTION', this.props);
   }
 
   openPlaylist() {
@@ -227,10 +217,6 @@ class Dashboard extends React.Component {
     }
 
     // console.log('getSpotifyAccountDetails ! _ 0', this.props);
-
-    console.log('What is this', this.props);
-    console.log('HERE I AM ', this.props.playlistId);
-    console.log('DAY AFTER TOMORROW', this.props.currentUser);
 
     return (
       <div className='dashboard'>

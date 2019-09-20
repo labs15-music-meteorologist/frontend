@@ -12,6 +12,8 @@ const initialState = {
   postingingSongError: '',
   several_tracks: [],
   fetchingError: '',
+  isFetchingDSSongs: '',
+  isFetchingSuccessful: '',
 };
 
 const queueReducer = (state = initialState, action) => {
@@ -19,17 +21,23 @@ const queueReducer = (state = initialState, action) => {
     case POST_DS_SONGS_FETCHING:
       return {
         ...state,
+        isFetchingDSSongs: true,
+        isFetchingSuccessful: false,
         postingingSongError: '',
       };
     case POST_DS_SONGS_SUCCESS:
       return {
         ...state,
         ds_songs: action.payload,
+        isFetchingDSSongs: false,
+        isFetchingSuccessful: true,
         postingingSongError: '',
       };
     case POST_DS_SONGS_FAILURE:
       return {
         ...state,
+        isFetchingDSSongs: false,
+        isFetchingSuccessful: false,
         postingingSongError: action.payload,
       };
 

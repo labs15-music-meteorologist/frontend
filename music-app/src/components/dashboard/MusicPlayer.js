@@ -66,17 +66,20 @@ class MusicPlayer extends Component {
       this.dsDelivery();
     }
 
-    if (
-      this.props.song.id === null ||
-      this.props.song.id !== prevProps.song.id
-    ) {
-      this.props.addToPlaylist(
+    // if (
+    //   (this.props.song.id === null ||
+    //   this.props.song.id !== prevProps.song.id) 
+    //   ) 
+     if (this.props.isFetchingSuccessful === true) {
+        this.props.addToPlaylist(
         {
           uris: this.createSpotifyUriArray(this.props.ds_songs),
         },
-        this.props.currentUser.spotify_playlist_id,
+        this.props.currentUser.spotify_playlist_id, 
       );
-    }
+      }
+      
+    
 
     // spotify:track:5d4zl1SVfjPykq0yfsdil6, spotify:track:32bZwIZbRYe4ImC7PJ8s2A
   }
@@ -189,11 +192,11 @@ class MusicPlayer extends Component {
     this.player.on('player_state_changed', state => {
       this.onStateChanged(state);
 
-      if (this.props.song.id) {
+      if (this.props.song.id && this.props.isFetchingSuccessful === true) {
         this.getCurrentSongFeatures(this.props.song.id);
       }
       // ONLY WHEN NEW SONG
-      if (state.track_window.current_track.id !== this.state.currentTrack) {
+      if (state.track_window.current_track.id !== this.state.currentTrack ) {
         this.currentSong();
         /*   if (this.props.song.id) {
           this.getCurrentSongFeatures(this.props.song.id);
@@ -635,7 +638,9 @@ const mapStateToProps = state => ({
   several_tracks: state.queueReducer.several_tracks,
   playlistId: state.createPlaylistReducer.playlistId,
   song_id: state.likedSongsReducer.song_id,
-  currentUser: state.getCurrentUserReducer.currentUser
+  currentUser: state.getCurrentUserReducer.currentUser,
+  isFetchingSuccessful: state.queueReducer.isFetchingSuccessful,
+  isFetchingDSSongs: state.queueReducer.isFetchingDSSongs,
 });
 
 export default connect(

@@ -51,14 +51,14 @@ class LikedSongs extends React.Component {
             Playlist
           </Typography>
 
-          {/* {this.props.several_tracks.tracks &&
+          {this.props.several_tracks.tracks &&
             this.props.several_tracks.tracks.map(song => (
               <Song song={song} id={song.id} key={song.id} />
-            ))} */}
-          {this.props.playlistTracks &&
+            ))}
+          {/* {this.props.playlistTracks &&
             this.props.playlistTracks.map(song => (
               <Song song={song.track} id={song.track.id} key={song.track.id} />
-            ))}
+            ))} */}
         </Grid>
         {/* <Grid item>
           <Typography

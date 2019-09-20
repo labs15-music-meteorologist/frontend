@@ -178,7 +178,7 @@ class MusicPlayer extends Component {
     });
 
     this.player.on('account_error', e => {});
-
+gi
     this.player.on('playback_error', e => {});
 
     // ONLY WHEN PLAYER STATE CHANGED

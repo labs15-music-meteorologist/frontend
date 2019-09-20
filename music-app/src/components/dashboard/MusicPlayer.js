@@ -13,6 +13,7 @@ import {
   addToPlaylist,
   removeTrack,
   saveLikedSong,
+  getCurrentUser
 } from '../../actions';
 import SkipLeft from '../../assets/skip-left.png';
 import SkipRight from '../../assets/skip-right.png';
@@ -73,7 +74,7 @@ class MusicPlayer extends Component {
         {
           uris: this.createSpotifyUriArray(this.props.ds_songs),
         },
-        this.props.playlistId,
+        this.props.currentUser.spotify_playlist_id,
       );
     }
 
@@ -371,7 +372,7 @@ class MusicPlayer extends Component {
   
 
   render() {
-    const { trackName, artistName, albumName, error, playing } = this.state;
+    const { trackName, artistName, albumName, error, playing, imageSpotify } = this.state;
     console.log('MYPROPS', this.props);
 
   let similarityPrediction = (this.props.ds_songs && this.props.song) && this.props.ds_songs.filter(song => 
@@ -633,6 +634,7 @@ const mapStateToProps = state => ({
   several_tracks: state.queueReducer.several_tracks,
   playlistId: state.createPlaylistReducer.playlistId,
   song_id: state.likedSongsReducer.song_id,
+  currentUser: state.getCurrentUserReducer.currentUser
 });
 
 export default connect(
@@ -646,5 +648,6 @@ export default connect(
     addToPlaylist,
     removeTrack,
     saveLikedSong,
+    getCurrentUser
   },
 )(MusicPlayer);

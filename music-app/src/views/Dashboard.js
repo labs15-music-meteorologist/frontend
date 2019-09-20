@@ -216,6 +216,8 @@ class Dashboard extends React.Component {
       this.props.history.push('/info');
     }
 
+    console.log('what it do', this.props)
+
     // console.log('getSpotifyAccountDetails ! _ 0', this.props);
 
     return (

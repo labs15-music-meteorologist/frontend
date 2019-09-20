@@ -371,7 +371,7 @@ class MusicPlayer extends Component {
   
 
   render() {
-    const { trackName, artistName, albumName, error, playing } = this.state;
+    const { trackName, artistName, albumName, error, playing, imageSpotify } = this.state;
     console.log('MYPROPS', this.props);
 
   let similarityPrediction = (this.props.ds_songs && this.props.song) && this.props.ds_songs.filter(song => 

@@ -39,7 +39,6 @@ class LikedSongs extends React.Component {
   }
 
   render() {
-    console.log('PLAYLIST ID PROPS', this.props.playlistId);
     if (this.props.fetchingLikedSongs) {
       return <h1>Loading...</h1>;
     }

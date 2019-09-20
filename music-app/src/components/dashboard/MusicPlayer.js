@@ -41,6 +41,7 @@ class MusicPlayer extends Component {
       trackName: 'Track Name',
       artistName: 'Artist Name',
       albumName: 'Album Name',
+      imageSpotify: '',
       imageUrl: '',
       playing: false,
       position: 0,
@@ -62,14 +63,12 @@ class MusicPlayer extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.song_id !== prevProps.song_id) {
       this.dsDelivery();
-      console.log('SONG ID', this.props.song_id);
     }
 
     if (
       this.props.song.id === null ||
       this.props.song.id !== prevProps.song.id
     ) {
-      console.log('This dot props', this.props.ds_songs);
       this.props.addToPlaylist(
         {
           uris: this.createSpotifyUriArray(this.props.ds_songs),
@@ -122,7 +121,6 @@ class MusicPlayer extends Component {
         },
       };
       this.props.postDSSong(obj);
-      console.log('RESPONSE', response.data);
     }
   }
 
@@ -151,8 +149,12 @@ class MusicPlayer extends Component {
       const trackName = currentTrack.name;
       const albumName = currentTrack.album.name;
       const artistName = currentTrack.artists
+
         .map(artist => artist.name)
         .join(', ');
+      const imageSpotify = currentTrack.album.images[2].url
+        // .map(image => image.url)
+        
       const playing = !state.paused;
       this.setState({
         position,
@@ -161,6 +163,7 @@ class MusicPlayer extends Component {
         albumName,
         artistName,
         playing,
+        imageSpotify
       });
     } else {
       // state was null, user might have swapped to another device
@@ -317,6 +320,7 @@ class MusicPlayer extends Component {
         }),
       },
     );
+    console.log('SONG LOADED INTO PLAYER');
     this.player.setVolume(0);
     setTimeout(() => this.player.pause(), 2000);
     this.player.setVolume(0.5);
@@ -383,14 +387,14 @@ class MusicPlayer extends Component {
             item
             className='music-component-album-info'
             style={{ maxWidth: '300px' }}>
-            {this.props.imageUrl[1] && (
+            {/* {this.props.imageUrl[1] && ( */}
               <img
                 ref='image'
-                src={this.props.imageUrl[1].url}
+                src={imageSpotify}
                 alt='Album artwork cover.'
                 style={{ maxWidth: '300px', objectFit: 'scale-down' }}
               />
-            )}
+            {/* )} */}
             <p className='p' style={{ fontWeight: 'bold' }}>
               {trackName}
             </p>

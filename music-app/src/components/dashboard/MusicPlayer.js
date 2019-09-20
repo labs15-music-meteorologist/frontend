@@ -316,7 +316,7 @@ class MusicPlayer extends Component {
           // In order manipulate the user's queue and feed them a more fluid and unique array of songs we would instead
           // pass an array of song uris through the "uris" key
           // The example below if uncommented will direct the user to 3 songs (make sure to comment out the context_uri)
-          // uris:["spotify:track:0aULRU35N9kTj6O1xMULRR","spotify:track:0VgkVdmE4gld66l8iyGjgx","spotify:track:5ry2OE6R2zPQFDO85XkgRb"]
+          // uris:["spotify:track:0aULRU35N90kTj6O1xMULRR","spotify:track:0VgkVdmE4gld66l8iyGjgx","spotify:track:5ry2OE6R2zPQFDO85XkgRb"]
         }),
       },
     );
@@ -368,10 +368,18 @@ class MusicPlayer extends Component {
       predictionPrompt: !this.state.predictionPrompt,
     });
   }
+  
 
   render() {
-    const { trackName, artistName, albumName, error, playing, imageSpotify } = this.state;
-    console.log('imageurl', this.state.imageSpotify)
+    const { trackName, artistName, albumName, error, playing } = this.state;
+    console.log('MYPROPS', this.props);
+
+  let similarityPrediction = (this.props.ds_songs && this.props.song) && this.props.ds_songs.filter(song => 
+    song.values === this.props.song.id)
+    let trueSimilarity = similarityPrediction && similarityPrediction[0]
+    console.log('trueSimilarity', trueSimilarity)
+    let roundedSimilarity = trueSimilarity && trueSimilarity
+    console.log('ROUNDEDSIM', roundedSimilarity)
     return (
       <div className='music-player joyride-player-2'>
         <div className='music-component'>
@@ -517,7 +525,9 @@ class MusicPlayer extends Component {
                   style={{ padding: '0px 15px 0px 15px' }}
                   className='joyride-prediction-5'>
                   <h5 style={{ textAlign: 'center' }}>Prediction: </h5>
-                  <h3 style={{ textAlign: 'center' }}>100% </h3>
+                  <h3 style={{ textAlign: 'center' }}>
+                    {trueSimilarity && ((trueSimilarity.similarity*100).toFixed(4))} %
+                  </h3>
                 </div>
                 <div className='joyride-like-6'>
                   <button

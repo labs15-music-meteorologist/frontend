@@ -202,7 +202,7 @@ class MusicPlayer extends Component {
           this.player.seek(1);
           this.player.setVolume(0.5);
         }, 2000);
-        if (this.props.ds_songs.songs) {
+        if (this.props.ds_songs) {
           this.getDataScienceSongArray();
         }
       }

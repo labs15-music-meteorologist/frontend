@@ -13,7 +13,7 @@ import {
   addToPlaylist,
   removeTrack,
   saveLikedSong,
-  getCurrentUser
+  getCurrentUser,
 } from '../../actions';
 import SkipLeft from '../../assets/skip-left.png';
 import SkipRight from '../../assets/skip-right.png';
@@ -68,18 +68,22 @@ class MusicPlayer extends Component {
 
     // if (
     //   (this.props.song.id === null ||
-    //   this.props.song.id !== prevProps.song.id) 
-    //   ) 
-     if (this.props.isFetchingSuccessful === true) {
-        this.props.addToPlaylist(
+    //   this.props.song.id !== prevProps.song.id)
+    //   )
+
+    // This now compares ds_songs to prevProps and only adds the songs to the playlist if they have been updated from ds_songs. \
+    // Without this it will happen happens on every component update, play song, access app playlist, etc.
+    if (
+      this.props.isFetchingSuccessful === true &&
+      this.props.ds_songs !== prevProps.ds_songs
+    ) {
+      this.props.addToPlaylist(
         {
           uris: this.createSpotifyUriArray(this.props.ds_songs),
         },
-        this.props.currentUser.spotify_playlist_id, 
+        this.props.currentUser.spotify_playlist_id,
       );
-      }
-      
-    
+    }
 
     // spotify:track:5d4zl1SVfjPykq0yfsdil6, spotify:track:32bZwIZbRYe4ImC7PJ8s2A
   }
@@ -156,9 +160,9 @@ class MusicPlayer extends Component {
 
         .map(artist => artist.name)
         .join(', ');
-      const imageSpotify = currentTrack.album.images[2].url
-        // .map(image => image.url)
-        
+      const imageSpotify = currentTrack.album.images[2].url;
+      // .map(image => image.url)
+
       const playing = !state.paused;
       this.setState({
         position,
@@ -167,7 +171,7 @@ class MusicPlayer extends Component {
         albumName,
         artistName,
         playing,
-        imageSpotify
+        imageSpotify,
       });
     } else {
       // state was null, user might have swapped to another device
@@ -196,7 +200,7 @@ class MusicPlayer extends Component {
         this.getCurrentSongFeatures(this.props.song.id);
       }
       // ONLY WHEN NEW SONG
-      if (state.track_window.current_track.id !== this.state.currentTrack ) {
+      if (state.track_window.current_track.id !== this.state.currentTrack) {
         this.currentSong();
         /*   if (this.props.song.id) {
           this.getCurrentSongFeatures(this.props.song.id);
@@ -310,7 +314,7 @@ class MusicPlayer extends Component {
           // If we want to direct them to a specific playlist,artist or album we will pass in "context_uri" with its respective uri
           /* context_uri:  */
           // uris: this.createSpotifyUriArray(this.props.ds_songs),
-          context_uri: `spotify:playlist:${this.props.currentUser.spotify_playlist_id}`
+          context_uri: `spotify:playlist:${this.props.currentUser.spotify_playlist_id}`,
           /*  [
             'spotify:track:5d4zl1SVfjPykq0yfsdil6',
             'spotify:track:32bZwIZbRYe4ImC7PJ8s2A',
@@ -373,18 +377,26 @@ class MusicPlayer extends Component {
       predictionPrompt: !this.state.predictionPrompt,
     });
   }
-  
 
   render() {
-    const { trackName, artistName, albumName, error, playing, imageSpotify } = this.state;
+    const {
+      trackName,
+      artistName,
+      albumName,
+      error,
+      playing,
+      imageSpotify,
+    } = this.state;
     console.log('MYPROPS', this.props);
 
-  let similarityPrediction = (this.props.ds_songs && this.props.song) && this.props.ds_songs.filter(song => 
-    song.values === this.props.song.id)
-    let trueSimilarity = similarityPrediction && similarityPrediction[0]
-    console.log('trueSimilarity', trueSimilarity)
-    let roundedSimilarity = trueSimilarity && trueSimilarity
-    console.log('ROUNDEDSIM', roundedSimilarity)
+    let similarityPrediction =
+      this.props.ds_songs &&
+      this.props.song &&
+      this.props.ds_songs.filter(song => song.values === this.props.song.id);
+    let trueSimilarity = similarityPrediction && similarityPrediction[0];
+    console.log('trueSimilarity', trueSimilarity);
+    let roundedSimilarity = trueSimilarity && trueSimilarity;
+    console.log('ROUNDEDSIM', roundedSimilarity);
     return (
       <div className='music-player joyride-player-2'>
         <div className='music-component'>
@@ -393,12 +405,12 @@ class MusicPlayer extends Component {
             className='music-component-album-info'
             style={{ maxWidth: '300px' }}>
             {/* {this.props.imageUrl[1] && ( */}
-              <img
-                ref='image'
-                src={imageSpotify}
-                alt='Album artwork cover.'
-                style={{ maxWidth: '300px', objectFit: 'scale-down' }}
-              />
+            <img
+              ref='image'
+              src={imageSpotify}
+              alt='Album artwork cover.'
+              style={{ maxWidth: '300px', objectFit: 'scale-down' }}
+            />
             {/* )} */}
             <p className='p' style={{ fontWeight: 'bold' }}>
               {trackName}
@@ -531,7 +543,9 @@ class MusicPlayer extends Component {
                   className='joyride-prediction-5'>
                   <h5 style={{ textAlign: 'center' }}>Prediction: </h5>
                   <h3 style={{ textAlign: 'center' }}>
-                    {trueSimilarity && ((trueSimilarity.similarity*100).toFixed(4))} %
+                    {trueSimilarity &&
+                      (trueSimilarity.similarity * 100).toFixed(4)}{' '}
+                    %
                   </h3>
                 </div>
                 <div className='joyride-like-6'>
@@ -654,6 +668,6 @@ export default connect(
     addToPlaylist,
     removeTrack,
     saveLikedSong,
-    getCurrentUser
+    getCurrentUser,
   },
 )(MusicPlayer);

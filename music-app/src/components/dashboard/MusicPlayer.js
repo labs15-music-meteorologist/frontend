@@ -207,8 +207,8 @@ class MusicPlayer extends Component {
     this.player.on('player_state_changed', state => {
       this.onStateChanged(state);
 
-      if (this.props.song.id && this.props.isFetchingSuccessful === true) {
-        this.getCurrentSongFeatures(this.props.song.id);
+      if (this.props.ds_songs && this.props.isFetchingSuccessful === true) {
+        this.props.song && this.getCurrentSongFeatures(this.props.song.id);
       }
       // ONLY WHEN NEW SONG
       if (state.track_window.current_track.id !== this.state.currentTrack) {

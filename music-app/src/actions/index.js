@@ -178,6 +178,11 @@ export const persistUser = (spotifyUser, playlistId) => dispatch => {
   dispatch({
     type: PERSIST_USER_FETCHING,
   });
+  console.log(
+    'after inital dispatch persist user fetching',
+    spotifyUser,
+    playlistId,
+  );
   axios
     .get(`${url}v1/users/spotify/${spotifyUser.id}`)
     .then(res => {
@@ -194,7 +199,10 @@ export const persistUser = (spotifyUser, playlistId) => dispatch => {
           display_name: res.data.display_name,
           country: res.data.country,
           profile_image_url: res.data.profile_image_url,
-          spotify_playlist_id: playlistId,
+          spotify_playlist_id:
+            playlistId === undefined
+              ? res.data.spotify_playlist_id
+              : playlistId,
         };
         axios
           .put(`${url}v1/users/${res.data.id}`, user)
@@ -209,7 +217,9 @@ export const persistUser = (spotifyUser, playlistId) => dispatch => {
       }
     })
     .catch(err => {
+      console.log('inside err persist user', err);
       if (err.message === 'Request failed with status code 404') {
+        console.log('spotify user inside persist', spotifyUser, playlistId);
         axios
           .post(`${url}v1/users/register`, {
             email: spotifyUser.email,

@@ -66,9 +66,9 @@ class MusicPlayer extends Component {
       this.dsDelivery();
     }
 
-    if (
-      this.props.song.id === null ||
-      this.props.song.id !== prevProps.song.id
+    if (this.props.ds_songs
+      // this.props.song.id === null ||
+      // this.props.song.id !== prevProps.song.id
     ) {
       this.props.addToPlaylist(
         {
@@ -77,7 +77,7 @@ class MusicPlayer extends Component {
         this.props.currentUser.spotify_playlist_id,
       );
     }
-
+    
     // spotify:track:5d4zl1SVfjPykq0yfsdil6, spotify:track:32bZwIZbRYe4ImC7PJ8s2A
   }
 
@@ -129,6 +129,7 @@ class MusicPlayer extends Component {
     if (this.state.token !== '') {
       this.setState({ loggedIn: true });
       this.playerCheckInterval = setInterval(() => this.checkForPlayer(), 1000);
+      console.log('HANDLELOGIN')
     }
   }
 
@@ -154,7 +155,6 @@ class MusicPlayer extends Component {
         .map(artist => artist.name)
         .join(', ');
       const imageSpotify = currentTrack.album.images[2].url
-        // .map(image => image.url)
         
       const playing = !state.paused;
       this.setState({
@@ -175,6 +175,7 @@ class MusicPlayer extends Component {
   }
 
   createEventHandlers() {
+    console.log('CREATE EVENT HANDLERS')
     this.player.on('initialization_error', e => {});
 
     this.player.on('authentication_error', e => {
@@ -184,16 +185,20 @@ class MusicPlayer extends Component {
     this.player.on('account_error', e => {});
 
     this.player.on('playback_error', e => {});
+    
 
     // ONLY WHEN PLAYER STATE CHANGED
     this.player.on('player_state_changed', state => {
       this.onStateChanged(state);
 
       if (this.props.song.id) {
+        console.log('GET CURRENT SONG FEATURES')
         this.getCurrentSongFeatures(this.props.song.id);
       }
+      
       // ONLY WHEN NEW SONG
       if (state.track_window.current_track.id !== this.state.currentTrack) {
+        console.log('CURRENT SONG FETCH')
         this.currentSong();
         /*   if (this.props.song.id) {
           this.getCurrentSongFeatures(this.props.song.id);
@@ -220,6 +225,7 @@ class MusicPlayer extends Component {
         loggedIn: true,
       });
       this.transferPlaybackHere();
+      this.props.ds_songs && this.currentSong();
     });
   }
 
@@ -238,8 +244,9 @@ class MusicPlayer extends Component {
 
   checkForPlayer() {
     const { token } = this.state;
-
+console.log('CHECKFORPLAYER')
     if (window.Spotify !== undefined) {
+      console.log('PLAYER INTERVAL CHECK')
       clearInterval(this.playerCheckInterval);
 
       this.player = new window.Spotify.Player({

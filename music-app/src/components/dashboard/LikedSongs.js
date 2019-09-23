@@ -47,7 +47,7 @@ class LikedSongs extends React.Component {
         <Grid item>
           <Typography
             style={{ fontWeight: 'bold', fontSize: 18, textAlign: 'center' }}>
-            Playlist
+            Last 20 Recommended Songs
           </Typography>
 
           {this.props.several_tracks.tracks &&

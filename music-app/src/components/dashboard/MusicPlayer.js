@@ -82,23 +82,7 @@ class MusicPlayer extends Component {
         this.props.currentUser.spotify_playlist_id
       );
     }
-
-    // if (this.player) {
-    //   this.getPlaybackState();
-    // }
-    // spotify:track:5d4zl1SVfjPykq0yfsdil6, spotify:track:32bZwIZbRYe4ImC7PJ8s2A
   }
-
-  // getPlaybackState() {
-  //   this.player.getCurrentState().then(state => {
-  //     if (!state) {
-  //       console.error('User is not playing music through the Web Playback SDK');
-  //       return;
-  //     }
-
-  //     console.log('Playback State', state);
-  //   });
-  // }
 
   async dsDelivery() {
     var config = {

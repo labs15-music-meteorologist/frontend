@@ -12,6 +12,7 @@ import {
   createPlaylist,
   addToPlaylist,
   removeTrack,
+  getlikedSongs,
   saveLikedSong,
   getCurrentUser
 } from '../../actions';
@@ -51,7 +52,7 @@ class MusicPlayer extends Component {
       songFeatures: [],
       collapse: false,
       currentTrack: '',
-      predictionPrompt: true,
+      predictionPrompt: true
     };
     // this will later be set by setInterval
     this.playerCheckInterval = null;
@@ -65,30 +66,43 @@ class MusicPlayer extends Component {
     if (this.props.song_id !== prevProps.song_id) {
       this.dsDelivery();
     }
+    if (this.props.savingLike) {
+      console.log('GET LIKED SONG IN CDU');
+      this.props.getlikedSongs();
+    }
 
+    // if (
+    //   (this.props.song.id === null ||
+    //   this.props.song.id !== prevProps.song.id)
+    //   )
+
+    // JBF
+    // This now compares ds_songs to prevProps and only adds the songs to the playlist if they have been updated from ds_songs.
+    // Without this it will happen happens on every component update, play song, access app playlist, etc.
+
+    // The songs will be re-added to the playlist upon relog as they are no longer in state.
+    // Adding the ability to query existing songs inside of the saved playlist and implementing similar logic should prevent this.
     if (
-      this.props.song.id === null ||
-      this.props.song.id !== prevProps.song.id
+      this.props.isFetchingSuccessful === true &&
+      this.props.ds_songs !== prevProps.ds_songs
     ) {
       this.props.addToPlaylist(
         {
-          uris: this.createSpotifyUriArray(this.props.ds_songs),
+          uris: this.createSpotifyUriArray(this.props.ds_songs)
         },
-        this.props.currentUser.spotify_playlist_id,
+        this.props.currentUser.spotify_playlist_id
       );
     }
-
-    // spotify:track:5d4zl1SVfjPykq0yfsdil6, spotify:track:32bZwIZbRYe4ImC7PJ8s2A
   }
 
   async dsDelivery() {
     var config = {
-      headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
+      headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
     };
 
     let response = await axios.get(
       `https://api.spotify.com/v1/audio-features/${this.props.song_id}`,
-      config,
+      config
     );
     if (response.status === 200) {
       let {
@@ -103,7 +117,7 @@ class MusicPlayer extends Component {
         speechiness,
         tempo,
         time_signature,
-        valence,
+        valence
       } = response.data;
       let obj = {
         audio_features: {
@@ -118,9 +132,13 @@ class MusicPlayer extends Component {
           speechiness,
           tempo,
           time_signature,
-          valence,
-        },
+          valence
+        }
       };
+      console.log(
+        'inside async dsDelivery musicplayer obj',
+        JSON.stringify(obj)
+      );
       this.props.postDSSong(obj);
     }
   }
@@ -134,7 +152,7 @@ class MusicPlayer extends Component {
 
   openAudioDetails() {
     this.setState({
-      collapse: !this.state.collapse,
+      collapse: !this.state.collapse
     });
   }
 
@@ -145,7 +163,7 @@ class MusicPlayer extends Component {
       const {
         current_track: currentTrack,
         position,
-        duration,
+        duration
       } = state.track_window;
       const trackName = currentTrack.name;
       const albumName = currentTrack.album.name;
@@ -153,9 +171,9 @@ class MusicPlayer extends Component {
 
         .map(artist => artist.name)
         .join(', ');
-      const imageSpotify = currentTrack.album.images[2].url
-        // .map(image => image.url)
-        
+      const imageSpotify = currentTrack.album.images[2].url;
+      // .map(image => image.url)
+
       const playing = !state.paused;
       this.setState({
         position,
@@ -169,7 +187,7 @@ class MusicPlayer extends Component {
     } else {
       // state was null, user might have swapped to another device
       this.setState({
-        error: 'Looks like you might have swapped to another device?',
+        error: 'Looks like you might have swapped to another device?'
       });
     }
   }
@@ -189,7 +207,7 @@ class MusicPlayer extends Component {
     this.player.on('player_state_changed', state => {
       this.onStateChanged(state);
 
-      if (this.props.song.id) {
+      if (this.props.song.id && this.props.isFetchingSuccessful === true) {
         this.getCurrentSongFeatures(this.props.song.id);
       }
       // ONLY WHEN NEW SONG
@@ -217,9 +235,11 @@ class MusicPlayer extends Component {
 
       await this.setState({
         deviceId: device_id,
-        loggedIn: true,
+        loggedIn: true
       });
+      console.log('Fired Off Transfer Playback ready');
       this.transferPlaybackHere();
+      this.props.ds_songs && this.currentSong();
     });
   }
 
@@ -246,7 +266,7 @@ class MusicPlayer extends Component {
         name: 'Music Meteorologist Spotify Player',
         getOAuthToken: cb => {
           cb(token);
-        },
+        }
       });
 
       this.createEventHandlers();
@@ -300,7 +320,7 @@ class MusicPlayer extends Component {
         method: 'PUT',
         headers: {
           authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           // This is where we will control what music is fed to the user
@@ -319,8 +339,8 @@ class MusicPlayer extends Component {
           // pass an array of song uris through the "uris" key
           // The example below if uncommented will direct the user to 3 songs (make sure to comment out the context_uri)
           // uris:["spotify:track:0aULRU35N90kTj6O1xMULRR","spotify:track:0VgkVdmE4gld66l8iyGjgx","spotify:track:5ry2OE6R2zPQFDO85XkgRb"]
-        }),
-      },
+        })
+      }
     );
     console.log('SONG LOADED INTO PLAYER');
     this.player.setVolume(0);
@@ -334,7 +354,7 @@ class MusicPlayer extends Component {
     this.player.resume();
     this.player.setVolume(0.5);
     this.setState({
-      predictionPrompt: !this.state.predictionPrompt,
+      predictionPrompt: !this.state.predictionPrompt
     });
   }
   // BF
@@ -350,7 +370,7 @@ class MusicPlayer extends Component {
       this.player.setVolume(0.5);
     }, 2000);
     this.setState({
-      predictionPrompt: !this.state.predictionPrompt,
+      predictionPrompt: !this.state.predictionPrompt
     });
   }
 
@@ -367,21 +387,29 @@ class MusicPlayer extends Component {
     }, 2000);
     this.props.removeTrack('4SzEKPufT9vDk1t3yWwlR4', '2FdQ4hkbqZ1X930oxxgZZy'); // Hardcoded for testing, make dynamic when ready
     this.setState({
-      predictionPrompt: !this.state.predictionPrompt,
+      predictionPrompt: !this.state.predictionPrompt
     });
   }
-  
 
   render() {
-    const { trackName, artistName, albumName, error, playing, imageSpotify } = this.state;
+    const {
+      trackName,
+      artistName,
+      albumName,
+      error,
+      playing,
+      imageSpotify
+    } = this.state;
     console.log('MYPROPS', this.props);
 
-  let similarityPrediction = (this.props.ds_songs && this.props.song) && this.props.ds_songs.filter(song => 
-    song.values === this.props.song.id)
-    let trueSimilarity = similarityPrediction && similarityPrediction[0]
-    console.log('trueSimilarity', trueSimilarity)
-    let roundedSimilarity = trueSimilarity && trueSimilarity
-    console.log('ROUNDEDSIM', roundedSimilarity)
+    let similarityPrediction =
+      this.props.ds_songs &&
+      this.props.song &&
+      this.props.ds_songs.filter(song => song.values === this.props.song.id);
+    let trueSimilarity = similarityPrediction && similarityPrediction[0];
+    console.log('trueSimilarity', trueSimilarity);
+    let roundedSimilarity = trueSimilarity && trueSimilarity;
+    console.log('ROUNDEDSIM', roundedSimilarity);
     return (
       <div className='music-player joyride-player-2'>
         <div className='music-component'>
@@ -390,12 +418,12 @@ class MusicPlayer extends Component {
             className='music-component-album-info'
             style={{ maxWidth: '300px' }}>
             {/* {this.props.imageUrl[1] && ( */}
-              <img
-                ref='image'
-                src={imageSpotify}
-                alt='Album artwork cover.'
-                style={{ maxWidth: '300px', objectFit: 'scale-down' }}
-              />
+            <img
+              ref='image'
+              src={imageSpotify}
+              alt='Album artwork cover.'
+              style={{ maxWidth: '300px', objectFit: 'scale-down' }}
+            />
             {/* )} */}
             <p className='p' style={{ fontWeight: 'bold' }}>
               {trackName}
@@ -434,7 +462,7 @@ class MusicPlayer extends Component {
                     overflow: 'auto',
                     backgroundColor: '#1a567a',
                     // backgroundColor: `rgba(${34}, ${109}, ${155}, ${0.98})`,
-                    color: 'lightgray',
+                    color: 'lightgray'
                   }}>
                   <AudioDetails />
                 </Paper>
@@ -509,7 +537,7 @@ class MusicPlayer extends Component {
                     style={{
                       background: 'none',
                       border: 'none',
-                      outline: 'none',
+                      outline: 'none'
                     }}
                     onClick={() => this.toggleDislikeButton()}>
                     <img
@@ -528,7 +556,9 @@ class MusicPlayer extends Component {
                   className='joyride-prediction-5'>
                   <h5 style={{ textAlign: 'center' }}>Prediction: </h5>
                   <h3 style={{ textAlign: 'center' }}>
-                    {trueSimilarity && ((trueSimilarity.similarity*100).toFixed(4))} %
+                    {trueSimilarity &&
+                      (trueSimilarity.similarity * 100).toFixed(4)}{' '}
+                    %
                   </h3>
                 </div>
                 <div className='joyride-like-6'>
@@ -537,7 +567,7 @@ class MusicPlayer extends Component {
                     style={{
                       background: 'none',
                       border: 'none',
-                      outline: 'none',
+                      outline: 'none'
                     }}
                     onClick={() => this.toggleLikeButton()}>
                     <img
@@ -567,7 +597,7 @@ class MusicPlayer extends Component {
                   style={{
                     background: 'none',
                     border: 'none',
-                    outline: 'none',
+                    outline: 'none'
                   }}
                   onClick={() => this.onPrevClick()}>
                   <img
@@ -581,7 +611,7 @@ class MusicPlayer extends Component {
                   style={{
                     background: 'none',
                     border: 'none',
-                    outline: 'none',
+                    outline: 'none'
                   }}
                   onClick={() => this.onPlayClick()}>
                   {playing ? (
@@ -605,7 +635,7 @@ class MusicPlayer extends Component {
                   style={{
                     background: 'none',
                     border: 'none',
-                    outline: 'none',
+                    outline: 'none'
                   }}
                   onClick={() => this.onNextClick()}>
                   <img
@@ -635,7 +665,10 @@ const mapStateToProps = state => ({
   several_tracks: state.queueReducer.several_tracks,
   playlistId: state.createPlaylistReducer.playlistId,
   song_id: state.likedSongsReducer.song_id,
-  currentUser: state.getCurrentUserReducer.currentUser
+  savingLike: state.likedSongsReducer.savingLike,
+  currentUser: state.getCurrentUserReducer.currentUser,
+  isFetchingSuccessful: state.queueReducer.isFetchingSuccessful,
+  isFetchingDSSongs: state.queueReducer.isFetchingDSSongs
 });
 
 export default connect(
@@ -648,7 +681,8 @@ export default connect(
     createPlaylist,
     addToPlaylist,
     removeTrack,
+    getlikedSongs,
     saveLikedSong,
     getCurrentUser
-  },
+  }
 )(MusicPlayer);

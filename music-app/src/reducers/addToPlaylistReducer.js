@@ -6,6 +6,7 @@ import {
 
 const initialState = {
   addedTo: false,
+  isFetching: false,
   error: '',
 };
 
@@ -14,10 +15,12 @@ const addToPlaylistReducer = (state = initialState, action) => {
     case ADD_TO_PLAYLIST_FETCHING:
       return {
         ...state,
+        isFetching: true,
       };
     case ADD_TO_PLAYLIST_SUCCESS:
       return {
         ...state,
+        isFetching: false,
         addedTo: true,
       };
     case ADD_TO_PLAYLIST_FAILURE:

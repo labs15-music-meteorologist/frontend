@@ -71,9 +71,20 @@ class MusicPlayer extends Component {
       this.props.getlikedSongs();
     }
 
+    // if (
+    //   (this.props.song.id === null ||
+    //   this.props.song.id !== prevProps.song.id)
+    //   )
+
+    // JBF
+    // This now compares ds_songs to prevProps and only adds the songs to the playlist if they have been updated from ds_songs.
+    // Without this it will happen happens on every component update, play song, access app playlist, etc.
+
+    // The songs will be re-added to the playlist upon relog as they are no longer in state.
+    // Adding the ability to query existing songs inside of the saved playlist and implementing similar logic should prevent this.
     if (
-      this.props.song.id === null ||
-      this.props.song.id !== prevProps.song.id
+      this.props.isFetchingSuccessful === true &&
+      this.props.ds_songs !== prevProps.ds_songs
     ) {
       this.props.addToPlaylist(
         {
@@ -124,6 +135,10 @@ class MusicPlayer extends Component {
           valence
         }
       };
+      console.log(
+        'inside async dsDelivery musicplayer obj',
+        JSON.stringify(obj)
+      );
       this.props.postDSSong(obj);
     }
   }
@@ -192,7 +207,7 @@ class MusicPlayer extends Component {
     this.player.on('player_state_changed', state => {
       this.onStateChanged(state);
 
-      if (this.props.song.id) {
+      if (this.props.song.id && this.props.isFetchingSuccessful === true) {
         this.getCurrentSongFeatures(this.props.song.id);
       }
       // ONLY WHEN NEW SONG
@@ -222,7 +237,9 @@ class MusicPlayer extends Component {
         deviceId: device_id,
         loggedIn: true
       });
+      console.log('Fired Off Transfer Playback ready');
       this.transferPlaybackHere();
+      this.props.ds_songs && this.currentSong();
     });
   }
 
@@ -649,7 +666,9 @@ const mapStateToProps = state => ({
   playlistId: state.createPlaylistReducer.playlistId,
   song_id: state.likedSongsReducer.song_id,
   savingLike: state.likedSongsReducer.savingLike,
-  currentUser: state.getCurrentUserReducer.currentUser
+  currentUser: state.getCurrentUserReducer.currentUser,
+  isFetchingSuccessful: state.queueReducer.isFetchingSuccessful,
+  isFetchingDSSongs: state.queueReducer.isFetchingDSSongs
 });
 
 export default connect(

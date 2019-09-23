@@ -38,7 +38,7 @@ class LinearDeterminate extends Component {
   render() {
     const player = this.props.player;
     const song = this.props.song;
-    this.props.song && this.checkPlayer(player, song);
+    this.checkPlayer(player, song);
     const tvalue = Math.floor(
       (this.state.position / this.state.duration) * 100,
     );

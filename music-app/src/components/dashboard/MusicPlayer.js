@@ -66,9 +66,8 @@ class MusicPlayer extends Component {
       this.dsDelivery();
     }
 
-    if (this.props.ds_songs
-      // this.props.song.id === null ||
-      // this.props.song.id !== prevProps.song.id
+    if (this.props.ds_songs && this.props.addToPlaylistFetching === false
+    // ()
     ) {
       this.props.addToPlaylist(
         {
@@ -642,7 +641,8 @@ const mapStateToProps = state => ({
   several_tracks: state.queueReducer.several_tracks,
   playlistId: state.createPlaylistReducer.playlistId,
   song_id: state.likedSongsReducer.song_id,
-  currentUser: state.getCurrentUserReducer.currentUser
+  currentUser: state.getCurrentUserReducer.currentUser,
+  addToPlaylistFetching: state.addToPlaylistReducer.isFetchingSuccessful
 });
 
 export default connect(

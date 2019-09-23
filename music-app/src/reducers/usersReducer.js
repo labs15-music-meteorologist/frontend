@@ -4,7 +4,10 @@ import {
   GET_USERS_FAILURE,
   GET_SPOTIFY_PRIVATE_ACCOUNT_DETAILS_FETCHING,
   GET_SPOTIFY_PRIVATE_ACCOUNT_DETAILS_SUCCESS,
-  GET_SPOTIFY_PRIVATE_ACCOUNT_DETAILS_FAILURE
+  GET_SPOTIFY_PRIVATE_ACCOUNT_DETAILS_FAILURE,
+  PERSIST_USER_FETCHING,
+  PERSIST_USER_SUCCESS,
+  PERSIST_USER_FAILURE,
 } from '../actions';
 
 const initialState = {
@@ -55,6 +58,18 @@ const getUsersReducer = (state = initialState, action) => {
         ...state,
         fetchingSpotifyUser: false,
         fetchingSpotifyUserError: action.payload,
+      };
+    case PERSIST_USER_FETCHING:
+      return {
+        ...state,
+      };
+    case PERSIST_USER_SUCCESS:
+      return {
+        ...state,
+      };
+    case PERSIST_USER_FAILURE:
+      return {
+        ...state,
       };
     default:
       return state;

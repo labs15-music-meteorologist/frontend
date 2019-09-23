@@ -71,8 +71,12 @@ class MusicPlayer extends Component {
     //   this.props.song.id !== prevProps.song.id)
     //   )
 
-    // This now compares ds_songs to prevProps and only adds the songs to the playlist if they have been updated from ds_songs. \
+    // JBF
+    // This now compares ds_songs to prevProps and only adds the songs to the playlist if they have been updated from ds_songs.
     // Without this it will happen happens on every component update, play song, access app playlist, etc.
+
+    // The songs will be re-added to the playlist upon relog as they are no longer in state.
+    // Adding the ability to query existing songs inside of the saved playlist and implementing similar logic should prevent this.
     if (
       this.props.isFetchingSuccessful === true &&
       this.props.ds_songs !== prevProps.ds_songs
@@ -128,6 +132,10 @@ class MusicPlayer extends Component {
           valence,
         },
       };
+      console.log(
+        'inside async dsDelivery musicplayer obj',
+        JSON.stringify(obj),
+      );
       this.props.postDSSong(obj);
     }
   }
@@ -226,7 +234,9 @@ class MusicPlayer extends Component {
         deviceId: device_id,
         loggedIn: true,
       });
+      console.log('Fired Off Transfer Playback ready');
       this.transferPlaybackHere();
+      this.props.ds_songs && this.currentSong();
     });
   }
 

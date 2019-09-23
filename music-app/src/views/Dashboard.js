@@ -108,7 +108,9 @@ class Dashboard extends React.Component {
   componentDidMount() {
     this.props.getSpotifyAccountDetails();
     // this.props.getCurrentUser(this.props.spotifyUser.id);
-    // this.props.persistUser(this.props.spotifyUser);
+    if (this.props.spotifyUser.length > 0) {
+      this.props.persistUser(this.props.spotifyUser);
+    }
     this.props.getlikedSongs();
   }
 

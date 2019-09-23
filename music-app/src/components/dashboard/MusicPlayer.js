@@ -14,7 +14,7 @@ import {
   removeTrack,
   getlikedSongs,
   saveLikedSong,
-  getCurrentUser
+  getCurrentUser,
 } from '../../actions';
 import SkipLeft from '../../assets/skip-left.png';
 import SkipRight from '../../assets/skip-right.png';
@@ -52,7 +52,7 @@ class MusicPlayer extends Component {
       songFeatures: [],
       collapse: false,
       currentTrack: '',
-      predictionPrompt: true
+      predictionPrompt: true,
     };
     // this will later be set by setInterval
     this.playerCheckInterval = null;
@@ -88,21 +88,21 @@ class MusicPlayer extends Component {
     ) {
       this.props.addToPlaylist(
         {
-          uris: this.createSpotifyUriArray(this.props.ds_songs)
+          uris: this.createSpotifyUriArray(this.props.ds_songs),
         },
-        this.props.currentUser.spotify_playlist_id
+        this.props.currentUser.spotify_playlist_id,
       );
     }
   }
 
   async dsDelivery() {
     var config = {
-      headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
+      headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
     };
 
     let response = await axios.get(
       `https://api.spotify.com/v1/audio-features/${this.props.song_id}`,
-      config
+      config,
     );
     if (response.status === 200) {
       let {
@@ -117,7 +117,7 @@ class MusicPlayer extends Component {
         speechiness,
         tempo,
         time_signature,
-        valence
+        valence,
       } = response.data;
       let obj = {
         audio_features: {
@@ -132,12 +132,12 @@ class MusicPlayer extends Component {
           speechiness,
           tempo,
           time_signature,
-          valence
-        }
+          valence,
+        },
       };
       console.log(
         'inside async dsDelivery musicplayer obj',
-        JSON.stringify(obj)
+        JSON.stringify(obj),
       );
       this.props.postDSSong(obj);
     }
@@ -152,7 +152,7 @@ class MusicPlayer extends Component {
 
   openAudioDetails() {
     this.setState({
-      collapse: !this.state.collapse
+      collapse: !this.state.collapse,
     });
   }
 
@@ -163,7 +163,7 @@ class MusicPlayer extends Component {
       const {
         current_track: currentTrack,
         position,
-        duration
+        duration,
       } = state.track_window;
       const trackName = currentTrack.name;
       const albumName = currentTrack.album.name;
@@ -182,12 +182,12 @@ class MusicPlayer extends Component {
         albumName,
         artistName,
         playing,
-        imageSpotify
+        imageSpotify,
       });
     } else {
       // state was null, user might have swapped to another device
       this.setState({
-        error: 'Looks like you might have swapped to another device?'
+        error: 'Looks like you might have swapped to another device?',
       });
     }
   }
@@ -235,7 +235,7 @@ class MusicPlayer extends Component {
 
       await this.setState({
         deviceId: device_id,
-        loggedIn: true
+        loggedIn: true,
       });
       console.log('Fired Off Transfer Playback ready');
       this.transferPlaybackHere();
@@ -266,7 +266,7 @@ class MusicPlayer extends Component {
         name: 'Music Meteorologist Spotify Player',
         getOAuthToken: cb => {
           cb(token);
-        }
+        },
       });
 
       this.createEventHandlers();
@@ -320,14 +320,14 @@ class MusicPlayer extends Component {
         method: 'PUT',
         headers: {
           authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           // This is where we will control what music is fed to the user
           // If we want to direct them to a specific playlist,artist or album we will pass in "context_uri" with its respective uri
           /* context_uri:  */
           // uris: this.createSpotifyUriArray(this.props.ds_songs),
-          context_uri: `spotify:playlist:${this.props.currentUser.spotify_playlist_id}`
+          context_uri: `spotify:playlist:${this.props.currentUser.spotify_playlist_id}`,
           /*  [
             'spotify:track:5d4zl1SVfjPykq0yfsdil6',
             'spotify:track:32bZwIZbRYe4ImC7PJ8s2A',
@@ -339,8 +339,8 @@ class MusicPlayer extends Component {
           // pass an array of song uris through the "uris" key
           // The example below if uncommented will direct the user to 3 songs (make sure to comment out the context_uri)
           // uris:["spotify:track:0aULRU35N90kTj6O1xMULRR","spotify:track:0VgkVdmE4gld66l8iyGjgx","spotify:track:5ry2OE6R2zPQFDO85XkgRb"]
-        })
-      }
+        }),
+      },
     );
     console.log('SONG LOADED INTO PLAYER');
     this.player.setVolume(0);
@@ -354,7 +354,7 @@ class MusicPlayer extends Component {
     this.player.resume();
     this.player.setVolume(0.5);
     this.setState({
-      predictionPrompt: !this.state.predictionPrompt
+      predictionPrompt: !this.state.predictionPrompt,
     });
   }
   // BF
@@ -371,7 +371,7 @@ class MusicPlayer extends Component {
     }, 2000);
     this.props.removeTrack(this.props.currentUser.spotify_playlist_id, this.props.song.id);
     this.setState({
-      predictionPrompt: !this.state.predictionPrompt
+      predictionPrompt: !this.state.predictionPrompt,
     });
   }
 
@@ -388,8 +388,12 @@ class MusicPlayer extends Component {
     }, 2000);
     this.props.removeTrack(this.props.currentUser.spotify_playlist_id, this.props.song.id); // Hardcoded for testing, make dynamic when ready
     this.setState({
-      predictionPrompt: !this.state.predictionPrompt
+      predictionPrompt: !this.state.predictionPrompt,
     });
+
+    // JBF This was added to test if calling transferplayback with an updated playlist would allow the user to progress to new songs.
+    // On activation it restarts playback at the inital song of the playlist regardless of position.
+    // this.transferPlaybackHere();
   }
 
   render() {
@@ -399,7 +403,7 @@ class MusicPlayer extends Component {
       albumName,
       error,
       playing,
-      imageSpotify
+      imageSpotify,
     } = this.state;
     console.log('MYPROPS', this.props);
 
@@ -463,7 +467,7 @@ class MusicPlayer extends Component {
                     overflow: 'auto',
                     backgroundColor: '#1a567a',
                     // backgroundColor: `rgba(${34}, ${109}, ${155}, ${0.98})`,
-                    color: 'lightgray'
+                    color: 'lightgray',
                   }}>
                   <AudioDetails />
                 </Paper>
@@ -538,7 +542,7 @@ class MusicPlayer extends Component {
                     style={{
                       background: 'none',
                       border: 'none',
-                      outline: 'none'
+                      outline: 'none',
                     }}
                     onClick={() => this.toggleDislikeButton()}>
                     <img
@@ -568,7 +572,7 @@ class MusicPlayer extends Component {
                     style={{
                       background: 'none',
                       border: 'none',
-                      outline: 'none'
+                      outline: 'none',
                     }}
                     onClick={() => this.toggleLikeButton()}>
                     <img
@@ -598,7 +602,7 @@ class MusicPlayer extends Component {
                   style={{
                     background: 'none',
                     border: 'none',
-                    outline: 'none'
+                    outline: 'none',
                   }}
                   onClick={() => this.onPrevClick()}>
                   <img
@@ -612,7 +616,7 @@ class MusicPlayer extends Component {
                   style={{
                     background: 'none',
                     border: 'none',
-                    outline: 'none'
+                    outline: 'none',
                   }}
                   onClick={() => this.onPlayClick()}>
                   {playing ? (
@@ -636,7 +640,7 @@ class MusicPlayer extends Component {
                   style={{
                     background: 'none',
                     border: 'none',
-                    outline: 'none'
+                    outline: 'none',
                   }}
                   onClick={() => this.onNextClick()}>
                   <img
@@ -669,7 +673,7 @@ const mapStateToProps = state => ({
   savingLike: state.likedSongsReducer.savingLike,
   currentUser: state.getCurrentUserReducer.currentUser,
   isFetchingSuccessful: state.queueReducer.isFetchingSuccessful,
-  isFetchingDSSongs: state.queueReducer.isFetchingDSSongs
+  isFetchingDSSongs: state.queueReducer.isFetchingDSSongs,
 });
 
 export default connect(
@@ -684,6 +688,6 @@ export default connect(
     removeTrack,
     getlikedSongs,
     saveLikedSong,
-    getCurrentUser
-  }
+    getCurrentUser,
+  },
 )(MusicPlayer);

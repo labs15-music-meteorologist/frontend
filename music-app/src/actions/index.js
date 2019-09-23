@@ -245,7 +245,7 @@ export const postDSSong = obj => dispatch => {
   });
   console.log('OBJ passed into postDSSong', JSON.stringify(obj));
   axios
-    .post(`${url}v1/recommender`, JSON.stringify(obj))
+    .post(`${url}v1/recommender`, obj)
     .then(res => {
       console.log('success postDSSong');
       dispatch({

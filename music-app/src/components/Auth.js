@@ -55,7 +55,7 @@ export class Auth extends Component {
         {/* <img src={HeaderImage} style={{ width: '63%', margin: 20 }} /> */}
         <div class='main-wrapper'>
           <div class='main-cta'>
-            <img src={user_gif} alt='' class='bd-box' />
+            <img src={user_gif} alt='' className='bd-box' />
             <p className='cta-text'>
               Listen and rate songs from your Spotify playlists. Our machine
               learning model will predict if you like a song before you hear it!
@@ -82,7 +82,7 @@ export class Auth extends Component {
             </div>
           </div>
           <div className='features full-width first'>
-            <img src={walking_city} alt='' class='bd-box' />
+            <img src={walking_city} alt='' class='first-image' />
             <div class='text-content'>
               <h2>What makes you move?</h2>
               <p>See what makes the songs you love awesome.</p>

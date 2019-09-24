@@ -87,9 +87,7 @@ class MusicPlayer extends Component {
       this.props.ds_songs !== prevProps.ds_songs
     ) {
       this.props.addToPlaylist(
-        {
-          uris: this.createSpotifyUriArray(this.props.ds_songs),
-        },
+        this.props.ds_songs,
         this.props.currentUser.spotify_playlist_id,
       );
     }

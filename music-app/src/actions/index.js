@@ -373,7 +373,7 @@ export const ADD_TO_PLAYLIST_FETCHING = 'ADD_TO_PLAYLIST_FETCHING';
 export const ADD_TO_PLAYLIST_SUCCESS = 'ADD_TO_PLAYLIST_SUCCESS';
 export const ADD_TO_PLAYLIST_FAILURE = 'ADD_TO_PLAYLIST_FAILURE';
 
-export const addToPlaylist = (songs, playlistId) => dispatch => {
+export const addToPlaylist =  (songs, playlistId) => dispatch => {
   dispatch({
     type: ADD_TO_PLAYLIST_FETCHING,
   });
@@ -382,11 +382,42 @@ export const addToPlaylist = (songs, playlistId) => dispatch => {
     headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
     'Content-Type': 'application/json',
   };
+  let newSongs = songs
+  console.log('newSongs',newSongs)
+  let playlist = []
+  let tmpSongs = []
+  axios
+  .get(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, config)
+  .then(res => {
+    let playlistTracks = res.data.items
+    for (let item of playlistTracks) {
+      playlist.push(item.track.id)
+    }
+    // console.log("playlist",playlist)
 
+    for(let item of newSongs){
+      tmpSongs.push(item.values)
+    }
+    // console.log("tmpSongs",tmpSongs)
+
+    for (let i in tmpSongs){
+      if(playlist.includes(tmpSongs[i])){
+        console.log("popped", tmpSongs[i])
+          // tmpSongs.pop(i)
+      }
+      }
+      // console.log("returnSongslog",createSpotifyUriArray(tmpSongs))
+    console.log("tmpSongs",tmpSongs)
+    // console.log("newSongs",tmpSongs)
+      var returnSongs = {
+        "uris": createSpotifyUriArray(tmpSongs)
+      }
+      console.log("returnSongs",returnSongs)
+      cleanPlaylist(playlistId)
   axios
     .post(
       `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
-      songs,
+      returnSongs,
       config,
     )
     .then(res => {
@@ -401,8 +432,8 @@ export const addToPlaylist = (songs, playlistId) => dispatch => {
         payload: err,
       });
     });
-};
 
+})}
 export const REMOVE_TRACK_FETCHING = 'REMOVE_TRACK_FETCHING';
 export const REMOVE_TRACK_SUCCESS = 'REMOVE_TRACK_SUCCESS';
 export const REMOVE_TRACK_FAILURE = 'REMOVE_TRACK_FAILURE';
@@ -470,3 +501,49 @@ export const saveLikedSong = songId => dispatch => {
       });
     });
 };
+
+function createSpotifyUriArray(array) {
+  console.log(array)
+  return array.map(song => 'spotify:track:' + song);
+}
+
+function cleanPlaylist(playlistId) {
+  var config = {
+    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
+    'Content-Type': 'application/json',
+  };
+  let playlist = []
+  let removeArr = []
+  axios
+  .get(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, config)
+  .then(res => {
+    let playlistTracks = res.data.items
+    for (let item of playlistTracks) {
+      playlist.push(item.track.id)
+    }
+    for (let item of playlist){
+      if(playlist.includes(item)){
+        removeArr.push(item)
+        playlist.pop(item)
+      }
+    }
+    let removeURIs = createSpotifyUriArray(removeArr)
+    axios({
+      method: 'delete',
+      url: `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+        'Content-Type': 'application/json',
+      },
+      data: {
+        tracks: [
+          {
+            uri: removeURIs,
+          },
+        ],
+      },
+    })
+    // console.log("removeArr", removeArr)
+
+  })
+}

@@ -131,8 +131,8 @@
   }
   .music-component {
     width: 90%;
-    display: flex; 
-    flex-flow: row; 
+    display: flex;
+    flex-flow: row;
     justify-content: center;
   }
   .dashboard {
@@ -141,7 +141,7 @@
   .music-component-album-info {
     margin-right: 0;
     width: 100%;
-     
+
   }
 }
 

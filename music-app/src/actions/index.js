@@ -258,6 +258,38 @@ export const postDSSong = obj => dispatch => {
     .post(`${url}v1/recommender`, obj)
     .then(res => {
       console.log('success postDSSong');
+      if (
+        res.data.songs !== undefined &&
+        res.data.songs !== null &&
+        res.data.songs.length > 0
+      ) {
+        if (localStorage.getItem('ds_songs') !== null) {
+          const previous_ds_songs = localStorage.getItem('ds_songs');
+
+          localStorage.setItem(
+            'ds_songs',
+            JSON.stringify(
+              JSON.parse(previous_ds_songs).concat(res.data.songs),
+            ),
+          );
+
+          /*    localStorage.setItem(
+            'ds_songs',
+            JSON.stringify([
+              ...new Set(
+                JSON.parse(previous_ds_songs)
+                  .concat(res.data.songs)
+                  .map(song => ({
+                    similarity: song.similarity,
+                    values: song.values,
+                  })),
+              ),
+            ]),
+          ); */
+        } else {
+          localStorage.setItem('ds_songs', JSON.stringify(res.data.songs));
+        }
+      }
       dispatch({
         type: POST_DS_SONGS_SUCCESS,
         payload: res.data,

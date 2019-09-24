@@ -12,7 +12,7 @@ class NavBar extends React.Component {
 
   render() {
     return (
-      <div class='navwrapper'>
+      <div className='navwrapper joyride-logo-1'>
         {/* <div class='home-button-wrapper'>
           <button
             to='/'
@@ -23,9 +23,9 @@ class NavBar extends React.Component {
             Home
           </button>
         </div> */}
-        <div class='navcontainer'>
+        <div className='navcontainer '>
           <img
-            class='navlogo'
+            className='navlogo'
             src={MusicLogo}
             alt={'Music Meteorologist logo with Meteor on last "o"'}
             style={{ height: 70 }}

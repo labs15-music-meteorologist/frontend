@@ -14,6 +14,7 @@ import Logout from './views/Logout';
 import Info from './views/Info';
 import Dashboard from './views/Dashboard.js';
 import './App.css';
+import About from './components/About';
 
 /* import { MixpanelConsumer } from 'react-mixpanel'; */
 /* import LikedSongs from './components/LikedSongs'; */
@@ -44,6 +45,7 @@ class App extends Component {
           <Route exact path='/logout' component={Logout} />
           <Route exact path='/info' render={props => <Info {...props} />} />
           <Route exact path='/player' component={MusicPlayer} />
+          <Route exact path='/about' component={About} />
           <ProtectedRoute exact path='/dashboard' component={Dashboard} />
           <Footer />
         </Router>

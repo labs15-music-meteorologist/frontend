@@ -53,6 +53,7 @@ class MusicPlayer extends Component {
       collapse: false,
       currentTrack: '',
       predictionPrompt: true,
+      trueSimilarity: { similarity: 0.00001, values: 'mock' },
     };
     // this will later be set by setInterval
     this.playerCheckInterval = null;
@@ -60,6 +61,15 @@ class MusicPlayer extends Component {
 
   componentDidMount() {
     this.handleLogin();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.ds_songs && this.props.song) {
+      console.log('SONGSWEARE', this.props.ds_songs, this.props.song);
+      setTimeout(() => {
+        this.predictionScoreCalculation(this.props.song);
+      }, 2000);
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -256,6 +266,22 @@ class MusicPlayer extends Component {
     return array.map(song => 'spotify:track:' + song.values);
   }
 
+  predictionScoreCalculation(songs) {
+    let similarityPrediction = JSON.parse(
+      localStorage.getItem('ds_songs'),
+    ).filter(song => song.values === songs.id);
+    console.log(
+      'UNCLEAR',
+      JSON.parse(localStorage.getItem('ds_songs')),
+      songs,
+      similarityPrediction,
+    );
+    if (similarityPrediction[0] !== undefined) {
+      this.setState({ trueSimilarity: similarityPrediction[0] });
+      console.log('trueSimilarity', similarityPrediction[0]);
+    }
+  }
+
   checkForPlayer() {
     const { token } = this.state;
 
@@ -369,7 +395,10 @@ class MusicPlayer extends Component {
       this.player.pause();
       this.player.setVolume(0.5);
     }, 2000);
-    this.props.removeTrack(this.props.currentUser.spotify_playlist_id, this.props.song.id);
+    this.props.removeTrack(
+      this.props.currentUser.spotify_playlist_id,
+      this.props.song.id,
+    );
     this.setState({
       predictionPrompt: !this.state.predictionPrompt,
     });
@@ -386,7 +415,10 @@ class MusicPlayer extends Component {
       this.player.pause();
       this.player.setVolume(0.5);
     }, 2000);
-    this.props.removeTrack(this.props.currentUser.spotify_playlist_id, this.props.song.id); // Hardcoded for testing, make dynamic when ready
+    this.props.removeTrack(
+      this.props.currentUser.spotify_playlist_id,
+      this.props.song.id,
+    ); // Hardcoded for testing, make dynamic when ready
     this.setState({
       predictionPrompt: !this.state.predictionPrompt,
     });
@@ -407,14 +439,6 @@ class MusicPlayer extends Component {
     } = this.state;
     console.log('MYPROPS', this.props);
 
-    let similarityPrediction =
-      this.props.ds_songs &&
-      this.props.song &&
-      this.props.ds_songs.filter(song => song.values === this.props.song.id);
-    let trueSimilarity = similarityPrediction && similarityPrediction[0];
-    console.log('trueSimilarity', trueSimilarity);
-    let roundedSimilarity = trueSimilarity && trueSimilarity;
-    console.log('ROUNDEDSIM', roundedSimilarity);
     return (
       <div className='music-player joyride-player-2'>
         <div className='music-component'>
@@ -561,9 +585,12 @@ class MusicPlayer extends Component {
                   className='joyride-prediction-5'>
                   <h5 style={{ textAlign: 'center' }}>Prediction: </h5>
                   <h3 style={{ textAlign: 'center' }}>
-                    {trueSimilarity &&
-                      (trueSimilarity.similarity * 100).toFixed(4)}{' '}
-                    %
+                    {console.log('SIMISIM', this.state.trueSimilarity)}
+                    {this.state.trueSimilarity.similarity < 0.00002
+                      ? 'Loading'
+                      : (this.state.trueSimilarity.similarity * 100)
+                          .toFixed(4)
+                          .toString() + ' %'}
                   </h3>
                 </div>
                 <div className='joyride-like-6'>

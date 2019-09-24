@@ -29,12 +29,15 @@ class LikedSongs extends React.Component {
     // });
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.addedTo === true && this.state.getList === false) {
+  componentDidUpdate() {
+    if (this.props.addedTo && this.state.getList && this.props.playlistId) {
       this.props.getPlaylist(this.props.playlistId);
-      this.setState({
-        getList: true,
-      });
+
+      if (this.props.playlistId) {
+        this.setState({
+          getList: true,
+        });
+      }
     }
   }
 

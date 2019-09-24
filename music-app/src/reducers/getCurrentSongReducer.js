@@ -21,7 +21,6 @@ const currentSongReducer = (state = initialState, action) => {
       return {
         ...state,
         item: action.payload,
-        // imageUrl: action.payload.album.images,
         fetchingSongError: '',
       };
     case GET_CURRENT_SONG_FAILURE:

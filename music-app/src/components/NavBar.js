@@ -13,16 +13,6 @@ class NavBar extends React.Component {
   render() {
     return (
       <div className='navwrapper joyride-logo-1'>
-        {/* <div class='home-button-wrapper'>
-          <button
-            to='/'
-            class='home-button'
-            onClick={e => {
-              this.homeButton(e);
-            }}>
-            Home
-          </button>
-        </div> */}
         <div className='navcontainer '>
           <img
             className='navlogo'

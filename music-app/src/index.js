@@ -14,8 +14,6 @@ import rootReducer from './reducers';
 import './index.css';
 import App from './App';
 
-// import 'typeface-roboto';
-
 ReactGA.initialize('UA-145979080-2');
 
 mixpanel.init('d94aefc540b96a9d3f4fb06be52a83fd');

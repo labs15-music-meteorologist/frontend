@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+
 import { connect } from 'react-redux';
 import { Grid } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import List from '@material-ui/core/List';
+
 import {
   getCurrentSong,
   getTrackInfo,
@@ -22,15 +24,13 @@ import Rocket from '../../assets/rocket-like.png';
 import Meteor from '../../assets/meteor-dislike.png';
 import Pause from '../../assets/player-stop.png';
 import Play from '../../assets/player-start.png';
-
-// Styles
-import '../../App.css';
-
-// Features
 import LinearDeterminate from '../LinearDeterminate';
 import Chart from '../Chart';
 import Characteristics from '../Characteristics.js';
 import AudioDetails from './AudioDetails';
+
+// Styles
+import '../../App.css';
 
 class MusicPlayer extends Component {
   constructor(props) {
@@ -55,7 +55,6 @@ class MusicPlayer extends Component {
       predictionPrompt: true,
       trueSimilarity: { similarity: 0.00001, values: 'mock' },
     };
-    // this will later be set by setInterval
     this.playerCheckInterval = null;
   }
 
@@ -65,7 +64,6 @@ class MusicPlayer extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.ds_songs && this.props.song) {
-      console.log('SONGSWEARE', this.props.ds_songs, this.props.song);
       setTimeout(() => {
         this.predictionScoreCalculation(this.props.song);
       }, 2000);
@@ -77,14 +75,8 @@ class MusicPlayer extends Component {
       this.dsDelivery();
     }
     if (this.props.savingLike) {
-      console.log('GET LIKED SONG IN CDU');
       this.props.getlikedSongs();
     }
-
-    // if (
-    //   (this.props.song.id === null ||
-    //   this.props.song.id !== prevProps.song.id)
-    //   )
 
     // JBF
     // This now compares ds_songs to prevProps and only adds the songs to the playlist if they have been updated from ds_songs.
@@ -93,7 +85,7 @@ class MusicPlayer extends Component {
     // The songs will be re-added to the playlist upon relog as they are no longer in state.
     // Adding the ability to query existing songs inside of the saved playlist and implementing similar logic should prevent this.
     if (
-      this.props.isFetchingSuccessful === true &&
+      this.props.isFetchingSuccessful &&
       this.props.ds_songs !== prevProps.ds_songs
     ) {
       this.props.addToPlaylist(
@@ -145,10 +137,7 @@ class MusicPlayer extends Component {
           valence,
         },
       };
-      console.log(
-        'inside async dsDelivery musicplayer obj',
-        JSON.stringify(obj),
-      );
+
       this.props.postDSSong(obj);
     }
   }
@@ -182,7 +171,6 @@ class MusicPlayer extends Component {
         .map(artist => artist.name)
         .join(', ');
       const imageSpotify = currentTrack.album.images[2].url;
-      // .map(image => image.url)
 
       const playing = !state.paused;
       this.setState({
@@ -217,16 +205,12 @@ class MusicPlayer extends Component {
     this.player.on('player_state_changed', state => {
       this.onStateChanged(state);
 
-      if (this.props.ds_songs && this.props.isFetchingSuccessful === true) {
+      if (this.props.ds_songs && this.props.isFetchingSuccessful) {
         this.props.song && this.getCurrentSongFeatures(this.props.song.id);
       }
       // ONLY WHEN NEW SONG
       if (state.track_window.current_track.id !== this.state.currentTrack) {
         this.currentSong();
-        /*   if (this.props.song.id) {
-          this.getCurrentSongFeatures(this.props.song.id);
-        } */
-
         this.setState({ currentTrack: state.track_window.current_track.id });
         this.player.setVolume(0);
         setTimeout(() => {
@@ -247,7 +231,7 @@ class MusicPlayer extends Component {
         deviceId: device_id,
         loggedIn: true,
       });
-      console.log('Fired Off Transfer Playback ready');
+
       this.transferPlaybackHere();
       this.props.ds_songs && this.currentSong();
     });
@@ -270,15 +254,9 @@ class MusicPlayer extends Component {
     let similarityPrediction = JSON.parse(
       localStorage.getItem('ds_songs'),
     ).filter(song => song.values === songs.id);
-    console.log(
-      'UNCLEAR',
-      JSON.parse(localStorage.getItem('ds_songs')),
-      songs,
-      similarityPrediction,
-    );
+
     if (similarityPrediction[0] !== undefined) {
       this.setState({ trueSimilarity: similarityPrediction[0] });
-      console.log('trueSimilarity', similarityPrediction[0]);
     }
   }
 
@@ -368,7 +346,6 @@ class MusicPlayer extends Component {
         }),
       },
     );
-    console.log('SONG LOADED INTO PLAYER');
     this.player.setVolume(0);
     setTimeout(() => this.player.pause(), 2000);
     this.player.setVolume(0.5);
@@ -437,7 +414,6 @@ class MusicPlayer extends Component {
       playing,
       imageSpotify,
     } = this.state;
-    console.log('MYPROPS', this.props);
 
     return (
       <div className='music-player joyride-player-2'>
@@ -446,14 +422,12 @@ class MusicPlayer extends Component {
             item
             className='music-component-album-info'
             style={{ maxWidth: '300px' }}>
-            {/* {this.props.imageUrl[1] && ( */}
             <img
               ref='image'
               src={imageSpotify}
               alt='Album artwork cover.'
               style={{ maxWidth: '300px', objectFit: 'scale-down' }}
             />
-            {/* )} */}
             <p className='p' style={{ fontWeight: 'bold' }}>
               {trackName}
             </p>
@@ -490,7 +464,6 @@ class MusicPlayer extends Component {
                     width: 450,
                     overflow: 'auto',
                     backgroundColor: '#1a567a',
-                    // backgroundColor: `rgba(${34}, ${109}, ${155}, ${0.98})`,
                     color: 'lightgray',
                   }}>
                   <AudioDetails />
@@ -514,18 +487,12 @@ class MusicPlayer extends Component {
 
             {error && <p>Error: {error}</p>}
 
-            {/* When predictionPrompt === true show className='yes-no-active'
-            On Yes/No click invoke onPlayclick();
-            On Yes/No click enable 'yes-no-active' on Like/Dislike wrapper
-          */}
-
             <Grid
               container
               direction='row'
               justify='center'
               alignItems='center'
               style={{ width: 300, marginBottom: '5%' }}>
-              {/* YES NO */}
               <div
                 className={
                   this.state.predictionPrompt
@@ -553,7 +520,6 @@ class MusicPlayer extends Component {
                 </div>
               </div>
 
-              {/* LIKE DISLIKE */}
               <div
                 className={
                   this.state.predictionPrompt
@@ -585,7 +551,6 @@ class MusicPlayer extends Component {
                   className='joyride-prediction-5'>
                   <h5 style={{ textAlign: 'center' }}>Prediction: </h5>
                   <h3 style={{ textAlign: 'center' }}>
-                    {console.log('SIMISIM', this.state.trueSimilarity)}
                     {this.state.trueSimilarity.similarity < 0.00002
                       ? 'Loading'
                       : (this.state.trueSimilarity.similarity * 100)
@@ -655,7 +620,6 @@ class MusicPlayer extends Component {
                     />
                   ) : (
                     <img
-                      /* ref={this.simulateClick} */
                       src={Play}
                       alt='White icon to start a pause song.'
                       style={{ maxHeight: 35 }}

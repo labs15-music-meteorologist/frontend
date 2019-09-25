@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import {
   Radar,
   RadarChart,
@@ -50,8 +51,6 @@ class Chart extends Component {
   render() {
     return (
       <div>
-        {/* Specify chart elements from import list to use them ex. PolarAngleAxis are the subjects */}
-        {/* <ResponsiveContainer width='99%' height='99%'> */}
         <RadarChart
           label={{ fill: 'white' }}
           value={{ color: 'white' }}
@@ -63,11 +62,9 @@ class Chart extends Component {
           data={this.state.data}>
           <PolarGrid />
           <PolarAngleAxis stroke='white' dataKey='subject' />
-          {/* <Legend formatter={this.renderColorfulLegendText} /> */}
           <PolarRadiusAxis tick={{ fill: 'white' }} />
           <Radar
             tick={{ fill: 'white' }}
-            // name='Audio Features'
             dataKey='A'
             stroke='#38b6ff'
             stroke-width='2%'
@@ -75,7 +72,6 @@ class Chart extends Component {
             fillOpacity={0.7}
           />
         </RadarChart>
-        {/* </ResponsiveContainer> */}
       </div>
     );
   }

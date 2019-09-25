@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -28,7 +29,6 @@ class Characteristics extends React.Component {
     key: '',
     mode: '',
     time_signature: '',
-    // popularity: '',
   };
   componentDidUpdate(prevProps) {
     if (this.props.features.id !== prevProps.features.id) {
@@ -37,7 +37,6 @@ class Characteristics extends React.Component {
         key: this.props.features.key,
         mode: this.props.features.mode,
         time_signature: this.props.features.time_signature,
-        // popularity: this.props.features.popularity,
       });
     }
   }

@@ -8,8 +8,6 @@ import '../../App.css';
 
 class Song extends React.Component {
   render() {
-    /*     const tf = this.props.tracksInfo[this.props.id]; */
-    /*    const loadingTf = !tf || tf.fetching; */
     return (
       <div>
         <Grid
@@ -34,7 +32,6 @@ class Song extends React.Component {
             <Typography style={{ fontSize: 13 }}>
               {this.props.song.artists[0].name}
             </Typography>
-            {/* <p>Audio Features: {loadingTf ? 'loading....' : tf.data.tempo}</p> */}
           </Grid>
         </Grid>
       </div>

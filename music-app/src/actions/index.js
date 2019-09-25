@@ -178,11 +178,7 @@ export const persistUser = (spotifyUser, playlistId) => dispatch => {
   dispatch({
     type: PERSIST_USER_FETCHING,
   });
-  console.log(
-    'after inital dispatch persist user fetching',
-    spotifyUser,
-    playlistId,
-  );
+
   axios
     .get(`${url}v1/users/spotify/${spotifyUser.id}`)
     .then(res => {
@@ -217,9 +213,7 @@ export const persistUser = (spotifyUser, playlistId) => dispatch => {
       }
     })
     .catch(err => {
-      console.log('inside err persist user', err);
       if (err.message === 'Request failed with status code 404') {
-        console.log('spotify user inside persist', spotifyUser, playlistId);
         axios
           .post(`${url}v1/users/register`, {
             email: spotifyUser.email,
@@ -234,14 +228,9 @@ export const persistUser = (spotifyUser, playlistId) => dispatch => {
             profile_image_url: '',
             spotify_playlist_id: playlistId,
           })
-          .then(res => {
-            /* dispatch({ type: PERSIST_USER_SUCCESS, payload: res.data }); */
-          })
-          .catch(err => {
-            /* dispatch({ type: PERSIST_USER_SUCCESS, payload: err }); */
-          });
+          .then(res => {})
+          .catch(err => {});
       }
-      /* dispatch({ type: PERSIST_USER_SUCCESS, payload: err }); */
     });
 };
 
@@ -253,11 +242,9 @@ export const postDSSong = obj => dispatch => {
   dispatch({
     type: POST_DS_SONGS_FETCHING,
   });
-  console.log('OBJ passed into postDSSong', JSON.stringify(obj));
   axios
     .post(`${url}v1/recommender`, obj)
     .then(res => {
-      console.log('success postDSSong');
       if (
         res.data.songs !== undefined &&
         res.data.songs !== null &&
@@ -272,20 +259,6 @@ export const postDSSong = obj => dispatch => {
               JSON.parse(previous_ds_songs).concat(res.data.songs),
             ),
           );
-
-          /*    localStorage.setItem(
-            'ds_songs',
-            JSON.stringify([
-              ...new Set(
-                JSON.parse(previous_ds_songs)
-                  .concat(res.data.songs)
-                  .map(song => ({
-                    similarity: song.similarity,
-                    values: song.values,
-                  })),
-              ),
-            ]),
-          ); */
         } else {
           localStorage.setItem('ds_songs', JSON.stringify(res.data.songs));
         }
@@ -354,10 +327,6 @@ export const createPlaylist = spotifyId => dispatch => {
       playlistName,
       config,
     )
-    //   console.log('CREATE PLAYLIST ACTION RES PAYLOAD', res.data);
-    //   axios.put(`${url}v1/users/spotify/${res.data.owner.id}`, {
-    //     spotify_playlist_id: res.data.id,
-    //   });
 
     .then(res => {
       dispatch({

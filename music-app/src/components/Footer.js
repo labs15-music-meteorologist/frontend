@@ -7,7 +7,6 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
 import '../App.css';
-// import { textAlign } from '@material-ui/system';
 
 const useStyles = makeStyles({
   root: {
@@ -30,10 +29,7 @@ export default function CenteredTabs() {
   return (
     <footer className='footer'>
       <Paper className={classes.root}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          centered>
+        <Tabs value={value} onChange={handleChange} centered>
           <Tab
             label='About'
             value='/dashboard'

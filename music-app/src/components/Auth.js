@@ -13,7 +13,8 @@ import user_gif from '../assets/user_gif.gif';
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
 
 const clientId = '256aebf9b04a4f5480a757f770864028'; // testing ENV
-const redirectUri = process.env.REACT_APP_REDIRECT_URL; // has to match exactly with spotify dashboard redirect uri
+// const redirectUri = process.env.REACT_APP_REDIRECT_URL;
+const redirectUri = "https://music-meteorologist.com/"; // has to match exactly with spotify dashboard redirect uri
 const scopes = [
   'streaming',
   'user-read-currently-playing',

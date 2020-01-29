@@ -1,7 +1,5 @@
 import React from 'react';
-
 import '../views/styles/navbar.css';
-
 import MusicLogo from '../assets/logo-music-new.png';
 
 class NavBar extends React.Component {
@@ -13,16 +11,6 @@ class NavBar extends React.Component {
   render() {
     return (
       <div className='navwrapper joyride-logo-1'>
-        {/* <div class='home-button-wrapper'>
-          <button
-            to='/'
-            class='home-button'
-            onClick={e => {
-              this.homeButton(e);
-            }}>
-            Home
-          </button>
-        </div> */}
         <div className='navcontainer '>
           <img
             className='navlogo'

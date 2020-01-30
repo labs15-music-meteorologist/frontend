@@ -19,39 +19,17 @@ const useStyles = makeStyles({
 export default function CenteredTabs() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-
-  function handleChange(event, newValue) {
-    setValue(newValue);
-  }
-
+  function handleChange(event, newValue) { setValue(newValue);}
   return (
     <footer className='footer'>
       <Paper className={classes.root}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          centered>
-          <Tab
-            label='About'
-            value='/dashboard'
-            component={Link}
-            to='/dashboard'
-          />
-          <Tab
-            label='Github'
-            href='https://github.com/labs15-music-meteorologist/frontend'
-            target='_blank'
-          />
-          <Tab
-            label='Contact'
-            href='https://github.com/Dstar4'
-            target='_blank'
-          />
+        <Tabs value={value} onChange={handleChange} centered>
+          <Tab label='About' value='/dashboard'component={Link} to='/dashboard' />
+          <Tab label='Github' href='https://github.com/labs15-music-meteorologist/frontend' target='_blank' />
+          <Tab label='Contact' href='https://github.com/Dstar4' target='_blank' />
         </Tabs>
         <Tabs centered>
-          <p style={{ fontSize: 14 }}>
-            &copy; Copyright 2019, Music Meteorologist
-          </p>
+          <p style={{ fontSize: 14 }}> &copy; Copyright 2019, Music Meteorologist </p>
         </Tabs>
       </Paper>
     </footer>

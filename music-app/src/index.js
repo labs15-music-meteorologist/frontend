@@ -8,7 +8,7 @@ import { applyMiddleware, createStore } from 'redux';
 import * as Sentry from '@sentry/browser';
 import ReactGA from 'react-ga';
 
-import rootReducer from './reducers';
+import rootReducer from './Redux/reducers';
 import './index.css';
 import App from './App';
 

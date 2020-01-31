@@ -6,19 +6,17 @@ import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import List from '@material-ui/core/List';
 import Joyride from 'react-joyride';
-
 import {
   getlikedSongs,
   getUsers,
   getSpotifyAccountDetails,
   persistUser,
-  postDSSong,
   getSeveralTracks,
   createPlaylist,
   getCurrentUser,
   removeTrack,
-} from '../actions';
-
+} from '../Redux/Spotify/spotify.actions';
+import { postDSSong } from '../Redux/DS/ds.actions';
 import LikedSongs from '../components/dashboard/LikedSongs';
 import MusicPlayer from '../components/dashboard/MusicPlayer';
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getCurrentSong } from '../actions';
+import { getCurrentSong } from '../Redux/Spotify/spotify.actions';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
 class LinearDeterminate extends Component {

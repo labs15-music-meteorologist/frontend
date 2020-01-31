@@ -1,8 +1,4 @@
-import {
-  GET_CURRENT_SONG_FETCHING,
-  GET_CURRENT_SONG_SUCCESS,
-  GET_CURRENT_SONG_FAILURE,
-} from '../actions';
+import SpotifyActionTypes from '../Spotify/spotify.types'
 
 const initialState = {
   item: [],
@@ -12,19 +8,19 @@ const initialState = {
 
 const currentSongReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_CURRENT_SONG_FETCHING:
+    case SpotifyActionTypes.GET_CURRENT_SONG_FETCHING:
       return {
         ...state,
         fetchingSongError: '',
       };
-    case GET_CURRENT_SONG_SUCCESS:
+    case SpotifyActionTypes.GET_CURRENT_SONG_SUCCESS:
       return {
         ...state,
         item: action.payload,
         // imageUrl: action.payload.album.images,
         fetchingSongError: '',
       };
-    case GET_CURRENT_SONG_FAILURE:
+    case SpotifyActionTypes.GET_CURRENT_SONG_FAILURE:
       return {
         ...state,
         fetchingSongError: action.payload,

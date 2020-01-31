@@ -8,14 +8,14 @@ import {
   getCurrentSong,
   getTrackInfo,
   getSeveralTracks,
-  postDSSong,
   createPlaylist,
   addToPlaylist,
   removeTrack,
   getlikedSongs,
   saveLikedSong,
   getCurrentUser,
-} from '../../actions';
+} from '../../Redux/Spotify/spotify.actions';
+import { postDSSong } from '../../Redux/DS/ds.actions';
 import SkipLeft from '../../assets/skip-left.png';
 import SkipRight from '../../assets/skip-right.png';
 import Rocket from '../../assets/rocket-like.png';

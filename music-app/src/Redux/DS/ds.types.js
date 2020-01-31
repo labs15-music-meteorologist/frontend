@@ -1,0 +1,8 @@
+const DsActionTypes = {
+//POST to ds
+    POST_DS_SONGS_FETCHING: 'POST_DS_SONGS_FETCHING',
+    POST_DS_SONGS_SUCCESS: 'POST_DS_SONGS_SUCCESS',
+    POST_DS_SONGS_FAILURE: 'POST_DS_SONGS_FAILURE',
+}
+
+export default DsActionTypes;

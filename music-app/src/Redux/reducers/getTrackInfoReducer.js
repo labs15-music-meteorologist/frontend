@@ -1,24 +1,20 @@
-import {
-  GET_TRACK_INFO_FETCHING,
-  GET_TRACK_INFO_SUCCESS,
-  GET_TRACK_INFO_FAILURE
-} from '../actions';
+import SpotifyActionTypes from '../Spotify/spotify.types'
 
 const initialState = {};
 
 const getTrackInfoReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_TRACK_INFO_FETCHING:
+    case SpotifyActionTypes.GET_TRACK_INFO_FETCHING:
       return {
         ...state,
         ...action.payload
       };
-    case GET_TRACK_INFO_SUCCESS:
+    case SpotifyActionTypes.GET_TRACK_INFO_SUCCESS:
       return {
         ...state,
         ...action.payload
       };
-    case GET_TRACK_INFO_FAILURE:
+    case SpotifyActionTypes.GET_TRACK_INFO_FAILURE:
       return {
         ...state,
         ...action.payload

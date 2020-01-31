@@ -1,11 +1,5 @@
-import {
-  POST_DS_SONGS_FETCHING,
-  POST_DS_SONGS_SUCCESS,
-  POST_DS_SONGS_FAILURE,
-  GET_SEVERAL_TRACKS_FETCHING,
-  GET_SEVERAL_TRACKS_SUCCESS,
-  GET_SEVERAL_TRACKS_FAILURE,
-} from '../actions';
+import SpotifyActionTypes from '../Spotify/spotify.types'
+import DSActionTypes from '../DS/ds.types'
 
 const initialState = {
   ds_songs: [],
@@ -18,14 +12,14 @@ const initialState = {
 
 const queueReducer = (state = initialState, action) => {
   switch (action.type) {
-    case POST_DS_SONGS_FETCHING:
+    case DSActionTypes.POST_DS_SONGS_FETCHING:
       return {
         ...state,
         isFetchingDSSongs: true,
         isFetchingSuccessful: false,
         postingingSongError: '',
       };
-    case POST_DS_SONGS_SUCCESS:
+    case DSActionTypes.POST_DS_SONGS_SUCCESS:
       return {
         ...state,
         ds_songs: action.payload,
@@ -33,7 +27,7 @@ const queueReducer = (state = initialState, action) => {
         isFetchingSuccessful: true,
         postingingSongError: '',
       };
-    case POST_DS_SONGS_FAILURE:
+    case DSActionTypes.POST_DS_SONGS_FAILURE:
       return {
         ...state,
         isFetchingDSSongs: false,
@@ -41,18 +35,18 @@ const queueReducer = (state = initialState, action) => {
         postingingSongError: action.payload,
       };
 
-    case GET_SEVERAL_TRACKS_FETCHING:
+    case SpotifyActionTypes.GET_SEVERAL_TRACKS_FETCHING:
       return {
         ...state,
         fetchingError: '',
       };
-    case GET_SEVERAL_TRACKS_SUCCESS:
+    case SpotifyActionTypes.GET_SEVERAL_TRACKS_SUCCESS:
       return {
         ...state,
         several_tracks: action.payload,
         fetchingError: '',
       };
-    case GET_SEVERAL_TRACKS_FAILURE:
+    case SpotifyActionTypes.GET_SEVERAL_TRACKS_FAILURE:
       return {
         ...state,
         fetchingError: action.payload,

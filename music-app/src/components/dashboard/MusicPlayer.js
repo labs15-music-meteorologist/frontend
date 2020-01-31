@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import { connect } from 'react-redux';
-import { Grid } from '@material-ui/core';
-import Paper from '@material-ui/core/Paper';
-import List from '@material-ui/core/List';
+import React, { Component } from "react";
+import axios from "axios";
+import { connect } from "react-redux";
+import { Grid } from "@material-ui/core";
+import Paper from "@material-ui/core/Paper";
+import List from "@material-ui/core/List";
 import {
   getCurrentSong,
   getTrackInfo,
@@ -13,47 +13,46 @@ import {
   removeTrack,
   getlikedSongs,
   saveLikedSong,
-  getCurrentUser,
-} from '../../Redux/Spotify/spotify.actions';
-import { postDSSong } from '../../Redux/DS/ds.actions';
-import SkipLeft from '../../assets/skip-left.png';
-import SkipRight from '../../assets/skip-right.png';
-import Rocket from '../../assets/rocket-like.png';
-import Meteor from '../../assets/meteor-dislike.png';
-import Pause from '../../assets/player-stop.png';
-import Play from '../../assets/player-start.png';
+  getCurrentUser
+} from "../../Redux/Spotify/spotify.actions";
+import { postDSSong } from "../../Redux/DS/ds.actions";
+import SkipLeft from "../../assets/skip-left.png";
+import SkipRight from "../../assets/skip-right.png";
+import Pause from "../../assets/player-stop.png";
+import Play from "../../assets/player-start.png";
 
 // Styles
-import '../../App.css';
+import "../../App.css";
 
 // Features
-import LinearDeterminate from '../LinearDeterminate';
-import Chart from '../Chart';
-import Characteristics from '../Characteristics.js';
-import AudioDetails from './AudioDetails';
+import LinearDeterminate from "../LinearDeterminate";
+import Chart from "../Chart";
+import Characteristics from "../Characteristics.js";
+import AudioDetails from "./AudioDetails";
+import LikeAndDislikeButton from "./LikeAndDislikeButton.component";
 
 class MusicPlayer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      token: localStorage.getItem('token'),
-      deviceId: '',
+      token: localStorage.getItem("token"),
+      deviceId: "",
       loggedIn: false,
-      error: '',
-      trackName: 'Track Name',
-      artistName: 'Artist Name',
-      albumName: 'Album Name',
-      imageSpotify: '',
-      imageUrl: '',
+      error: "",
+      trackName: "Track Name",
+      artistName: "Artist Name",
+      albumName: "Album Name",
+      imageSpotify: "",
+      imageUrl: "",
       playing: false,
       position: 0,
       duration: 1,
-      id: '',
+      id: "",
       songFeatures: [],
       collapse: false,
-      currentTrack: '',
+      currentTrack: "",
       predictionPrompt: true,
-      trueSimilarity: { similarity: 0.00001, values: 'mock' },
+      trueSimilarity: { similarity: 0.00001, values: "mock" }
     };
     // this will later be set by setInterval
     this.playerCheckInterval = null;
@@ -65,7 +64,7 @@ class MusicPlayer extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.ds_songs && this.props.song) {
-      console.log('SONGSWEARE', this.props.ds_songs, this.props.song);
+      console.log("SONGSWEARE", this.props.ds_songs, this.props.song);
       setTimeout(() => {
         this.predictionScoreCalculation(this.props.song);
       }, 2000);
@@ -77,7 +76,7 @@ class MusicPlayer extends Component {
       this.dsDelivery();
     }
     if (this.props.savingLike) {
-      console.log('GET LIKED SONG IN CDU');
+      console.log("GET LIKED SONG IN CDU");
       this.props.getlikedSongs();
     }
 
@@ -98,21 +97,21 @@ class MusicPlayer extends Component {
     ) {
       this.props.addToPlaylist(
         {
-          uris: this.createSpotifyUriArray(this.props.ds_songs),
+          uris: this.createSpotifyUriArray(this.props.ds_songs)
         },
-        this.props.currentUser.spotify_playlist_id,
+        this.props.currentUser.spotify_playlist_id
       );
     }
   }
 
   async dsDelivery() {
     var config = {
-      headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
+      headers: { Authorization: "Bearer " + localStorage.getItem("token") }
     };
 
     let response = await axios.get(
       `https://api.spotify.com/v1/audio-features/${this.props.song_id}`,
-      config,
+      config
     );
     if (response.status === 200) {
       let {
@@ -127,7 +126,7 @@ class MusicPlayer extends Component {
         speechiness,
         tempo,
         time_signature,
-        valence,
+        valence
       } = response.data;
       let obj = {
         audio_features: {
@@ -142,27 +141,28 @@ class MusicPlayer extends Component {
           speechiness,
           tempo,
           time_signature,
-          valence,
-        },
+          valence
+        }
       };
       console.log(
-        'inside async dsDelivery musicplayer obj',
-        JSON.stringify(obj),
+        "inside async dsDelivery musicplayer obj",
+        JSON.stringify(obj)
       );
       this.props.postDSSong(obj);
     }
   }
 
   handleLogin() {
-    if (this.state.token !== '') {
+    if (this.state.token !== "") {
       this.setState({ loggedIn: true });
       this.playerCheckInterval = setInterval(() => this.checkForPlayer(), 1000);
     }
   }
 
+  // toggles state collapse
   openAudioDetails() {
     this.setState({
-      collapse: !this.state.collapse,
+      collapse: !this.state.collapse
     });
   }
 
@@ -173,14 +173,13 @@ class MusicPlayer extends Component {
       const {
         current_track: currentTrack,
         position,
-        duration,
+        duration
       } = state.track_window;
       const trackName = currentTrack.name;
       const albumName = currentTrack.album.name;
       const artistName = currentTrack.artists
-
         .map(artist => artist.name)
-        .join(', ');
+        .join(", ");
       const imageSpotify = currentTrack.album.images[2].url;
       // .map(image => image.url)
 
@@ -192,29 +191,29 @@ class MusicPlayer extends Component {
         albumName,
         artistName,
         playing,
-        imageSpotify,
+        imageSpotify
       });
     } else {
       // state was null, user might have swapped to another device
       this.setState({
-        error: 'Looks like you might have swapped to another device?',
+        error: "Looks like you might have swapped to another device?"
       });
     }
   }
 
   createEventHandlers() {
-    this.player.on('initialization_error', e => {});
+    this.player.on("initialization_error", e => {});
 
-    this.player.on('authentication_error', e => {
+    this.player.on("authentication_error", e => {
       this.setState({ loggedIn: false });
     });
 
-    this.player.on('account_error', e => {});
+    this.player.on("account_error", e => {});
 
-    this.player.on('playback_error', e => {});
+    this.player.on("playback_error", e => {});
 
     // ONLY WHEN PLAYER STATE CHANGED
-    this.player.on('player_state_changed', state => {
+    this.player.on("player_state_changed", state => {
       this.onStateChanged(state);
 
       if (this.props.ds_songs && this.props.isFetchingSuccessful === true) {
@@ -240,14 +239,14 @@ class MusicPlayer extends Component {
       }
     });
 
-    this.player.on('ready', async data => {
+    this.player.on("ready", async data => {
       let { device_id } = data;
 
       await this.setState({
         deviceId: device_id,
-        loggedIn: true,
+        loggedIn: true
       });
-      console.log('Fired Off Transfer Playback ready');
+      console.log("Fired Off Transfer Playback ready");
       this.transferPlaybackHere();
       this.props.ds_songs && this.currentSong();
     });
@@ -259,26 +258,26 @@ class MusicPlayer extends Component {
   };
 
   concatenateSongIds(array) {
-    return array.map(song => song.values).join(',');
+    return array.map(song => song.values).join(",");
   }
 
   createSpotifyUriArray(array) {
-    return array.map(song => 'spotify:track:' + song.values);
+    return array.map(song => "spotify:track:" + song.values);
   }
 
   predictionScoreCalculation(songs) {
     let similarityPrediction = JSON.parse(
-      localStorage.getItem('ds_songs'),
+      localStorage.getItem("ds_songs")
     ).filter(song => song.values === songs.id);
     console.log(
-      'UNCLEAR',
-      JSON.parse(localStorage.getItem('ds_songs')),
+      "UNCLEAR",
+      JSON.parse(localStorage.getItem("ds_songs")),
       songs,
-      similarityPrediction,
+      similarityPrediction
     );
     if (similarityPrediction[0] !== undefined) {
       this.setState({ trueSimilarity: similarityPrediction[0] });
-      console.log('trueSimilarity', similarityPrediction[0]);
+      console.log("trueSimilarity", similarityPrediction[0]);
     }
   }
 
@@ -289,10 +288,10 @@ class MusicPlayer extends Component {
       clearInterval(this.playerCheckInterval);
 
       this.player = new window.Spotify.Player({
-        name: 'Music Meteorologist Spotify Player',
+        name: "Music Meteorologist Spotify Player",
         getOAuthToken: cb => {
           cb(token);
-        },
+        }
       });
 
       this.createEventHandlers();
@@ -313,7 +312,6 @@ class MusicPlayer extends Component {
   };
 
   // -- SDK Player Song playback controls --
-
   onPrevClick() {
     this.player.previousTrack();
     this.player.setVolume(0);
@@ -343,17 +341,17 @@ class MusicPlayer extends Component {
     fetch(
       `https://api.spotify.com/v1/me/player/play/?device_id=${this.state.deviceId}`,
       {
-        method: 'PUT',
+        method: "PUT",
         headers: {
           authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({
           // This is where we will control what music is fed to the user
           // If we want to direct them to a specific playlist,artist or album we will pass in "context_uri" with its respective uri
           /* context_uri:  */
           // uris: this.createSpotifyUriArray(this.props.ds_songs),
-          context_uri: `spotify:playlist:${this.props.currentUser.spotify_playlist_id}`,
+          context_uri: `spotify:playlist:${this.props.currentUser.spotify_playlist_id}`
           /*  [
             'spotify:track:5d4zl1SVfjPykq0yfsdil6',
             'spotify:track:32bZwIZbRYe4ImC7PJ8s2A',
@@ -365,68 +363,36 @@ class MusicPlayer extends Component {
           // pass an array of song uris through the "uris" key
           // The example below if uncommented will direct the user to 3 songs (make sure to comment out the context_uri)
           // uris:["spotify:track:0aULRU35N90kTj6O1xMULRR","spotify:track:0VgkVdmE4gld66l8iyGjgx","spotify:track:5ry2OE6R2zPQFDO85XkgRb"]
-        }),
-      },
+        })
+      }
     );
-    console.log('SONG LOADED INTO PLAYER');
+    console.log("SONG LOADED INTO PLAYER");
     this.player.setVolume(0);
     setTimeout(() => this.player.pause(), 2000);
     this.player.setVolume(0.5);
   }
 
   // -- Prediction Prompt Logic --
-
   togglePredictionPrompt() {
     this.player.resume();
     this.player.setVolume(0.5);
     this.setState({
-      predictionPrompt: !this.state.predictionPrompt,
+      predictionPrompt: !this.state.predictionPrompt
     });
   }
   // BF
   // Once playlist or queue format is decided
   // ADD function to add current song to liked songs on spotify
   // Send input to BE
-  toggleLikeButton() {
-    this.props.saveLikedSong(this.props.song.id);
-    this.player.nextTrack();
-    this.player.setVolume(0);
-    setTimeout(() => {
-      this.player.pause();
-      this.player.setVolume(0.5);
-    }, 2000);
-    this.props.removeTrack(
-      this.props.currentUser.spotify_playlist_id,
-      this.props.song.id,
-    );
-    this.setState({
-      predictionPrompt: !this.state.predictionPrompt,
-    });
-  }
 
   // BF
   // Once playlist or queue format is decided
   // ADD functionality to REMOVE current song from playlist/queue
   // Send input to BE
-  toggleDislikeButton() {
-    this.player.nextTrack();
-    this.player.setVolume(0);
-    setTimeout(() => {
-      this.player.pause();
-      this.player.setVolume(0.5);
-    }, 2000);
-    this.props.removeTrack(
-      this.props.currentUser.spotify_playlist_id,
-      this.props.song.id,
-    ); // Hardcoded for testing, make dynamic when ready
-    this.setState({
-      predictionPrompt: !this.state.predictionPrompt,
-    });
 
-    // JBF This was added to test if calling transferplayback with an updated playlist would allow the user to progress to new songs.
-    // On activation it restarts playback at the inital song of the playlist regardless of position.
-    // this.transferPlaybackHere();
-  }
+  // JBF This was added to test if calling transferplayback with an updated playlist would allow the user to progress to new songs.
+  // On activation it restarts playback at the inital song of the playlist regardless of position.
+  // this.transferPlaybackHere();
 
   render() {
     const {
@@ -435,9 +401,9 @@ class MusicPlayer extends Component {
       albumName,
       error,
       playing,
-      imageSpotify,
+      imageSpotify
     } = this.state;
-    console.log('MYPROPS', this.props);
+    console.log("MYPROPS", this.props);
 
     return (
       <div className='music-player joyride-player-2'>
@@ -445,16 +411,17 @@ class MusicPlayer extends Component {
           <Grid
             item
             className='music-component-album-info'
-            style={{ maxWidth: '300px' }}>
+            style={{ maxWidth: "300px" }}
+          >
             {/* {this.props.imageUrl[1] && ( */}
             <img
               ref='image'
               src={imageSpotify}
               alt='Album artwork cover.'
-              style={{ maxWidth: '300px', objectFit: 'scale-down' }}
+              style={{ maxWidth: "300px", objectFit: "scale-down" }}
             />
             {/* )} */}
-            <p className='p' style={{ fontWeight: 'bold' }}>
+            <p className='p' style={{ fontWeight: "bold" }}>
               {trackName}
             </p>
             <p>{artistName}</p>
@@ -467,14 +434,16 @@ class MusicPlayer extends Component {
             container
             direction='column'
             justify='center'
-            alignItems='center'>
+            alignItems='center'
+          >
             <Grid item>
-              <div style={{ textAlign: 'right' }}>
+              <div style={{ textAlign: "right" }}>
                 <button
                   onClick={() => this.openAudioDetails()}
                   className='grid-question grid-chart joyride-3'
                   title='Click for Audio Features details'
-                  style={{ margin: 0, borderRadius: '25px' }}>
+                  style={{ margin: 0, borderRadius: "25px" }}
+                >
                   ?
                 </button>
               </div>
@@ -482,31 +451,32 @@ class MusicPlayer extends Component {
                 <Paper
                   className={
                     this.state.collapse
-                      ? 'audio-details-open'
-                      : 'audio-details-closed'
+                      ? "audio-details-open"
+                      : "audio-details-closed"
                   }
                   style={{
                     maxHeight: 510,
                     width: 450,
-                    overflow: 'auto',
-                    backgroundColor: '#1a567a',
+                    overflow: "auto",
+                    backgroundColor: "#1a567a",
                     // backgroundColor: `rgba(${34}, ${109}, ${155}, ${0.98})`,
-                    color: 'lightgray',
-                  }}>
+                    color: "lightgray"
+                  }}
+                >
                   <AudioDetails />
                 </Paper>
               </List>
               <Chart
                 features={this.props.traits}
-                style={{ width: '100%', objectFit: 'scale-down' }}
+                style={{ width: "100%", objectFit: "scale-down" }}
               />
             </Grid>
             <Grid item>
               {window.Spotify !== undefined &&
-                this.state.imageUrl !== '' &&
-                artistName !== 'Artist Name' && (
+                this.state.imageUrl !== "" &&
+                artistName !== "Artist Name" && (
                   <div className='album-art'>
-                    <h4 style={{ textAlign: 'center' }}>Now Playing</h4>
+                    <h4 style={{ textAlign: "center" }}>Now Playing</h4>
                     <img src={this.state.imageUrl} alt='album-art' />
                   </div>
                 )}
@@ -524,7 +494,8 @@ class MusicPlayer extends Component {
               direction='row'
               justify='center'
               alignItems='center'
-              style={{ width: 300, marginBottom: '5%' }}>
+              style={{ width: 300, marginBottom: "5%" }}
+            >
               {/* YES NO */}
               <div
                 className={
@@ -552,67 +523,12 @@ class MusicPlayer extends Component {
                   </div>
                 </div>
               </div>
-
+              
               {/* LIKE DISLIKE */}
-              <div
-                className={
-                  this.state.predictionPrompt
-                    ? 'like-dislike-wrapper yes-no-deactivated'
-                    : 'like-dislike-wrapper yes-no-active'
-                }>
-                <div className='joyride-dislike-4'>
-                  <button
-                    className='like-dislike dislike joyride-dislike-4'
-                    style={{
-                      background: 'none',
-                      border: 'none',
-                      outline: 'none',
-                    }}
-                    onClick={() => this.toggleDislikeButton()}>
-                    <img
-                      src={Meteor}
-                      alt='Dislike Button'
-                      style={{ maxHeight: 70 }}
-                    />
-                  </button>
-                  <h5 style={{ textAlign: 'center', marginTop: '10px' }}>
-                    DISLIKE
-                  </h5>
-                </div>
-
-                <div
-                  style={{ padding: '0px 15px 0px 15px' }}
-                  className='joyride-prediction-5'>
-                  <h5 style={{ textAlign: 'center' }}>Prediction: </h5>
-                  <h3 style={{ textAlign: 'center' }}>
-                    {console.log('SIMISIM', this.state.trueSimilarity)}
-                    {this.state.trueSimilarity.similarity < 0.00002
-                      ? 'Loading'
-                      : (this.state.trueSimilarity.similarity * 100)
-                          .toFixed(4)
-                          .toString() + ' %'}
-                  </h3>
-                </div>
-                <div className='joyride-like-6'>
-                  <button
-                    className='like-dislike like'
-                    style={{
-                      background: 'none',
-                      border: 'none',
-                      outline: 'none',
-                    }}
-                    onClick={() => this.toggleLikeButton()}>
-                    <img
-                      src={Rocket}
-                      alt='Like Button'
-                      style={{ maxHeight: 70 }}
-                    />
-                  </button>
-                  <h5 style={{ textAlign: 'center', marginTop: '10px' }}>
-                    LIKE
-                  </h5>
-                </div>
-              </div>
+              <LikeAndDislikeButton
+                player={this.player}
+                trueSimilarity={this.state.trueSimilarity}
+              />
             </Grid>
 
             <Grid
@@ -620,18 +536,20 @@ class MusicPlayer extends Component {
               direction='column'
               justify='center'
               alignItems='center'
-              style={{ width: 300, marginBottom: '5%' }}>
+              style={{ width: 300, marginBottom: "5%" }}
+            >
               <div>
                 <LinearDeterminate player={this.player} />
               </div>
-              <div style={{ display: 'flex' }}>
+              <div style={{ display: "flex" }}>
                 <button
                   style={{
-                    background: 'none',
-                    border: 'none',
-                    outline: 'none',
+                    background: "none",
+                    border: "none",
+                    outline: "none"
                   }}
-                  onClick={() => this.onPrevClick()}>
+                  onClick={() => this.onPrevClick()}
+                >
                   <img
                     src={SkipLeft}
                     alt='White icon to skip to the previous song.'
@@ -641,11 +559,12 @@ class MusicPlayer extends Component {
 
                 <button
                   style={{
-                    background: 'none',
-                    border: 'none',
-                    outline: 'none',
+                    background: "none",
+                    border: "none",
+                    outline: "none"
                   }}
-                  onClick={() => this.onPlayClick()}>
+                  onClick={() => this.onPlayClick()}
+                >
                   {playing ? (
                     <img
                       ref={input => (this.inputElement = input)}
@@ -665,11 +584,12 @@ class MusicPlayer extends Component {
 
                 <button
                   style={{
-                    background: 'none',
-                    border: 'none',
-                    outline: 'none',
+                    background: "none",
+                    border: "none",
+                    outline: "none"
                   }}
-                  onClick={() => this.onNextClick()}>
+                  onClick={() => this.onNextClick()}
+                >
                   <img
                     src={SkipRight}
                     alt='White icon to skip to the next song.'
@@ -700,21 +620,18 @@ const mapStateToProps = state => ({
   savingLike: state.likedSongsReducer.savingLike,
   currentUser: state.getCurrentUserReducer.currentUser,
   isFetchingSuccessful: state.queueReducer.isFetchingSuccessful,
-  isFetchingDSSongs: state.queueReducer.isFetchingDSSongs,
+  isFetchingDSSongs: state.queueReducer.isFetchingDSSongs
 });
 
-export default connect(
-  mapStateToProps,
-  {
-    getTrackInfo,
-    getCurrentSong,
-    postDSSong,
-    getSeveralTracks,
-    createPlaylist,
-    addToPlaylist,
-    removeTrack,
-    getlikedSongs,
-    saveLikedSong,
-    getCurrentUser,
-  },
-)(MusicPlayer);
+export default connect(mapStateToProps, {
+  getTrackInfo,
+  getCurrentSong,
+  postDSSong,
+  getSeveralTracks,
+  createPlaylist,
+  addToPlaylist,
+  removeTrack,
+  getlikedSongs,
+  saveLikedSong,
+  getCurrentUser
+})(MusicPlayer);

@@ -144,10 +144,6 @@ class MusicPlayer extends Component {
           valence
         }
       };
-      console.log(
-        "inside async dsDelivery musicplayer obj",
-        JSON.stringify(obj)
-      );
       this.props.postDSSong(obj);
     }
   }
@@ -333,7 +329,6 @@ class MusicPlayer extends Component {
       this.player.pause();
       this.player.setVolume(0.5);
     }, 2000);
-    this.togglePredictionPrompt();
   }
 
   transferPlaybackHere() {
@@ -366,33 +361,10 @@ class MusicPlayer extends Component {
         })
       }
     );
-    console.log("SONG LOADED INTO PLAYER");
     this.player.setVolume(0);
     setTimeout(() => this.player.pause(), 2000);
     this.player.setVolume(0.5);
   }
-
-  // -- Prediction Prompt Logic --
-  togglePredictionPrompt() {
-    this.player.resume();
-    this.player.setVolume(0.5);
-    this.setState({
-      predictionPrompt: !this.state.predictionPrompt
-    });
-  }
-  // BF
-  // Once playlist or queue format is decided
-  // ADD function to add current song to liked songs on spotify
-  // Send input to BE
-
-  // BF
-  // Once playlist or queue format is decided
-  // ADD functionality to REMOVE current song from playlist/queue
-  // Send input to BE
-
-  // JBF This was added to test if calling transferplayback with an updated playlist would allow the user to progress to new songs.
-  // On activation it restarts playback at the inital song of the playlist regardless of position.
-  // this.transferPlaybackHere();
 
   render() {
     const {
@@ -484,51 +456,14 @@ class MusicPlayer extends Component {
 
             {error && <p>Error: {error}</p>}
 
-            {/* When predictionPrompt === true show className='yes-no-active'
-            On Yes/No click invoke onPlayclick();
-            On Yes/No click enable 'yes-no-active' on Like/Dislike wrapper
-          */}
-
             <Grid
               container
               direction='row'
               justify='center'
               alignItems='center'
               style={{ width: 300, marginBottom: "5%" }}
-            >
-              {/* YES NO */}
-              <div
-                className={
-                  this.state.predictionPrompt
-                    ? 'yes-no-wrapper yes-no-active '
-                    : 'yes-no-wrapper yes-no-deactivated'
-                }>
-                <div className='yes-no-prompt'>
-                  <p>Do you like it?</p>
-                </div>
-                <div className='yes-no-button-wrapper joyride-prediction-7'>
-                  <div className='yes-button-wrapper'>
-                    <button
-                      className='yes-button'
-                      onClick={() => this.togglePredictionPrompt()}>
-                      Yes
-                    </button>
-                  </div>
-                  <div className='no-button-wrapper'>
-                    <button
-                      className='no-button'
-                      onClick={() => this.togglePredictionPrompt()}>
-                      No
-                    </button>
-                  </div>
-                </div>
-              </div>
-              
-              {/* LIKE DISLIKE */}
-              <LikeAndDislikeButton
-                player={this.player}
-                trueSimilarity={this.state.trueSimilarity}
-              />
+            >      
+              <LikeAndDislikeButton player={this.player} trueSimilarity={this.state.trueSimilarity} />
             </Grid>
 
             <Grid

@@ -2,7 +2,7 @@ import DsActionTypes from "./ds.types";
 import axios from 'axios';
 
 // const url = process.env.REACT_APP_BACKEND_BASE_URL;
-const url = process.env.REACT_APP_BACKEND_BASE_URL;
+const url = "https://music-meteorology.herokuapp.com/";
 
 export const postDSSong = obj => dispatch => {
     dispatch({

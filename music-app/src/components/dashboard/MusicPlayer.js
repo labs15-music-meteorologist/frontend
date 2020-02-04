@@ -30,6 +30,7 @@ import Chart from "../Chart";
 import Characteristics from "../Characteristics.js";
 import AudioDetails from "./AudioDetails";
 import LikeAndDislikeButton from "./LikeAndDislikeButton.component";
+import AlbumInfo from "./AlbumInfo.component";
 
 class MusicPlayer extends Component {
   constructor(props) {
@@ -375,31 +376,15 @@ class MusicPlayer extends Component {
       playing,
       imageSpotify
     } = this.state;
-    console.log("MYPROPS", this.props);
 
     return (
       <div className='music-player joyride-player-2'>
-        <div className='music-component'>
-          <Grid
-            item
-            className='music-component-album-info'
-            style={{ maxWidth: "300px" }}
-          >
-            {/* {this.props.imageUrl[1] && ( */}
-            <img
-              ref='image'
-              src={imageSpotify}
-              alt='Album artwork cover.'
-              style={{ maxWidth: "300px", objectFit: "scale-down" }}
-            />
-            {/* )} */}
-            <p className='p' style={{ fontWeight: "bold" }}>
-              {trackName}
-            </p>
-            <p>{artistName}</p>
-            <p>{albumName}</p>
-          </Grid>
-        </div>
+        <AlbumInfo
+          imageSpotify={imageSpotify}
+          trackName={trackName}
+          artistName={artistName}
+          albumName={albumName}
+        />
 
         <div className='music-component music-chart'>
           <Grid
@@ -462,8 +447,11 @@ class MusicPlayer extends Component {
               justify='center'
               alignItems='center'
               style={{ width: 300, marginBottom: "5%" }}
-            >      
-              <LikeAndDislikeButton player={this.player} trueSimilarity={this.state.trueSimilarity} />
+            >
+              <LikeAndDislikeButton
+                player={this.player}
+                trueSimilarity={this.state.trueSimilarity}
+              />
             </Grid>
 
             <Grid

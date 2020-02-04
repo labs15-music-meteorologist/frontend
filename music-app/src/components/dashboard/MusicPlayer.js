@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { connect } from "react-redux";
 import { Grid } from "@material-ui/core";
 import {
@@ -14,6 +13,8 @@ import {
   getCurrentUser
 } from "../../Redux/Spotify/spotify.actions";
 import { postDSSong } from "../../Redux/DS/ds.actions";
+
+import { dsDelivery } from "./MusicPlayer.functions";
 
 // Styles
 import "../../App.css";
@@ -67,7 +68,7 @@ class MusicPlayer extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.song_id !== prevProps.song_id) {
-      this.dsDelivery();
+      dsDelivery(this.props.song_id);
     }
     if (this.props.savingLike) {
       console.log("GET LIKED SONG IN CDU");
@@ -95,50 +96,6 @@ class MusicPlayer extends Component {
         },
         this.props.currentUser.spotify_playlist_id
       );
-    }
-  }
-
-  async dsDelivery() {
-    var config = {
-      headers: { Authorization: "Bearer " + localStorage.getItem("token") }
-    };
-
-    let response = await axios.get(
-      `https://api.spotify.com/v1/audio-features/${this.props.song_id}`,
-      config
-    );
-    if (response.status === 200) {
-      let {
-        acousticness,
-        danceability,
-        energy,
-        instrumentalness,
-        key,
-        liveness,
-        loudness,
-        mode,
-        speechiness,
-        tempo,
-        time_signature,
-        valence
-      } = response.data;
-      let obj = {
-        audio_features: {
-          acousticness,
-          danceability,
-          energy,
-          instrumentalness,
-          key,
-          liveness,
-          loudness,
-          mode,
-          speechiness,
-          tempo,
-          time_signature,
-          valence
-        }
-      };
-      this.props.postDSSong(obj);
     }
   }
 
@@ -329,7 +286,7 @@ class MusicPlayer extends Component {
     } = this.state;
 
     return (
-      <div className="music-player joyride-player-2">
+      <div className='music-player joyride-player-2'>
         <AlbumInfo
           imageSpotify={imageSpotify}
           trackName={trackName}
@@ -337,21 +294,21 @@ class MusicPlayer extends Component {
           albumName={albumName}
         />
 
-        <div className="music-component music-chart">
+        <div className='music-component music-chart'>
           <Grid
             container
-            direction="column"
-            justify="center"
-            alignItems="center"
+            direction='column'
+            justify='center'
+            alignItems='center'
           >
             <AudioDetailsContainer traits={this.props.traits} />
             <Grid item>
               {window.Spotify !== undefined &&
                 this.state.imageUrl !== "" &&
                 artistName !== "Artist Name" && (
-                  <div className="album-art">
+                  <div className='album-art'>
                     <h4 style={{ textAlign: "center" }}>Now Playing</h4>
-                    <img src={this.state.imageUrl} alt="album-art" />
+                    <img src={this.state.imageUrl} alt='album-art' />
                   </div>
                 )}
             </Grid>
@@ -360,9 +317,9 @@ class MusicPlayer extends Component {
 
             <Grid
               container
-              direction="row"
-              justify="center"
-              alignItems="center"
+              direction='row'
+              justify='center'
+              alignItems='center'
               style={{ width: 300, marginBottom: "5%" }}
             >
               <LikeAndDislikeButton
@@ -373,9 +330,9 @@ class MusicPlayer extends Component {
 
             <Grid
               container
-              direction="column"
-              justify="center"
-              alignItems="center"
+              direction='column'
+              justify='center'
+              alignItems='center'
               style={{ width: 300, marginBottom: "5%" }}
             >
               <div>
@@ -386,7 +343,7 @@ class MusicPlayer extends Component {
           </Grid>
         </div>
 
-        <div className="music-component">
+        <div className='music-component'>
           <Characteristics features={this.props.traits} />
         </div>
       </div>

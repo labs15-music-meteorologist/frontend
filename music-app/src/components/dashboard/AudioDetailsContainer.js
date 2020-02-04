@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
 import AudioDetails from "./AudioDetails"
 import { Grid } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
@@ -52,6 +51,5 @@ const [collapse, setCollapse] = useState(false)
   </Grid>
   );
 };
-
 
 export default AudioDetailsContainer

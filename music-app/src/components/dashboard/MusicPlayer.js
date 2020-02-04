@@ -48,9 +48,7 @@ class MusicPlayer extends Component {
     this.playerCheckInterval = null;
   }
 
-  componentDidMount() {
-    this.handleLogin();
-  }
+  componentDidMount() { this.handleLogin(); }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.ds_songs && this.props.song) {
@@ -100,7 +98,6 @@ class MusicPlayer extends Component {
         .map(artist => artist.name)
         .join(", ");
       const imageSpotify = currentTrack.album.images[2].url;
-
       const playing = !state.paused;
       this.setState({
         position,
@@ -216,13 +213,7 @@ class MusicPlayer extends Component {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          // This is where we will control what music is fed to the user
-          // If we want to direct them to a specific playlist,artist or album we will pass in "context_uri" with its respective uri
           context_uri: `spotify:playlist:${this.props.currentUser.spotify_playlist_id}`
-
-          // In order manipulate the user's queue and feed them a more fluid and unique array of songs we would instead
-          // pass an array of song uris through the "uris" key
-          // The example below if uncommented will direct the user to 3 songs (make sure to comment out the context_uri)
         })
       }
     );

@@ -305,29 +305,6 @@ class MusicPlayer extends Component {
     this.props.getTrackInfo(id);
   };
 
-  // -- SDK Player Song playback controls --
-  onPrevClick() {
-    this.player.previousTrack();
-    this.player.setVolume(0);
-    setTimeout(() => {
-      this.player.pause();
-      this.player.setVolume(0.5);
-    }, 1000);
-  }
-
-  onPlayClick() {
-    this.player.togglePlay();
-  }
-
-  onNextClick() {
-    this.player.nextTrack();
-    this.player.setVolume(0);
-    this.player.playing && this.player.pause();
-    setTimeout(() => {
-      this.player.pause();
-      this.player.setVolume(0.5);
-    }, 2000);
-  }
 
   transferPlaybackHere() {
     const { token } = this.state;

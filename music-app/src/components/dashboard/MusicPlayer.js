@@ -27,7 +27,7 @@ import Characteristics from "../Characteristics.js";
 import AudioDetails from "./AudioDetails";
 import LikeAndDislikeButton from "./LikeAndDislikeButton.component";
 import AlbumInfo from "./AlbumInfo.component";
-import PLayerButtons from "./PlayerButtons.component"
+import PlayerButtons from "./PlayerButtons.component"
 
 class MusicPlayer extends Component {
   constructor(props) {
@@ -305,7 +305,10 @@ class MusicPlayer extends Component {
     this.props.getTrackInfo(id);
   };
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> fb754dd81c5756b9230699b7561e203afce5e866
   transferPlaybackHere() {
     const { token } = this.state;
     fetch(
@@ -438,7 +441,7 @@ class MusicPlayer extends Component {
               <div>
                 <LinearDeterminate player={this.player} />
               </div>
-              <PLayerButtons player={this.player} playing={playing}/>
+              <PlayerButtons player={this.player} playing={playing}/>
             </Grid>
           </Grid>
         </div>

@@ -54,7 +54,7 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     this.props.getSpotifyAccountDetails();
-    // this.props.getCurrentUser(this.props.spotifyUser.id);
+
     if (this.props.spotifyUser.length > 0) {
       this.props.persistUser(this.props.spotifyUser);
     }
@@ -62,21 +62,8 @@ class Dashboard extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    // this.props.spotifyUser.id &&
-
     // console.log('Previous Props', prevProps);
     // console.log('Current Props', this.props);
-
-    // Check to see if a MM playlist has been saved to BE user
-    // -- in order to do this pull in user data from BE specifically playlist.id
-
-    // If not - Create a playlist and save to BE user table
-    // If it has - do nothing
-
-    // if (this.props.spotifyUser) {
-    //   console.log('I EXIST SPOTID', this.props.spotifyUser);
-    //   this.props.persistUser(this.props.spotifyUser);
-    // }
 
     if (this.state.userDataFetching === false && this.props.spotifyUser.id) {
       this.props.getCurrentUser(this.props.spotifyUser.id);
@@ -167,7 +154,6 @@ class Dashboard extends React.Component {
     }
 
     console.log("what it do", this.props);
-
     // console.log('getSpotifyAccountDetails ! _ 0', this.props);
 
     return (

@@ -13,10 +13,7 @@ import {
   getCurrentUser
 } from "../../Redux/Spotify/spotify.actions";
 import { postDSSong } from "../../Redux/DS/ds.actions";
-
 import { dsDelivery } from "./MusicPlayer.functions";
-
-// Styles
 import "../../App.css";
 
 // Features
@@ -46,10 +43,8 @@ class MusicPlayer extends Component {
       id: "",
       songFeatures: [],
       currentTrack: "",
-      predictionPrompt: true,
       trueSimilarity: { similarity: 0.00001, values: "mock" }
     };
-    // this will later be set by setInterval
     this.playerCheckInterval = null;
   }
 
@@ -59,7 +54,6 @@ class MusicPlayer extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.ds_songs && this.props.song) {
-      console.log("SONGSWEARE", this.props.ds_songs, this.props.song);
       setTimeout(() => {
         this.predictionScoreCalculation(this.props.song);
       }, 2000);
@@ -71,21 +65,8 @@ class MusicPlayer extends Component {
       dsDelivery(this.props.song_id);
     }
     if (this.props.savingLike) {
-      console.log("GET LIKED SONG IN CDU");
       this.props.getlikedSongs();
     }
-
-    // if (
-    //   (this.props.song.id === null ||
-    //   this.props.song.id !== prevProps.song.id)
-    //   )
-
-    // JBF
-    // This now compares ds_songs to prevProps and only adds the songs to the playlist if they have been updated from ds_songs.
-    // Without this it will happen happens on every component update, play song, access app playlist, etc.
-
-    // The songs will be re-added to the playlist upon relog as they are no longer in state.
-    // Adding the ability to query existing songs inside of the saved playlist and implementing similar logic should prevent this.
     if (
       this.props.isFetchingSuccessful === true &&
       this.props.ds_songs !== prevProps.ds_songs
@@ -106,9 +87,7 @@ class MusicPlayer extends Component {
     }
   }
 
-  // when we receive a new update from the player
   onStateChanged(state) {
-    // only update if we got a real state
     if (state !== null) {
       const {
         current_track: currentTrack,
@@ -121,7 +100,6 @@ class MusicPlayer extends Component {
         .map(artist => artist.name)
         .join(", ");
       const imageSpotify = currentTrack.album.images[2].url;
-      // .map(image => image.url)
 
       const playing = !state.paused;
       this.setState({
@@ -134,7 +112,6 @@ class MusicPlayer extends Component {
         imageSpotify
       });
     } else {
-      // state was null, user might have swapped to another device
       this.setState({
         error: "Looks like you might have swapped to another device?"
       });
@@ -143,13 +120,10 @@ class MusicPlayer extends Component {
 
   createEventHandlers() {
     this.player.on("initialization_error", e => {});
-
     this.player.on("authentication_error", e => {
       this.setState({ loggedIn: false });
     });
-
     this.player.on("account_error", e => {});
-
     this.player.on("playback_error", e => {});
 
     // ONLY WHEN PLAYER STATE CHANGED
@@ -162,10 +136,6 @@ class MusicPlayer extends Component {
       // ONLY WHEN NEW SONG
       if (state.track_window.current_track.id !== this.state.currentTrack) {
         this.currentSong();
-        /*   if (this.props.song.id) {
-          this.getCurrentSongFeatures(this.props.song.id);
-        } */
-
         this.setState({ currentTrack: state.track_window.current_track.id });
         this.player.setVolume(0);
         setTimeout(() => {
@@ -186,7 +156,6 @@ class MusicPlayer extends Component {
         deviceId: device_id,
         loggedIn: true
       });
-      console.log("Fired Off Transfer Playback ready");
       this.transferPlaybackHere();
       this.props.ds_songs && this.currentSong();
     });
@@ -197,27 +166,16 @@ class MusicPlayer extends Component {
       this.props.getSeveralTracks(this.concatenateSongIds(this.props.ds_songs));
   };
 
-  concatenateSongIds(array) {
-    return array.map(song => song.values).join(",");
-  }
-
-  createSpotifyUriArray(array) {
-    return array.map(song => "spotify:track:" + song.values);
-  }
+  concatenateSongIds(array) { return array.map(song => song.values).join(",");}
+  getCurrentSongFeatures = id => this.props.getTrackInfo(id);
+  createSpotifyUriArray(array) { return array.map(song => "spotify:track:" + song.values);}
 
   predictionScoreCalculation(songs) {
     let similarityPrediction = JSON.parse(
       localStorage.getItem("ds_songs")
     ).filter(song => song.values === songs.id);
-    console.log(
-      "UNCLEAR",
-      JSON.parse(localStorage.getItem("ds_songs")),
-      songs,
-      similarityPrediction
-    );
     if (similarityPrediction[0] !== undefined) {
       this.setState({ trueSimilarity: similarityPrediction[0] });
-      console.log("trueSimilarity", similarityPrediction[0]);
     }
   }
 
@@ -246,8 +204,6 @@ class MusicPlayer extends Component {
       this.props.getCurrentSong();
     }
   }
-
-  getCurrentSongFeatures = id => this.props.getTrackInfo(id);
 
   transferPlaybackHere() {
     const { token } = this.state;

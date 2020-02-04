@@ -1,18 +1,20 @@
 name: CI
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Code Climate Coverage Action
-      uses: paambaati/codeclimate-action@v2.4.0
-      with:
-        # Coverage command to execute
-        coverageCommand: yarn coverage
-        # Enable debugging logs for the Code Climate test reporter
-        debug: false
+      - uses: actions/checkout@v2
+      - name: Code Climate Coverage Action
+        uses: paambaati/codeclimate-action@v2.4.0
+        with:
+          # Coverage command to execute
+          coverageCommand: yarn coverage
+          # Enable debugging logs for the Code Climate test reporter
+          debug: false

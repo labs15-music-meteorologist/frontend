@@ -305,10 +305,6 @@ class MusicPlayer extends Component {
     this.props.getTrackInfo(id);
   };
 
-<<<<<<< HEAD
-
-=======
->>>>>>> fb754dd81c5756b9230699b7561e203afce5e866
   transferPlaybackHere() {
     const { token } = this.state;
     fetch(

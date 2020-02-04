@@ -30,7 +30,7 @@ export const getCurrentUser = spotifyId => dispatch => {
     });
     axios
     .get(`${url}v1/users/spotify/${spotifyId}`)
-    .then(res => {
+    .then(res => { console.log("this is the spotify id", spotifyId)
         dispatch({
         type: SpotifyActionTypes.GET_LOGGED_IN_SUCCESS,
         payload: res.data,

@@ -8,7 +8,8 @@ export const postDSSong = obj => dispatch => {
     dispatch({
       type: DsActionTypes.POST_DS_SONGS_FETCHING,
     });
-    console.log('OBJ passed into postDSSong', JSON.stringify(obj));
+    console.log("token here", localStorage.getItem('token'));
+    // console.log('OBJ passed into postDSSong', JSON.stringify(obj));
     axios
       .post(`${url}v1/recommender`, obj)
       .then(res => {

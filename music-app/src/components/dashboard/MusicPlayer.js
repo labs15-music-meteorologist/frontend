@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import { Grid } from "@material-ui/core";
-import Paper from "@material-ui/core/Paper";
-import List from "@material-ui/core/List";
 import {
   getCurrentSong,
   getTrackInfo,
@@ -22,12 +20,11 @@ import "../../App.css";
 
 // Features
 import LinearDeterminate from "../LinearDeterminate";
-import Chart from "../Chart";
 import Characteristics from "../Characteristics.js";
-import AudioDetails from "./AudioDetails";
 import LikeAndDislikeButton from "./LikeAndDislikeButton.component";
 import AlbumInfo from "./AlbumInfo.component";
-import PlayerButtons from "./PlayerButtons.component"
+import PlayerButtons from "./PlayerButtons.component";
+import AudioDetailsContainer from "./AudioDetailsContainer";
 
 class MusicPlayer extends Component {
   constructor(props) {
@@ -47,7 +44,6 @@ class MusicPlayer extends Component {
       duration: 1,
       id: "",
       songFeatures: [],
-      collapse: false,
       currentTrack: "",
       predictionPrompt: true,
       trueSimilarity: { similarity: 0.00001, values: "mock" }
@@ -151,13 +147,6 @@ class MusicPlayer extends Component {
       this.setState({ loggedIn: true });
       this.playerCheckInterval = setInterval(() => this.checkForPlayer(), 1000);
     }
-  }
-
-  // toggles state collapse
-  openAudioDetails() {
-    this.setState({
-      collapse: !this.state.collapse
-    });
   }
 
   // when we receive a new update from the player
@@ -301,9 +290,7 @@ class MusicPlayer extends Component {
     }
   }
 
-  getCurrentSongFeatures = id => {
-    this.props.getTrackInfo(id);
-  };
+  getCurrentSongFeatures = id => this.props.getTrackInfo(id);
 
   transferPlaybackHere() {
     const { token } = this.state;
@@ -318,20 +305,11 @@ class MusicPlayer extends Component {
         body: JSON.stringify({
           // This is where we will control what music is fed to the user
           // If we want to direct them to a specific playlist,artist or album we will pass in "context_uri" with its respective uri
-          /* context_uri:  */
-          // uris: this.createSpotifyUriArray(this.props.ds_songs),
           context_uri: `spotify:playlist:${this.props.currentUser.spotify_playlist_id}`
-          /*  [
-            'spotify:track:5d4zl1SVfjPykq0yfsdil6',
-            'spotify:track:32bZwIZbRYe4ImC7PJ8s2A',
-          ], */
-          /* this.props.ds_songs.songs */
-          /* 'spotify:user:spotifycharts:playlist:37i9dQZEVXbMDoHDwVN2tF' */ //Directs User to Global Top 50 playlist curated by spotify
 
           // In order manipulate the user's queue and feed them a more fluid and unique array of songs we would instead
           // pass an array of song uris through the "uris" key
           // The example below if uncommented will direct the user to 3 songs (make sure to comment out the context_uri)
-          // uris:["spotify:track:0aULRU35N90kTj6O1xMULRR","spotify:track:0VgkVdmE4gld66l8iyGjgx","spotify:track:5ry2OE6R2zPQFDO85XkgRb"]
         })
       }
     );
@@ -351,7 +329,7 @@ class MusicPlayer extends Component {
     } = this.state;
 
     return (
-      <div className='music-player joyride-player-2'>
+      <div className="music-player joyride-player-2">
         <AlbumInfo
           imageSpotify={imageSpotify}
           trackName={trackName}
@@ -359,55 +337,21 @@ class MusicPlayer extends Component {
           albumName={albumName}
         />
 
-        <div className='music-component music-chart'>
+        <div className="music-component music-chart">
           <Grid
             container
-            direction='column'
-            justify='center'
-            alignItems='center'
+            direction="column"
+            justify="center"
+            alignItems="center"
           >
-            <Grid item>
-              <div style={{ textAlign: "right" }}>
-                <button
-                  onClick={() => this.openAudioDetails()}
-                  className='grid-question grid-chart joyride-3'
-                  title='Click for Audio Features details'
-                  style={{ margin: 0, borderRadius: "25px" }}
-                >
-                  ?
-                </button>
-              </div>
-              <List>
-                <Paper
-                  className={
-                    this.state.collapse
-                      ? "audio-details-open"
-                      : "audio-details-closed"
-                  }
-                  style={{
-                    maxHeight: 510,
-                    width: 450,
-                    overflow: "auto",
-                    backgroundColor: "#1a567a",
-                    // backgroundColor: `rgba(${34}, ${109}, ${155}, ${0.98})`,
-                    color: "lightgray"
-                  }}
-                >
-                  <AudioDetails />
-                </Paper>
-              </List>
-              <Chart
-                features={this.props.traits}
-                style={{ width: "100%", objectFit: "scale-down" }}
-              />
-            </Grid>
+            <AudioDetailsContainer traits={this.props.traits} />
             <Grid item>
               {window.Spotify !== undefined &&
                 this.state.imageUrl !== "" &&
                 artistName !== "Artist Name" && (
-                  <div className='album-art'>
+                  <div className="album-art">
                     <h4 style={{ textAlign: "center" }}>Now Playing</h4>
-                    <img src={this.state.imageUrl} alt='album-art' />
+                    <img src={this.state.imageUrl} alt="album-art" />
                   </div>
                 )}
             </Grid>
@@ -416,9 +360,9 @@ class MusicPlayer extends Component {
 
             <Grid
               container
-              direction='row'
-              justify='center'
-              alignItems='center'
+              direction="row"
+              justify="center"
+              alignItems="center"
               style={{ width: 300, marginBottom: "5%" }}
             >
               <LikeAndDislikeButton
@@ -429,20 +373,20 @@ class MusicPlayer extends Component {
 
             <Grid
               container
-              direction='column'
-              justify='center'
-              alignItems='center'
+              direction="column"
+              justify="center"
+              alignItems="center"
               style={{ width: 300, marginBottom: "5%" }}
             >
               <div>
                 <LinearDeterminate player={this.player} />
               </div>
-              <PlayerButtons player={this.player} playing={playing}/>
+              <PlayerButtons player={this.player} playing={playing} />
             </Grid>
           </Grid>
         </div>
 
-        <div className='music-component'>
+        <div className="music-component">
           <Characteristics features={this.props.traits} />
         </div>
       </div>

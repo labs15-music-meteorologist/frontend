@@ -27,7 +27,7 @@ import Characteristics from "../Characteristics.js";
 import AudioDetails from "./AudioDetails";
 import LikeAndDislikeButton from "./LikeAndDislikeButton.component";
 import AlbumInfo from "./AlbumInfo.component";
-import PLayerButtons from "./PlayerButtons.component"
+import PlayerButtons from "./PlayerButtons.component"
 
 class MusicPlayer extends Component {
   constructor(props) {
@@ -305,30 +305,6 @@ class MusicPlayer extends Component {
     this.props.getTrackInfo(id);
   };
 
-  // -- SDK Player Song playback controls --
-  onPrevClick() {
-    this.player.previousTrack();
-    this.player.setVolume(0);
-    setTimeout(() => {
-      this.player.pause();
-      this.player.setVolume(0.5);
-    }, 1000);
-  }
-
-  onPlayClick() {
-    this.player.togglePlay();
-  }
-
-  onNextClick() {
-    this.player.nextTrack();
-    this.player.setVolume(0);
-    this.player.playing && this.player.pause();
-    setTimeout(() => {
-      this.player.pause();
-      this.player.setVolume(0.5);
-    }, 2000);
-  }
-
   transferPlaybackHere() {
     const { token } = this.state;
     fetch(
@@ -461,7 +437,7 @@ class MusicPlayer extends Component {
               <div>
                 <LinearDeterminate player={this.player} />
               </div>
-              <PLayerButtons player={this.player} playing={playing}/>
+              <PlayerButtons player={this.player} playing={playing}/>
             </Grid>
           </Grid>
         </div>

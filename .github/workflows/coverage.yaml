@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: 12
       - name: install dependencies
-        run: ls && yarn install
+        run: cd /music-app && yarn install
       - name: calculate
         uses: paambaati/codeclimate-action@v2.4.0
         with:

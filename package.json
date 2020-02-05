@@ -4,6 +4,7 @@
   "description": "[![Maintainability](https://api.codeclimate.com/v1/badges/6459996a0b5667ac7075/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/Music-Meteorologist-fe/maintainability)",
   "main": "index.js",
   "scripts": {
+    "test": "cd music-app && yarn test -- --coverage --watchAll=false"
   },
   "repository": {
     "type": "git",

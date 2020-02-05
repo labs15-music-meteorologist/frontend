@@ -1,4 +1,5 @@
 # Music Meteorologist Frontend
+[![Maintainability](https://api.codeclimate.com/v1/badges/6459996a0b5667ac7075/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/Music-Meteorologist-fe/maintainability)
 
 View this site at - https://music-meteorologist.com/
 

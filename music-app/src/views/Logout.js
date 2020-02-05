@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import { Mixpanel } from '../analytics/Mixpanel';
 import '../App.css';
 
 export class Logout extends Component {

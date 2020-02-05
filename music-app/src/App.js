@@ -16,7 +16,6 @@ import Dashboard from './views/Dashboard.js';
 import './App.css';
 import About from './components/About';
 
-/* import { MixpanelConsumer } from 'react-mixpanel'; */
 /* import LikedSongs from './components/LikedSongs'; */
 
 const history = createBrowserHistory();
@@ -32,15 +31,6 @@ class App extends Component {
       <div className='App'>
         <Router history={history}>
           <NavBar />
-          {/* <MixpanelConsumer>
-            {mixpanel => <ApiRunner mixpanel={mixpanel} />}
-            {/* {mixpanel => <LikedSongs {...mixpanel} />} */}
-          {/* </MixpanelConsumer> */}
-          {/* <Route // Here we need to wrap this route within a <MixpanelConsumer>
-            exact
-            path='/likedsongs'
-            render={props => <LikedSongs {...props} />}
-          /> */}
           <Route exact path='/' render={props => <Auth {...props} />} />
           <Route exact path='/logout' component={Logout} />
           <Route exact path='/info' render={props => <Info {...props} />} />

@@ -1,8 +1,4 @@
-import {
-    REMOVE_TRACK_FETCHING,
-    REMOVE_TRACK_SUCCESS,
-    REMOVE_TRACK_FAILURE,
-  } from '../actions';
+import SpotifyActionTypes from '../Spotify/spotify.types'
   
   const initialState = {
     status: ''
@@ -10,16 +6,16 @@ import {
   
   const removeTrackReducer = (state = initialState, action) => {
     switch (action.type) {
-      case REMOVE_TRACK_FETCHING:
+      case SpotifyActionTypes.REMOVE_TRACK_FETCHING:
         return {
           ...state,
         };
-      case REMOVE_TRACK_SUCCESS:
+      case SpotifyActionTypes.REMOVE_TRACK_SUCCESS:
         return {
           ...state,
           status: action.payload,
         };
-      case REMOVE_TRACK_FAILURE:
+      case SpotifyActionTypes.REMOVE_TRACK_FAILURE:
         return {
           ...state,
           status: action.payload

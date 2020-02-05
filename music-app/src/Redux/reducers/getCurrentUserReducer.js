@@ -1,8 +1,4 @@
-import {
-  GET_LOGGED_IN_FETCHING,
-  GET_LOGGED_IN_SUCCESS,
-  GET_LOGGED_IN_FAILURE,
-} from '../actions';
+import SpotifyActionTypes from '../Spotify/spotify.types'
 
 const initialState = {
   currentUser: {},
@@ -12,18 +8,18 @@ const initialState = {
 
 const getCurrentUserReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_LOGGED_IN_FETCHING:
+    case SpotifyActionTypes.GET_LOGGED_IN_FETCHING:
       return {
         ...state,
         currentUserFetching: true,
       };
-    case GET_LOGGED_IN_SUCCESS:
+    case SpotifyActionTypes.GET_LOGGED_IN_SUCCESS:
       return {
         ...state,
         currentUser: action.payload,
         currentUserFetching: false,
       };
-    case GET_LOGGED_IN_FAILURE:
+    case SpotifyActionTypes.GET_LOGGED_IN_FAILURE:
       return {
         ...state,
         error: '',

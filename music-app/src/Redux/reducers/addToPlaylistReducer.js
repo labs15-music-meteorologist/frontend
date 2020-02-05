@@ -1,8 +1,4 @@
-import {
-  ADD_TO_PLAYLIST_FETCHING,
-  ADD_TO_PLAYLIST_SUCCESS,
-  ADD_TO_PLAYLIST_FAILURE,
-} from '../actions';
+import SpotifyActionTypes from '../Spotify/spotify.types'
 
 const initialState = {
   addedTo: false,
@@ -12,18 +8,18 @@ const initialState = {
 
 const addToPlaylistReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_TO_PLAYLIST_FETCHING:
+    case SpotifyActionTypes.ADD_TO_PLAYLIST_FETCHING:
       return {
         ...state,
         isFetching: true,
       };
-    case ADD_TO_PLAYLIST_SUCCESS:
+    case SpotifyActionTypes.ADD_TO_PLAYLIST_SUCCESS:
       return {
         ...state,
         isFetching: false,
         addedTo: true,
       };
-    case ADD_TO_PLAYLIST_FAILURE:
+    case SpotifyActionTypes.ADD_TO_PLAYLIST_FAILURE:
       return {
         ...state,
         error: action.payload,

@@ -1,10 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-/* import { Mixpanel } from '../analytics/Mixpanel'; */
 import { Grid, Typography } from '@material-ui/core';
 
-import { getlikedSongs, getUsers, getPlaylist } from '../../actions';
+import { getlikedSongs, getUsers, getPlaylist } from '../../Redux/Spotify/spotify.actions';
 import Song from './Song.js';
 
 class LikedSongs extends React.Component {
@@ -14,19 +13,6 @@ class LikedSongs extends React.Component {
   componentDidMount() {
     // this.props.getlikedSongs();
     this.props.getUsers();
-    // this.props.mixpanel.track('Spotify Login'); // Removed temp tracking
-
-    // Example tracking once implemented
-    /* this.props.getSpotifyAccountDetails(); */
-    /*     Mixpanel.track('Spotify Login'); */
-
-    // // Mixpanel Tracking
-    // Mixpanel.identify(this.props.user.display_name);
-    // Mixpanel.track('Successful login');
-    // Mixpanel.people.set({
-    //   $first_name: this.props.user.first_name,
-    //   $last_name: this.props.user.last_name,
-    // });
   }
 
   componentDidUpdate() {

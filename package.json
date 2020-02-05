@@ -1,0 +1,19 @@
+{
+  "name": "music-meteorologist-fe",
+  "version": "1.0.0",
+  "description": "[![Maintainability](https://api.codeclimate.com/v1/badges/6459996a0b5667ac7075/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/Music-Meteorologist-fe/maintainability)",
+  "main": "index.js",
+  "scripts": {
+    "test": "cd /src && yarn test --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lambda-School-Labs/Music-Meteorologist-fe.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lambda-School-Labs/Music-Meteorologist-fe/issues"
+  },
+  "homepage": "https://github.com/Lambda-School-Labs/Music-Meteorologist-fe#readme"
+}

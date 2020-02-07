@@ -3,10 +3,17 @@ import SkipLeft from "../../assets/skip-left.png";
 import SkipRight from "../../assets/skip-right.png";
 import Pause from "../../assets/player-stop.png";
 import Play from "../../assets/player-start.png";
+import React from "react";
+import { connect } from "react-redux";
+import { saveLikedSong, removeTrack } from "../../Redux/Spotify/spotify.actions";
+import Whiteheart from "../../assets/whiteheart1.png";
+import Pinkheart from "../../assets/pinkheart1.png";
+import Close from "../../assets/close.png";
+import LikeDislikeContainer from '../dashboard/element-styles/LikeDislikeContainer';
 
 const PlayerButtons = props => {
 
-  const { player, playing } = props;
+  const { player, playing, trueSimilarity } = props;
 
  const onPrevClick = () => {
     player.previousTrack();
@@ -30,65 +37,63 @@ const PlayerButtons = props => {
       player.setVolume(0.5);
     }, 2000);
   }
+
+  const toggleLikeButton = () => {
+    props.saveLikedSong(props.song.id);
+    player.nextTrack();
+    player.setVolume(0);
+    setTimeout(() => {
+      player.pause();
+      player.setVolume(0.5);
+    }, 2000);
+    props.removeTrack(props.currentUser.spotify_playlist_id, props.song.id);
+  };
+
+  const toggleDislikeButton = () => {
+    player.nextTrack();
+    player.setVolume(0);
+    setTimeout(() => {
+      player.pause();
+      player.setVolume(0.5);
+    }, 2000);
+    props.removeTrack(props.currentUser.spotify_playlist_id, props.song.id);
+  };
   
   return (
-    <div style={{ display: "flex" }}>
+    <LikeDislikeContainer>
+    <div className="like-dislike-wrapper yes-no-active" >
+      <div className='joyride-dislike-4'>
         <button
-            style={{
-            background: "none",
-            border: "none",
-            outline: "none"
-            }}
-            onClick={() => onPrevClick()}
-        >
-            <img
-            src={SkipLeft}
-            alt='White icon to skip to the previous song.'
-            style={{ maxHeight: 22 }}
-            />
+          className='like-dislike dislike joyride-dislike-4'
+          style={{ background: "none", border: "none", outline: "none" }}
+          onClick={toggleDislikeButton} >
+          <img src={Close} alt='Dislike Button' style={{ maxHeight: 70 }} />
         </button>
-
-        <button
-            style={{
-            background: "none",
-            border: "none",
-            outline: "none"
-            }}
-            onClick={() => onPlayClick()}
-        >
-            {playing ? (
-            <img
-                // ref={input => (this.inputElement = input)}
-                src={Pause}
-                alt='White icon to pause a song.'
-                style={{ maxHeight: 35 }}
-            />
-            ) : (
-            <img
-                /* ref={this.simulateClick} */
-                src={Play}
-                alt='White icon to start a pause song.'
-                style={{ maxHeight: 35 }}
-            />
-            )}
+        <h5 style={{ textAlign: "center", marginTop: "10px" }}></h5>
+      </div>
+      <div style={{ padding: "0px 15px 0px 15px" }} className='joyride-prediction-5' >
+        <h5 style={{ textAlign: "center" }}> </h5>
+        <h3 style={{ textAlign: "center" }}>
+          {console.log("SIMISIM", trueSimilarity)}
+          {trueSimilarity.similarity < 0.00002 ? "" : (trueSimilarity.similarity * 100).toFixed(4).toString() + " %"}
+        </h3>
+      </div>
+      <div className='joyride-like-6'>
+        <button className='like-dislike like' style={{ background: "none", border: "none", outline: "none", marginLeft: "70px" }} onClick={toggleLikeButton} >
+          <a className="likeicon" style={{ maxHeight: 70 }} />
         </button>
-
-        <button
-            style={{
-            background: "none",
-            border: "none",
-            outline: "none"
-            }}
-            onClick={() => onNextClick()}
-        >
-            <img
-            src={SkipRight}
-            alt='White icon to skip to the next song.'
-            style={{ maxHeight: 22 }}
-            />
-        </button>
-        </div>
+        <h5 style={{ textAlign: "center", marginTop: "10px" }}></h5>
+      </div>
+      </div>
+      </LikeDislikeContainer>
   );
 };
 
-export default PlayerButtons
+const mapStateToProps = state => ({
+  song: state.currentSongReducer.item,
+  currentUser: state.getCurrentUserReducer.currentUser
+});
+
+export default connect(mapStateToProps, { saveLikedSong, removeTrack })(
+  PlayerButtons
+);

@@ -7,7 +7,7 @@ import ReactGA from 'react-ga';
 
 import Auth from './components/Auth';
 import MusicPlayer from './components/dashboard/MusicPlayer';
-import Footer from './components/Footer.js';
+import FooterContainer from './components/Footer.js';
 
 import Logout from './views/Logout';
 import Info from './views/Info';
@@ -35,7 +35,7 @@ class App extends Component {
           <Route exact path='/player' component={MusicPlayer} />
           <Route exact path='/about' component={About} />
           <ProtectedRoute exact path='/dashboard' component={Dashboard} />
-          <Footer />
+          <FooterContainer />
         </Router>
       </div>
     );

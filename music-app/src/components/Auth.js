@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 
-import Button from '@material-ui/core/Button';
+import Button from './dashboard/element-styles/AuthButton.js'
 
 import '../App.css';
 import '../views/styles/homepage.css';
 
-import walking_city from '../assets/walking_city.svg';
-import weather_sitting from '../assets/weather_sitting.svg';
-import music_notes from '../assets/music_notes.svg';
-import user_gif from '../assets/user_gif.gif';
+import albums_background from '../assets/albums-background.svg';
 
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
 
@@ -28,6 +25,7 @@ const scopes = [
   'playlist-modify-public',
   'playlist-modify-private'
 ];
+
 
 const hash = window.location.hash
   .substring(1)
@@ -54,60 +52,21 @@ export class Auth extends Component {
   render() {
     return (
       <div className='auth'>
-        {/* <img src={HeaderImage} style={{ width: '63%', margin: 20 }} /> */}
         <div class='main-wrapper'>
-          <div class='main-cta'>
-            <img src={user_gif} alt='' class='bd-box' />
-            <p className='cta-text'>
-              Listen and rate songs from your Spotify playlists. Our machine
-              learning model will predict if you like a song before you hear it!
-            </p>
-            <div class='cta-signup'>
-              <Button
-                variant='contained'
-                style={{
-                  paddingTop: 10,
-                  paddingBottom: 10,
-                  paddingLeft: 20,
-                  paddingRight: 20,
-                  margin: 30,
-                  fontWeight: 'bold',
-                  fontSize: 18,
-                  color: 'white',
-                  backgroundColor: '#1DB954'
-                }}
-                href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${encodeURIComponent(
-                  scopes
-                )}&response_type=token&show_dialog=true`}>
-                Login With Spotify
-              </Button>
+          <div className='main-cta-spotify'>
+            <div class="img-container">
+              <img src={albums_background} alt='' class='bd-box' />
             </div>
-          </div>
-          <div className='features full-width first'>
-            <img src={walking_city} alt='' class='bd-box' />
-            <div class='text-content'>
-              <h2>What makes you move?</h2>
-              <p>See what makes the songs you love awesome.</p>
-            </div>
-          </div>
-          <div className='features second'>
-            <img src={weather_sitting} alt='' class='baloon-woman' />
-            <div className='text-content'>
-              <h2>Prediction at it's finest.</h2>
-              <p>
-                The more songs you rate the more accurate your predictions will
-                be.
-              </p>
-            </div>
-          </div>
-          <div className='features full-width third'>
-            <img src={music_notes} alt='' class='party' />
-            <div class='text-content'>
-              <h2>Are you smarter than a machine?</h2>
-              <p>
-                Put us to the test! See if we can predict if you like a song
-                before you hear it.
-              </p>
+            <div class="text-content-container">
+              <div class='text-content'>
+                <h2>Discover songs by their traits</h2>
+                <p>We'll curate a playlist based on the different traits of songs you like in your Spotify library.</p>
+                  <div class='cta-signup'>
+                    <Button as="a" href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${encodeURIComponent(scopes)}&response_type=token&show_dialog=true`}>
+                        Login With Spotify
+                    </Button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

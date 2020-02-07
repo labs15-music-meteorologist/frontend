@@ -263,12 +263,8 @@ class MusicPlayer extends Component {
                   <div>
                     <LinearDeterminate player={this.player} />
                   </div>
-                  <PlayerButtons player={this.player} playing={playing} />
+                  <PlayerButtons player={this.player} playing={playing} trueSimilarity={this.state.trueSimilarity} />
                 </Grid>
-                <LikeAndDislikeButton
-                    player={this.player}
-                    trueSimilarity={this.state.trueSimilarity}
-                  />
               <Grid
                 container
                 direction='column'

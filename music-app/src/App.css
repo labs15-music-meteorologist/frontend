@@ -24,6 +24,14 @@
   color: #9761fb;
 }
 
+.display-flex {
+  display: flex;
+}
+
+.play-button, .pause-button {
+  margin-top: 10px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -247,8 +255,7 @@
 
 .like-dislike-wrapper {
   display: flex;
-  height: 75px;
-  padding-bottom: 20px;
+
 }
 
 

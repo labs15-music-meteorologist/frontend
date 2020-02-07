@@ -6,7 +6,6 @@ import { ProtectedRoute } from './components/protected.route';
 import ReactGA from 'react-ga';
 
 import Auth from './components/Auth';
-import NavBar from './components/NavBar';
 import MusicPlayer from './components/dashboard/MusicPlayer';
 import Footer from './components/Footer.js';
 
@@ -30,7 +29,6 @@ class App extends Component {
     return (
       <div className='App'>
         <Router history={history}>
-          <NavBar />
           <Route exact path='/' render={props => <Auth {...props} />} />
           <Route exact path='/logout' component={Logout} />
           <Route exact path='/info' render={props => <Info {...props} />} />

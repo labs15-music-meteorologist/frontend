@@ -51,7 +51,7 @@ const LikeAndDislikeButton = props => {
       </div>
       <div className='joyride-like-6'>
         <button className='like-dislike like' style={{ background: "none", border: "none", outline: "none", marginLeft: "70px" }} onClick={toggleLikeButton} >
-          <img src={Whiteheart} alt='Like Button' style={{ maxHeight: 70 }} />
+          <a className="likeicon" style={{ maxHeight: 70 }} />
         </button>
         <h5 style={{ textAlign: "center", marginTop: "10px" }}></h5>
       </div>

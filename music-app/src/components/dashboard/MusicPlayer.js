@@ -31,7 +31,6 @@ import MainBar from './element-styles/MainBarContainer';
 import PlaylistInfoContainer from './element-styles/PlaylistInfo'
 import PlaylistSongsContainer from './element-styles/PlaylistSongs';
 import NavBar from './element-styles/NavBarMusicPlayer';
-import ChartAndPlayerContainer from './element-styles/ChartAndPlayer';
 
 class MusicPlayer extends Component {
   constructor(props) {

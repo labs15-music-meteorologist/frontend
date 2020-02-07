@@ -235,6 +235,16 @@
 
 /* LIKE/DISLIKE BUTTON STYLES */
 
+.likeicon {
+  display: inline-block;
+  height: 25px;
+  width: 25px;
+  background: transparent url("./assets/whiteheart1.png") no-repeat 0 0;
+}
+.likeicon:hover {
+  background: transparent url("./assets/pinkheart1.png") no-repeat 0 0;
+}
+
 .like-dislike-wrapper {
   display: flex;
   height: 125px;

@@ -1,4 +1,5 @@
 import React from 'react';
+import Footer from '../components/Footer.js'
 import AuthButton from '../components/dashboard/element-styles/AuthButton.js'
 import styled from 'styled-components';
 import '../App.css';
@@ -67,8 +68,9 @@ const Logout = () => {
         <Gone>Gone so soon?</Gone>
         <Sentence>We hate to see you leave but hope you’ll come back for more fun. If you change your mind, you can log back in below.</Sentence>
       <AuthButton as="a" href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${encodeURIComponent(scopes)}&response_type=token&show_dialog=true`}>Login With Spotify</AuthButton>
-      <Return as="a" href={'#'}>Return to Homepage</Return>
+      <Return as="a" href={'/'}>Return to Homepage</Return>
     </LogoutContainer>
+    <Footer/>
     </div>
   );
 

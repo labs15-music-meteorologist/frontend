@@ -36,7 +36,7 @@ class App extends Component {
           <Route exact path='/about' component={About} />
           <ProtectedRoute exact path='/dashboard' component={Dashboard} />
         </Router>
-        <FooterContainer />
+        {/* <FooterContainer /> */}
       </div>
     );
   }

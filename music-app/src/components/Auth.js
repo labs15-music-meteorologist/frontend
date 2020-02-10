@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import Button from './dashboard/element-styles/AuthButton.js'
+import Footer from './Footer.js'
 
 import '../App.css';
 import '../views/styles/homepage.css';
@@ -70,6 +71,7 @@ export class Auth extends Component {
             </div>
           </div>
         </div>
+        <Footer/>
       </div>
     );
   }

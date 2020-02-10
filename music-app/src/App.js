@@ -35,8 +35,8 @@ class App extends Component {
           <Route exact path='/player' component={MusicPlayer} />
           <Route exact path='/about' component={About} />
           <ProtectedRoute exact path='/dashboard' component={Dashboard} />
-          <FooterContainer />
         </Router>
+        <FooterContainer />
       </div>
     );
   }

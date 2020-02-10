@@ -10,6 +10,8 @@ div.main-wrapper {
 .main-cta-spotify{
   display: flex;
   flex-direction: row-reverse;
+  min-height: 100% !important;
+  height: 100%;
 }
 
 .main-cta-spotify .text-content{

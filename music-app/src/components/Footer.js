@@ -9,7 +9,10 @@ const Footer = styled.footer`
   align-items: center;
   background-color: #151619;
   height: 66px;
+  width: 100%;
   font-size: 18px;
+  position: absolute;
+  bottom: 0;
 `;
 
 const FooterContainer = () => {

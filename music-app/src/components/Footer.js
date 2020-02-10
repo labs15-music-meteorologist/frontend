@@ -16,7 +16,7 @@ const FooterContainer = () => {
 
   return (
     <Footer>
-        <p> © Copyright 2019, Music Meteorologist </p>
+        <p> © Copyright 2019, SoundDrip </p>
     </Footer>
   );
 

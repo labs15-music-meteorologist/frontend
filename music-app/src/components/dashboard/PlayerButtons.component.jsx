@@ -10,7 +10,7 @@ import LikeDislikeContainer from '../dashboard/element-styles/LikeDislikeContain
 
 const PlayerButtons = props => {
 
-  const { player, playing, trueSimilarity } = props;
+  const { player, playing } = props;
 
  const onPrevClick = () => {
     player.previousTrack();

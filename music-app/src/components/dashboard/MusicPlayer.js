@@ -17,8 +17,6 @@ import { dsDelivery } from "./MusicPlayer.functions";
 
 // Features
 import LinearDeterminate from "../LinearDeterminate";
-import Characteristics from "../Characteristics.js";
-import LikeAndDislikeButton from "./LikeAndDislikeButton.component";
 import AlbumInfo from "./AlbumInfo.component";
 import PlayerButtons from "./PlayerButtons.component";
 import AudioDetailsContainer from "./AudioDetailsContainer";

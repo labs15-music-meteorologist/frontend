@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-
 import { Grid } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
@@ -22,9 +21,6 @@ import MusicPlayer from "../components/dashboard/MusicPlayer";
 
 // Styling
 import "../App.css";
-
-// Images
-import JoyExample from "../assets/dislike.PNG";
 
 class Dashboard extends React.Component {
   state = {

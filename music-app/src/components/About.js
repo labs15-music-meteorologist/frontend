@@ -1,9 +1,28 @@
 import React from 'react';
 import styled from 'styled-components';
-import Footer from './Footer.js'
+import Button from './dashboard/element-styles/AuthButton.js'
 import '../views/styles/about.css';
 
 import AboutImage from '../assets/About-Image.svg'
+
+export const authEndpoint = 'https://accounts.spotify.com/authorize';
+
+const clientId = '256aebf9b04a4f5480a757f770864028'; // testing ENV
+// const redirectUri = process.env.REACT_APP_REDIRECT_URL;
+// const redirectUri = "http://localhost:3000/";
+const redirectUri = "http://localhost:3000/"; // has to match exactly with spotify dashboard redirect uri
+const scopes = [
+  'streaming',
+  'user-read-currently-playing',
+  'user-read-playback-state',
+  'user-library-read',
+  'user-library-modify',
+  'user-modify-playback-state',
+  'user-read-email',
+  'user-read-private',
+  'playlist-modify-public',
+  'playlist-modify-private'
+];
 
 const AboutContainer = styled.div`
   display: flex;
@@ -15,6 +34,7 @@ const Header = styled.h2`
   font-size: 48px;
   width: 900px;
   margin: 5%;
+  text-align: center;
 `;
 
 const SecondaryHeader = styled.h4`
@@ -31,10 +51,9 @@ const Grid = styled.div`
   display: grid;
   margin-left: 25%;
   margin-right: 25%;
-  height: 1200px;
+  height: 1500px;
   grid-template-columns: 50% 50%;
   grid-template-rows: 30% 30% 30%;
-  border: 1px solid white;
 `
 
 const InnerGrid = styled.div`
@@ -43,9 +62,26 @@ const InnerGrid = styled.div`
   flex-direction: column;
   padding: 7%;
 `
+const Footer = styled.footer`
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  background-color: #151619;
+  height: 66px;
+  width: 100%;
+  font-size: 18px;
+  position: relative;
+  bottom: 0;
+  margin-top: 10%;
+`;
+
 const About = () => (
 
     <AboutContainer>
+      <div className="nav">
+        just chillin, waitin for a nav bar
+      </div>
       <div className="about-image">
         <img src={AboutImage}/>
       </div>
@@ -75,6 +111,11 @@ const About = () => (
           <img></img>
         </InnerGrid>
       </Grid>
+      <div className="button-container">
+        <Button as="a" href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${encodeURIComponent(scopes)}&response_type=token&show_dialog=true`}>Get Started!
+        </Button>
+      </div>
+      <Footer><p> © Copyright 2019, SoundDrip </p></Footer>
     </AboutContainer>
 
 );

@@ -14,4 +14,8 @@ width: 313px;
 text-decoration: none;
 display: flex;
 justify-content: center;
+
+&:hover {
+    background: #EB4C83;
+  }
 `;

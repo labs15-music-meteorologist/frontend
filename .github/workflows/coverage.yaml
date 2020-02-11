@@ -16,8 +16,13 @@ jobs:
         with:
           node-version: 12
       - name: install dependencies
-        run: cd music-app && yarn install
+        run: yarn install
+        working-directory: music-app
       - name: calculate
         uses: paambaati/codeclimate-action@v2.4.0
         with:
-          coverageCommand: yarn coverage
+          coverageCommand: yarn --cwd music-app coverage
+          coverageLocations:
+            - music-app
+
+

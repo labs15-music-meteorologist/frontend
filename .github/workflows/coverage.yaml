@@ -22,7 +22,4 @@ jobs:
         uses: paambaati/codeclimate-action@v2.4.0
         with:
           coverageCommand: yarn --cwd music-app coverage
-          coverageLocations:
-            - music-app
-
-
+          coverageLocations: "music-app"

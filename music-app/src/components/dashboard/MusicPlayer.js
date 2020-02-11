@@ -14,6 +14,7 @@ import {
   getCurrentUser
 } from "../../Redux/Spotify/spotify.actions";
 import { postDSSong } from "../../Redux/DS/ds.actions";
+import PlaylistItems from './PlaylistItems';
 
 // Features
 import LinearDeterminate from "../LinearDeterminate";
@@ -344,8 +345,10 @@ class MusicPlayer extends Component {
         <MainBar>
           <PlaylistInfoContainer>
           </PlaylistInfoContainer>
-          <PlaylistSongsContainer>
-          </PlaylistSongsContainer>  
+            <PlaylistSongsContainer>
+              <PlaylistItems>
+              </PlaylistItems>
+            </PlaylistSongsContainer>  
         </MainBar>
         </ElementContainer>
       </div>     

@@ -3,15 +3,12 @@
   "version": "1.0.0",
   "description": "[![Maintainability](https://api.codeclimate.com/v1/badges/6459996a0b5667ac7075/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/Music-Meteorologist-fe/maintainability)",
   "main": "index.js",
-  "scripts": {
-    "coverage": "cd music-app && ls && yarn test --coverage --watchAll=false"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Lambda-School-Labs/Music-Meteorologist-fe.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Lambda-School-Labs/Music-Meteorologist-fe/issues"
   },

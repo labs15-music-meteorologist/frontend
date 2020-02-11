@@ -25,6 +25,14 @@
   color: #9761fb;
 }
 
+.display-flex {
+  display: flex;
+}
+
+.play-button, .pause-button {
+  margin-top: 10px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -248,7 +256,7 @@
 
 .like-dislike-wrapper {
   display: flex;
-  height: 125px;
+
 }
 
 
@@ -275,60 +283,4 @@
 
 }
 
-/*  YES / NO BUTTON STYLES */
-
-.yes-no-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 125px;
-}
-
-.yes-no-button-wrapper {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  /* justify-items: center; */
-}
-
-.yes-button {
-  border: none;
-  width: 50px;
-  height: 30px;
-  border-radius: 10px;
-  background-color: white;
-  font-size: 15px;
-  margin: 5px;
-}
-
-.yes-button:hover {
-  background-color: black;
-  color: white;
-  border: 2px solid white;
-}
-.no-button {
-  border: none;
-  width: 50px;
-  height: 30px;
-  border-radius: 10px;
-  background-color: white;
-  font-size: 15px;
-}
-
-.no-button:hover {
-  background-color: black;
-  color: white;
-  border: 2px solid white;
-}
-
-.yes-no-deactivated {
-  display: none;
-}
-
-.fullscreen{
-  min-height: 100% !important;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+/* Play button */

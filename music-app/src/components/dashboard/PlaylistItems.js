@@ -14,17 +14,16 @@ import {
   createPlaylist,
   getCurrentUser,
   removeTrack
-} from "../Redux/Spotify/spotify.actions";
-import { postDSSong } from "../Redux/DS/ds.actions";
-import LikedSongs from "../components/dashboard/LikedSongs";
-import MusicPlayer from "../components/dashboard/MusicPlayer";
+} from "../../Redux/Spotify/spotify.actions";
+import { postDSSong } from "../../Redux/DS/ds.actions";
+import LikedSongs from "../../components/dashboard/LikedSongs";
 
 // Styling
-import "../App.css";
+import "../../App.css";
 
-class Dashboard extends React.Component {
+class PlaylistItems extends React.Component {
   state = {
-    collapse: false,
+    collapse: true,
     steps: [
       {
         target: ".joyride-logo-1",
@@ -149,95 +148,32 @@ class Dashboard extends React.Component {
       this.props.history.push("/info");
     }
 
-    console.log("what it do", this.props);
-    // console.log('getSpotifyAccountDetails ! _ 0', this.props);
 
     return (
       <div className="dashboard">
-        <Joyride
-          steps={this.state.steps}
-          continuous={true}
-          scrollToFirstStep={true}
-          styles={{
-            beaconInner: {
-              backgroundColor: "#5ce1e6"
-            },
-            beaconOuter: {
-              border: "2px solid #5ce1e6"
-            },
-            options: {
-              primaryColor: "#5ce1e6"
-            }
-          }}
-        />
-        <div>
-          <Button
-            className="burger"
-            style={{ color: "white" }}
-            onClick={() => this.openPlaylist()}
-          >
-            <Grid container direction="column">
-              <div
-                className={
-                  this.state.collapse
-                    ? "line-one mobile-only toggle-line-one"
-                    : "line-one mobile-only"
-                }
-              />
-              <div
-                className={
-                  this.state.collapse
-                    ? "line-two mobile-only toggle-line-two"
-                    : "line-two mobile-only"
-                }
-              />
-              <div
-                className={
-                  this.state.collapse
-                    ? "line-three mobile-only toggle-line-three"
-                    : "line-three mobile-only"
-                }
-              />
-            </Grid>
-            Playlist
-          </Button>
-          <Button
-            variant="contained"
-            onClick={e => this.logout(e)}
-            style={{
-              color: "white",
-              backgroundColor: `rgba(${56}, ${182}, ${255}, ${0.6})`,
-              fontWeight: "600",
-              letterSpacing: "1.5px",
-              position: "absolute",
-              right: "0px",
-              marginRight: "5%",
-              marginTop: "0.8%"
-            }}
-          >
-            Logout
-          </Button>
+        <div>     
           <List>
             <Paper
-              className={
-                this.state.collapse ? "side-menu-open" : "side-menu-closed"
-              }
               style={{
-                maxHeight: 450,
-                width: 280,
+                maxHeight: '700px',
+                width: 'auto',
+                minWidth: '400px',
                 overflow: "auto",
-                backgroundColor: `rgba(${20}, ${20}, ${20}, ${0.9})`,
-                color: "white"
+                color: "white",
+                marginLeft: '100px',
+                marginRight: '100px',
+                background: 'transparent',
+                boxShadow: 'none',
+                textAlign: 'left'
               }}
-            >
-              <LikedSongs props={this.props} />
+                    >
+            <div style={{borderBottom: '1px solid #454B54', fontSize: 15, height: 20, color: '#454B54', fontWeight: "bold"}}>
+                            <p style={{marginLeft: 80}}>Track / Artist</p>
+            </div> 
+            <LikedSongs props={this.props} />
             </Paper>
           </List>
         </div>
-
-        <Grid item>
-          <MusicPlayer spotifyId={this.props.spotifyUser} />
-        </Grid>
       </div>
     );
   }
@@ -264,4 +200,4 @@ export default connect(mapStateToProps, {
   createPlaylist,
   getCurrentUser,
   removeTrack
-})(Dashboard);
+})(PlaylistItems);

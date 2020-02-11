@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Grid } from "@material-ui/core";
+import axios from 'axios';
 import {
   getCurrentSong,
   getTrackInfo,
@@ -13,7 +14,6 @@ import {
   getCurrentUser
 } from "../../Redux/Spotify/spotify.actions";
 import { postDSSong } from "../../Redux/DS/ds.actions";
-import { dsDelivery } from "./MusicPlayer.functions";
 
 // Features
 import LinearDeterminate from "../LinearDeterminate";
@@ -66,7 +66,7 @@ class MusicPlayer extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.song_id !== prevProps.song_id) {
-      dsDelivery(this.props.song_id);
+      this.dsDelivery();
     }
     if (this.props.savingLike) {
       this.props.getlikedSongs();
@@ -81,6 +81,54 @@ class MusicPlayer extends Component {
         },
         this.props.currentUser.spotify_playlist_id
       );
+    }
+  }
+
+  async dsDelivery() {
+    var config = {
+      headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
+    };
+
+    let response = await axios.get(
+      `https://api.spotify.com/v1/audio-features/${this.props.song_id}`,
+      config,
+    );
+    if (response.status === 200) {
+      let {
+        acousticness,
+        danceability,
+        energy,
+        instrumentalness,
+        key,
+        liveness,
+        loudness,
+        mode,
+        speechiness,
+        tempo,
+        time_signature,
+        valence,
+      } = response.data;
+      let obj = {
+        audio_features: {
+          acousticness,
+          danceability,
+          energy,
+          instrumentalness,
+          key,
+          liveness,
+          loudness,
+          mode,
+          speechiness,
+          tempo,
+          time_signature,
+          valence,
+        },
+      };
+      console.log(
+        'inside async dsDelivery musicplayer obj',
+        JSON.stringify(obj),
+      );
+      this.props.postDSSong(obj);
     }
   }
 

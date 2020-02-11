@@ -6,23 +6,18 @@ env:
   CC_TEST_REPORTER_ID: ${{ secrets.REPORTER_ID }}
 
 jobs:
-  coverage:
-    name: Test and report coverage
+  test:
+    name: Test and Calculate Coverage
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-
-      - uses: actions/setup-node@master
+      - uses: actions/checkout@v1
+      - name: Use Node.js 12
+        uses: actions/setup-node@v1
         with:
           node-version: 12
-
-      - run: yarn install
-        working-directory: music-app
-
-      - uses: paambaati/codeclimate-action@v2.4.0
+      - name: install dependencies
+        run: cd music-app && yarn install
+      - name: calculate
+        uses: paambaati/codeclimate-action@v2.4.0
         with:
-          coverageCommand: yarn --cwd music-app coverage
-          coverageLocations: "music-app/coverage/lcov.info:lcov"
-          debug: true
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.REPORTER_ID }}
+          coverageCommand: yarn coverage

@@ -22,7 +22,7 @@ jobs:
       - uses: paambaati/codeclimate-action@v2.4.0
         with:
           coverageCommand: yarn --cwd music-app coverage
-          coverageLocations: "music-app"
+          coverageLocations: "music-app/coverage/lcov.info:lcov"
           debug: true
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.REPORTER_ID }}

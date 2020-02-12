@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export default styled.div`
-    height: 90%;
+    height: 655px;
     width: 100%;
     background: white;
     font-family: Work Sans;

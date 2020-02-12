@@ -425,6 +425,13 @@ body::-webkit-scrollbar {
   background-color: #E20351 !important;
   color: #E20351;
 }
+.music-player {
+  height: auto;
+  background: #121416;
+}
+.MuiGrid-container {
+  max-height: 600px;
+}
 
 
 

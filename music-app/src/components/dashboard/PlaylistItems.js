@@ -1,10 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Grid } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import List from "@material-ui/core/List";
-import Joyride from "react-joyride";
 import {
   getlikedSongs,
   getUsers,
@@ -14,17 +11,17 @@ import {
   createPlaylist,
   getCurrentUser,
   removeTrack
-} from "../Redux/Spotify/spotify.actions";
-import { postDSSong } from "../Redux/DS/ds.actions";
-import LikedSongs from "../components/dashboard/LikedSongs";
-import MusicPlayer from "../components/dashboard/MusicPlayer";
+} from "../../Redux/Spotify/spotify.actions";
+import { postDSSong } from "../../Redux/DS/ds.actions";
+import LikedSongs from "../../components/dashboard/LikedSongs";
+import '../../App.css'
 
 // Styling
-import "../App.css";
+import "../../App.css";
 
-class Dashboard extends React.Component {
+class PlaylistItems extends React.Component {
   state = {
-    collapse: false,
+    collapse: true,
     steps: [
       {
         target: ".joyride-logo-1",
@@ -48,7 +45,7 @@ class Dashboard extends React.Component {
     userDataFetching: false
   };
 
-  componentDidMount() {
+    componentDidMount() {
     this.props.getSpotifyAccountDetails();
 
     if (this.props.spotifyUser.length > 0) {
@@ -149,14 +146,36 @@ class Dashboard extends React.Component {
       this.props.history.push("/info");
     }
 
-    console.log("what it do", this.props);
-    // console.log('getSpotifyAccountDetails ! _ 0', this.props);
 
     return (
       <div className="dashboard">
-        <Grid item>
-          <MusicPlayer spotifyId={this.props.spotifyUser} />
-        </Grid>
+        <div>     
+                <List>
+                <div style={{ borderBottom: '1px solid #454B54', fontSize: 15, height: 20, color: '#454B54', fontWeight: "bold", display: 'flex', width: 'auto', marginLeft: '35px', marginRight: '35px', paddingBottom: '6px', marginBottom: '6px'}}>
+                        <div style={{ marginLeft: 105 }}>Track / Artist </div>
+                        <div style={{ marginLeft: 105 }}>Album </div>
+                        <div style={{ marginLeft: 160 }}>Duration </div>
+                        </div> 
+            <Paper className="scroll"
+              style={{
+                maxHeight: '65vh',
+                width: 'auto',
+                minWidth: '550px',
+                overflow: "auto",
+                color: "white",
+                marginLeft: '45px',
+                marginRight: '45px',
+                background: 'transparent',
+                boxShadow: 'none',
+                textAlign: 'left',
+                scrollbarColor: 'blue'
+              }}
+                    >
+
+            <LikedSongs props={this.props} />
+            </Paper>
+          </List>
+        </div>
       </div>
     );
   }
@@ -183,4 +202,4 @@ export default connect(mapStateToProps, {
   createPlaylist,
   getCurrentUser,
   removeTrack
-})(Dashboard);
+})(PlaylistItems);

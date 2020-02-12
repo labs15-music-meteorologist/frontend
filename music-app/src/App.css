@@ -1,7 +1,15 @@
 .App {
   /* text-align: center; */
-  margin: 0 5% 0 5%;
-  height: 100vh;
+  /* height: 100%; */
+  min-height: 100vh;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll::-webkit-scrollbar {
+  display: none;
 }
 
 .App-logo {
@@ -25,6 +33,15 @@
   color: #9761fb;
 }
 
+.display-flex {
+  display: flex;
+}
+
+.play-button, .pause-button {
+  margin-top: 10px;
+}
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -33,6 +50,50 @@
     transform: rotate(360deg);
   }
 }
+
+@keyframes hvr-icon-buzz-out {
+  10% {
+    -webkit-transform: translateX(3px) rotate(2deg);
+    transform: translateX(3px) rotate(2deg);
+  }
+  20% {
+    -webkit-transform: translateX(-3px) rotate(-2deg);
+    transform: translateX(-3px) rotate(-2deg);
+  }
+  30% {
+    -webkit-transform: translateX(3px) rotate(2deg);
+    transform: translateX(3px) rotate(2deg);
+  }
+  40% {
+    -webkit-transform: translateX(-3px) rotate(-2deg);
+    transform: translateX(-3px) rotate(-2deg);
+  }
+  50% {
+    -webkit-transform: translateX(2px) rotate(1deg);
+    transform: translateX(2px) rotate(1deg);
+  }
+  60% {
+    -webkit-transform: translateX(-2px) rotate(-1deg);
+    transform: translateX(-2px) rotate(-1deg);
+  }
+  70% {
+    -webkit-transform: translateX(2px) rotate(1deg);
+    transform: translateX(2px) rotate(1deg);
+  }
+  80% {
+    -webkit-transform: translateX(-2px) rotate(-1deg);
+    transform: translateX(-2px) rotate(-1deg);
+  }
+  90% {
+    -webkit-transform: translateX(1px) rotate(0);
+    transform: translateX(1px) rotate(0);
+  }
+  100% {
+    -webkit-transform: translateX(-1px) rotate(0);
+    transform: translateX(-1px) rotate(0);
+  }
+}
+
 
 /* PLAYLIST STYLES */
 
@@ -113,35 +174,125 @@
   align-items: center;
 }
 
-.music-component {
-  width: 20%;
-  margin: 10px;
+.MuiButton-root {
+  min-width: 0px !important;
 }
+
+.arrow {
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+.arrow:hover {
+  border: solid #E20351;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.MuiButton-root:hover .arrow {
+  border: solid #E20351;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+.drop {
+  left: -32px !important;
+  background-color: black !important;
+}
+#menu-list-grow {
+  background-color: #17191C !important;
+  color: white !important;
+}
+.MuiListItem-button:hover{
+ background-color: #1E2024 !important;
+}
+
+.shake {
+	-webkit-animation: shake-vertical 4s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
+	animation: shake-vertical 4s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
+}
+
+
 
 .music-chart {
   width: 40%;
 }
 
-@media (max-width: 1200px) {
-  .music-player {
-    display: flex;
-    flex-flow: column;
-    justify-content: space-around;
-    align-items: center;
+.music-player {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.music-component {
+  width: 90%;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  margin-top: 20px;
+  text-align: center;
+}
+.dashboard {
+  height: initial;
+}
+@-webkit-keyframes shake-vertical {
+  0%,
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
   }
-  .music-component {
-    width: 90%;
-    display: flex;
-    flex-flow: row;
-    justify-content: center;
+  10%,
+  30%,
+  50%,
+  70% {
+    -webkit-transform: translateY(-8px);
+            transform: translateY(-8px);
   }
-  .dashboard {
-    height: initial;
+  20%,
+  40%,
+  60% {
+    -webkit-transform: translateY(8px);
+            transform: translateY(8px);
   }
-  .music-component-album-info {
-    margin-right: 0;
-    width: 100%;
-
+  80% {
+    -webkit-transform: translateY(6.4px);
+            transform: translateY(6.4px);
+  }
+  90% {
+    -webkit-transform: translateY(-6.4px);
+            transform: translateY(-6.4px);
+  }
+}
+@keyframes shake-vertical {
+  0%,
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+  10%,
+  30%,
+  50%,
+  70% {
+    -webkit-transform: translateY(-8px);
+            transform: translateY(-8px);
+  }
+  20%,
+  40%,
+  60% {
+    -webkit-transform: translateY(8px);
+            transform: translateY(8px);
+  }
+  80% {
+    -webkit-transform: translateY(6.4px);
+            transform: translateY(6.4px);
+  }
+  90% {
+    -webkit-transform: translateY(-6.4px);
+            transform: translateY(-6.4px);
   }
 }
 
@@ -152,9 +303,7 @@
     justify-content: space-around;
     align-items: center;
   }
-  .music-component {
-    width: 90%;
-  }
+
   .dashboard {
     height: initial;
   }
@@ -198,81 +347,120 @@
   margin-left: 5px;
   font-size: 0.93rem;
 }
+.audioDiv {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 50px;
+}
 
 /* LIKE/DISLIKE BUTTON STYLES */
 
-.like-dislike-wrapper {
-  display: flex;
-  height: 125px;
+.likeicon {
+  display: inline-block;
+  height: 25px;
+  width: 25px;
+  background: transparent url("./assets/likeWhite.png") no-repeat 0 0;
+  margin-bottom: 5px;
+}
+.likeicon:hover {
+  background: transparent url("./assets/likepink.png") no-repeat 0 0;
+}
+.dislikeicon {
+  display: inline-block;
+  height: 25px;
+  width: 25px;
+  background: transparent url("./assets/dislikeWhite.png") no-repeat 0 0;
+  margin-top: 5px;
+}
+.dislikeicon:hover {
+  background: transparent url("./assets/dislikepink.png") no-repeat 0 0;
 }
 
-.like,
+.playicon {
+  display: inline-block;
+  height: 25px;
+  width: 25px;
+  background: transparent url("./assets/play-buttonWhite.png") no-repeat 0 0;
+}
+.playicon:hover {
+  background: transparent url("./assets/play-buttonPink.png") no-repeat 0 0;
+}
+.pauseicon {
+  display: inline-block;
+  height: 25px;
+  width: 25px;
+  background: transparent url("./assets/pauseWhite.png") no-repeat 0 0;
+}
+.pauseicon:hover {
+  background: transparent url("./assets/pausePink.png") no-repeat 0 0;
+}
+.previcon {
+  display: inline-block;
+  height: 25px;
+  width: 25px;
+  background: transparent url("./assets/PrevWhite.png") no-repeat 0 0;
+}
+.previcon:hover {
+  background: transparent url("./assets/prevPink.png") no-repeat 0 0;
+}
+.nexticon {
+  display: inline-block;
+  height: 25px;
+  width: 25px;
+  background: transparent url("./assets/nextWhite.png") no-repeat 0 0;
+}
+.nexticon:hover {
+  background: transparent url("./assets/nextPink.png") no-repeat 0 0;
+}
+.vectoricon {
+  display: inline-block;
+  height: 20px;
+  width: 18px;
+  background: transparent url("./assets/Vector.svg") no-repeat 0 0;
+  margin-top: 3px;
+  margin-left: 2px;
+}
+
+.pinkhover:hover {
+  background-color: #E20351 !important;
+  color: #E20351;
+}
+
+
+
+
+.like-dislike-wrapper {
+  display: flex;
+}
+.MuiLinearProgress-barColorPrimary {
+  background-color: #E20351 !important;
+}
+.MuiLinearProgress-colorPrimary{
+  background-color: white !important;
+}
+
+
 .dislike {
-  transition: 0.9s ease;
+  transition: 0.2s ease;
+}
+
+.like {
+  transition: 0.2s ease;
 }
 
 .like:hover {
-  -moz-transform: translate(5px, -5px);
-  -ms-transform: translate(5px, -5px);
-  -o-transform: translate(5px, -5px);
-  -webkit-transform: translate(5px, -5px);
-  transform: translate(5px, -5px);
+
+}
+.like:active {
+
+}
+
+.dislike:active {
+
 }
 
 .dislike:hover {
-  -moz-transform: translate(-5px, 5px);
-  -ms-transform: translate(-5px, 5px);
-  -o-transform: translate(-5px, 5px);
-  -webkit-transform: translate(-5px, 5px);
-  transform: translate(-5px, 5px);
+
 }
 
-/*  YES / NO BUTTON STYLES */
-
-.yes-no-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 125px;
-}
-
-.yes-no-button-wrapper {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  /* justify-items: center; */
-}
-
-.yes-button {
-  border: none;
-  width: 50px;
-  height: 30px;
-  border-radius: 10px;
-  background-color: white;
-  font-size: 15px;
-  margin: 5px;
-}
-
-.yes-button:hover {
-  background-color: black;
-  color: white;
-  border: 2px solid white;
-}
-.no-button {
-  border: none;
-  width: 50px;
-  height: 30px;
-  border-radius: 10px;
-  background-color: white;
-  font-size: 15px;
-}
-
-.no-button:hover {
-  background-color: black;
-  color: white;
-  border: 2px solid white;
-}
-
-.yes-no-deactivated {
-  display: none;
-}
+/* Play button */

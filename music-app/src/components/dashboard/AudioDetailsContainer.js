@@ -17,23 +17,17 @@ const [collapse, setCollapse] = useState(false)
 
   return (
     <AudioDetailsStyles>
-    <Grid item>
-
-    <Chart
-      features={traits}
-      style={{ width: "100%", objectFit: "scale-down" }}
-        />
-            <div style={{ textAlign: "center", marginTop: "10px" }}>
-      <button
+      <div className="audioDiv">
+            <button
         onClick={() => openAudioDetails()}
-        className='grid-question grid-chart joyride-3'
+        className='grid-question grid-chart joyride-3 pinkhover'
         title='Click for Audio Features details'
-        style={{ margin: 0, borderRadius: "6px", backgroundColor: "#E20351", color: "white", border: "none", fontSize: "12px", height: "20px" }}
+        style={{ margin: 0, borderRadius: "6px", backgroundColor: "#1E2024", color: "white", border: "none", fontSize: "12px", height: "30px" }}
       >
-        Audio Specifics
+        <a className="vectoricon" style={{ maxHeight: 35 }} />
       </button>
-    </div>
-    <List>
+      </div>
+      <List>
       <Paper
         className={
           collapse
@@ -41,7 +35,7 @@ const [collapse, setCollapse] = useState(false)
             : "audio-details-closed"
         }
         style={{
-          maxHeight: 510,
+          maxHeight: 400,
           width: 377,
           overflow: "auto",
           backgroundColor: "#E20351",
@@ -51,6 +45,15 @@ const [collapse, setCollapse] = useState(false)
         <AudioDetails />
       </Paper>
     </List>
+    <Grid item>
+
+    <Chart
+      features={traits}
+      style={{ width: "100%", objectFit: "scale-down" }}
+        />
+            <div style={{ textAlign: "center", marginTop: "10px" }}>
+    </div>
+    
       </Grid>
       </AudioDetailsStyles>
   );

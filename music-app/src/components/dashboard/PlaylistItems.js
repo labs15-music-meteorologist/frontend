@@ -1,10 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Grid } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import List from "@material-ui/core/List";
-import Joyride from "react-joyride";
 import {
   getlikedSongs,
   getUsers,
@@ -17,6 +14,7 @@ import {
 } from "../../Redux/Spotify/spotify.actions";
 import { postDSSong } from "../../Redux/DS/ds.actions";
 import LikedSongs from "../../components/dashboard/LikedSongs";
+import '../../App.css'
 
 // Styling
 import "../../App.css";
@@ -47,7 +45,7 @@ class PlaylistItems extends React.Component {
     userDataFetching: false
   };
 
-  componentDidMount() {
+    componentDidMount() {
     this.props.getSpotifyAccountDetails();
 
     if (this.props.spotifyUser.length > 0) {
@@ -152,24 +150,28 @@ class PlaylistItems extends React.Component {
     return (
       <div className="dashboard">
         <div>     
-          <List>
-            <Paper
+                <List>
+                <div style={{ borderBottom: '1px solid #454B54', fontSize: 15, height: 20, color: '#454B54', fontWeight: "bold", display: 'flex', width: 'auto', marginLeft: '35px', marginRight: '35px', paddingBottom: '6px', marginBottom: '6px'}}>
+                        <div style={{ marginLeft: 105 }}>Track / Artist </div>
+                        <div style={{ marginLeft: 105 }}>Album </div>
+                        <div style={{ marginLeft: 160 }}>Duration </div>
+                        </div> 
+            <Paper className="scroll"
               style={{
-                maxHeight: '700px',
+                maxHeight: '65vh',
                 width: 'auto',
-                minWidth: '400px',
+                minWidth: '550px',
                 overflow: "auto",
                 color: "white",
-                marginLeft: '100px',
-                marginRight: '100px',
+                marginLeft: '45px',
+                marginRight: '45px',
                 background: 'transparent',
                 boxShadow: 'none',
-                textAlign: 'left'
+                textAlign: 'left',
+                scrollbarColor: 'blue'
               }}
                     >
-            <div style={{borderBottom: '1px solid #454B54', fontSize: 15, height: 20, color: '#454B54', fontWeight: "bold"}}>
-                            <p style={{marginLeft: 80}}>Track / Artist</p>
-            </div> 
+
             <LikedSongs props={this.props} />
             </Paper>
           </List>

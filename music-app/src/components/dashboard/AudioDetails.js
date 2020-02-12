@@ -5,30 +5,6 @@ class AudioDetails extends React.Component {
     return (
       <>
         <div className='audio-detail'>
-          <h4>Key:</h4>
-          <p>
-            The estimated overall key of the track. Integers map to pitches
-            using standard Pitch Class notation . E.g. 0 = C, 1 = C♯/D♭, 2 = D,
-            and so on. If no key was detected, the value is -1.
-          </p>
-        </div>
-        <div className='audio-detail'>
-          <h4>Mode:</h4>
-          <p>
-            Mode indicates the modality (major or minor) of a track, the type of
-            scale from which its melodic content is derived. Major is
-            represented by 1 and minor is 0.
-          </p>
-        </div>
-        <div className='audio-detail'>
-          <h4>Time Signature:</h4>
-          <p>
-            An estimated overall time signature of a track. The time signature
-            (meter) is a notational convention to specify how many beats are in
-            each bar (or measure).
-          </p>
-        </div>
-        <div className='audio-detail'>
           <h4>Acousticness:</h4>
           <p>
             A confidence measure from 0.0 to 1.0 of whether the track is

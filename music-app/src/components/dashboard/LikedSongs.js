@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
 import { Grid, Typography } from '@material-ui/core';
-
 import { getlikedSongs, getUsers, getPlaylist } from '../../Redux/Spotify/spotify.actions';
 import Song from './Song.js';
 

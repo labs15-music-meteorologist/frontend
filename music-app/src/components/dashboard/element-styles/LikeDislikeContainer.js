@@ -5,4 +5,5 @@ export default styled.div`
     height: 20px;
     justify-content: center;
     align-items: center;
+    font-family: Work Sans;
 `;

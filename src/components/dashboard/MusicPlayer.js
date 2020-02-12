@@ -166,7 +166,7 @@ class MusicPlayer extends Component {
   }
 
   getDataScienceSongArray = () => {
-    this.props.ds_songs &&
+    this.props.ds_songs.length > 0 &&
       this.props.getSeveralTracks(
         this.concatenateSongIds(this.props.ds_songs[0].songs)
       );

@@ -2,8 +2,8 @@ import DsActionTypes from "./ds.types";
 import axios from "axios";
 
 // const url = process.env.REACT_APP_BACKEND_BASE_URL;
-// const url = "https://music-meteorology.herokuapp.com/";
-const url = process.env.REACT_APP_BACKEND_BASE_URL;
+const url = "http://sounddrip-prod.us-east-1.elasticbeanstalk.com";
+// const url = process.env.REACT_APP_BACKEND_BASE_URL;
 
 export const postDSSong = obj => dispatch => {
   dispatch({
@@ -11,7 +11,7 @@ export const postDSSong = obj => dispatch => {
   });
   console.log("OBJ passed into postDSSong", JSON.stringify(obj));
   axios
-    .post(`${url}v1/recommender`, obj)
+    .post(`${url}/request`, obj)
     .then(res => {
       console.log("success postDSSong");
       if (

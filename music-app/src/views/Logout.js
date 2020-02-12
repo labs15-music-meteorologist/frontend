@@ -31,7 +31,14 @@ const LogoutContainer = styled.div`
  height: 600px;
  width: 600px;
  padding-top: 5%;
+ margin: 0%;
 `;
+
+const Fullscreen = styled.div`
+  Display: flex;
+  align-content: center;
+  justify-content: center;
+`
 
 const Gone = styled.h2`
   font-size: 60px;
@@ -63,7 +70,7 @@ justify-content: center;
 const Logout = () => {
 
   return (
-    <div className="fullscreen">
+    <Fullscreen>
     <LogoutContainer>
         <Gone>Gone so soon?</Gone>
         <Sentence>We hate to see you leave but hope you’ll come back for more fun. If you change your mind, you can log back in below.</Sentence>
@@ -71,7 +78,7 @@ const Logout = () => {
       <Return as="a" href={'/'}>Return to Homepage</Return>
     </LogoutContainer>
     <Footer/>
-    </div>
+    </Fullscreen>
   );
 
 }

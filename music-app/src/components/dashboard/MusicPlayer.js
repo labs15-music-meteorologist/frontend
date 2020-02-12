@@ -66,6 +66,7 @@ class MusicPlayer extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    console.log("this is prevProps", prevProps)
     if (this.props.song_id !== prevProps.song_id) {
       this.dsDelivery();
     }
@@ -346,7 +347,7 @@ class MusicPlayer extends Component {
           <PlaylistInfoContainer>
           </PlaylistInfoContainer>
             <PlaylistSongsContainer>
-              <PlaylistItems>
+              <PlaylistItems player={this.player}>
               </PlaylistItems>
             </PlaylistSongsContainer>  
         </MainBar>

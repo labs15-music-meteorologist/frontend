@@ -56,23 +56,3 @@ export const postDSSong = obj => dispatch => {
       });
     });
 };
-
-export const sendDSToken = () => dispatch => {
-  dispatch({
-    type: DsActionTypes.POST_DS_TOKEN_FETCHING
-  });
-  axios
-    .post("", { token: localStorage.getItem("token") })
-    .then(res => {
-      dispatch({
-        type: DsActionTypes.POST_DS_TOKEN_SUCCESS,
-        payload: res.data
-      });
-    })
-    .catch(err => {
-      dispatch({
-        type: DsActionTypes.POST_DS_TOKEN_FAILURE,
-        payload: err.data
-      });
-    });
-};

@@ -5,7 +5,6 @@ import Pause from "../../assets/player-stop.png";
 import Play from "../../assets/player-start.png";
 import { connect } from "react-redux";
 import { saveLikedSong, removeTrack } from "../../Redux/Spotify/spotify.actions";
-import Close from "../../assets/close.png";
 import LikeDislikeContainer from '../dashboard/element-styles/LikeDislikeContainer';
 
 const PlayerButtons = props => {
@@ -63,7 +62,7 @@ const PlayerButtons = props => {
           className='like-dislike dislike joyride-dislike-4'
           style={{ background: "none", border: "none", outline: "none" }}
           onClick={toggleDislikeButton} >
-          <img src={Close} alt='Dislike Button' style={{ maxHeight: 70 }} />
+          <a className="dislikeicon" style={{ maxHeight: 70 }} />
         </button>
       <div style={{ display: "flex" }}>
         <button
@@ -74,11 +73,7 @@ const PlayerButtons = props => {
             }}
             onClick={() => onPrevClick()}
         >
-            <img
-            src={SkipLeft}
-            alt='White icon to skip to the previous song.'
-            style={{ maxHeight: 22 }}
-            />
+          <a className="previcon" style={{ maxHeight: 35 }} />
         </button>
 
         <button
@@ -90,19 +85,9 @@ const PlayerButtons = props => {
             onClick={() => onPlayClick()}
         >
             {playing ? (
-            <img className="pause-button"
-                // ref={input => (this.inputElement = input)}
-                src={Pause}
-                alt='White icon to pause a song.'
-                style={{ maxHeight: 35 }}
-            />
+            <a className="pauseicon" style={{ maxHeight: 35 }} />
             ) : (
-            <img className="play-button"
-                /* ref={this.simulateClick} */
-                src={Play}
-                alt='White icon to start a pause song.'
-                style={{ maxHeight: 35 }}
-            />
+            <a className="playicon" style={{ maxHeight: 35 }} />
             )}
         </button>
 
@@ -114,11 +99,7 @@ const PlayerButtons = props => {
             }}
             onClick={() => onNextClick()}
         >
-            <img
-            src={SkipRight}
-            alt='White icon to skip to the next song.'
-            style={{ maxHeight: 22 }}
-            />
+          <a className="nexticon" style={{ maxHeight: 35 }} />
         </button>
         </div>
         <button className='like-dislike like' style={{ background: "none", border: "none", outline: "none"}} onClick={toggleLikeButton} >

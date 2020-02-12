@@ -290,7 +290,8 @@ class MusicPlayer extends Component {
 
     return (
       <div>
-      <NavBar/>
+        <NavBar musicPlayerProps={this.props} userName={this.props.spotifyId.display_name}/>
+        {console.log("all music player props for user", this.props.spotifyId)}
       <ElementContainer>
           <SideBar>
             <div className='music-player joyride-player-2'>
@@ -304,9 +305,9 @@ class MusicPlayer extends Component {
               <Grid
                   container
                   direction='column'
-                  justify='center'
+                  justify='space-around'
                   alignItems='center'
-                  style={{ width: 377, marginTop: "5%", height: "100px" }}
+                  style={{ width: 377, height: "60px", marginBottom: '10px' }}
                 >
                   <div>
                     <LinearDeterminate player={this.player} />

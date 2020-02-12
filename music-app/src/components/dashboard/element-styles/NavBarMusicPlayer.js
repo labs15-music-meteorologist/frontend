@@ -1,7 +1,8 @@
 import React from 'react';
 import '../../../views/styles/navbar.css';
-import MusicLogo from '../../../assets/sounddrip1.svg';
+import MusicLogo from '../../../assets/sounddrip.svg';
 import styled from 'styled-components';
+import MenuListComposition from './Dropdown'
 
 const Nav1 = styled.div`
   background: #0E0F11;
@@ -10,20 +11,22 @@ const Nav1 = styled.div`
 `;
 
 const Logo1 = styled.img`
-  width: 118px;
-  height: 26px;
-  margin-left: 75px;
-  margin-top: 29px;
+
+  height: 50px;
+  margin-left: 105px;
+  margin-top: 20px;
 `;
 
 const Navname = styled.p`
-margin-right: 75px;
-margin-top: 33px;
+margin-right: 50px;
+margin-top: 31px;
 font-family: Work Sans;
 font-style: normal;
 font-weight: 600;
 font-size: 15px;
 line-height: 21px;
+display: flex;
+align-items: center;
 `;
 
 const NavContainer = styled.div`
@@ -33,22 +36,29 @@ const NavContainer = styled.div`
 `;
 
 class NavBar extends React.Component {
+
   homeButton = e => {
     e.preventDefault();
     window.location.href = '/';
   };
+  
+
+
 
   render() {
     return (
       <Nav1>
         <NavContainer>
+          {console.log("props from navbar", this.props)}
           <Logo1
             src={MusicLogo}
             alt={'Navbar logo'}
             onClick={e => {
               this.homeButton(e);
             }}></Logo1>
-          <Navname>PlaceHolder Name ▼</Navname>
+          <Navname>{this.props.userName}
+            <MenuListComposition navBarProps={this.props.musicPlayerProps} userName={this.props.userName}/>
+          </Navname>
         </NavContainer>
       </Nav1>
     );

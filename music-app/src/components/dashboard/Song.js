@@ -17,6 +17,8 @@ class Song extends React.Component {
     var hrs = (s - mins) / 60;
     if (secs === 0) {
       return mins + ':' + '00'
+    } else if (secs < 10) {
+      return mins + ':' + '0' + secs;
     } else { 
       return mins + ':' + secs;
     }

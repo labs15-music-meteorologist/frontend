@@ -3,7 +3,7 @@ import React from 'react';
 class AudioDetails extends React.Component {
   render() {
     return (
-      <>
+      <> 
         <div className='audio-detail'>
           <h4>Acousticness:</h4>
           <p>

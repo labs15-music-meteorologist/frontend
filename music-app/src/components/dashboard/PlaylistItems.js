@@ -152,9 +152,9 @@ class PlaylistItems extends React.Component {
         <div>     
                 <List>
                 <div style={{ borderBottom: '1px solid #454B54', fontSize: 15, height: 20, color: '#454B54', fontWeight: "bold", display: 'flex', width: 'auto', marginLeft: '35px', marginRight: '35px', paddingBottom: '6px', marginBottom: '6px'}}>
-                        <div style={{ marginLeft: 105, minWidth: 100 }}>Track / Artist </div>
-                        <div style={{ marginLeft: 105 }}>Album </div>
-                        <div style={{ marginLeft: 160 }}>Duration </div>
+                        <div style={{ marginLeft: 168, minWidth: 100 }}>Track / Artist </div>
+                        <div style={{ marginLeft: 100 }}>Album </div>
+                        <div style={{ marginLeft: 158 }}>Duration </div>
                         </div> 
             <Paper className="scroll"
               style={{

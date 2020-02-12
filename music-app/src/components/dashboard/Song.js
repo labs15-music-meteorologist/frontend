@@ -35,6 +35,23 @@ class Song extends React.Component {
           alignItems='center'
           wrap='wrap'
           className='song'>
+          <Grid item>
+          <button
+            style={{
+            background: "none",
+            border: "none",
+            outline: "none",
+            marginRight: '12px',
+            marginLeft: '12px'
+            }}
+        >
+            {"playing" ? (
+            <a className="pauseicon" style={{ maxHeight: 35 }} />
+            ) : (
+            <a className="playicon" style={{ maxHeight: 35 }} />
+            )}
+            </button>
+            </Grid>
           <Grid item style={{ padding: 5 }}>
             <img style={{ borderRadius: '5px', marginRight: '20px'}}
               src={this.props.song.album.images[2].url}

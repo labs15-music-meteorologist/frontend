@@ -16,7 +16,7 @@ const [collapse, setCollapse] = useState(false)
   }
 
   return (
-    <AudioDetailsStyles>
+    <AudioDetailsStyles className="scroll">
       
       <div className="audioDiv">
       <a href="#" onClick={() => openAudioDetails()} style={{ color: 'white', marginTop: 8, marginRight: 85, fontSize: 12}}>What does this mean?</a>
@@ -29,22 +29,22 @@ const [collapse, setCollapse] = useState(false)
           <a className='barsicon'/>
         </a>
       </div>
-      <List>
-      <Paper
+      <List className="scroll">
+        <Paper
         className={
           collapse
-            ? "audio-details-open"
-            : "audio-details-closed"
+            ? "audio-details-open scroll"
+            : "audio-details-closed scroll"
         }
         style={{
-          maxHeight: 400,
+          maxHeight: 250,
           width: 377,
           overflow: "auto",
-          backgroundColor: "#E20351",
+          backgroundColor: "#1E2024",
           color: "lightgray"
         }}
       >
-        <AudioDetails />
+        <AudioDetails className="scroll" />
       </Paper>
     </List>
     <Grid item>

@@ -3,7 +3,7 @@ import React from 'react';
 class AudioDetails extends React.Component {
   render() {
     return (
-      <> 
+      <div className="scroll"> 
         <div className='audio-detail'>
           <h4>Acousticness:</h4>
           <p>
@@ -103,7 +103,7 @@ class AudioDetails extends React.Component {
             values for this feature look like this: Tempo distribution
           </p>
         </div>
-      </>
+      </div>
     );
   }
 }

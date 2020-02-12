@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Grid } from "@material-ui/core";
+import axios from 'axios';
 import {
   getCurrentSong,
   getTrackInfo,
@@ -13,16 +14,22 @@ import {
   getCurrentUser
 } from "../../Redux/Spotify/spotify.actions";
 import { postDSSong } from "../../Redux/DS/ds.actions";
-import { dsDelivery } from "./MusicPlayer.functions";
-import "../../App.css";
+import PlaylistItems from './PlaylistItems';
 
 // Features
 import LinearDeterminate from "../LinearDeterminate";
-import Characteristics from "../Characteristics.js";
-import LikeAndDislikeButton from "./LikeAndDislikeButton.component";
 import AlbumInfo from "./AlbumInfo.component";
 import PlayerButtons from "./PlayerButtons.component";
 import AudioDetailsContainer from "./AudioDetailsContainer";
+
+// Styles
+import "../../App.css";
+import ElementContainer from './element-styles/ElementContainer';
+import SideBar from './element-styles/SideBar';
+import MainBar from './element-styles/MainBarContainer';
+import PlaylistInfoContainer from './element-styles/PlaylistInfo'
+import PlaylistSongsContainer from './element-styles/PlaylistSongs';
+import NavBar from './element-styles/NavBarMusicPlayer';
 
 class MusicPlayer extends Component {
   constructor(props) {
@@ -59,8 +66,9 @@ class MusicPlayer extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    console.log("this is prevProps", prevProps)
     if (this.props.song_id !== prevProps.song_id) {
-      dsDelivery(this.props.song_id);
+      this.dsDelivery();
     }
     if (this.props.savingLike) {
       this.props.getlikedSongs();
@@ -75,6 +83,54 @@ class MusicPlayer extends Component {
         },
         this.props.currentUser.spotify_playlist_id
       );
+    }
+  }
+
+  async dsDelivery() {
+    var config = {
+      headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
+    };
+
+    let response = await axios.get(
+      `https://api.spotify.com/v1/audio-features/${this.props.song_id}`,
+      config,
+    );
+    if (response.status === 200) {
+      let {
+        acousticness,
+        danceability,
+        energy,
+        instrumentalness,
+        key,
+        liveness,
+        loudness,
+        mode,
+        speechiness,
+        tempo,
+        time_signature,
+        valence,
+      } = response.data;
+      let obj = {
+        audio_features: {
+          acousticness,
+          danceability,
+          energy,
+          instrumentalness,
+          key,
+          liveness,
+          loudness,
+          mode,
+          speechiness,
+          tempo,
+          time_signature,
+          valence,
+        },
+      };
+      console.log(
+        'inside async dsDelivery musicplayer obj',
+        JSON.stringify(obj),
+      );
+      this.props.postDSSong(obj);
     }
   }
 
@@ -233,67 +289,71 @@ class MusicPlayer extends Component {
     } = this.state;
 
     return (
-      <div className='music-player joyride-player-2'>
-        <AlbumInfo
-          imageSpotify={imageSpotify}
-          trackName={trackName}
-          artistName={artistName}
-          albumName={albumName}
-        />
-
-        <div className='music-component music-chart'>
-          <Grid
-            container
-            direction='column'
-            justify='center'
-            alignItems='center'
-          >
-            <AudioDetailsContainer traits={this.props.traits} />
-            <Grid item>
-              {window.Spotify !== undefined &&
-                this.state.imageUrl !== "" &&
-                artistName !== "Artist Name" && (
-                  <div className='album-art'>
-                    <h4 style={{ textAlign: "center" }}>Now Playing</h4>
-                    <img src={this.state.imageUrl} alt='album-art' />
-                  </div>
-                )}
-            </Grid>
-
-            {error && <p>Error: {error}</p>}
-
-            <Grid
-              container
-              direction='row'
-              justify='center'
-              alignItems='center'
-              style={{ width: 300, marginBottom: "5%" }}
-            >
-              <LikeAndDislikeButton
-                player={this.player}
-                trueSimilarity={this.state.trueSimilarity}
-              />
-            </Grid>
-
-            <Grid
-              container
-              direction='column'
-              justify='center'
-              alignItems='center'
-              style={{ width: 300, marginBottom: "5%" }}
-            >
+      <div>
+        <NavBar musicPlayerProps={this.props} userName={this.props.spotifyId.display_name}/>
+        {console.log("all music player props for user", this.props.spotifyId)}
+      <ElementContainer>
+          <SideBar>
+            <div className='music-player joyride-player-2'>
+              <AlbumInfo
+              imageSpotify={imageSpotify}
+              trackName={trackName}
+              artistName={artistName}
+              albumName={albumName}
+            />
               <div>
-                <LinearDeterminate player={this.player} />
-              </div>
-              <PlayerButtons player={this.player} playing={playing} />
-            </Grid>
-          </Grid>
-        </div>
-
-        <div className='music-component'>
-          <Characteristics features={this.props.traits} />
-        </div>
-      </div>
+              <Grid
+                  container
+                  direction='column'
+                  justify='space-around'
+                  alignItems='center'
+                  style={{ width: 377, height: "60px", marginBottom: '10px' }}
+                >
+                  <div>
+                    <LinearDeterminate player={this.player} />
+                  </div>
+                  <PlayerButtons player={this.player} playing={playing} trueSimilarity={this.state.trueSimilarity} />
+                </Grid>
+              <Grid
+                container
+                direction='column'
+                justify='center'
+                alignItems='center'
+              >
+                <AudioDetailsContainer traits={this.props.traits} />
+                <Grid item>
+                  {window.Spotify !== undefined &&
+                    this.state.imageUrl !== "" &&
+                    artistName !== "Artist Name" && (
+                      <div className='album-art'>
+                        <h4 style={{ textAlign: "center" }}>Now Playing</h4>
+                        <img src={this.state.imageUrl} alt='album-art' />
+                      </div>
+                    )}
+                </Grid>
+                {error && <p>Error: {error}</p>}
+                <Grid
+                  container
+                  direction='row'
+                  justify='center'
+                  alignItems='center'
+                  style={{ width: 300, marginBottom: "5%" }}
+                >
+                </Grid>
+              </Grid>
+            </div>
+          </div>
+        </SideBar>
+        <MainBar>
+          <PlaylistInfoContainer>
+          </PlaylistInfoContainer>
+            <PlaylistSongsContainer>
+              <PlaylistItems player={this.player}>
+              </PlaylistItems>
+            </PlaylistSongsContainer>  
+        </MainBar>
+        </ElementContainer>
+      </div>     
     );
   }
 }

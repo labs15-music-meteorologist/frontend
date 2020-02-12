@@ -4,6 +4,7 @@ import { Grid } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import List from "@material-ui/core/List";
 import Chart from "../Chart";
+import AudioDetailsStyles from './element-styles/AudioDetailsStyles';
 
 const AudioDetailsContainer = props => {
 
@@ -15,18 +16,18 @@ const [collapse, setCollapse] = useState(false)
   }
 
   return (
-    <Grid item>
-    <div style={{ textAlign: "right" }}>
-      <button
+    <AudioDetailsStyles>
+      <div className="audioDiv">
+            <button
         onClick={() => openAudioDetails()}
-        className='grid-question grid-chart joyride-3'
+        className='grid-question grid-chart joyride-3 pinkhover'
         title='Click for Audio Features details'
-        style={{ margin: 0, borderRadius: "25px" }}
+        style={{ margin: 0, borderRadius: "6px", backgroundColor: "#1E2024", color: "white", border: "none", fontSize: "12px", height: "30px" }}
       >
-        ?
+        <a className="vectoricon" style={{ maxHeight: 35 }} />
       </button>
-    </div>
-    <List>
+      </div>
+      <List>
       <Paper
         className={
           collapse
@@ -34,21 +35,27 @@ const [collapse, setCollapse] = useState(false)
             : "audio-details-closed"
         }
         style={{
-          maxHeight: 510,
-          width: 450,
+          maxHeight: 400,
+          width: 377,
           overflow: "auto",
-          backgroundColor: "#1a567a",
+          backgroundColor: "#E20351",
           color: "lightgray"
         }}
       >
         <AudioDetails />
       </Paper>
     </List>
+    <Grid item>
+
     <Chart
       features={traits}
       style={{ width: "100%", objectFit: "scale-down" }}
-    />
-  </Grid>
+        />
+            <div style={{ textAlign: "center", marginTop: "10px" }}>
+    </div>
+    
+      </Grid>
+      </AudioDetailsStyles>
   );
 };
 

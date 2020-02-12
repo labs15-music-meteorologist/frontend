@@ -3,6 +3,9 @@ import SkipLeft from "../../assets/skip-left.png";
 import SkipRight from "../../assets/skip-right.png";
 import Pause from "../../assets/player-stop.png";
 import Play from "../../assets/player-start.png";
+import { connect } from "react-redux";
+import { saveLikedSong, removeTrack } from "../../Redux/Spotify/spotify.actions";
+import LikeDislikeContainer from '../dashboard/element-styles/LikeDislikeContainer';
 
 const PlayerButtons = props => {
 
@@ -30,9 +33,38 @@ const PlayerButtons = props => {
       player.setVolume(0.5);
     }, 2000);
   }
+
+  const toggleLikeButton = () => {
+    props.saveLikedSong(props.song.id);
+    player.nextTrack();
+    player.setVolume(0);
+    setTimeout(() => {
+      player.pause();
+      player.setVolume(0.5);
+    }, 2000);
+    props.removeTrack(props.currentUser.spotify_playlist_id, props.song.id);
+  };
+
+  const toggleDislikeButton = () => {
+    player.nextTrack();
+    player.setVolume(0);
+    setTimeout(() => {
+      player.pause();
+      player.setVolume(0.5);
+    }, 2000);
+    props.removeTrack(props.currentUser.spotify_playlist_id, props.song.id);
+  };
   
   return (
-    <div style={{ display: "flex" }}>
+    <LikeDislikeContainer>
+    <div className="display-flex">
+        <button
+          className='like-dislike dislike joyride-dislike-4'
+          style={{ background: "none", border: "none", outline: "none" }}
+          onClick={toggleDislikeButton} >
+          <a className="dislikeicon" style={{ maxHeight: 70 }} />
+        </button>
+      <div style={{ display: "flex" }}>
         <button
             style={{
             background: "none",
@@ -41,11 +73,7 @@ const PlayerButtons = props => {
             }}
             onClick={() => onPrevClick()}
         >
-            <img
-            src={SkipLeft}
-            alt='White icon to skip to the previous song.'
-            style={{ maxHeight: 22 }}
-            />
+          <a className="previcon" style={{ maxHeight: 35 }} />
         </button>
 
         <button
@@ -57,19 +85,9 @@ const PlayerButtons = props => {
             onClick={() => onPlayClick()}
         >
             {playing ? (
-            <img
-                // ref={input => (this.inputElement = input)}
-                src={Pause}
-                alt='White icon to pause a song.'
-                style={{ maxHeight: 35 }}
-            />
+            <a className="pauseicon" style={{ maxHeight: 35 }} />
             ) : (
-            <img
-                /* ref={this.simulateClick} */
-                src={Play}
-                alt='White icon to start a pause song.'
-                style={{ maxHeight: 35 }}
-            />
+            <a className="playicon" style={{ maxHeight: 35 }} />
             )}
         </button>
 
@@ -81,14 +99,22 @@ const PlayerButtons = props => {
             }}
             onClick={() => onNextClick()}
         >
-            <img
-            src={SkipRight}
-            alt='White icon to skip to the next song.'
-            style={{ maxHeight: 22 }}
-            />
+          <a className="nexticon" style={{ maxHeight: 35 }} />
         </button>
         </div>
+        <button className='like-dislike like' style={{ background: "none", border: "none", outline: "none"}} onClick={toggleLikeButton} >
+          <a className="likeicon" style={{ maxHeight: 70 }} />
+        </button>
+      </div>
+      </LikeDislikeContainer>
   );
 };
 
-export default PlayerButtons
+const mapStateToProps = state => ({
+  song: state.currentSongReducer.item,
+  currentUser: state.getCurrentUserReducer.currentUser
+});
+
+export default connect(mapStateToProps, { saveLikedSong, removeTrack })(
+  PlayerButtons
+);

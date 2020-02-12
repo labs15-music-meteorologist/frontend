@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
 import { Grid, Typography } from '@material-ui/core';
-
 import { getlikedSongs, getUsers, getPlaylist } from '../../Redux/Spotify/spotify.actions';
 import Song from './Song.js';
 
@@ -34,11 +32,6 @@ class LikedSongs extends React.Component {
     return (
       <Grid container>
         <Grid item>
-          <Typography
-            style={{ fontWeight: 'bold', fontSize: 18, textAlign: 'center' }}>
-            Last 20 Recommended Songs
-          </Typography>
-
           {this.props.several_tracks.tracks &&
             this.props.several_tracks.tracks.map(song => (
               <Song song={song} id={song.id} key={song.id} />

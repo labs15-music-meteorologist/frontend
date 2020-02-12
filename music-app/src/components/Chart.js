@@ -55,11 +55,11 @@ class Chart extends Component {
         <RadarChart
           label={{ fill: 'white' }}
           value={{ color: 'white' }}
-          cx={225}
-          cy={200}
-          outerRadius={150}
-          width={450}
-          height={400}
+          cx={188}
+          cy={120}
+          outerRadius={100}
+          width={377}
+          height={240}
           data={this.state.data}>
           <PolarGrid />
           <PolarAngleAxis stroke='white' dataKey='subject' />

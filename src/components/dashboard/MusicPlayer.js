@@ -59,14 +59,6 @@ class MusicPlayer extends Component {
     this.handleLogin();
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.ds_songs && this.props.song) {
-      setTimeout(() => {
-        this.predictionScoreCalculation(this.props.song);
-      }, 2000);
-    }
-  }
-
   componentDidUpdate(prevProps) {
     console.log("this is prevProps", prevProps);
     if (this.props.song_id !== prevProps.song_id) {
@@ -81,7 +73,7 @@ class MusicPlayer extends Component {
     ) {
       this.props.addToPlaylist(
         {
-          uris: this.createSpotifyUriArray(this.props.ds_songs)
+          uris: this.createSpotifyUriArray(this.props.ds_songs[0].songs)
         },
         this.props.currentUser.spotify_playlist_id
       );
@@ -175,24 +167,18 @@ class MusicPlayer extends Component {
 
   getDataScienceSongArray = () => {
     this.props.ds_songs &&
-      this.props.getSeveralTracks(this.concatenateSongIds(this.props.ds_songs));
+      this.props.getSeveralTracks(
+        this.concatenateSongIds(this.props.ds_songs[0].songs)
+      );
   };
 
   concatenateSongIds(array) {
     return array.map(song => song.values).join(",");
   }
   getCurrentSongFeatures = id => this.props.getTrackInfo(id);
+
   createSpotifyUriArray(array) {
     return array.map(song => "spotify:track:" + song.values);
-  }
-
-  predictionScoreCalculation(songs) {
-    let similarityPrediction = JSON.parse(
-      localStorage.getItem("ds_songs")
-    ).filter(song => song.values === songs.id);
-    if (similarityPrediction[0] !== undefined) {
-      this.setState({ trueSimilarity: similarityPrediction[0] });
-    }
   }
 
   checkForPlayer() {
@@ -329,7 +315,7 @@ const mapStateToProps = state => ({
   song: state.currentSongReducer.item,
   imageUrl: state.currentSongReducer.imageUrl,
   traits: state.getTrackInfoReducer,
-  ds_songs: state.queueReducer.ds_songs.songs,
+  ds_songs: state.queueReducer.ds_songs,
   several_tracks: state.queueReducer.several_tracks,
   playlistId: state.createPlaylistReducer.playlistId,
   song_id: state.likedSongsReducer.song_id,

@@ -149,6 +149,7 @@ class PlaylistItems extends React.Component {
 
     return (
       <div className="dashboard">
+        {console.log("playlistitems props", this.props)}
         <div>     
                 <List>
                 <div style={{ borderBottom: '1px solid #454B54', fontSize: 15, height: 20, color: '#454B54', fontWeight: "bold", display: 'flex', width: 'auto', marginLeft: '35px', marginRight: '35px', paddingBottom: '6px', marginBottom: '6px'}}>
@@ -172,7 +173,7 @@ class PlaylistItems extends React.Component {
               }}
                     >
 
-            <LikedSongs props={this.props} />
+              <LikedSongs deviceId={this.props.deviceId} />
             </Paper>
           </List>
         </div>

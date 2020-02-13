@@ -3,8 +3,12 @@ import { connect } from 'react-redux';
 import { Grid, Typography } from '@material-ui/core';
 import { getTrackInfo } from '../../Redux/Spotify/spotify.actions';
 import '../../App.css';
+import axios from 'axios';
 
 class Song extends React.Component {
+  constructor(props) { 
+    super(props);
+  }
 
   msToTime(s) {
     var ms = s % 1000;
@@ -22,9 +26,34 @@ class Song extends React.Component {
     }
   }
 
+  // changeSong(props) {
+  //   console.log("changeSong", props)
+  //   var config = {
+  //     headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
+  //   };
+
+  //   // axios.get(
+  //   //   `https://api.spotify.com/v1/audio-features/${this.props.song.id}`,
+  //   //   config,
+  //   // );
+  // }
+
   render() {
     /*     const tf = this.props.tracksInfo[this.props.id]; */
-    /*    const loadingTf = !tf || tf.fetching; */
+  /*    const loadingTf = !tf || tf.fetching; */
+    const changeSong = () => {
+      console.log("changeSong", this.props.tracks)
+      const trackArray = [`${this.props.song.uri}`]
+      trackArray.push()
+      axios.put(
+        `https://api.spotify.com/v1/me/player/play?device_id=${this.props.deviceId}`,
+        {
+          "uris": [`${this.props.song.uri}`, "spotify:track:2LMVHQH7NIWOZOcnleT4CE"],
+        },
+        { headers: { Authorization: 'Bearer ' + localStorage.getItem('token') } }
+      )
+    }
+
     return (
       <div>
         <Grid
@@ -44,7 +73,7 @@ class Song extends React.Component {
             }}
         >
             {"playing" ? (
-            <a className="pauseicon" style={{ maxHeight: 35 }} />
+                <a onClick={changeSong} className="pauseicon" style={{ maxHeight: 35 }} />
             ) : (
             <a className="playicon" style={{ maxHeight: 35 }} />
             )}

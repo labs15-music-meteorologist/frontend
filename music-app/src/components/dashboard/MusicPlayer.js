@@ -63,7 +63,7 @@ class MusicPlayer extends Component {
         this.predictionScoreCalculation(this.props.song);
       }, 2000);
     }
-  }
+  } 
 
   componentDidUpdate(prevProps) {
     console.log("this is prevProps", prevProps)
@@ -190,6 +190,7 @@ class MusicPlayer extends Component {
       if (state.track_window.current_track.id !== this.state.currentTrack) {
         this.currentSong();
         this.setState({ currentTrack: state.track_window.current_track.id });
+        console.log("Testing musicplayer", state.track_window.current_track.id)
         this.player.setVolume(0);
         setTimeout(() => {
           this.player.pause();
@@ -239,7 +240,7 @@ class MusicPlayer extends Component {
       clearInterval(this.playerCheckInterval);
 
       this.player = new window.Spotify.Player({
-        name: "Music Meteorologist Spotify Player",
+        name: "Sound Drip Spotify Player",
         getOAuthToken: cb => {
           cb(token);
         }
@@ -292,7 +293,7 @@ class MusicPlayer extends Component {
       <div>
         {console.log("music player props", this.props)}
         <NavBar musicPlayerProps={this.props} userName={this.props.spotifyId.display_name}/>
-        {console.log("all music player props for user", this.props.spotifyId)}
+        {console.log("Device id in state", this.state.deviceId)}
       <ElementContainer>
           <SideBar>
             <div className='music-player joyride-player-2'>
@@ -349,7 +350,7 @@ class MusicPlayer extends Component {
           <PlaylistInfoContainer>
           </PlaylistInfoContainer>
             <PlaylistSongsContainer>
-              <PlaylistItems player={this.player}>
+              <PlaylistItems player={this.player} deviceId={this.state.deviceId}>
               </PlaylistItems>
             </PlaylistSongsContainer>  
         </MainBar>

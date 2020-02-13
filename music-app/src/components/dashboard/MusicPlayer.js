@@ -290,6 +290,7 @@ class MusicPlayer extends Component {
 
     return (
       <div>
+        {console.log("music player props", this.props)}
         <NavBar musicPlayerProps={this.props} userName={this.props.spotifyId.display_name}/>
         {console.log("all music player props for user", this.props.spotifyId)}
       <ElementContainer>

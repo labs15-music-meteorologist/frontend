@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
 import { Grid, Typography } from '@material-ui/core';
-
 import { getTrackInfo } from '../../Redux/Spotify/spotify.actions';
 import '../../App.css';
 

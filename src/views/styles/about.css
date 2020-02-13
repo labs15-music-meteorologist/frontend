@@ -1,0 +1,19 @@
+.about-image{
+    display: flex;
+    justify-content: center;
+}
+
+.header-container{
+    display: flex;
+    justify-content: center;
+}
+
+.button-container{
+    display: flex;
+    justify-content: center;
+}
+
+.nav{
+    height: 200px;
+    border: 1px solid white;
+}

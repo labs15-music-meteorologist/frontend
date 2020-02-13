@@ -1,9 +1,7 @@
 import DsActionTypes from "./ds.types";
 import axios from "axios";
 
-// const url = process.env.REACT_APP_BACKEND_BASE_URL;
-const url = "http://sounddrip-prod.us-east-1.elasticbeanstalk.com";
-// const url = process.env.REACT_APP_BACKEND_BASE_URL;
+const url = process.env.BACKEND_BASE_URL;
 
 export const postDSSong = obj => dispatch => {
   dispatch({

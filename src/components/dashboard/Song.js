@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Grid, Typography } from '@material-ui/core';
-import { getTrackInfo } from '../../Redux/Spotify/spotify.actions';
+import { getTrackInfo, getSeveralTracks } from '../../Redux/Spotify/spotify.actions';
 import '../../App.css';
 import axios from 'axios';
 
@@ -26,29 +26,20 @@ class Song extends React.Component {
     }
   }
 
-  // changeSong(props) {
-  //   console.log("changeSong", props)
-  //   var config = {
-  //     headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
-  //   };
-
-  //   // axios.get(
-  //   //   `https://api.spotify.com/v1/audio-features/${this.props.song.id}`,
-  //   //   config,
-  //   // );
-  // }
 
   render() {
-    /*     const tf = this.props.tracksInfo[this.props.id]; */
-  /*    const loadingTf = !tf || tf.fetching; */
+
+    const trackUris = [`${this.props.song.uri}`, `${this.props.tracks[0].uri}`, `${this.props.tracks[1].uri}`]
+    // const blah = this.props.tracks.map(track => console.log("individual song uris",track[0].uri))
+
     const changeSong = () => {
-      console.log("changeSong", this.props.tracks)
+      console.log("changeSong", this.props)
       const trackArray = [`${this.props.song.uri}`]
       trackArray.push()
       axios.put(
         `https://api.spotify.com/v1/me/player/play?device_id=${this.props.deviceId}`,
         {
-          "uris": [`${this.props.song.uri}`, "spotify:track:2LMVHQH7NIWOZOcnleT4CE"],
+          "uris": trackUris,
         },
         { headers: { Authorization: 'Bearer ' + localStorage.getItem('token') } }
       )
@@ -115,9 +106,10 @@ class Song extends React.Component {
 
 const mapStateToProps = state => ({
   tracksInfo: state.getTrackInfoReducer,
+  several_tracks: state.queueReducer.several_tracks,
 });
 
 export default connect(
   mapStateToProps,
-  { getTrackInfo },
+  { getTrackInfo, getSeveralTracks },
 )(Song);

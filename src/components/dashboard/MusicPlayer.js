@@ -245,7 +245,7 @@ class MusicPlayer extends Component {
           musicPlayerProps={this.props}
           userName={this.props.spotifyId.display_name}
         />
-        {console.log("all music player props for user", this.props.spotifyId)}
+        {console.log("all music player props", this.props)}
         <ElementContainer>
           <SideBar>
             <div className='music-player joyride-player-2'>
@@ -302,7 +302,7 @@ class MusicPlayer extends Component {
             </div>
           </SideBar>
           <MainBar>
-            <PlaylistInfoContainer>
+            <PlaylistInfoContainer spotifyId={this.props.spotifyId.id}>
               
             </PlaylistInfoContainer>
             <PlaylistSongsContainer>

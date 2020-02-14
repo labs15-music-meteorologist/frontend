@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { createPlaylist, getSeveralTracks, addToPlaylist } from '../../../Redux/Spotify/spotify.actions';
+import axios from 'axios';
 
 const Container = styled.div`
     height: 175px;
@@ -38,14 +39,43 @@ const MakePlaylist = styled.button`
 class PlaylistInfo extends React.Component { 
 
     render() { 
-        // const trackUris = this.props.tracks.map(track => track.uri)
+        const addPlaylist = () => { 
+            const trackUris = this.props.several_tracks.tracks.map(track => track.uri)
+            var config = {
+                headers: {
+                  Authorization: "Bearer " + localStorage.getItem("token"),
+                  "Content-Type": "application/json"
+                }
+            };
+            var playlistName = {
+                name: "Sound Drip Playlist",
+                description: "A playlist of songs curated by Sound Drip"
+              };
+
+            axios.post(
+                `https://api.spotify.com/v1/users/${this.props.spotifyId}/playlists`,
+                playlistName,
+                config,
+            )
+                .then(res => {
+                    axios.post(
+                        `https://api.spotify.com/v1/playlists/${res.data.id}/tracks`,
+                        { uris: trackUris },
+                        config,
+                    )
+                })
+
+            console.log("playlistinfo props", trackUris)
+
+         }
+
         console.log("playlistinfo props", this.props)
         return (
             <Container>
                 <DivLeft>
                 </DivLeft>
                 <DivRight>
-                    <MakePlaylist>Create a Playlist From These Songs</MakePlaylist>
+                    <MakePlaylist onClick={addPlaylist}>Create a Playlist From These Songs</MakePlaylist>
                 </DivRight>
             </Container>
         )

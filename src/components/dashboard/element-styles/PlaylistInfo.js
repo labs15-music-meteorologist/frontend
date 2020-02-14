@@ -23,7 +23,7 @@ const DivRight = styled.div`
     height: 80%;
     margin-top: 15px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
 `
 
@@ -33,14 +33,27 @@ const MakePlaylist = styled.button`
     font-family: Work Sans;
     border: none;
     border-radius: 5px;
-    padding: 10px
+    padding: 10px;
+    margin-right: 45px;
+    margin-top: 40px;
+    transition: 0.4s ease;
+    &:hover {
+        color: rgba(255, 255, 255, 1);
+        box-shadow: 0 3px 25px rgba(226, 3, 81, .7);
+        transition: 0.4s ease;
+    }
+    &:active {
+        transform: scale(.5);
+        transition: 0.4s ease;
+    }
 `
 
 class PlaylistInfo extends React.Component { 
 
     render() { 
         const addPlaylist = () => { 
-            const trackUris = this.props.several_tracks.tracks.map(track => track.uri)
+            let trackUris = this.props.several_tracks.tracks ? this.props.several_tracks.tracks.map(track => track.uri) : 0
+            if (trackUris === 0) { window.alert("Playlist hasn't populated yet.")}
             var config = {
                 headers: {
                   Authorization: "Bearer " + localStorage.getItem("token"),
@@ -50,20 +63,21 @@ class PlaylistInfo extends React.Component {
             var playlistName = {
                 name: "Sound Drip Playlist",
                 description: "A playlist of songs curated by Sound Drip"
-              };
-
-            axios.post(
-                `https://api.spotify.com/v1/users/${this.props.spotifyId}/playlists`,
-                playlistName,
-                config,
-            )
-                .then(res => {
-                    axios.post(
-                        `https://api.spotify.com/v1/playlists/${res.data.id}/tracks`,
-                        { uris: trackUris },
-                        config,
-                    )
-                })
+            };
+            if (this.props.several_tracks.tracks) {
+                axios.post(
+                    `https://api.spotify.com/v1/users/${this.props.spotifyId}/playlists`,
+                    playlistName,
+                    config,
+                )
+                    .then(res => {
+                        axios.post(
+                            `https://api.spotify.com/v1/playlists/${res.data.id}/tracks`,
+                            { uris: trackUris },
+                            config,
+                        )
+                    })
+            }
 
             console.log("playlistinfo props", trackUris)
 
@@ -75,7 +89,7 @@ class PlaylistInfo extends React.Component {
                 <DivLeft>
                 </DivLeft>
                 <DivRight>
-                    <MakePlaylist onClick={addPlaylist}>Create a Playlist From These Songs</MakePlaylist>
+                    <MakePlaylist onClick={addPlaylist}>Create a Playlist From These Songs!</MakePlaylist>
                 </DivRight>
             </Container>
         )

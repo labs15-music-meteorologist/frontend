@@ -45,7 +45,7 @@ class Song extends React.Component {
 
     return (
       <div>
-        <Grid
+        <Grid style={{borderRadius: "5px"}}
           container
           direction='row'
           alignItems='center'

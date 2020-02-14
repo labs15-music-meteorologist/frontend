@@ -97,14 +97,14 @@ body::-webkit-scrollbar {
 /* PLAYLIST STYLES */
 
 .song:hover {
-  background-color: rgba(56, 182, 255, 0.55);
+  background-color: rgba(226, 3, 81, 0.9);
 }
 
 /* DASHBOARD STYLES */
 
 .dashboard {
-  height: 120vh;
 }
+
 
 /* FOOTER STYLES */
 
@@ -171,6 +171,7 @@ body::-webkit-scrollbar {
   flex-flow: row;
   justify-content: space-evenly;
   align-items: center;
+  padding-bottom: 150px;
 }
 
 .MuiButton-root {
@@ -234,6 +235,7 @@ body::-webkit-scrollbar {
   justify-content: center;
   margin-top: 20px;
   text-align: center;
+  min-height: 425px;
 }
 .dashboard {
   height: initial;
@@ -360,9 +362,11 @@ body::-webkit-scrollbar {
   width: 25px;
   background: transparent url("./assets/likeWhite.png") no-repeat 0 0;
   margin-bottom: 5px;
+  transition: 0.15s ease;
 }
 .likeicon:hover {
   background: transparent url("./assets/likepink.png") no-repeat 0 0;
+  transition: 0.15s ease;
 }
 .dislikeicon {
   display: inline-block;
@@ -370,9 +374,11 @@ body::-webkit-scrollbar {
   width: 25px;
   background: transparent url("./assets/dislikeWhite.png") no-repeat 0 0;
   margin-top: 5px;
+  transition: 0.15s ease;
 }
 .dislikeicon:hover {
   background: transparent url("./assets/dislikepink.png") no-repeat 0 0;
+  transition: 0.15s ease;
 }
 
 .playicon {
@@ -380,36 +386,44 @@ body::-webkit-scrollbar {
   height: 25px;
   width: 25px;
   background: transparent url("./assets/play-buttonWhite.png") no-repeat 0 0;
+  transition: 0.15s ease;
 }
 .playicon:hover {
   background: transparent url("./assets/play-buttonPink.png") no-repeat 0 0;
+  transition: 0.15s ease;
 }
 .pauseicon {
   display: inline-block;
   height: 25px;
   width: 25px;
   background: transparent url("./assets/pauseWhite.png") no-repeat 0 0;
+  transition: 0.15s ease;
 }
 .pauseicon:hover {
   background: transparent url("./assets/pausePink.png") no-repeat 0 0;
+  transition: 0.15s ease;
 }
 .previcon {
   display: inline-block;
   height: 25px;
   width: 25px;
   background: transparent url("./assets/PrevWhite.png") no-repeat 0 0;
+  transition: 0.15s ease;
 }
 .previcon:hover {
   background: transparent url("./assets/prevPink.png") no-repeat 0 0;
+  transition: 0.15s ease;
 }
 .nexticon {
   display: inline-block;
   height: 25px;
   width: 25px;
   background: transparent url("./assets/nextWhite.png") no-repeat 0 0;
+  transition: 0.15s ease;
 }
 .nexticon:hover {
   background: transparent url("./assets/nextPink.png") no-repeat 0 0;
+  transition: 0.15s ease;
 }
 .vectoricon {
   display: inline-block;
@@ -418,6 +432,7 @@ body::-webkit-scrollbar {
   background: transparent url("./assets/Vector.svg") no-repeat 0 0;
   margin-top: 3px;
   margin-left: 4px;
+  transition: 0.15s ease;
 }
 
 .barsicon {
@@ -427,10 +442,12 @@ body::-webkit-scrollbar {
   width: 20px;
   margin-top: 5px;
   margin-left: 5px;
+  transition: 0.15s ease;
 }
 
 .charticon {
   margin-right: 10px;
+  transition: 0.15s ease;
 }
 
 
@@ -446,9 +463,6 @@ body::-webkit-scrollbar {
 .MuiGrid-container {
   max-height: 600px;
 }
-
-
-
 
 .like-dislike-wrapper {
   display: flex;
@@ -467,21 +481,6 @@ body::-webkit-scrollbar {
 
 .like {
   transition: 0.2s ease;
-}
-
-.like:hover {
-
-}
-.like:active {
-
-}
-
-.dislike:active {
-
-}
-
-.dislike:hover {
-
 }
 
 /* Play button */

@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { createPlaylist, getSeveralTracks, addToPlaylist } from '../../../Redux/Spotify/spotify.actions';
 
 const Container = styled.div`
     height: 175px;
@@ -36,6 +38,8 @@ const MakePlaylist = styled.button`
 class PlaylistInfo extends React.Component { 
 
     render() { 
+        // const trackUris = this.props.tracks.map(track => track.uri)
+        console.log("playlistinfo props", this.props)
         return (
             <Container>
                 <DivLeft>
@@ -48,4 +52,12 @@ class PlaylistInfo extends React.Component {
     }
 }
 
-export default PlaylistInfo;
+const mapStateToProps = state => ({
+    several_tracks: state.queueReducer.several_tracks,
+    playlistId: state.createPlaylistReducer.playlistId,
+  });
+
+  export default connect(
+    mapStateToProps,
+    { getSeveralTracks, createPlaylist, addToPlaylist },
+  )(PlaylistInfo);

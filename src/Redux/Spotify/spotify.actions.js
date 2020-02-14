@@ -250,7 +250,7 @@ export const createPlaylist = spotifyId => dispatch => {
     }
   };
   var playlistName = {
-    name: "Music Meteorologist (DYNAMIC)",
+    name: "Sound Drip Playlist",
     description: "A playlist of songs curated by Music Meteorologist"
   };
   axios

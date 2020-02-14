@@ -1,8 +1,4 @@
 import React from "react";
-import SkipLeft from "../../assets/skip-left.png";
-import SkipRight from "../../assets/skip-right.png";
-import Pause from "../../assets/player-stop.png";
-import Play from "../../assets/player-start.png";
 import { connect } from "react-redux";
 import { saveLikedSong, removeTrack } from "../../Redux/Spotify/spotify.actions";
 import LikeDislikeContainer from '../dashboard/element-styles/LikeDislikeContainer';

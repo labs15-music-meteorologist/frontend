@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
@@ -17,7 +18,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function MenuListComposition() {
+  const MenuListComposition = (props) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
@@ -45,9 +46,9 @@ export default function MenuListComposition() {
         e.preventDefault();
         localStorage.removeItem("token");
         localStorage.removeItem("ds_songs");
-        this.props.history.push("/logout");
+        props.history.push("/logout");
       };
-
+console.log("logout props", props)
   // return focus to the button when we transitioned from !open -> open
   const prevOpen = React.useRef(open);
   React.useEffect(() => {
@@ -90,3 +91,5 @@ export default function MenuListComposition() {
     </div>
   );
 }
+
+export default withRouter(MenuListComposition);

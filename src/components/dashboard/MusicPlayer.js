@@ -141,6 +141,7 @@ class MusicPlayer extends Component {
       if (state.track_window.current_track.id !== this.state.currentTrack) {
         this.currentSong();
         this.setState({ currentTrack: state.track_window.current_track.id });
+        console.log("Testing musicplayer", state.track_window.current_track.id)
         this.player.setVolume(0);
         setTimeout(() => {
           this.player.pause();
@@ -188,7 +189,7 @@ class MusicPlayer extends Component {
       clearInterval(this.playerCheckInterval);
 
       this.player = new window.Spotify.Player({
-        name: "Music Meteorologist Spotify Player",
+        name: "Sound Drip Spotify Player",
         getOAuthToken: cb => {
           cb(token);
         }
@@ -302,7 +303,8 @@ class MusicPlayer extends Component {
           <MainBar>
             <PlaylistInfoContainer></PlaylistInfoContainer>
             <PlaylistSongsContainer>
-              <PlaylistItems player={this.player}></PlaylistItems>
+              <PlaylistItems player={this.player} deviceId={this.state.deviceId}>
+              </PlaylistItems>
             </PlaylistSongsContainer>
           </MainBar>
         </ElementContainer>

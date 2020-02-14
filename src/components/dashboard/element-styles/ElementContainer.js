@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
 export default styled.div`
-    min-height: 900px;
-    height: 80vh;
+    height: 76vh;
     width: 100vw;
     display: flex;
     flex-direction: row;

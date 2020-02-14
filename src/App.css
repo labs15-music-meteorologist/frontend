@@ -483,4 +483,27 @@ body::-webkit-scrollbar {
   transition: 0.2s ease;
 }
 
-/* Play button */
+.playicon2 {
+  display: inline-block;
+  height: 45px;
+  width: 45px;
+  background: transparent url("./assets/whiteplayspaced.png") no-repeat 0 0;
+  transition: 0.3s ease;
+}
+.playicon2:hover {
+  background: white url("./assets/pinkplayspaced.png") no-repeat 0 0;
+  transition: 0.3s ease;
+  border-radius: 10px;
+}
+
+.playicon2:active {
+ transform: scale(.8);
+ transition: 0.3s ease;
+
+}
+.playflex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}

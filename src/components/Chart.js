@@ -52,7 +52,7 @@ class Chart extends Component {
       <div>
         {/* Specify chart elements from import list to use them ex. PolarAngleAxis are the subjects */}
         {/* <ResponsiveContainer width='99%' height='99%'> */}
-        <RadarChart
+        <RadarChart 
           label={{ fill: 'white' }}
           value={{ color: 'white' }}
           cx={188}
@@ -64,15 +64,15 @@ class Chart extends Component {
           <PolarGrid />
           <PolarAngleAxis stroke='white' dataKey='subject' />
           {/* <Legend formatter={this.renderColorfulLegendText} /> */}
-          <PolarRadiusAxis tick={{ fill: 'white' }} />
-          <Radar
-            tick={{ fill: 'white' }}
+
+          <Radar id="canvas"
+            tick={{ fill: 'transparent' }}
             // name='Audio Features'
             dataKey='A'
-            stroke='#38b6ff'
-            stroke-width='2%'
-            fill='#5ce1e6'
-            fillOpacity={0.7}
+            stroke='white'
+            stroke-width='5%'
+            fill='#E20351'
+            fillOpacity={0.9}
           />
         </RadarChart>
         {/* </ResponsiveContainer> */}

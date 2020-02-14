@@ -29,13 +29,12 @@ class Song extends React.Component {
 
   render() {
 
-    const trackUris = [`${this.props.song.uri}`, `${this.props.tracks[0].uri}`, `${this.props.tracks[1].uri}`]
-    // const blah = this.props.tracks.map(track => console.log("individual song uris",track[0].uri))
+    const trackUris = this.props.tracks.map(track => track.uri)
+    trackUris.unshift(this.props.song.uri)
 
     const changeSong = () => {
       console.log("changeSong", this.props)
-      const trackArray = [`${this.props.song.uri}`]
-      trackArray.push()
+      console.log("uri array", trackUris)
       axios.put(
         `https://api.spotify.com/v1/me/player/play?device_id=${this.props.deviceId}`,
         {

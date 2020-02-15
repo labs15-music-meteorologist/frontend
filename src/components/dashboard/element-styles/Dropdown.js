@@ -8,6 +8,8 @@ import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import { makeStyles } from '@material-ui/core/styles';
+import "../../../App.css";
+import axios from 'axios';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -48,7 +50,8 @@ const useStyles = makeStyles(theme => ({
         localStorage.removeItem("ds_songs");
         props.history.push("/logout");
       };
-console.log("logout props", props)
+    console.log("logout props", props)
+    console.log("this.props.deviceid", props.deviceid)
   // return focus to the button when we transitioned from !open -> open
   const prevOpen = React.useRef(open);
   React.useEffect(() => {
@@ -57,7 +60,24 @@ console.log("logout props", props)
     }
     prevOpen.current = open;
   }, [open]);
-  return (
+
+    function transferHere() {
+      axios.put(
+        'https://api.spotify.com/v1/me/player',
+        {
+          "device_ids": [props.deviceid]
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+            "Content-Type": "application/json"
+          }
+        }
+      )
+     }
+    
+    
+    return (
       <div className={classes.root}>
       <div>
         <Button
@@ -78,11 +98,12 @@ console.log("logout props", props)
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                    <MenuItem>
-                      Your Spotify ID
-                      <br /> {props.navBarProps.spotifyId.id}
+                  <MenuItem className="copybar" onClick={transferHere}>Transfer Playback</MenuItem>
+                    <MenuItem className="copybar">
+                      Your Spotify ID <br />
+                      <input className="copytext" type="text" value={props.navBarProps.spotifyId.id} id="myInput"/>
                     </MenuItem>
-                    <MenuItem onClick={logout}>Logout</MenuItem>
+                    <MenuItem className="copybar" onClick={logout}>Logout</MenuItem>
                   </MenuList>
                 </ClickAwayListener>
               </Paper>

@@ -473,6 +473,18 @@ body::-webkit-scrollbar {
 .MuiLinearProgress-colorPrimary{
   background-color: white !important;
 }
+.copybar {
+  display: flex;
+  flex-direction: column;
+}
+
+.copytext {
+  color: white;
+  background-color: #17191C;
+  border: solid 2px transparent;
+  text-align: center;
+  width: 90px;
+}
 
 
 .dislike {

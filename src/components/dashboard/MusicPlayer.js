@@ -244,6 +244,7 @@ class MusicPlayer extends Component {
         <NavBar
           musicPlayerProps={this.props}
           userName={this.props.spotifyId.display_name}
+          deviceId={this.state.deviceId}
         />
         {console.log("all music player props", this.props)}
         <ElementContainer>

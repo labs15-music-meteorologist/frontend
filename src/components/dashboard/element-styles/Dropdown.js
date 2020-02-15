@@ -55,10 +55,8 @@ console.log("logout props", props)
     if (prevOpen.current === true && open === false) {
       anchorRef.current.focus();
     }
-
     prevOpen.current = open;
   }, [open]);
-
   return (
       <div className={classes.root}>
       <div>
@@ -80,6 +78,10 @@ console.log("logout props", props)
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                    <MenuItem>
+                      Your Spotify ID
+                      <br /> {props.navBarProps.spotifyId.id}
+                    </MenuItem>
                     <MenuItem onClick={logout}>Logout</MenuItem>
                   </MenuList>
                 </ClickAwayListener>

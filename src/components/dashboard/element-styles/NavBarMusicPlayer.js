@@ -41,8 +41,6 @@ class NavBar extends React.Component {
     e.preventDefault();
     window.location.href = '/';
   };
-  
-
 
 
   render() {

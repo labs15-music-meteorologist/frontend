@@ -45,24 +45,22 @@ class Song extends React.Component {
 
     return (
       <div>
-        <Grid
+        <Grid style={{borderRadius: "5px"}}
           container
           direction='row'
           alignItems='center'
           wrap='wrap'
           className='song'>
           <Grid item>
-          <button
+          <button className="playflex"
             style={{
             background: "none",
             border: "none",
             outline: "none",
-            marginRight: '12px',
-            marginLeft: '12px'
             }}
         >
             {"playing" ? (
-                <a onClick={changeSong} className="pauseicon" style={{ maxHeight: 35 }} />
+                <a onClick={changeSong} className="playicon2" />
             ) : (
             <a className="playicon" style={{ maxHeight: 35 }} />
             )}

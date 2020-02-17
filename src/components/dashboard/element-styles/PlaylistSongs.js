@@ -5,4 +5,5 @@ export default styled.div`
     width: 100%;
     background: #17191C;
     font-family: Work Sans;
+    padding-bottom: 120px;
 `;

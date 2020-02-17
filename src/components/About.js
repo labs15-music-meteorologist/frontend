@@ -1,9 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import Button from "./dashboard/element-styles/AuthButton.js";
+
 import "../views/styles/about.css";
 
 import AboutImage from "../assets/About-Image.svg";
+import ChartImage from "../assets/chart-image.svg";
+import SpotifyImage from "../assets/spotify-image.svg";
+import SongImage from "../assets/song-image.svg";
 
 export const authEndpoint = "https://accounts.spotify.com/authorize";
 
@@ -39,6 +43,8 @@ const Header = styled.h2`
 
 const SecondaryHeader = styled.h4`
   font-size: 24px;
+  margin-bottom: 2%;
+
 `;
 
 const Sentence = styled.p`
@@ -60,7 +66,8 @@ const InnerGrid = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  padding: 7%;
+  margin: 2%;
+  padding: 10%;
 `;
 const Footer = styled.footer`
   display: flex;
@@ -96,10 +103,10 @@ const About = () => (
         </Sentence>
       </InnerGrid>
       <InnerGrid>
-        <img></img>
+        <img src={ChartImage}/>
       </InnerGrid>
       <InnerGrid>
-        <img></img>
+      <img src={SpotifyImage}/>
       </InnerGrid>
       <InnerGrid>
         <SecondaryHeader>
@@ -118,7 +125,7 @@ const About = () => (
         </Sentence>
       </InnerGrid>
       <InnerGrid>
-        <img></img>
+      <img src={SongImage}/>
       </InnerGrid>
     </Grid>
     <div className='button-container'>

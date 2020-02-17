@@ -1,26 +1,44 @@
 import React from 'react';
 import styled from 'styled-components';
 import '../App.css';
+import MusicLogo from '../assets/sounddrip.svg';
 
-const Footer = styled.footer`
+const HomepageNavbar = styled.nav`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-content: center;
   align-items: center;
-  background-color: #151619;
-  height: 66px;
-  width: 100%;
-  font-size: 18px;
+  text-decoration: none;
+  margin-left: 5%;
+  padding-top: 2%;
+  height: 60px;
+  width: 450px;
+  color: #9DA4AF;
+  font-size: 19px;
+  position: absolute;
 `;
 
-const FooterContainer = () => {
+const NavbarLinks = styled.a`
+    text-decoration: none;
+    color: #9DA4AF;
+    font-size: 18px;
+
+    &:hover {
+        color: white;
+      }
+`;
+
+const HomepageNav = () => {
 
   return (
-    <Footer>
-        <p> © Copyright 2019, SoundDrip </p>
-    </Footer>
+    <HomepageNavbar>
+        <a href="/"><img src={MusicLogo}/></a>
+        <NavbarLinks href="/about">How it works?</NavbarLinks>
+        <NavbarLinks href="/team">Team</NavbarLinks>
+        <NavbarLinks href="https://github.com/Lambda-School-Labs/Music-Meteorologist-fe">Github</NavbarLinks>
+    </HomepageNavbar>
   );
 
 }
 
-export default FooterContainer
+export default HomepageNav

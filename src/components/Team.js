@@ -1,4 +1,6 @@
 import React from "react";
+import styled from "styled-components";
+import MusicLogo from '../assets/sounddrip.svg';
 import {
   Grid,
   Typography,
@@ -8,12 +10,38 @@ import {
   makeStyles
 } from "@material-ui/core";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
+// import HomepageNav from "./HomepageNav.js"
 // import useMediaQuery from "@material-ui/core/useMediaQuery";
+
+const HomepageNavbar = styled.nav`
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+  text-decoration: none;
+  margin-left: 5%;
+  padding-top: 2%;
+  margin-bottom: 2%;
+  height: 60px;
+  width: 450px;
+  color: #9DA4AF;
+  font-size: 19px;
+`;
+
+const NavbarLinks = styled.a`
+    text-decoration: none;
+    color: #9DA4AF;
+    font-size: 18px;
+
+    &:hover {
+        color: white;
+      }
+`;
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    margin: "50px 0"
+    // margin: "50px 0"
   },
   paper: {
     padding: theme.spacing(2),
@@ -78,6 +106,12 @@ export default function Team() {
 
   return (
     <div className={classes.root}>
+      <HomepageNavbar>
+        <a href="/"><img src={MusicLogo}/></a>
+        <NavbarLinks href="/about">How it works?</NavbarLinks>
+        <NavbarLinks href="/team">Team</NavbarLinks>
+        <NavbarLinks href="https://github.com/Lambda-School-Labs/Music-Meteorologist-fe">Github</NavbarLinks>
+      </HomepageNavbar>
       <Container maxWidth="md">
         <Grid container spacing={3}>
           <Grid item xs={12} sm={4}>

@@ -286,7 +286,7 @@ class MusicPlayer extends Component {
                       artistName !== "Artist Name" && (
                         <div className='album-art'>
                           <h4 style={{ textAlign: "center" }}>Now Playing</h4>
-                          <img src={this.state.imageUrl} alt='album-art' />
+                          <img className='album-artwork' src={this.state.imageUrl} alt='album-art' />
                         </div>
                       )}
                   </Grid>

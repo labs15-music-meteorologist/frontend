@@ -30,6 +30,7 @@ import MainBar from "./element-styles/MainBarContainer";
 import PlaylistInfoContainer from "./element-styles/PlaylistInfo";
 import PlaylistSongsContainer from "./element-styles/PlaylistSongs";
 import NavBar from "./element-styles/NavBarMusicPlayer";
+import Footer from '../Footer';
 
 class MusicPlayer extends Component {
   constructor(props) {
@@ -243,8 +244,9 @@ class MusicPlayer extends Component {
         <NavBar
           musicPlayerProps={this.props}
           userName={this.props.spotifyId.display_name}
+          deviceId={this.state.deviceId}
         />
-        {console.log("all music player props for user", this.props.spotifyId)}
+        {console.log("all music player props", this.props)}
         <ElementContainer>
           <SideBar>
             <div className='music-player joyride-player-2'>
@@ -301,13 +303,16 @@ class MusicPlayer extends Component {
             </div>
           </SideBar>
           <MainBar>
-            <PlaylistInfoContainer></PlaylistInfoContainer>
+            <PlaylistInfoContainer spotifyId={this.props.spotifyId.id}>
+              
+            </PlaylistInfoContainer>
             <PlaylistSongsContainer>
               <PlaylistItems player={this.player} deviceId={this.state.deviceId}>
               </PlaylistItems>
             </PlaylistSongsContainer>
           </MainBar>
         </ElementContainer>
+        <Footer/>
       </div>
     );
   }

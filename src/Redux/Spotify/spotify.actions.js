@@ -251,7 +251,7 @@ export const createPlaylist = spotifyId => dispatch => {
   };
   var playlistName = {
     name: "Sound Drip Playlist",
-    description: "A playlist of songs curated by Music Meteorologist"
+    description: "A playlist of songs curated by Sound Drip"
   };
   axios
     .post(

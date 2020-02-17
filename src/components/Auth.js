@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import Button from "./dashboard/element-styles/AuthButton.js";
 import Footer from "./Footer.js";
-
+import HomepageNav from "./HomepageNav.js"
 import "../App.css";
 import "../views/styles/homepage.css";
 
@@ -54,6 +54,7 @@ export class Auth extends Component {
   render() {
     return (
       <div className='auth'>
+        <HomepageNav/>
         <div class='main-wrapper'>
           <div className='main-cta-spotify'>
             <div class='img-container'>

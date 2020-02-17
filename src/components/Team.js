@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import MusicLogo from '../assets/sounddrip.svg';
+import '../App.css';
 import {
   Grid,
   Typography,
@@ -26,6 +27,20 @@ const HomepageNavbar = styled.nav`
   width: 450px;
   color: #9DA4AF;
   font-size: 19px;
+`;
+
+const Footer = styled.footer`
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  background-color: #151619;
+  height: 66px;
+  width: 100%;
+  font-size: 18px;
+  position: relative;
+  bottom: 0;
+  margin-top: 500px;
 `;
 
 const NavbarLinks = styled.a`
@@ -415,6 +430,7 @@ export default function Team() {
           </Grid>
         </Grid>
       </Container>
+      <Footer><p> © Copyright 2019, SoundDrip </p></Footer>
     </div>
   );
 }

@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.3.3",
+    "@material-ui/icons": "^4.9.1",
     "@sentry/browser": "^5.6.2",
     "axios": "^0.19.0",
     "curlrequest": "^1.0.1",
@@ -32,8 +33,17 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "ls && react-scripts test",
+    "eject": "react-scripts eject",
+    "coverage": "jest --coverage || true"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}"
+    ],
+    "coverageReporters": [
+      "lcov"
+    ]
   },
   "eslintConfig": {
     "extends": "react-app"

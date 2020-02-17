@@ -15,7 +15,7 @@ const AlbumInfo = props => {
       <img
         src={imageSpotify}
         alt='Album artwork cover.'
-        style={{ maxWidth: "300px", objectFit: "scale-down" }}
+        style={{ maxWidth: "250px", objectFit: "scale-down" }}
       />
       <p className='p' style={{ fontWeight: "bold" }}>
         {trackName}

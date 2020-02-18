@@ -200,8 +200,8 @@ body::-webkit-scrollbar {
   padding: 3px;
 }
 .drop {
-  left: -32px !important;
-  background-color: black !important;
+  left: -50px !important;
+  background-color: transparent !important;
 }
 #menu-list-grow {
   background-color: #17191C !important;
@@ -305,6 +305,38 @@ body::-webkit-scrollbar {
 
   .dashboard {
     height: initial;
+  }
+  .audioDiv {
+    display: none !important;
+  }
+  .music-component {
+    min-height: 300px !important;
+  }
+  .playLogo {
+    display: none;
+  }
+  .playH1 {
+    width: 100vw;
+    padding-top: 0 !important;
+    text-align: center;
+    margin-left: 0 !important;
+    min-width: 350px;
+    margin-bottom: 5px !important;
+    margin-top: 10px !important;
+  }
+  .playH2 {
+    display: flex;
+    justify-content: center;
+    margin-right: 8px;
+  }
+  .listTitles {
+    margin: 0 !important;
+  }
+  .MuiPaper-elevation1 {
+    margin-left: 10px !important;
+  }
+ .mainBar {
+  height: 50vw !important;
   }
 }
 

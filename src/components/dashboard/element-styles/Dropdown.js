@@ -93,7 +93,7 @@ const useStyles = makeStyles(theme => ({
           {({ TransitionProps, placement }) => (
             <Grow
               {...TransitionProps}
-              style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom', left: '-30px' }}
+                style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom', left: '-50px', background: 'transparent' }}
             >
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>

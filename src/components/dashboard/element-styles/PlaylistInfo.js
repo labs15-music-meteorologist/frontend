@@ -10,6 +10,12 @@ const Container = styled.div`
     background: #1E2024;
     font-family: Work Sans;
     display: flex;
+
+    @media (max-width: 600px){
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+    }
 `;
 
 const DivLeft = styled.div`
@@ -18,6 +24,11 @@ const DivLeft = styled.div`
     margin-top: 15px;
     display: flex;
     min-width: 685px;
+
+    @media (max-width: 600px){
+        max-width: 100vw;
+        width: 50%;
+    }
 `
 
 const PlayLogo = styled.img`
@@ -37,6 +48,13 @@ const DivRight = styled.div`
     display: flex;
     justify-content: flex-end;
     align-items: center;
+
+    @media (max-width: 600px){
+        justify-content: center;
+        width: 100vw;
+        margin-top: 0px;
+        
+    }
 `
 
 const MakePlaylist = styled.button`
@@ -48,7 +66,7 @@ const MakePlaylist = styled.button`
     border-radius: 5px;
     padding: 10px;
     margin-right: 45px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     transition: 0.4s ease;
     &:hover {
         color: rgba(255, 255, 255, 1);
@@ -58,6 +76,11 @@ const MakePlaylist = styled.button`
     &:active {
         transform: scale(.5);
         transition: 0.4s ease;
+    }
+
+    @media (max-width: 600px){
+        margin-right: 0px;
+        margin-bottom: 20px;
     }
 `
 
@@ -114,8 +137,8 @@ class PlaylistInfo extends React.Component {
                 <DivLeft>
                     <PlayLogo className="playLogo" />
                     <PlayInfo>
-                        <PlayH1 style={{ fontSize: 24, paddingTop: 30, paddingBottom: 0, marginLeft: 15 }}>{this.props.spotifyName + "'s Sound Drip Playlist"}</PlayH1>
-                        <div style={{ display: "flex" }}>
+                        <PlayH1 className="playH1" style={{ fontSize: 24, paddingTop: 30, paddingBottom: 0, marginLeft: 15 }}>{this.props.spotifyName + "'s Sound Drip Playlist"}</PlayH1>
+                        <div className="playH2" style={{ display: "flex" }}>
                             <a className="playlisticon"/>
                             <PlayH2 style={{ fontSize: 18, paddingTop: 5, marginLeft: 8, paddingBottom: 0, marginTop: 0 }}>20 Songs</PlayH2>
                         </div>

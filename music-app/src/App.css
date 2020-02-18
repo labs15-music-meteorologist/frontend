@@ -1,0 +1,278 @@
+.App {
+  /* text-align: center; */
+  margin: 0 5% 0 5%;
+  height: 100vh;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  /* background-color: #282c34; */
+  /* min-height: 50vh; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #9761fb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* PLAYLIST STYLES */
+
+.song:hover {
+  background-color: rgba(56, 182, 255, 0.55);
+}
+
+/* DASHBOARD STYLES */
+
+.dashboard {
+  height: 120vh;
+}
+
+/* FOOTER STYLES */
+
+.footer {
+  bottom: 0;
+  position: relative;
+}
+
+/* MENU STYLES */
+
+.side-menu-open {
+  position: absolute;
+  z-index: 1;
+  top: 40px;
+  margin-left: 0px;
+  padding-left: 0px;
+}
+
+.side-menu-closed {
+  display: none;
+}
+
+.burger {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  z-index: 0;
+}
+
+.burger div div {
+  width: 28px;
+  height: 2px;
+  background-color: #ffffff;
+  margin: 4px;
+  transition: all 0.5s ease;
+}
+
+.toggle-line-one {
+  transform: rotate(-45deg) translate(-9px, 5px);
+}
+.toggle-line-two {
+  opacity: 0;
+}
+.toggle-line-three {
+  transform: rotate(45deg) translate(-9px, -6px);
+}
+
+/* LOGOUT STYLES */
+
+.logout {
+  height: 100vh;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 3%;
+}
+
+/* MUSIC PLAYER STYLES */
+
+.music-player {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.music-component {
+  width: 20%;
+  margin: 10px;
+}
+
+.music-chart {
+  width: 40%;
+}
+
+@media (max-width: 1200px) {
+  .music-player {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .music-component {
+    width: 90%;
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+  }
+  .dashboard {
+    height: initial;
+  }
+  .music-component-album-info {
+    margin-right: 0;
+    width: 100%;
+
+  }
+}
+
+@media (max-width: 600px) {
+  .music-player {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .music-component {
+    width: 90%;
+  }
+  .dashboard {
+    height: initial;
+  }
+}
+
+/*  INFO BUBBLE STYLES  */
+
+.grid-question {
+  font-size: 0.85rem;
+}
+.grid-question:hover {
+  background: #216b98;
+}
+
+@media (max-width: 500px) {
+  .grid-chart {
+    transform: scale(0.85);
+  }
+}
+.audio-details-open {
+  position: absolute;
+  z-index: 1;
+  top: 40px;
+  margin-left: 0px;
+  padding-left: 0px;
+}
+
+.audio-details-closed {
+  display: none;
+}
+
+.audio-detail {
+  margin: 2%;
+}
+.audio-detail h4 {
+  display: inline;
+  color: white;
+}
+.audio-detail p {
+  display: inline;
+  margin-left: 5px;
+  font-size: 0.93rem;
+}
+
+/* LIKE/DISLIKE BUTTON STYLES */
+
+.like-dislike-wrapper {
+  display: flex;
+  height: 125px;
+}
+
+.like,
+.dislike {
+  transition: 0.9s ease;
+}
+
+.like:hover {
+  -moz-transform: translate(5px, -5px);
+  -ms-transform: translate(5px, -5px);
+  -o-transform: translate(5px, -5px);
+  -webkit-transform: translate(5px, -5px);
+  transform: translate(5px, -5px);
+}
+
+.dislike:hover {
+  -moz-transform: translate(-5px, 5px);
+  -ms-transform: translate(-5px, 5px);
+  -o-transform: translate(-5px, 5px);
+  -webkit-transform: translate(-5px, 5px);
+  transform: translate(-5px, 5px);
+}
+
+/*  YES / NO BUTTON STYLES */
+
+.yes-no-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 125px;
+}
+
+.yes-no-button-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* justify-items: center; */
+}
+
+.yes-button {
+  border: none;
+  width: 50px;
+  height: 30px;
+  border-radius: 10px;
+  background-color: white;
+  font-size: 15px;
+  margin: 5px;
+}
+
+.yes-button:hover {
+  background-color: black;
+  color: white;
+  border: 2px solid white;
+}
+.no-button {
+  border: none;
+  width: 50px;
+  height: 30px;
+  border-radius: 10px;
+  background-color: white;
+  font-size: 15px;
+}
+
+.no-button:hover {
+  background-color: black;
+  color: white;
+  border: 2px solid white;
+}
+
+.yes-no-deactivated {
+  display: none;
+}

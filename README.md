@@ -1,13 +1,15 @@
-# Music Meteorologist Frontend
+# Sound Drip Frontend
 [![Maintainability](https://api.codeclimate.com/v1/badges/6459996a0b5667ac7075/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/Music-Meteorologist-fe/maintainability)
 
 
-View this site at - https://music-meteorologist.com/
+View the new site at - https://www.sound-drip.com/
+View prior site at   - https://music-meteorologist.com/
 
-Music Meteorologist is a fullstack web application that has been built during the Labs15 (1st August 2019 - 30 September 2019) by
+Sound Drip is a fullstack web application that has been a Green Build during the Labs20 (13th January 2020 - 6th March 2020) by
 [LambdaSchool](https://lambdaschool.com/) students. Each student fulfills a role in the project to collectively build the application. (Roles listed below)
 
-Music Meteorologist provides a web application where users can play a guessing game and get to know themself better. A sophisticated Machine Learning model will try to predict better than the user itself if a certain music song will be liked or not. For that a lot of different characteristics of a songs are considered. At the end the user can revisit the assessment of the model and give feedback about its correctness. To deliver this experience a Node.JS Backend and a React.JS Frontend were built.
+Sound Drip provides a web application where music lovers can receive song recommendations based on Data Science functionality. A sophisticated Machine Learning model will try to predict better than the user themselves; once a certain song is liked or not new songs will be populated for the user to listen and create a new playlist. For that to happen a lot of different characteristics of a songs are considered. 
+<!-- At the end the user can revisit the assessment of the model and give feedback about its correctness. To deliver this experience a Node.JS Backend and a React.JS Frontend were built. -->
 
 ## Example
 
@@ -21,7 +23,10 @@ Music Meteorologist provides a web application where users can play a guessing g
 - [Redux](https://redux.js.org/) - State management for React
 - [Recharts](http://recharts.org/en-US/) - Data Visualization tool
 - [Material-UI](https://material-ui.com/) - Component Library/ Style Guide
+- [Styled Components](https://styled-components.com/) - Component Library/ Style Guide
 - [JWT](https://jwt.io/) - JSON Web Token for authorization and client side tokens for security
+- [Axios](https://github.com/axios/axios) - Third Party API Calls
+
 
 ## Authors
 
@@ -43,10 +48,10 @@ Music Meteorologist provides a web application where users can play a guessing g
 
 **Role: Data Scientist**
 
-- **[Mugil Choi](https://github.com/Higgins2718)**
-- **[Riley Pence](https://github.com/fuse999/Project2)**
-- **[Xander Bennett](https://github.com/xander-bennett/copstop-predictor)**
-- **[Zhenya Warshavsky](https://github.com/Higgins2718)**
+- **[Mugil Choi](https://github.com/mooglol)**
+- **[Riley Pence](https://github.com/fuse999)**
+- **[Xander Bennett](https://github.com/xander-bennett)**
+- **[Zhenya Warshavsky](https://github.com/zwarshavsky)**
 
 ## License
 

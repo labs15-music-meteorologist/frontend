@@ -90,8 +90,11 @@ class Song extends React.Component {
           <Grid item style={{ padding: 5, fontSize: 13, width: '200px', marginRight: '10px'}}>
             {this.props.song.album.name}
           </Grid>
-          <Grid item style={{ padding: 5, fontSize: 13, width: '50px' }}>
+          <Grid item style={{ padding: 5, fontSize: 13, width: '50px', marginLeft: 25 }}>
             {this.msToTime(this.props.song.duration_ms)}
+          </Grid>
+          <Grid item style={{ padding: 5, fontSize: 13, width: '100px', marginLeft: 65 }}>
+            {this.props.song.album.release_date}
           </Grid>
 
         </Grid>

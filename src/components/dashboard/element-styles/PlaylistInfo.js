@@ -13,13 +13,25 @@ const Container = styled.div`
 `;
 
 const DivLeft = styled.div`
-    width: 50%;
+    width: 80%;
     height: 80%;
     margin-top: 15px;
+    display: flex;
+    min-width: 685px;
+`
+
+const PlayLogo = styled.img`
+    width: 125px;
+    height: 125px;
+    margin-left: 50px;
+    margin-top: 10px;
+`
+const PlayInfo = styled.div`
+
 `
 
 const DivRight = styled.div`
-    width: 50%;
+    width: 20%;
     height: 80%;
     margin-top: 15px;
     display: flex;
@@ -28,6 +40,7 @@ const DivRight = styled.div`
 `
 
 const MakePlaylist = styled.button`
+    min-width: 135px;
     color: white;
     background-color: #E20351;
     font-family: Work Sans;
@@ -46,6 +59,18 @@ const MakePlaylist = styled.button`
         transform: scale(.5);
         transition: 0.4s ease;
     }
+`
+
+const PlayH1 = styled.h1`
+    font-size: 12;
+    font-family: Work Sans;
+    font-weight: bold;
+`
+const PlayH2 = styled.h1`
+    font-size: 12;
+    font-family: Work Sans;
+    text-align: left;
+    
 `
 
 class PlaylistInfo extends React.Component { 
@@ -87,9 +112,17 @@ class PlaylistInfo extends React.Component {
         return (
             <Container>
                 <DivLeft>
+                    <PlayLogo className="playLogo" />
+                    <PlayInfo>
+                        <PlayH1 style={{ fontSize: 24, paddingTop: 50, paddingBottom: 0, marginLeft: 15 }}>{this.props.spotifyName + "'s Sound Drip Playlist"}</PlayH1>
+                        <div style={{ display: "flex" }}>
+                            <a className="playlisticon"/>
+                            <PlayH2 style={{ fontSize: 18, paddingTop: 5, marginLeft: 8, paddingBottom: 0 }}>20 Songs</PlayH2>
+                        </div>
+                    </PlayInfo>
                 </DivLeft>
                 <DivRight>
-                    <MakePlaylist onClick={addPlaylist}>Create a Playlist From These Songs!</MakePlaylist>
+                    <MakePlaylist onClick={addPlaylist}>Add This Playlist!</MakePlaylist>
                 </DivRight>
             </Container>
         )

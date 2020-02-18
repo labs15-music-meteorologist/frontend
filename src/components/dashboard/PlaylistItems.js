@@ -161,7 +161,7 @@ class PlaylistItems extends React.Component {
             <Paper className="scroll"
               style={{
                 width: 'auto',
-                minWidth: '550px',
+                minWidth: '850px',
                 overflow: "auto",
                 color: "white",
                 marginLeft: '45px',

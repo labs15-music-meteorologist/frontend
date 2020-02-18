@@ -1,4 +1,6 @@
 # Music Meteorologist Frontend
+[![Maintainability](https://api.codeclimate.com/v1/badges/6459996a0b5667ac7075/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/Music-Meteorologist-fe/maintainability)
+
 
 View this site at - https://music-meteorologist.com/
 
@@ -25,19 +27,26 @@ Music Meteorologist provides a web application where users can play a guessing g
 
 **Role: Team Lead**
 
-- **[Daniel Starling](https://github.com/Dstar4)**
+- **[Erik Sandoval](https://github.com/erik-sandoval)**
+
+**Role: UX/UI Designer**
+
+- **[Rachel Windsor](https://www.rachellanwindsor.com/)**
 
 **Role: Full Stack Web Developer**
 
-- **[Ben Feole](https://github.com/Zurglots)**
-- **[Sascha Majewsky](https://github.com/SaschaWebDev)**
-- **[Justin Chen](https://github.com/justiny2c)**
-- **[Rushi Arumalla](https://github.com/rushi444)**
-- **[Jean Lafontant](https://github.com/jrl508)**
+- **[April M. Clements](https://github.com/AMC-ai)**
+- **[Joshua Edgerton](https://github.com/Joshua-Edgerton)**
+- **[Cory Ortega](https://github.com/coryortega)**
+- **[Gurpreet Dhaliwal](https://github.com/gdhaliwal22)**
+- **[Nicholas Truson](https://github.com/NicholasTruson)**
 
 **Role: Data Scientist**
 
-- **[Tom Higgins](https://github.com/Higgins2718)**
+- **[Mugil Choi](https://github.com/Higgins2718)**
+- **[Riley Pence](https://github.com/fuse999/Project2)**
+- **[Xander Bennett](https://github.com/xander-bennett/copstop-predictor)**
+- **[Zhenya Warshavsky](https://github.com/Higgins2718)**
 
 ## License
 

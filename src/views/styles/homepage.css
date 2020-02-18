@@ -4,7 +4,7 @@ div.main-wrapper {
   align-content: center;
   align-items: center;
   flex-direction: column;
-  height: 900px;
+  height: 100vh;
 }
 
 .main-cta-spotify{
@@ -36,15 +36,17 @@ div.main-wrapper {
 .text-content-container{
   display: flex;
   align-items: center;
+  width: 50%;
 }
 
 .img-container{
-  flex-direction: row-reverse;
+  display: flex;
   width: 50%;
 }
 
 .img-container img{
   height: 92%;
+  width: 95%;
 }
 
 .cta-text {
@@ -58,7 +60,23 @@ div.main-wrapper {
 
 
 @media (max-width: 500px) {
-  .text-content h2 {
+  /* .text-content h2 {
     font-size: 20px;
+  } */
+
+  .main-cta-spotify{
+    display: flex;
+    flex-direction: column-reverse;
+    min-height: 100% !important;
+    height: 100%;
   }
+
+  .img-container{
+    width: 100%;
+  }
+
+  .text-content-container{
+    width: 100%;
+  }
+
 }

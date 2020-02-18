@@ -16,6 +16,10 @@ const HomepageNavbar = styled.nav`
   color: #9DA4AF;
   font-size: 19px;
   position: absolute;
+
+  @media (max-width: 500px) {
+    display: none;
+  }
 `;
 
 const NavbarLinks = styled.a`

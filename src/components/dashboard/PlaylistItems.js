@@ -160,7 +160,6 @@ class PlaylistItems extends React.Component {
                         </div> 
             <Paper className="scroll"
               style={{
-                maxHeight: '65vh',
                 width: 'auto',
                 minWidth: '550px',
                 overflow: "auto",
@@ -170,7 +169,7 @@ class PlaylistItems extends React.Component {
                 background: 'transparent',
                 boxShadow: 'none',
                 textAlign: 'left',
-                scrollbarColor: 'blue'
+                height: '600px'
               }}
                     >
 

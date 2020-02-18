@@ -312,7 +312,6 @@ class MusicPlayer extends Component {
             </PlaylistSongsContainer>
           </MainBar>
         </ElementContainer>
-        <Footer/>
       </div>
     );
   }

@@ -48,7 +48,7 @@ const MakePlaylist = styled.button`
     border-radius: 5px;
     padding: 10px;
     margin-right: 45px;
-    margin-top: 40px;
+    margin-bottom: 5px;
     transition: 0.4s ease;
     &:hover {
         color: rgba(255, 255, 255, 1);
@@ -114,10 +114,10 @@ class PlaylistInfo extends React.Component {
                 <DivLeft>
                     <PlayLogo className="playLogo" />
                     <PlayInfo>
-                        <PlayH1 style={{ fontSize: 24, paddingTop: 50, paddingBottom: 0, marginLeft: 15 }}>{this.props.spotifyName + "'s Sound Drip Playlist"}</PlayH1>
+                        <PlayH1 style={{ fontSize: 24, paddingTop: 30, paddingBottom: 0, marginLeft: 15 }}>{this.props.spotifyName + "'s Sound Drip Playlist"}</PlayH1>
                         <div style={{ display: "flex" }}>
                             <a className="playlisticon"/>
-                            <PlayH2 style={{ fontSize: 18, paddingTop: 5, marginLeft: 8, paddingBottom: 0 }}>20 Songs</PlayH2>
+                            <PlayH2 style={{ fontSize: 18, paddingTop: 5, marginLeft: 8, paddingBottom: 0, marginTop: 0 }}>20 Songs</PlayH2>
                         </div>
                     </PlayInfo>
                 </DivLeft>

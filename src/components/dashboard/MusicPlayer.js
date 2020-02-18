@@ -303,7 +303,7 @@ class MusicPlayer extends Component {
             </div>
           </SideBar>
           <MainBar>
-            <PlaylistInfoContainer spotifyId={this.props.spotifyId.id}>
+            <PlaylistInfoContainer spotifyId={this.props.spotifyId.id} spotifyName={this.props.spotifyId.display_name}>
               
             </PlaylistInfoContainer>
             <PlaylistSongsContainer>

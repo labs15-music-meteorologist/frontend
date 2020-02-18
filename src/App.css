@@ -357,32 +357,47 @@ body::-webkit-scrollbar {
 }
 
 /* LIKE/DISLIKE BUTTON STYLES */
+.playLogo {
+  background: transparent url("./assets/rectangle.png") no-repeat 0 0 !important;
+}
 
+.fullHeart {
+  background: transparent url("./assets/likefullwhite.png") no-repeat 0 0 !important;
+  transition: 0.15s ease;
+}
+.fullHeart:hover {
+  background: transparent url("./assets/likefullpink.png") no-repeat 0 0 !important;
+  transition: 0.15s ease;
+}
 .likeicon {
   display: inline-block;
   height: 25px;
   width: 25px;
-  background: transparent url("./assets/likeWhite.png") no-repeat 0 0;
-  margin-bottom: 5px;
+  background: transparent url("./assets/like1emptywhite.png") no-repeat 0 0;
   transition: 0.15s ease;
 }
 .likeicon:hover {
-  background: transparent url("./assets/likepink.png") no-repeat 0 0;
+  background: transparent url("./assets/like1emptypink.png") no-repeat 0 0;
   transition: 0.15s ease;
 }
 .dislikeicon {
   display: inline-block;
-  height: 25px;
-  width: 25px;
-  background: transparent url("./assets/dislikeWhite.png") no-repeat 0 0;
-  margin-top: 5px;
+  height: 20px;
+  width: 20px;
+  background: transparent url("./assets/x1white.png") no-repeat 0 0;
   transition: 0.15s ease;
 }
 .dislikeicon:hover {
-  background: transparent url("./assets/dislikepink.png") no-repeat 0 0;
+  background: transparent url("./assets/x1pink.png") no-repeat 0 0;
   transition: 0.15s ease;
 }
-
+.playlisticon {
+  background: transparent url("./assets/playlist.png") no-repeat 0 0;
+  width: 20px;
+  height:20px;
+  margin-top: 6px;
+  margin-left: 15px;
+}
 .playicon {
   display: inline-block;
   height: 25px;

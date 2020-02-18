@@ -14,6 +14,8 @@ const PlayerButtons = props => {
       player.pause();
       player.setVolume(0.5);
     }, 1000);
+    var element = document.getElementById("like1");
+    element.classList.remove("fullHeart");
   }
 
   const onPlayClick = () => {
@@ -28,17 +30,20 @@ const PlayerButtons = props => {
       player.pause();
       player.setVolume(0.5);
     }, 2000);
+    var element = document.getElementById("like1");
+    element.classList.remove("fullHeart");
   }
 
-  const toggleLikeButton = () => {
+  let toggleLikeButton = () => {
     props.saveLikedSong(props.song.id);
-    player.nextTrack();
-    player.setVolume(0);
+    
     setTimeout(() => {
       player.pause();
       player.setVolume(0.5);
     }, 2000);
     props.removeTrack(props.currentUser.spotify_playlist_id, props.song.id);
+    var element = document.getElementById("like1");
+    element.classList.add("fullHeart");
   };
 
   const toggleDislikeButton = () => {
@@ -49,6 +54,8 @@ const PlayerButtons = props => {
       player.setVolume(0.5);
     }, 2000);
     props.removeTrack(props.currentUser.spotify_playlist_id, props.song.id);
+    var element = document.getElementById("like1");
+    element.classList.remove("fullHeart");
   };
   
   return (
@@ -98,8 +105,8 @@ const PlayerButtons = props => {
           <a className="nexticon" style={{ maxHeight: 35 }} />
         </button>
         </div>
-        <button className='like-dislike like' style={{ background: "none", border: "none", outline: "none"}} onClick={toggleLikeButton} >
-          <a className="likeicon" style={{ maxHeight: 70 }} />
+        <button className='like-dislike like' style={{ background: "none", border: "none", outline: "none" }} onClick={toggleLikeButton} >
+          <a className="likeicon" id="like1" style={{ maxHeight: 70 }} />
         </button>
       </div>
       </LikeDislikeContainer>

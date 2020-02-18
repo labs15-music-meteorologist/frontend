@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Button from "./dashboard/element-styles/AuthButton.js";
 
 import "../views/styles/about.css";
-
+import HomepageNav from "./HomepageNav.js"
 import AboutImage from "../assets/About-Image.svg";
 import ChartImage from "../assets/chart-image.svg";
 import SpotifyImage from "../assets/spotify-image.svg";
@@ -85,7 +85,7 @@ const Footer = styled.footer`
 
 const About = () => (
   <AboutContainer>
-    <div className='nav'>just chillin, waitin for a nav bar</div>
+    <HomepageNav/>
     <div className='about-image'>
       <img src={AboutImage} />
     </div>

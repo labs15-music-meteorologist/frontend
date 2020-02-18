@@ -216,10 +216,6 @@ body::-webkit-scrollbar {
 	animation: shake-vertical 4s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
 }
 
-.album-art .album-artwork{
-  width: 250px;
-}
-
 .music-chart {
   width: 40%;
 }

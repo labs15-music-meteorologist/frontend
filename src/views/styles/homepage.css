@@ -63,11 +63,7 @@ div.main-wrapper {
 }
 
 
-@media (max-width: 500px) {
-  /* .text-content h2 {
-    font-size: 20px;
-  } */
-
+@media (max-width: 576px) {
   .cta-signup{
     display: flex;
     flex-direction: column;

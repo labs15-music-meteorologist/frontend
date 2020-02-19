@@ -93,12 +93,37 @@ const PlayH2 = styled.h1`
     font-size: 12;
     font-family: Work Sans;
     text-align: left;
-    
 `
+
+
 
 class PlaylistInfo extends React.Component { 
 
+    msToTime(s) {
+        var ms = s % 1000;
+        s = (s - ms) / 1000;
+        var secs = s % 60;
+        s = (s - secs) / 60;
+        var mins = s % 60;
+        var hrs = (s - mins) / 60;
+        if (secs === 0) {
+          return mins + ':' + '00'
+        } else if (secs < 10) {
+          return mins + ':' + '0' + secs;
+        } else { 
+          return mins + ':' + secs;
+        }
+      }
+
     render() { 
+            let songTime = () => { 
+            let trackslist = this.props.several_tracks.tracks.map(track => track.duration_ms);
+            const reducer = (accumulator, currentValue) => accumulator + currentValue;
+            let songTime = trackslist.reduce(reducer)
+            let total = this.msToTime(songTime);  
+            console.log("songtime", total)
+        }
+
         const addPlaylist = () => { 
             let trackUris = this.props.several_tracks.tracks ? this.props.several_tracks.tracks.map(track => track.uri) : 0
             if (trackUris === 0) { window.alert("Playlist hasn't populated yet.")}
@@ -140,7 +165,10 @@ class PlaylistInfo extends React.Component {
                         <PlayH1 className="playH1" style={{ fontSize: 24, paddingTop: 30, paddingBottom: 0, marginLeft: 15 }}>{this.props.spotifyName + "'s Sound Drip Playlist"}</PlayH1>
                         <div className="playH2" style={{ display: "flex" }}>
                             <a className="playlisticon"/>
-                            <PlayH2 style={{ fontSize: 18, paddingTop: 5, marginLeft: 8, paddingBottom: 0, marginTop: 0 }}>20 Songs</PlayH2>
+                            <PlayH2 style={{ fontSize: 18, paddingTop: 5, marginLeft: 8, paddingBottom: 0, marginTop: 0 }}>20 Songs
+                            </PlayH2>
+                            <PlayH2 onClick={songTime} style={{ fontSize: 18, paddingTop: 5, marginLeft: 8, paddingBottom: 0, marginTop: 0 }}>{songTime}
+                            </PlayH2>
                         </div>
                     </PlayInfo>
                 </DivLeft>

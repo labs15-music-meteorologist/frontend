@@ -31,7 +31,7 @@ const DivLeft = styled.div`
     }
 `
 
-const PlayLogo = styled.img`
+const PlayLogo = styled.a`
     width: 125px;
     height: 125px;
     margin-left: 50px;

@@ -1,5 +1,6 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
+import '../../App.css';
 
 const AlbumInfo = props => {
 
@@ -15,7 +16,7 @@ const AlbumInfo = props => {
       <img
         src={imageSpotify}
         alt='Album artwork cover.'
-        style={{ maxWidth: "250px", objectFit: "scale-down" }}
+        style={{ maxWidth: "280px", objectFit: "scale-down", borderRadius: '5px' }}
       />
       <p className='p' style={{ fontWeight: "bold" }}>
         {trackName}

@@ -338,6 +338,40 @@ body::-webkit-scrollbar {
  .mainBar {
   height: 50vw !important;
   }
+  .songAlbumName {
+    width: 15% !important;
+    margin-right: 50px !important;
+  }
+  .drop {
+    left: -70px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .songAlbumName {
+    display: none !important;
+  }
+  .songDuration {
+    display: none !important;
+  }
+  .songReleaseDate {
+    display: none !important;
+  }
+  .hideTitle {
+    display: none !important;
+  }
+  .MuiPaper-elevation1 {
+    margin-left: 40px !important;
+  }
+  .MuiGrid-container {
+    width: 400px !important;
+  }
+  .moveTitle {
+    margin-left: 195px !important;
+  }
+  .drop {
+    left: -70px !important;
+  }
 }
 
 /*  INFO BUBBLE STYLES  */

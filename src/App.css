@@ -606,6 +606,7 @@ body::-webkit-scrollbar {
   background: white !important;
   color: #22252A !important;
   stroke: #22252A !important;
+  transition: 1s ease;
 }
 
 .radarL {
@@ -614,43 +615,52 @@ body::-webkit-scrollbar {
   fill: #22252A !important;
   border-radius: 100px;
   padding-top: 10px;
+  transition: 1s ease;
 }
 
 .playInfoL {
   background: #EEEFF1 !important;
   color: #22252A !important;
+  transition: 1s ease;
 }
 .mainBarL {
   background: white !important;
   color: #22252A !important;
+  transition: 1s ease;
 }
 
 .playpauseL {
   background: #22252A !important;
   padding-top: 5px;
   padding-bottom: 2px;
+  transition: 1s ease;
 }
 .nextPrevL {
   background: #22252A !important;
   padding-top: 5px;
   padding-bottom: 2px;
+  transition: 1s ease;
 }
 .x {
   background: #22252A !important;
   border-top-left-radius: 10px !important;
   border-bottom-left-radius: 10px !important;
+  transition: 1s ease;
 }
 
 .heart {
   background: #22252A !important;
   border-top-right-radius: 10px !important;
   border-bottom-right-radius: 10px !important;
+  transition: 1s ease;
 }
 .progressBarEmpty {
   background-color: #E3E5E8 !important;
+  transition: 1s ease;
 }
 .progressBarFull {
   background-color: #121416 !important;
+  transition: 1s ease;
 }
 
 .playiconL {
@@ -675,4 +685,5 @@ body::-webkit-scrollbar {
   height:20px;
   margin-top: 6px;
   margin-left: 15px;
+  transition: 1s ease;
 }

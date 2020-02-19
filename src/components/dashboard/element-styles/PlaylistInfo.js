@@ -133,7 +133,7 @@ class PlaylistInfo extends React.Component {
 
         console.log("playlistinfo props", this.props)
         return (
-            <Container>
+            <Container id="playInfoLD">
                 <DivLeft>
                     <PlayLogo className="playLogo" />
                     <PlayInfo>

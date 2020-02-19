@@ -598,3 +598,81 @@ body::-webkit-scrollbar {
   justify-content: center;
   text-align: center;
 }
+
+
+/* LIGHT / DARK MODE */
+
+.sideBarL {
+  background: white !important;
+  color: #22252A !important;
+  stroke: #22252A !important;
+}
+
+.radarL {
+  background:#22252A !important;
+  stroke: #22252A !important;
+  fill: #22252A !important;
+  border-radius: 100px;
+  padding-top: 10px;
+}
+
+.playInfoL {
+  background: #EEEFF1 !important;
+  color: #22252A !important;
+}
+.mainBarL {
+  background: white !important;
+  color: #22252A !important;
+}
+
+.playpauseL {
+  background: #22252A !important;
+  padding-top: 5px;
+  padding-bottom: 2px;
+}
+.nextPrevL {
+  background: #22252A !important;
+  padding-top: 5px;
+  padding-bottom: 2px;
+}
+.x {
+  background: #22252A !important;
+  border-top-left-radius: 10px !important;
+  border-bottom-left-radius: 10px !important;
+}
+
+.heart {
+  background: #22252A !important;
+  border-top-right-radius: 10px !important;
+  border-bottom-right-radius: 10px !important;
+}
+.progressBarEmpty {
+  background-color: #E3E5E8 !important;
+}
+.progressBarFull {
+  background-color: #121416 !important;
+}
+
+.playiconL {
+  display: inline-block;
+  height: 45px;
+  width: 45px;
+  background: white url("./assets/play-buttonL.png") no-repeat 0 0 !important;
+  transition: 0.3s ease;
+}
+
+.playiconL:hover {
+  display: inline-block;
+  height: 45px;
+  width: 45px;
+  background: white url("./assets/pinkplayspaced.png") no-repeat 0 0 !important;
+  transition: 0.3s ease;
+}
+
+.playlistblack {
+  background: transparent url("./assets/playlistblack.png") no-repeat 0 0 !important;
+  width: 20px;
+  height:20px;
+  margin-top: 6px;
+  margin-left: 15px;
+}

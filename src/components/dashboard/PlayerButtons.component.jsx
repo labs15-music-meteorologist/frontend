@@ -61,14 +61,14 @@ const PlayerButtons = props => {
   return (
     <LikeDislikeContainer>
     <div className="display-flex">
-        <button
+        <button id="x"
           className='like-dislike dislike joyride-dislike-4'
           style={{ background: "none", border: "none", outline: "none" }}
           onClick={toggleDislikeButton} >
           <a className="dislikeicon" style={{ maxHeight: 70 }} />
         </button>
       <div style={{ display: "flex" }}>
-        <button
+        <button id="prev"
             style={{
             background: "none",
             border: "none",
@@ -79,7 +79,7 @@ const PlayerButtons = props => {
           <a className="previcon" style={{ maxHeight: 35 }} />
         </button>
 
-        <button
+        <button id="playpause"
             style={{
             background: "none",
             border: "none",
@@ -94,7 +94,7 @@ const PlayerButtons = props => {
             )}
         </button>
 
-        <button
+        <button id="next"
             style={{
             background: "none",
             border: "none",
@@ -105,7 +105,7 @@ const PlayerButtons = props => {
           <a className="nexticon" style={{ maxHeight: 35 }} />
         </button>
         </div>
-        <button className='like-dislike like' style={{ background: "none", border: "none", outline: "none" }} onClick={toggleLikeButton} >
+        <button id="heart" className='like-dislike like' style={{ background: "none", border: "none", outline: "none" }} onClick={toggleLikeButton} >
           <a className="likeicon" id="like1" style={{ maxHeight: 70 }} />
         </button>
       </div>

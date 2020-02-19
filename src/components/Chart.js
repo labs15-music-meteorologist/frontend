@@ -7,6 +7,8 @@ import {
   PolarRadiusAxis,
 } from 'recharts';
 
+import '../App.css';
+
 class Chart extends Component {
   static displayName = 'RadarChartDemo';
 
@@ -45,14 +47,12 @@ class Chart extends Component {
     }
   }
 
-  handleMouseEnter(props) {}
-
   render() {
     return (
-      <div>
+      <div id="radar1">
         {/* Specify chart elements from import list to use them ex. PolarAngleAxis are the subjects */}
         {/* <ResponsiveContainer width='99%' height='99%'> */}
-        <RadarChart 
+        <RadarChart className="radar"
           label={{ fill: 'white' }}
           value={{ color: 'white' }}
           cx={188}
@@ -65,7 +65,7 @@ class Chart extends Component {
           <PolarAngleAxis stroke='white' dataKey='subject' />
           {/* <Legend formatter={this.renderColorfulLegendText} /> */}
 
-          <Radar id="canvas"
+          <Radar id="canvas" className="radar"
             tick={{ fill: 'transparent' }}
             // name='Audio Features'
             dataKey='A'

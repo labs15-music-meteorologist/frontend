@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import MusicLogo from '../assets/sounddrip.svg';
+import mobileNav from './dashboard/element-styles/MobileNav.js'
 import '../App.css';
 import {
   Grid,
@@ -11,6 +12,7 @@ import {
   makeStyles
 } from "@material-ui/core";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
+import MobileNav from "./dashboard/element-styles/MobileNav.js";
 // import HomepageNav from "./HomepageNav.js"
 // import useMediaQuery from "@material-ui/core/useMediaQuery";
 
@@ -27,6 +29,9 @@ const HomepageNavbar = styled.nav`
   width: 450px;
   color: #9DA4AF;
   font-size: 19px;
+  @media (max-width: 576px) {
+    display: none;
+  }
 `;
 
 const Footer = styled.footer`
@@ -121,6 +126,7 @@ export default function Team() {
 
   return (
     <div className={classes.root}>
+      <MobileNav/>
       <HomepageNavbar>
         <a href="/"><img src={MusicLogo}/></a>
         <NavbarLinks href="/about">How it works?</NavbarLinks>

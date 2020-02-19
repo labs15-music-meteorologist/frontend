@@ -1,0 +1,15 @@
+.logo{
+    display: none;
+}
+
+@media (max-width: 576px) {
+
+.logo{
+    display: flex;
+    position: absolute;
+    top: 5%;
+    left: 2rem;
+    z-index: 3;
+}
+
+}

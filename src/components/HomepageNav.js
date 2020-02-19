@@ -17,7 +17,7 @@ const HomepageNavbar = styled.nav`
   font-size: 19px;
   position: absolute;
 
-  @media (max-width: 500px) {
+  @media (max-width: 576px) {
     display: none;
   }
 `;
@@ -39,7 +39,7 @@ const HomepageNav = () => {
         <a href="/"><img src={MusicLogo}/></a>
         <NavbarLinks href="/about">How it works?</NavbarLinks>
         <NavbarLinks href="/team">Team</NavbarLinks>
-        <NavbarLinks href="https://github.com/Lambda-School-Labs/Music-Meteorologist-fe">Github</NavbarLinks>
+        <NavbarLinks href="https://github.com/Lambda-School-Labs/Music-Meteorologist-fe" target="_blank">Github</NavbarLinks>
     </HomepageNavbar>
   );
 

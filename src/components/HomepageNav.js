@@ -12,7 +12,7 @@ const HomepageNavbar = styled.nav`
   margin-left: 5%;
   padding-top: 2%;
   height: 60px;
-  width: 450px;
+  width: 550px;
   color: #9DA4AF;
   font-size: 19px;
   position: absolute;
@@ -25,7 +25,7 @@ const HomepageNavbar = styled.nav`
 const NavbarLinks = styled.a`
     text-decoration: none;
     color: #9DA4AF;
-    font-size: 18px;
+    font-size: 20px;
 
     &:hover {
         color: white;

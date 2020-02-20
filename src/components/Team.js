@@ -26,7 +26,7 @@ const HomepageNavbar = styled.nav`
   padding-top: 2%;
   margin-bottom: 2%;
   height: 60px;
-  width: 450px;
+  width: 550px;
   color: #9DA4AF;
   font-size: 19px;
   @media (max-width: 576px) {
@@ -51,7 +51,7 @@ const Footer = styled.footer`
 const NavbarLinks = styled.a`
     text-decoration: none;
     color: #9DA4AF;
-    font-size: 18px;
+    font-size: 20px;
 
     &:hover {
         color: white;

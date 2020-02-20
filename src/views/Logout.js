@@ -1,6 +1,8 @@
 import React from "react";
 import Footer from "../components/Footer.js";
 import AuthButton from "../components/dashboard/element-styles/AuthButton.js";
+import MobileNav from "../components/dashboard/element-styles/MobileNav.js";
+import HomepageNav from "../components/HomepageNav.js";
 import styled from "styled-components";
 import "../App.css";
 
@@ -30,8 +32,12 @@ const LogoutContainer = styled.div`
   align-content: center;
   height: 600px;
   width: 600px;
-  padding-top: 5%;
+  padding-top: 14%;
   margin: 0%;
+  @media (max-width: 576px) {
+    padding-top: 45%;
+    margin: 2%;
+  }
 `;
 
 const Fullscreen = styled.div`
@@ -43,6 +49,11 @@ const Fullscreen = styled.div`
 const Gone = styled.h2`
   font-size: 60px;
   margin: 2%;
+  @media (max-width: 576px) {
+    text-align: center;
+    font-size: 45px;
+
+  }
 `;
 
 const Sentence = styled.p`
@@ -50,6 +61,9 @@ const Sentence = styled.p`
   color: rgba(255, 255, 255, 0.75);
   margin: 2%;
   margin-bottom: 7%;
+  @media (max-width: 576px) {
+    text-align: center;
+  }
 `;
 const Return = styled.a`
   padding-top: 15px;
@@ -69,6 +83,9 @@ const Return = styled.a`
 
 const Logout = () => {
   return (
+    <div>
+    <MobileNav/>
+    <HomepageNav/>
     <Fullscreen>
       <LogoutContainer>
         <Gone>Gone so soon?</Gone>
@@ -77,6 +94,8 @@ const Logout = () => {
           you change your mind, you can log back in below.
         </Sentence>
         <AuthButton
+          noAbsolute={true}
+          noTransform={true}
           as='a'
           href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${encodeURIComponent(
             scopes
@@ -90,6 +109,7 @@ const Logout = () => {
       </LogoutContainer>
       <Footer />
     </Fullscreen>
+    </div>
   );
 };
 

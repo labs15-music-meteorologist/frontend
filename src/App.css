@@ -200,8 +200,8 @@ body::-webkit-scrollbar {
   padding: 3px;
 }
 .drop {
-  left: -32px !important;
-  background-color: black !important;
+  left: -50px !important;
+  background-color: transparent !important;
 }
 #menu-list-grow {
   background-color: #17191C !important;
@@ -305,6 +305,72 @@ body::-webkit-scrollbar {
 
   .dashboard {
     height: initial;
+  }
+  .audioDiv {
+    display: none !important;
+  }
+  .music-component {
+    min-height: 300px !important;
+  }
+  .playLogo {
+    display: none;
+  }
+  .playH1 {
+    width: 100vw;
+    padding-top: 0 !important;
+    text-align: center;
+    margin-left: 0 !important;
+    min-width: 350px;
+    margin-bottom: 5px !important;
+    margin-top: 10px !important;
+  }
+  .playH2 {
+    display: flex;
+    justify-content: center;
+    margin-right: 8px;
+  }
+  .listTitles {
+    margin: 0 !important;
+  }
+  .MuiPaper-elevation1 {
+    margin-left: 10px !important;
+  }
+ .mainBar {
+  height: 50vw !important;
+  }
+  .songAlbumName {
+    width: 15% !important;
+    margin-right: 50px !important;
+  }
+  .drop {
+    left: -70px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .songAlbumName {
+    display: none !important;
+  }
+  .songDuration {
+    display: none !important;
+  }
+  .songReleaseDate {
+    display: none !important;
+  }
+  .hideTitle {
+    display: none !important;
+  }
+  .MuiPaper-elevation1 {
+    margin-left: 40px !important;
+  }
+  .MuiGrid-container {
+    width: 400px !important;
+  }
+  .moveTitle {
+    margin-left: 195px !important;
+  }
+  .drop {
+    left: -70px !important;
   }
 }
 
@@ -531,4 +597,93 @@ body::-webkit-scrollbar {
   align-items: center;
   justify-content: center;
   text-align: center;
+}
+
+
+/* LIGHT / DARK MODE */
+
+.sideBarL {
+  background: white !important;
+  color: #22252A !important;
+  stroke: #22252A !important;
+  transition: 1s ease;
+}
+
+.radarL {
+  background:#22252A !important;
+  stroke: #22252A !important;
+  fill: #22252A !important;
+  border-radius: 100px;
+  padding-top: 10px;
+  transition: 1s ease;
+}
+
+.playInfoL {
+  background: #EEEFF1 !important;
+  color: #22252A !important;
+  transition: 1s ease;
+}
+.mainBarL {
+  background: white !important;
+  color: #22252A !important;
+  transition: 1s ease;
+}
+
+.playpauseL {
+  background: #22252A !important;
+  padding-top: 5px;
+  padding-bottom: 2px;
+  transition: 1s ease;
+}
+.nextPrevL {
+  background: #22252A !important;
+  padding-top: 5px;
+  padding-bottom: 2px;
+  transition: 1s ease;
+}
+.x {
+  background: #22252A !important;
+  border-top-left-radius: 10px !important;
+  border-bottom-left-radius: 10px !important;
+  transition: 1s ease;
+}
+
+.heart {
+  background: #22252A !important;
+  border-top-right-radius: 10px !important;
+  border-bottom-right-radius: 10px !important;
+  transition: 1s ease;
+}
+.progressBarEmpty {
+  background-color: #E3E5E8 !important;
+  transition: 1s ease;
+}
+.progressBarFull {
+  background-color: #121416 !important;
+  transition: 1s ease;
+}
+
+.playiconL {
+  display: inline-block;
+  height: 45px;
+  width: 45px;
+  background: white url("./assets/play-buttonL.png") no-repeat 0 0 !important;
+  transition: 0.3s ease;
+}
+
+.playiconL:hover {
+  display: inline-block;
+  height: 45px;
+  width: 45px;
+  background: white url("./assets/pinkplayspaced.png") no-repeat 0 0 !important;
+  transition: 0.3s ease;
+}
+
+.playlistblack {
+  background: transparent url("./assets/playlistblack.png") no-repeat 0 0 !important;
+  width: 20px;
+  height:20px;
+  margin-top: 6px;
+  margin-left: 15px;
+  transition: 1s ease;
 }

@@ -19,15 +19,7 @@ const [collapse, setCollapse] = useState(false)
     <AudioDetailsStyles className="scroll">
       
       <div className="audioDiv">
-      <a href="#" onClick={() => openAudioDetails()} style={{ color: 'white', marginTop: 8, marginRight: 85, fontSize: 12}}>What does this mean?</a>
-        <a className='grid-question grid-chart joyride-3 pinkhover charticon'
-          style={{ marginRight: 5, borderRadius: "6px", backgroundColor: "#1E2024", color: "white", border: "none", fontSize: "12px", height: "25px", width: '25px' }}>
-          <a className='vectoricon'/>
-        </a>
-        <a className='grid-question grid-chart joyride-3 pinkhover charticon'
-          style={{ marginRight: 5, borderRadius: "6px", backgroundColor: "#1E2024", color: "white", border: "none", fontSize: "12px", height: "25px", width: '25px' }}>
-          <a className='barsicon'/>
-        </a>
+      <a id="sideBarLD2" href="#" onClick={() => openAudioDetails()} style={{ color: 'white', marginTop: 8, marginRight: 75, fontSize: 12}}>What does this mean?</a>
       </div>
       <List className="scroll">
         <Paper

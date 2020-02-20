@@ -248,8 +248,8 @@ class MusicPlayer extends Component {
         />
         {console.log("all music player props", this.props)}
         <ElementContainer>
-          <SideBar>
-            <div className='music-player joyride-player-2'>
+          <SideBar id="sideBarLD">
+            <div id="sideBarLD1" className='music-player joyride-player-2'>
               <AlbumInfo
                 imageSpotify={imageSpotify}
                 trackName={trackName}
@@ -302,7 +302,7 @@ class MusicPlayer extends Component {
               </div>
             </div>
           </SideBar>
-          <MainBar>
+          <MainBar id="mainBarLD" className="mainBar">
             <PlaylistInfoContainer spotifyId={this.props.spotifyId.id} spotifyName={this.props.spotifyId.display_name}>
               
             </PlaylistInfoContainer>
@@ -312,7 +312,6 @@ class MusicPlayer extends Component {
             </PlaylistSongsContainer>
           </MainBar>
         </ElementContainer>
-        <Footer/>
       </div>
     );
   }

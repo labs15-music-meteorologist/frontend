@@ -317,6 +317,7 @@ body::-webkit-scrollbar {
   .lockScroll{
     padding-top: 0% !important;
     margin-top: 30% !important;
+    max-height: 400px;
   }
 
   .music-player {

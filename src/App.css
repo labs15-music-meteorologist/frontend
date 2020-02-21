@@ -242,10 +242,16 @@ body::-webkit-scrollbar {
 
 @media (max-width: 576px) {
     .makeStyles-heading-3{
-      padding-top: 100px;
+      padding-top: 20%;
     }
     .team-footer{
       display: none !important;
+    }
+    .logo {
+      top: 40% !important;
+    }
+    .makeStyles-buttonArrow-8 {
+      z-index: -1 !important;
     }
   }
 
@@ -315,14 +321,12 @@ body::-webkit-scrollbar {
     overflow-x: hidden !important;
   }
 
-  .makeStyles-buttonArrow-8 {
-    width: 160px !important;
-  }
-
-  .lockScroll{
-    padding-top: 0% !important;
-    margin-top: 30% !important;
-    max-height: 400px;
+  .mobileNavWrap {
+    height: 40px;
+    width: 100%;
+    background-color: #E20351;
+    position: fixed;
+    padding-bottom: 40px;
   }
 
   .music-player {

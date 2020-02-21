@@ -126,7 +126,9 @@ export default function Team() {
 
   return (
     <div className={classes.root}>
-      <MobileNav position/>
+      <div className="mobileNavWrap">
+        <MobileNav position />
+      </div>
       <HomepageNavbar>
         <a href="/"><img src={MusicLogo}/></a>
         <NavbarLinks href="/about">How it works?</NavbarLinks>
@@ -184,7 +186,7 @@ export default function Team() {
             <Grid style={{ marginTop: "3px" }} container spacing={3}>
               <Grid item xs={12} sm={8}>
                 <Typography className={classes.name}>
-                  Johsua Edgerton
+                  Joshua Edgerton
                 </Typography>
                 <Typography className={classes.position}>
                   Web Developer

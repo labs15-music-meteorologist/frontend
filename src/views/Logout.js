@@ -5,6 +5,7 @@ import MobileNav from "../components/dashboard/element-styles/MobileNav.js";
 import HomepageNav from "../components/HomepageNav.js";
 import styled from "styled-components";
 import "../App.css";
+import '../Mobile.css';
 
 export const authEndpoint = "https://accounts.spotify.com/authorize";
 

@@ -107,8 +107,8 @@ const Logout = () => {
           Return to Homepage
         </Return>
       </LogoutContainer>
+      </Fullscreen>
       <Footer />
-    </Fullscreen>
     </div>
   );
 };

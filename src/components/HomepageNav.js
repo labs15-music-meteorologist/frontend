@@ -12,16 +12,20 @@ const HomepageNavbar = styled.nav`
   margin-left: 5%;
   padding-top: 2%;
   height: 60px;
-  width: 450px;
+  width: 550px;
   color: #9DA4AF;
   font-size: 19px;
   position: absolute;
+
+  @media (max-width: 576px) {
+    display: none;
+  }
 `;
 
 const NavbarLinks = styled.a`
     text-decoration: none;
     color: #9DA4AF;
-    font-size: 18px;
+    font-size: 20px;
 
     &:hover {
         color: white;
@@ -35,7 +39,7 @@ const HomepageNav = () => {
         <a href="/"><img src={MusicLogo}/></a>
         <NavbarLinks href="/about">How it works?</NavbarLinks>
         <NavbarLinks href="/team">Team</NavbarLinks>
-        <NavbarLinks href="https://github.com/Lambda-School-Labs/Music-Meteorologist-fe">Github</NavbarLinks>
+        <NavbarLinks href="https://github.com/Lambda-School-Labs/Music-Meteorologist-fe" target="_blank">Github</NavbarLinks>
     </HomepageNavbar>
   );
 

@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 
-import Button from "./dashboard/element-styles/AuthButton.js";
+import ButtonAuth from "./dashboard/element-styles/AuthButton.js";
+import MobileNav from "./dashboard/element-styles/MobileNav.js";
+
 import Footer from "./Footer.js";
 import HomepageNav from "./HomepageNav.js"
 import "../App.css";
 import "../views/styles/homepage.css";
 
 import albums_background from "../assets/albums-background.svg";
+import albums_background_mobile from "../assets/albums-background-mobile.svg";
 
 export const authEndpoint = "https://accounts.spotify.com/authorize";
 
@@ -52,8 +55,10 @@ export class Auth extends Component {
   }
 
   render() {
+
     return (
       <div className='auth'>
+        <MobileNav/>
         <HomepageNav/>
         <div class='main-wrapper'>
           <div className='main-cta-spotify'>
@@ -68,14 +73,17 @@ export class Auth extends Component {
                   you like in your Spotify library.
                 </p>
                 <div class='cta-signup'>
-                  <Button
+                  <ButtonAuth
                     as='a'
                     href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${encodeURIComponent(
                       scopes
                     )}&response_type=token&show_dialog=true`}
                   >
                     Login With Spotify
-                  </Button>
+                  </ButtonAuth>
+                  <div class='img-container-mobile'>
+                    <img src={albums_background_mobile} alt='' class='bd-box' />
+                  </div>
                 </div>
               </div>
             </div>

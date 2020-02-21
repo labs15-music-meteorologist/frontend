@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import MusicLogo from '../assets/sounddrip.svg';
+import mobileNav from './dashboard/element-styles/MobileNav.js'
 import '../App.css';
 import {
   Grid,
@@ -11,6 +12,7 @@ import {
   makeStyles
 } from "@material-ui/core";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
+import MobileNav from "./dashboard/element-styles/MobileNav.js";
 // import HomepageNav from "./HomepageNav.js"
 // import useMediaQuery from "@material-ui/core/useMediaQuery";
 
@@ -24,9 +26,12 @@ const HomepageNavbar = styled.nav`
   padding-top: 2%;
   margin-bottom: 2%;
   height: 60px;
-  width: 450px;
+  width: 550px;
   color: #9DA4AF;
   font-size: 19px;
+  @media (max-width: 576px) {
+    display: none;
+  }
 `;
 
 const Footer = styled.footer`
@@ -46,7 +51,7 @@ const Footer = styled.footer`
 const NavbarLinks = styled.a`
     text-decoration: none;
     color: #9DA4AF;
-    font-size: 18px;
+    font-size: 20px;
 
     &:hover {
         color: white;
@@ -121,6 +126,7 @@ export default function Team() {
 
   return (
     <div className={classes.root}>
+      <MobileNav position/>
       <HomepageNavbar>
         <a href="/"><img src={MusicLogo}/></a>
         <NavbarLinks href="/about">How it works?</NavbarLinks>
@@ -430,7 +436,7 @@ export default function Team() {
           </Grid>
         </Grid>
       </Container>
-      <Footer><p> © Copyright 2019, SoundDrip </p></Footer>
+      <Footer className="team-footer"><p> © Copyright 2019, SoundDrip </p></Footer>
     </div>
   );
 }

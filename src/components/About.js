@@ -161,7 +161,7 @@ const About = () => (
         <SecondaryHeader>
           Songs picked just for your music taste.
         </SecondaryHeader>
-        <Sentence>
+        <Sentence style={{zIndex: "-1"}}>
           We’ll put together a playlsit for you based on the musical traits of
           the songs you like.
         </Sentence>
@@ -176,7 +176,7 @@ const About = () => (
           <SecondaryHeader>
             Our prediction model will do all the work.
           </SecondaryHeader>
-          <Sentence>
+          <Sentence style={{zIndex: "-1"}}>
             We’ve got you covered, just join with your Spotify account and we’ll
             take it from there.
           </Sentence>
@@ -189,7 +189,7 @@ const About = () => (
           <SecondaryHeader>
             Our prediction model will do all the work.
           </SecondaryHeader>
-          <Sentence>
+          <Sentence style={{zIndex: "-1"}}>
             We’ve got you covered, just join with your Spotify account and we’ll
             take it from there.
           </Sentence>
@@ -197,7 +197,7 @@ const About = () => (
       </div>
       <InnerGrid>
         <SecondaryHeader>Listen and enjoy!</SecondaryHeader>
-        <Sentence>
+        <Sentence style={{zIndex: "-1"}}>
           Voila! Now you can add the playlist to your Spotify or enjoy in our
           music player.
         </Sentence>

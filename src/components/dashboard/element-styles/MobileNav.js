@@ -49,7 +49,7 @@ right: 2rem;
 @media (max-width: 576px) {
 
   position: absolute;
-  top: 43%;
+  top: 38%;
   
   display: flex;
   flex-direction: column;

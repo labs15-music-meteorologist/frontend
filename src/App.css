@@ -307,6 +307,13 @@ body::-webkit-scrollbar {
 }
 
 @media (max-width: 600px) {
+
+  html, body {
+    margin: 0; 
+    height: 100%; 
+    overflow-x: hidden !important;
+  }
+
   .music-player {
     display: flex;
     flex-flow: column;

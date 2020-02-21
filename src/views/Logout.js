@@ -106,9 +106,9 @@ const Logout = () => {
         <Return as='a' href={"/"}>
           Return to Homepage
         </Return>
-      </LogoutContainer>
+        </LogoutContainer>
+        <Footer />
       </Fullscreen>
-      <Footer />
     </div>
   );
 };

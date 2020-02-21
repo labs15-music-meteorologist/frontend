@@ -126,7 +126,7 @@ export default function Team() {
 
   return (
     <div className={classes.root}>
-      <MobileNav/>
+      <MobileNav position/>
       <HomepageNavbar>
         <a href="/"><img src={MusicLogo}/></a>
         <NavbarLinks href="/about">How it works?</NavbarLinks>
@@ -436,7 +436,7 @@ export default function Team() {
           </Grid>
         </Grid>
       </Container>
-      <Footer><p> © Copyright 2019, SoundDrip </p></Footer>
+      <Footer className="team-footer"><p> © Copyright 2019, SoundDrip </p></Footer>
     </div>
   );
 }

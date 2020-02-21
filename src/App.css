@@ -239,6 +239,16 @@ body::-webkit-scrollbar {
   height: initial;
 }
 
+@media (max-width: 576px) {
+    .makeStyles-heading-3{
+      padding-top: 20%;
+    }
+    .team-footer{
+      display: none !important;
+    }
+  }
+
+
 @-webkit-keyframes shake-vertical {
   0%,
   100% {

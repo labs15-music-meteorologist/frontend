@@ -253,6 +253,7 @@ body::-webkit-scrollbar {
     .makeStyles-buttonArrow-8 {
       z-index: -1 !important;
     }
+
   }
 
 
@@ -380,6 +381,10 @@ body::-webkit-scrollbar {
   }
   .startedButton {
     position: relative !important;
+    top: 110px;
+  }
+  .button-container {
+    margin-top: 0px !important;
   }
 }
 

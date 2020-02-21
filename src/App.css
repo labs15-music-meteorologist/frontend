@@ -315,10 +315,9 @@ body::-webkit-scrollbar {
   }
 
   .lockScroll {
-    overflow: hidden !important;
+    overflow-y: hidden !important;
     height: 100% !important; 
     margin: 0 !important; 
-    position: fixed !important;
   }
 
   .music-player {

@@ -351,7 +351,7 @@ body::-webkit-scrollbar {
     margin: 0 !important;
   }
   .MuiPaper-elevation1 {
-    margin-left: 10px !important;
+    margin-left: 6px !important;
   }
  .mainBar {
   height: 50vw !important;
@@ -379,13 +379,13 @@ body::-webkit-scrollbar {
     display: none !important;
   }
   .MuiPaper-elevation1 {
-    margin-left: 40px !important;
+    margin-left: 10px !important;
   }
   .MuiGrid-container {
     width: 400px !important;
   }
   .moveTitle {
-    margin-left: 195px !important;
+    margin-left: 165px !important;
   }
   .drop {
     left: -70px !important;

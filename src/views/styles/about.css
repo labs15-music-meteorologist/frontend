@@ -4,6 +4,10 @@
     margin-top: 7%;
 }
 
+.about-image .mobile-about{
+    display: none;
+}
+
 .header-container{
     display: flex;
     justify-content: center;
@@ -17,4 +21,35 @@
 .nav{
     height: 200px;
     border: 1px solid white;
+}
+
+.reverse{
+    display: none;
+}
+
+@media (max-width: 576px) {
+
+    .about-image .desktop-about{
+        display: none;
+    }
+
+    .about-image .mobile-about{
+        display: flex;
+        padding-top: 25%;
+    }
+
+    .about-images{
+        max-width: 100%;
+        max-height: 100%;
+    }
+    .reverse{
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .button-container{
+        display: flex;
+        justify-content: center;
+        margin-top: 50%;
+    }
 }

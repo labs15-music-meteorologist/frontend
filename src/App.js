@@ -4,7 +4,6 @@ import { ProtectedRoute } from "./components/protected.route";
 
 import Auth from "./components/Auth";
 import MusicPlayer from "./components/dashboard/MusicPlayer";
-import FooterContainer from "./components/Footer.js";
 
 import Logout from "./views/Logout";
 import Dashboard from "./views/Dashboard.js";

@@ -7,7 +7,6 @@ import Footer from "./Footer.js";
 import HomepageNav from "./HomepageNav.js"
 import "../App.css";
 import "../views/styles/homepage.css";
-import '../Mobile.css';
 
 import albums_background from "../assets/albums-background.svg";
 import albums_background_mobile from "../assets/albums-background-mobile.svg";

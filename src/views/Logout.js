@@ -83,11 +83,11 @@ const Return = styled.a`
 
 const Logout = () => {
   return (
-    <div className="lockScroll">
+    <div>
     <MobileNav/>
     <HomepageNav/>
     <Fullscreen>
-      <LogoutContainer>
+      <LogoutContainer className="lockScroll">
         <Gone>Gone so soon?</Gone>
         <Sentence>
           We hate to see you leave but hope you’ll come back for more fun. If

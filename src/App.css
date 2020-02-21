@@ -314,6 +314,11 @@ body::-webkit-scrollbar {
     overflow-x: hidden !important;
   }
 
+  .lockScroll{
+    padding-top: 0% !important;
+    margin-top: 30% !important;
+  }
+
   .music-player {
     display: flex;
     flex-flow: column;

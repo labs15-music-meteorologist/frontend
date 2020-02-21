@@ -318,6 +318,7 @@ body::-webkit-scrollbar {
     overflow: hidden !important;
     height: 100% !important; 
     margin: 0 !important; 
+    position: fixed !important;
   }
 
   .music-player {

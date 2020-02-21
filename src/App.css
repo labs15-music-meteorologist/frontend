@@ -248,7 +248,7 @@ body::-webkit-scrollbar {
       display: none !important;
     }
     .logo {
-      top: 35% !important;
+      top: 28% !important;
     }
     .makeStyles-buttonArrow-8 {
       z-index: -1 !important;
@@ -323,7 +323,7 @@ body::-webkit-scrollbar {
   }
 
   .mobileNavWrap {
-    height: 40px;
+    height: 25px;
     width: 100%;
     background-color: #E20351;
     position: fixed;

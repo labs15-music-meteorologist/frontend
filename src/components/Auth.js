@@ -58,7 +58,9 @@ export class Auth extends Component {
 
     return (
       <div className='auth'>
-        <MobileNav/>
+        <div className="mobileNavWrap">
+          <MobileNav />
+        </div>
         <HomepageNav/>
         <div class='main-wrapper'>
           <div className='main-cta-spotify'>

@@ -83,7 +83,7 @@ const Return = styled.a`
 
 const Logout = () => {
   return (
-    <div>
+    <div className="lockScroll">
     <MobileNav/>
     <HomepageNav/>
     <Fullscreen>

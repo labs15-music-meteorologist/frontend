@@ -242,7 +242,7 @@ body::-webkit-scrollbar {
 
 @media (max-width: 576px) {
     .makeStyles-heading-3{
-      padding-top: 20%;
+      padding-top: 100px;
     }
     .team-footer{
       display: none !important;
@@ -313,6 +313,10 @@ body::-webkit-scrollbar {
     margin: 0; 
     height: 100%; 
     overflow-x: hidden !important;
+  }
+
+  .makeStyles-buttonArrow-8 {
+    width: 160px !important;
   }
 
   .lockScroll{

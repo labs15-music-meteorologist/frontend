@@ -370,6 +370,9 @@ body::-webkit-scrollbar {
   .drop {
     left: -70px !important;
   }
+  .startedButton {
+    position: relative !important;
+  }
 }
 
 @media (max-width: 480px) {

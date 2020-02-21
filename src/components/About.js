@@ -204,7 +204,7 @@ const About = () => (
       </InnerGrid>
     </Grid>
     <div className='button-container'>
-      <Button
+      <Button className="startedButton"
         as='a'
         href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${encodeURIComponent(
           scopes

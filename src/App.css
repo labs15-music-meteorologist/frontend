@@ -408,9 +408,6 @@ body::-webkit-scrollbar {
   .MuiPaper-elevation1 {
     margin-left: 10px !important;
   }
-  .MuiGrid-container {
-    width: 400px !important;
-  }
   .moveTitle {
     margin-left: 165px !important;
   }

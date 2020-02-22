@@ -251,7 +251,7 @@ body::-webkit-scrollbar {
       top: 28% !important;
     }
     .makeStyles-buttonArrow-8 {
-      z-index: -1 !important;
+      z-index: -2 !important;
     }
     .img-container-mobile {
       z-index: -2;
@@ -331,6 +331,7 @@ body::-webkit-scrollbar {
     background-color: #E20351;
     position: fixed;
     padding-bottom: 40px;
+    z-index: 1;
   }
 
   .music-player {

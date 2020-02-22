@@ -253,6 +253,9 @@ body::-webkit-scrollbar {
     .makeStyles-buttonArrow-8 {
       z-index: -1 !important;
     }
+    .img-container-mobile {
+      z-index: -2;
+    }
 
   }
 

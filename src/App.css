@@ -249,7 +249,7 @@ body::-webkit-scrollbar {
       top: 28% !important;
     }
     .makeStyles-buttonArrow-8 {
-      z-index: -2 !important;
+      z-index: 0 !important;
     }
     .img-container-mobile {
       z-index: -2;
@@ -261,6 +261,12 @@ body::-webkit-scrollbar {
       color: #fff;
       background-color: #E20351 !important;
   }
+
+  .makeStyles-buttonArrow-8:hover {
+    color: rgba(255, 255, 255, 1) !important;
+    box-shadow: 0 3px 25px rgba(226, 3, 81, .7) !important;
+    transition: 0.3s ease !important;
+}
   }
 
 
@@ -391,6 +397,19 @@ body::-webkit-scrollbar {
     position: relative !important;
     top: 110px;
   }
+  .startedButton:hover {
+    color: rgba(255, 255, 255, 1) !important;
+    box-shadow: 0 3px 25px rgba(226, 3, 81, .7) !important;
+    transition: 0.3s ease !important;
+    background-color: #E20351 !important;
+  }
+  .loginHover:hover {
+    color: rgba(255, 255, 255, 1) !important;
+    box-shadow: 0 3px 25px rgba(226, 3, 81, .7) !important;
+    transition: 0.3s ease !important;
+    background-color: #E20351 !important;
+  }
+  
   .button-container {
     margin-top: 0px !important;
   }

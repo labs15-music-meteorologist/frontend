@@ -75,7 +75,8 @@ export class Auth extends Component {
                   you like in your Spotify library.
                 </p>
                 <div class='cta-signup'>
-                  <ButtonAuth style={{zIndex: '0'}}
+                  <ButtonAuth className="loginHover"
+                    style={{ zIndex: '0' }}
                     as='a'
                     href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${encodeURIComponent(
                       scopes

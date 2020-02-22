@@ -329,9 +329,7 @@ body::-webkit-scrollbar {
 
 @media (max-width: 600px) {
 
-  html, body {
-    margin: 0; 
-    height: 100%; 
+  .App {
     overflow-x: hidden !important;
   }
 
@@ -409,9 +407,11 @@ body::-webkit-scrollbar {
     transition: 0.3s ease !important;
     background-color: #E20351 !important;
   }
-  
   .button-container {
     margin-top: 0px !important;
+  }
+  #root{
+    overflow-x: hidden !important;
   }
 }
 

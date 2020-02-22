@@ -137,7 +137,7 @@ export default function Team() {
       </HomepageNavbar>
       <Container maxWidth="md">
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={4}>
+          <Grid className ="teamContainer" item xs={12} sm={4}>
             <Typography className={classes.heading}>Our Team</Typography>
           </Grid>
           <Grid item xs={12} sm={8}>

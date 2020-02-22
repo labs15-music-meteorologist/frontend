@@ -241,9 +241,7 @@ body::-webkit-scrollbar {
 }
 
 @media (max-width: 576px) {
-    .makeStyles-heading-3{
-      padding-top: 20%;
-    }
+
     .team-footer{
       display: none !important;
     }
@@ -256,7 +254,13 @@ body::-webkit-scrollbar {
     .img-container-mobile {
       z-index: -2;
     }
-
+    .teamContainer {
+      margin-top: 60px !important;
+    }
+    .MuiButton-containedSecondary {
+      color: #fff;
+      background-color: #E20351 !important;
+  }
   }
 
 

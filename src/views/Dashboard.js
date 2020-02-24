@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Grid } from "@material-ui/core";
+import LoadingPage from "./LoadingPage.js"
+import WaitForSongs from "./WaitForSongs"
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import List from "@material-ui/core/List";
@@ -51,10 +53,13 @@ class Dashboard extends React.Component {
   componentDidMount() {
     this.props.getSpotifyAccountDetails();
 
+    this.dsDelivery()
+
     if (this.props.spotifyUser.length > 0) {
       this.props.persistUser(this.props.spotifyUser);
     }
     this.props.getlikedSongs();
+
   }
 
   componentDidUpdate(prevProps) {
@@ -110,6 +115,11 @@ class Dashboard extends React.Component {
     // }
   }
 
+  dsDelivery() {
+    const token = { token: localStorage.getItem("token") };
+    this.props.postDSSong(token);
+  }
+
   openPlaylist() {
     this.setState({
       collapse: !this.state.collapse
@@ -144,6 +154,7 @@ class Dashboard extends React.Component {
       ? true
       : false;
   };
+  
   render() {
     if (this.checkPremiumUser() || this.checkNoIOS()) {
       this.props.history.push("/info");
@@ -152,13 +163,29 @@ class Dashboard extends React.Component {
     console.log("what it do", this.props);
     // console.log('getSpotifyAccountDetails ! _ 0', this.props);
 
-    return (
-      <div className="dashboard">
-        <Grid item>
-          <MusicPlayer spotifyId={this.props.spotifyUser} />
-        </Grid>
-      </div>
-    );
+    
+      const dsSongs = this.props.ds_songs;
+    // console.log("this is dsSongs", dsSongs)
+
+      let PlayerOfMusic;
+
+      // setTimeout(() => {
+      //     PlayerOfMusic = <Grid item><MusicPlayer spotifyId={this.props.spotifyUser} /></Grid>;
+      // }, 2000);
+
+      // if (dsSongs.length === 0) {
+      //   PlayerOfMusic = <LoadingPage/>;
+      // } else {
+      //   PlayerOfMusic = <Grid item><MusicPlayer spotifyId={this.props.spotifyUser} /></Grid>;
+      // }
+
+      return(
+        <div className="dashboard">
+          {/* {dsSongs.length ===  0 ? <LoadingPage />  :  <Grid><MusicPlayer spotifyId={this.props.spotifyUser} /></Grid>} */}
+          {dsSongs.length ===  0 ? <LoadingPage />  :  <Grid><MusicPlayer spotifyId={this.props.spotifyUser} /></Grid>}
+        </div>
+      );
+    
   }
 }
 
@@ -166,6 +193,7 @@ const mapStateToProps = state => ({
   spotifyUser: state.getUsersReducer.spotifyUser,
   currentUser: state.getCurrentUserReducer.currentUser,
   fetchingSpotifyUser: state.getUsersReducer.fetchingSpotifyUser,
+  fetchingDsSongs: state.queueReducer.isFetchingDSSongs,
   ds_songs: state.queueReducer.ds_songs,
   several_tracks: state.queueReducer.several_tracks,
   playlistId: state.createPlaylistReducer.playlistId,

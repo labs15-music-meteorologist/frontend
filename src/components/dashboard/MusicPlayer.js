@@ -56,12 +56,12 @@ class MusicPlayer extends Component {
     this.playerCheckInterval = null;
   }
 
-  componentDidMount() {
+  componentDidMount(prevProps) {
     this.handleLogin();
   }
 
   componentDidUpdate(prevProps) {
-    console.log("this is prevProps", prevProps);
+    console.log("this is ds props songs", this.props.ds_songs);
     if (this.props.song_id !== prevProps.song_id) {
       this.dsDelivery();
     }

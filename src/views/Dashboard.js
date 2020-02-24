@@ -94,6 +94,21 @@ class Dashboard extends React.Component {
       }, 5000);
     }
 
+    if (this.props.savingLike) {
+      this.props.getlikedSongs();
+    }
+    if (
+      this.props.isFetchingSuccessful === true &&
+      this.props.ds_songs !== prevProps.ds_songs
+    ) {
+      this.props.addToPlaylist(
+        {
+          uris: this.createSpotifyUriArray(this.props.ds_songs[0].songs)
+        },
+        this.props.currentUser.spotify_playlist_id
+      );
+    }
+
     // if no have then run createplaylist
     // update component state with flag to false
 
@@ -139,46 +154,13 @@ class Dashboard extends React.Component {
     this.props.history.push("/logout");
   };
 
-  checkPremiumUser = () => {
-    return this.props.spotifyUser.product &&
-      this.props.fetchingSpotifyUser === false &&
-      this.props.spotifyUser.product !== "premium"
-      ? true
-      : false;
-  };
-
-  checkNoIOS = () => {
-    return window.navigator.platform === "iPhone" ||
-      window.navigator.platform === "iPad" ||
-      window.navigator.platform === "iPod"
-      ? true
-      : false;
-  };
   
   render() {
-    if (this.checkPremiumUser() || this.checkNoIOS()) {
-      this.props.history.push("/info");
-    }
-
     console.log("what it do", this.props);
     // console.log('getSpotifyAccountDetails ! _ 0', this.props);
 
     
       const dsSongs = this.props.ds_songs;
-    // console.log("this is dsSongs", dsSongs)
-
-      let PlayerOfMusic;
-
-      // setTimeout(() => {
-      //     PlayerOfMusic = <Grid item><MusicPlayer spotifyId={this.props.spotifyUser} /></Grid>;
-      // }, 2000);
-
-      // if (dsSongs.length === 0) {
-      //   PlayerOfMusic = <LoadingPage/>;
-      // } else {
-      //   PlayerOfMusic = <Grid item><MusicPlayer spotifyId={this.props.spotifyUser} /></Grid>;
-      // }
-
       return(
         <div className="dashboard">
           {/* {dsSongs.length ===  0 ? <LoadingPage />  :  <Grid><MusicPlayer spotifyId={this.props.spotifyUser} /></Grid>} */}

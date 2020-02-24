@@ -62,29 +62,29 @@ class MusicPlayer extends Component {
 
   componentDidUpdate(prevProps) {
     console.log("this is ds props songs", this.props.ds_songs);
-    if (this.props.song_id !== prevProps.song_id) {
-      this.dsDelivery();
-    }
-    if (this.props.savingLike) {
-      this.props.getlikedSongs();
-    }
-    if (
-      this.props.isFetchingSuccessful === true &&
-      this.props.ds_songs !== prevProps.ds_songs
-    ) {
-      this.props.addToPlaylist(
-        {
-          uris: this.createSpotifyUriArray(this.props.ds_songs[0].songs)
-        },
-        this.props.currentUser.spotify_playlist_id
-      );
-    }
+    // if (this.props.song_id !== prevProps.song_id) {
+    //   this.dsDelivery();
+    // }
+    // if (this.props.savingLike) {
+    //   this.props.getlikedSongs();
+    // }
+    // if (
+    //   this.props.isFetchingSuccessful === true &&
+    //   this.props.ds_songs !== prevProps.ds_songs
+    // ) {
+    //   this.props.addToPlaylist(
+    //     {
+    //       uris: this.createSpotifyUriArray(this.props.ds_songs[0].songs)
+    //     },
+    //     this.props.currentUser.spotify_playlist_id
+    //   );
+    // }
   }
 
-  dsDelivery() {
-    const token = { token: localStorage.getItem("token") };
-    this.props.postDSSong(token);
-  }
+  // dsDelivery() {
+  //   const token = { token: localStorage.getItem("token") };
+  //   this.props.postDSSong(token);
+  // }
 
   handleLogin() {
     if (this.state.token !== "") {
@@ -304,7 +304,6 @@ class MusicPlayer extends Component {
           </SideBar>
           <MainBar id="mainBarLD" className="mainBar">
             <PlaylistInfoContainer spotifyId={this.props.spotifyId.id} spotifyName={this.props.spotifyId.display_name}>
-              
             </PlaylistInfoContainer>
             <PlaylistSongsContainer>
               <PlaylistItems player={this.player} deviceId={this.state.deviceId}>

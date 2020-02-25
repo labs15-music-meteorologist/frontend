@@ -1,12 +1,16 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Grid } from '@material-ui/core';
-import { getlikedSongs, getUsers, getPlaylist } from '../../Redux/Spotify/spotify.actions';
-import Song from './Song.js';
+import React from "react";
+import { connect } from "react-redux";
+import { Grid } from "@material-ui/core";
+import {
+  getlikedSongs,
+  getUsers,
+  getPlaylist
+} from "../../Redux/Spotify/spotify.actions";
+import Song from "./Song.js";
 
 class LikedSongs extends React.Component {
   state = {
-    getList: false,
+    getList: false
   };
   componentDidMount() {
     // this.props.getlikedSongs();
@@ -19,57 +23,51 @@ class LikedSongs extends React.Component {
 
       if (this.props.playlistId) {
         this.setState({
-          getList: true,
+          getList: true
         });
       }
     }
   }
 
   render() {
+    console.log("liked songs props", this.props);
+    console.log("liked songs state", this.state);
+
+    console.log();
     if (this.props.fetchingLikedSongs) {
       return <h1>Loading...</h1>;
     }
     return (
       <Grid container>
         <Grid id="songLD" item>
-          {console.log("this is props in likedsongs", this.props)}
-          {this.props.several_tracks.tracks &&
+          {this.props.several_tracks.tracks ? 
             this.props.several_tracks.tracks.map(song => (
-              <Song song={song} id={song.id} key={song.id} deviceId={this.props.deviceId} tracks={this.props.several_tracks.tracks} />
-            ))}
-          {/* {this.props.playlistTracks &&
-            this.props.playlistTracks.map(song => (
-              <Song song={song.track} id={song.track.id} key={song.track.id} />
-            ))} */}
+              <Song
+                song={song}
+                id={song.id}
+                key={song.id}
+                deviceId={this.props.deviceId}
+                tracks={this.props.several_tracks.tracks}
+              />
+            )) : <h1>Loading...</h1>}
         </Grid>
-        {/* <Grid item>
-          <Typography
-            style={{ fontWeight: 'bold', fontSize: 18, textAlign: 'center' }}>
-            Users
-          </Typography>
-          {this.props.users.map(user => (
-            <div>
-              <p>{user.display_name}</p>
-            </div>
-          ))}
-        </Grid> */}
       </Grid>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  songs: state.likedSongsReducer.songs,
-  users: state.getUsersReducer.users,
+  songs: state.likedSongsReducer,
   spotifyUser: state.getUsersReducer.spotifyUser,
   several_tracks: state.queueReducer.several_tracks,
-  playlistTracks: state.getPlaylistReducer.playlistTracks.items,
-  playlistId: state.createPlaylistReducer.playlistId,
+  playlistTracks: state.getPlaylistReducer,
+  playlistId: state.createPlaylistReducer,
   playlistCreated: state.createPlaylistReducer.playlistCreated,
-  addedTo: state.addToPlaylistReducer.addedTo,
+  addedTo: state.addToPlaylistReducer.addedTo
 });
 
-export default connect(
-  mapStateToProps,
-  { getlikedSongs, getUsers, getPlaylist },
-)(LikedSongs);
+export default connect(mapStateToProps, {
+  getlikedSongs,
+  getUsers,
+  getPlaylist
+})(LikedSongs);

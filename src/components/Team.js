@@ -388,12 +388,12 @@ export default function Team() {
               </Grid>
             </Grid>
           </Grid>
+
           <Grid item xs={6} sm={3}>
             <CardMedia
               component="img"
-              image="https://i.ibb.co/6BQwdSM/T4-JUEB3-ME-UMV7-CL10-D-15c133820281-512.jpg"
+              image="https://i.ibb.co/CsWhHsf/Rachel2.jpg"
             />
-
             <Grid style={{ marginTop: "3px" }} container spacing={3}>
               <Grid item xs={12} sm={8}>
                 <Typography className={classes.name}>Rachel Windsor</Typography>

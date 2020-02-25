@@ -103,7 +103,7 @@ class Dashboard extends React.Component {
     ) {
       this.props.addToPlaylist(
         {
-          uris: this.createSpotifyUriArray(this.props.ds_songs[0].songs)
+          uris: this.createSpotifyUriArray(this.props.ds_songs.songs)
         },
         this.props.currentUser.spotify_playlist_id
       );
@@ -154,20 +154,20 @@ class Dashboard extends React.Component {
     this.props.history.push("/logout");
   };
 
-  
+
   render() {
     console.log("what it do", this.props);
     // console.log('getSpotifyAccountDetails ! _ 0', this.props);
 
-    
-      const dsSongs = this.props.ds_songs;
-      return(
-        <div className="dashboard">
-          {/* {dsSongs.length ===  0 ? <LoadingPage />  :  <Grid><MusicPlayer spotifyId={this.props.spotifyUser} /></Grid>} */}
-          {dsSongs.length ===  0 ? <LoadingPage />  :  <Grid><MusicPlayer spotifyId={this.props.spotifyUser} /></Grid>}
-        </div>
-      );
-    
+
+    const dsSongs = this.props.ds_songs;
+    return (
+      <div className="dashboard">
+        {/* {dsSongs.length ===  0 ? <LoadingPage />  :  <Grid><MusicPlayer spotifyId={this.props.spotifyUser} /></Grid>} */}
+        {dsSongs.length === 0 ? <LoadingPage /> : <Grid><MusicPlayer spotifyId={this.props.spotifyUser} /></Grid>}
+      </div>
+    );
+
   }
 }
 

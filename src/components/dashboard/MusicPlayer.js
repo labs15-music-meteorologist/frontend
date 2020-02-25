@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Grid } from "@material-ui/core";
-import axios from "axios";
+// import axios from "axios";
 import {
   getCurrentSong,
   getTrackInfo,
@@ -124,12 +124,12 @@ class MusicPlayer extends Component {
   }
 
   createEventHandlers() {
-    this.player.on("initialization_error", e => {});
+    this.player.on("initialization_error", e => { });
     this.player.on("authentication_error", e => {
       this.setState({ loggedIn: false });
     });
-    this.player.on("account_error", e => {});
-    this.player.on("playback_error", e => {});
+    this.player.on("account_error", e => { });
+    this.player.on("playback_error", e => { });
 
     // ONLY WHEN PLAYER STATE CHANGED
     this.player.on("player_state_changed", state => {
@@ -168,9 +168,10 @@ class MusicPlayer extends Component {
   }
 
   getDataScienceSongArray = () => {
+    console.log("MUsic Play gettracks", getSeveralTracks)
     this.props.ds_songs.length > 0 &&
       this.props.getSeveralTracks(
-        this.concatenateSongIds(this.props.ds_songs[0].songs)
+        this.concatenateSongIds(this.props.ds_songs.songs)
       );
   };
 

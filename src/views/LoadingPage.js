@@ -8,14 +8,9 @@ const LoadContainer = styled.div`
   flex-direction: column;
   align-items: center;
   align-content: center;
-  height: 600px;
-  width: 600px;
-  padding-top: 14%;
-  margin: 0%;
-  @media (max-width: 576px) {
-    padding-top: 45%;
-    margin: 2%;
-  }
+  width: 100%;
+  height: 100%;
+  margin-top: 50vh;
 `;
 
 const LoaderContainer = () => {

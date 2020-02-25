@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Grid } from "@material-ui/core";
+import LoadingPage from "./LoadingPage.js"
+import WaitForSongs from "./WaitForSongs"
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import List from "@material-ui/core/List";
@@ -51,10 +53,13 @@ class Dashboard extends React.Component {
   componentDidMount() {
     this.props.getSpotifyAccountDetails();
 
+    this.dsDelivery()
+
     if (this.props.spotifyUser.length > 0) {
       this.props.persistUser(this.props.spotifyUser);
     }
     this.props.getlikedSongs();
+
   }
 
   componentDidUpdate(prevProps) {
@@ -89,6 +94,21 @@ class Dashboard extends React.Component {
       }, 5000);
     }
 
+    if (this.props.savingLike) {
+      this.props.getlikedSongs();
+    }
+    if (
+      this.props.isFetchingSuccessful === true &&
+      this.props.ds_songs !== prevProps.ds_songs
+    ) {
+      this.props.addToPlaylist(
+        {
+          uris: this.createSpotifyUriArray(this.props.ds_songs.songs)
+        },
+        this.props.currentUser.spotify_playlist_id
+      );
+    }
+
     // if no have then run createplaylist
     // update component state with flag to false
 
@@ -110,6 +130,11 @@ class Dashboard extends React.Component {
     // }
   }
 
+  dsDelivery() {
+    const token = { token: localStorage.getItem("token") };
+    this.props.postDSSong(token);
+  }
+
   openPlaylist() {
     this.setState({
       collapse: !this.state.collapse
@@ -129,36 +154,20 @@ class Dashboard extends React.Component {
     this.props.history.push("/logout");
   };
 
-  checkPremiumUser = () => {
-    return this.props.spotifyUser.product &&
-      this.props.fetchingSpotifyUser === false &&
-      this.props.spotifyUser.product !== "premium"
-      ? true
-      : false;
-  };
 
-  checkNoIOS = () => {
-    return window.navigator.platform === "iPhone" ||
-      window.navigator.platform === "iPad" ||
-      window.navigator.platform === "iPod"
-      ? true
-      : false;
-  };
   render() {
-    if (this.checkPremiumUser() || this.checkNoIOS()) {
-      this.props.history.push("/info");
-    }
-
     console.log("what it do", this.props);
     // console.log('getSpotifyAccountDetails ! _ 0', this.props);
 
+
+    const dsSongs = this.props.ds_songs;
     return (
       <div className="dashboard">
-        <Grid item>
-          <MusicPlayer spotifyId={this.props.spotifyUser} />
-        </Grid>
+        {/* {dsSongs.length ===  0 ? <LoadingPage />  :  <Grid><MusicPlayer spotifyId={this.props.spotifyUser} /></Grid>} */}
+        {dsSongs.length === 0 ? <LoadingPage /> : <Grid><MusicPlayer spotifyId={this.props.spotifyUser} /></Grid>}
       </div>
     );
+
   }
 }
 
@@ -166,6 +175,7 @@ const mapStateToProps = state => ({
   spotifyUser: state.getUsersReducer.spotifyUser,
   currentUser: state.getCurrentUserReducer.currentUser,
   fetchingSpotifyUser: state.getUsersReducer.fetchingSpotifyUser,
+  fetchingDsSongs: state.queueReducer.isFetchingDSSongs,
   ds_songs: state.queueReducer.ds_songs,
   several_tracks: state.queueReducer.several_tracks,
   playlistId: state.createPlaylistReducer.playlistId,

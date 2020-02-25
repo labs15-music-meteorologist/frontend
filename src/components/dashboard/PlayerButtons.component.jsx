@@ -38,7 +38,7 @@ const PlayerButtons = props => {
     props.saveLikedSong(props.song.id);
     
     setTimeout(() => {
-      player.pause();
+      // player.pause();
       player.setVolume(0.5);
     }, 2000);
     props.removeTrack(props.currentUser.spotify_playlist_id, props.song.id);

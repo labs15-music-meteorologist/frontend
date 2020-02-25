@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Grid } from "@material-ui/core";
-import axios from "axios";
+// import axios from "axios";
 import {
   getCurrentSong,
   getTrackInfo,
@@ -30,7 +30,7 @@ import MainBar from "./element-styles/MainBarContainer";
 import PlaylistInfoContainer from "./element-styles/PlaylistInfo";
 import PlaylistSongsContainer from "./element-styles/PlaylistSongs";
 import NavBar from "./element-styles/NavBarMusicPlayer";
-import Footer from '../Footer';
+import Footer from "../Footer";
 
 class MusicPlayer extends Component {
   constructor(props) {
@@ -61,24 +61,24 @@ class MusicPlayer extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log("this is prevProps", prevProps);
-    if (this.props.song_id !== prevProps.song_id) {
-      this.dsDelivery();
-    }
-    if (this.props.savingLike) {
-      this.props.getlikedSongs();
-    }
-    if (
-      this.props.isFetchingSuccessful === true &&
-      this.props.ds_songs !== prevProps.ds_songs
-    ) {
-      this.props.addToPlaylist(
-        {
-          uris: this.createSpotifyUriArray(this.props.ds_songs[0].songs)
-        },
-        this.props.currentUser.spotify_playlist_id
-      );
-    }
+    console.log("this is ds props songs", this.props.ds_songs);
+    // if (this.props.song_id !== prevProps.song_id) {
+    //   this.dsDelivery();
+    // }
+    // if (this.props.savingLike) {
+    //   this.props.getlikedSongs();
+    // }
+    // if (
+    //   this.props.isFetchingSuccessful === true &&
+    //   this.props.ds_songs !== prevProps.ds_songs
+    // ) {
+    //   this.props.addToPlaylist(
+    //     {
+    //       uris: this.createSpotifyUriArray(this.props.ds_songs[0].songs)
+    //     },
+    //     this.props.currentUser.spotify_playlist_id
+    //   );
+    // }
   }
 
   dsDelivery() {
@@ -124,12 +124,12 @@ class MusicPlayer extends Component {
   }
 
   createEventHandlers() {
-    this.player.on("initialization_error", e => {});
+    this.player.on("initialization_error", e => { });
     this.player.on("authentication_error", e => {
       this.setState({ loggedIn: false });
     });
-    this.player.on("account_error", e => {});
-    this.player.on("playback_error", e => {});
+    this.player.on("account_error", e => { });
+    this.player.on("playback_error", e => { });
 
     // ONLY WHEN PLAYER STATE CHANGED
     this.player.on("player_state_changed", state => {
@@ -142,14 +142,15 @@ class MusicPlayer extends Component {
       if (state.track_window.current_track.id !== this.state.currentTrack) {
         this.currentSong();
         this.setState({ currentTrack: state.track_window.current_track.id });
-        console.log("Testing musicplayer", state.track_window.current_track.id)
+        console.log("Testing musicplayer", state.track_window.current_track.id);
         this.player.setVolume(0);
         setTimeout(() => {
           this.player.pause();
           this.player.seek(1);
           this.player.setVolume(0.5);
         }, 2000);
-        if (this.props.ds_songs) {
+        if (true) {
+          console.log("DS ARRAY called");
           this.getDataScienceSongArray();
         }
       }
@@ -168,14 +169,16 @@ class MusicPlayer extends Component {
   }
 
   getDataScienceSongArray = () => {
-    this.props.ds_songs.length > 0 &&
+    this.props.ds_songs.songs.length > 0 &&
       this.props.getSeveralTracks(
-        this.concatenateSongIds(this.props.ds_songs[0].songs)
+        this.concatenateSongIds(this.props.ds_songs.songs)
       );
   };
 
   concatenateSongIds(array) {
-    return array.map(song => song.values).join(",");
+    const concatString = array.map(song => song.values).join(",");
+    console.log("testing concat string", concatString);
+    return concatString;
   }
   getCurrentSongFeatures = id => this.props.getTrackInfo(id);
 
@@ -186,7 +189,10 @@ class MusicPlayer extends Component {
   checkForPlayer() {
     const { token } = this.state;
 
+    console.log("spotify window", window.Spotify);
+
     if (window.Spotify !== undefined) {
+      console.log("spotify window called");
       clearInterval(this.playerCheckInterval);
 
       this.player = new window.Spotify.Player({
@@ -211,25 +217,23 @@ class MusicPlayer extends Component {
 
   transferPlaybackHere() {
     const { token } = this.state;
-    fetch(
-      `https://api.spotify.com/v1/me/player/play/?device_id=${this.state.deviceId}`,
-      {
-        method: "PUT",
-        headers: {
-          authorization: `Bearer ${token}`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          context_uri: `spotify:playlist:${this.props.currentUser.spotify_playlist_id}`
-        })
-      }
-    );
+    fetch(`https://api.spotify.com/v1/me/player`, {
+      method: "PUT",
+      headers: {
+        authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        device_ids: [this.state.deviceId]
+      })
+    });
     this.player.setVolume(0);
     setTimeout(() => this.player.pause(), 2000);
     this.player.setVolume(0.5);
   }
 
   render() {
+    console.log("debugging device id error", this.props);
     const {
       trackName,
       artistName,
@@ -249,7 +253,7 @@ class MusicPlayer extends Component {
         {console.log("all music player props", this.props)}
         <ElementContainer>
           <SideBar id="sideBarLD">
-            <div id="sideBarLD1" className='music-player joyride-player-2'>
+            <div id="sideBarLD1" className="music-player joyride-player-2">
               <AlbumInfo
                 imageSpotify={imageSpotify}
                 trackName={trackName}
@@ -259,9 +263,9 @@ class MusicPlayer extends Component {
               <div>
                 <Grid
                   container
-                  direction='column'
-                  justify='space-around'
-                  alignItems='center'
+                  direction="column"
+                  justify="space-around"
+                  alignItems="center"
                   style={{ width: 377, height: "60px", marginBottom: "10px" }}
                 >
                   <div>
@@ -275,27 +279,31 @@ class MusicPlayer extends Component {
                 </Grid>
                 <Grid
                   container
-                  direction='column'
-                  justify='center'
-                  alignItems='center'
+                  direction="column"
+                  justify="center"
+                  alignItems="center"
                 >
                   <AudioDetailsContainer traits={this.props.traits} />
                   <Grid item>
                     {window.Spotify !== undefined &&
                       this.state.imageUrl !== "" &&
                       artistName !== "Artist Name" && (
-                        <div className='album-art'>
+                        <div className="album-art">
                           <h4 style={{ textAlign: "center" }}>Now Playing</h4>
-                          <img className='album-artwork' src={this.state.imageUrl} alt='album-art' />
+                          <img
+                            className="album-artwork"
+                            src={this.state.imageUrl}
+                            alt="album-art"
+                          />
                         </div>
                       )}
                   </Grid>
                   {error && <p>Error: {error}</p>}
                   <Grid
                     container
-                    direction='row'
-                    justify='center'
-                    alignItems='center'
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
                     style={{ width: 300, marginBottom: "5%" }}
                   ></Grid>
                 </Grid>
@@ -303,12 +311,15 @@ class MusicPlayer extends Component {
             </div>
           </SideBar>
           <MainBar id="mainBarLD" className="mainBar">
-            <PlaylistInfoContainer spotifyId={this.props.spotifyId.id} spotifyName={this.props.spotifyId.display_name}>
-              
-            </PlaylistInfoContainer>
+            <PlaylistInfoContainer
+              spotifyId={this.props.spotifyId.id}
+              spotifyName={this.props.spotifyId.display_name}
+            ></PlaylistInfoContainer>
             <PlaylistSongsContainer>
-              <PlaylistItems player={this.player} deviceId={this.state.deviceId}>
-              </PlaylistItems>
+              <PlaylistItems
+                player={this.player}
+                deviceId={this.state.deviceId}
+              ></PlaylistItems>
             </PlaylistSongsContainer>
           </MainBar>
         </ElementContainer>

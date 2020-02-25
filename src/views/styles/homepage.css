@@ -97,7 +97,7 @@ div.main-wrapper {
 
   .main-cta-spotify{
     display: flex;
-    flex-direction: column-reverse;
+    padding-top: 20%;
     min-height: 100% !important;
     height: 100%;
   }

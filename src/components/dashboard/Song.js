@@ -75,11 +75,12 @@ class Song extends React.Component {
           </Grid>
           <Grid item style={{ padding: 5, width: '200px'}}>
             <Typography
+              className="songName"
               style={{ fontSize: 13, fontWeight: 'bold', marginBottom: '3px' }}
               direction='row'>
               {this.props.song.name}
             </Typography>
-            <Typography style={{ fontSize: 13 }}>
+            <Typography className="songArtistName" style={{ fontSize: 13 }}>
               {this.props.song.artists[0].name}
             </Typography>
             <Typography style={{ fontSize: 13 }}>
@@ -87,13 +88,13 @@ class Song extends React.Component {
             </Typography>
             {/* <p>Audio Features: {loadingTf ? 'loading....' : tf.data.tempo}</p> */}
           </Grid>
-          <Grid item style={{ padding: 5, fontSize: 13, width: '200px', marginRight: '10px'}}>
+          <Grid className="songAlbumName" item style={{ padding: 5, fontSize: 13, width: '200px', marginRight: '10px'}}>
             {this.props.song.album.name}
           </Grid>
-          <Grid item style={{ padding: 5, fontSize: 13, width: '50px', marginLeft: 25 }}>
+          <Grid className="songDuration" item style={{ padding: 5, fontSize: 13, width: '50px', marginLeft: 25 }}>
             {this.msToTime(this.props.song.duration_ms)}
           </Grid>
-          <Grid item style={{ padding: 5, fontSize: 13, width: '100px', marginLeft: 65 }}>
+          <Grid className="songReleaseDate" item style={{ padding: 5, fontSize: 13, width: '100px', marginLeft: 65 }}>
             {this.props.song.album.release_date}
           </Grid>
 

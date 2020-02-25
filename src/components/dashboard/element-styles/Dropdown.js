@@ -10,6 +10,7 @@ import MenuList from '@material-ui/core/MenuList';
 import { makeStyles } from '@material-ui/core/styles';
 import "../../../App.css";
 import axios from 'axios';
+import { Icon } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -60,22 +61,43 @@ const useStyles = makeStyles(theme => ({
     }
     prevOpen.current = open;
   }, [open]);
-
-    function transferHere() {
-      axios.put(
-        'https://api.spotify.com/v1/me/player',
-        {
-          "device_ids": [props.deviceid]
-        },
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-            "Content-Type": "application/json"
-          }
-        }
-      )
-     }
     
+    function toggleLightDark() { 
+      var element = document.getElementById("sideBarLD");
+      element.classList.toggle("sideBarL");
+      var element1 = document.getElementById("sideBarLD1");
+      element1.classList.toggle("sideBarL");
+      var element2 = document.getElementById("sideBarLD2");
+      element2.classList.toggle("sideBarL");
+      var element3 = document.getElementById("radar1");
+      element3.classList.toggle("radarL");
+      var element4 = document.getElementById("playInfoLD");
+      element4.classList.toggle("playInfoL");
+      var element5 = document.getElementById("mainBarLD");
+      element5.classList.toggle("mainBarL");
+      var element6 = document.getElementById("mainBarLD1");
+      element6.classList.toggle("mainBarL");
+      var element7 = document.getElementById("songLD");
+      element7.classList.toggle("mainBarL");
+      var element8 = document.querySelector("#playpause");
+      element8.classList.toggle("playpauseL");
+      var element9 = document.querySelector("#prev");
+      element9.classList.toggle("nextPrevL");
+      var element10 = document.querySelector("#next");
+      element10.classList.toggle("nextPrevL");
+      var element11 = document.querySelector("#x");
+      element11.classList.toggle("x");
+      var element12 = document.querySelector("#heart");
+      element12.classList.toggle("heart");
+      var element13 = document.querySelector(".MuiLinearProgress-colorPrimary");
+      element13.classList.toggle("progressBarEmpty");
+      var element14 = document.querySelector(".MuiLinearProgress-barColorPrimary");
+      element14.classList.toggle("progressBarFull");
+      var element15 = document.querySelectorAll(".playicon2");
+      element15.forEach(element => element.classList.toggle("playiconL"));
+      var element16 = document.querySelector(".playlisticon");
+      element16.classList.toggle("playlistblack");
+    }
     
     return (
       <div className={classes.root}>
@@ -93,12 +115,13 @@ const useStyles = makeStyles(theme => ({
           {({ TransitionProps, placement }) => (
             <Grow
               {...TransitionProps}
-              style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom', left: '-30px' }}
+                style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom', left: '-50px', background: 'transparent' }}
             >
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                  <MenuItem className="copybar" onClick={transferHere}>Transfer Playback</MenuItem>
+                      <MenuItem className="copybar" onClick={toggleLightDark}>Dark/Light Mode
+                      </MenuItem>
                     <MenuItem className="copybar">
                       Your Spotify ID <br />
                       <input className="copytext" type="text" value={props.navBarProps.spotifyId.id} id="myInput"/>

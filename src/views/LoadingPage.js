@@ -1,17 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
 import '../App.css';
+import Loader from '../assets/loader.gif';
 
+const LoadContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+  height: 100%;
+  margin-top: 50vh;
+`;
 
-const FooterContainer = () => {
+const LoaderContainer = () => {
 
   return (
     <div>
-        chill, its coming
-        <img src="https://files.slack.com/files-pri/T4JUEB3ME-FU1SBUNBC/825__2_.gif"/>
+      <LoadContainer>
+        {/* chill, its coming */}
+        <img src={Loader} />
+      </LoadContainer>
     </div>
   );
 
 }
 
-export default FooterContainer
+export default LoaderContainer

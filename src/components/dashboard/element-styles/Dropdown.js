@@ -122,10 +122,10 @@ const MenuListComposition = (props) => {
                   <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
                     <MenuItem className="copybar" onClick={toggleLightDark}>Dark/Light Mode
                       </MenuItem>
-                    <MenuItem className="copybar">
+                    {/* <MenuItem className="copybar">
                       Your Spotify ID <br />
                       <input className="copytext" type="text" value={props.navBarProps.spotifyId.id} id="myInput" />
-                    </MenuItem>
+                    </MenuItem> */}
                     <MenuItem className="copybar" onClick={logout}>Logout</MenuItem>
                   </MenuList>
                 </ClickAwayListener>

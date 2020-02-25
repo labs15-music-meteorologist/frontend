@@ -1,9 +1,0 @@
-[build]
-base = "music-app/"
-publish = "music-app/build/"
-command = "yarn build"
-
-[[redirects]]
-from = "/*"
-to = "/index.html"
-status = 200

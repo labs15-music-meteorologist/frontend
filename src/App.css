@@ -12,6 +12,7 @@ body::-webkit-scrollbar {
 .scroll::-webkit-scrollbar {
   display: none !important;
 }
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
@@ -37,7 +38,8 @@ body::-webkit-scrollbar {
   display: flex;
 }
 
-.play-button, .pause-button {
+.play-button,
+.pause-button {
   margin-top: 10px;
 }
 
@@ -46,6 +48,7 @@ body::-webkit-scrollbar {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -56,38 +59,47 @@ body::-webkit-scrollbar {
     -webkit-transform: translateX(3px) rotate(2deg);
     transform: translateX(3px) rotate(2deg);
   }
+
   20% {
     -webkit-transform: translateX(-3px) rotate(-2deg);
     transform: translateX(-3px) rotate(-2deg);
   }
+
   30% {
     -webkit-transform: translateX(3px) rotate(2deg);
     transform: translateX(3px) rotate(2deg);
   }
+
   40% {
     -webkit-transform: translateX(-3px) rotate(-2deg);
     transform: translateX(-3px) rotate(-2deg);
   }
+
   50% {
     -webkit-transform: translateX(2px) rotate(1deg);
     transform: translateX(2px) rotate(1deg);
   }
+
   60% {
     -webkit-transform: translateX(-2px) rotate(-1deg);
     transform: translateX(-2px) rotate(-1deg);
   }
+
   70% {
     -webkit-transform: translateX(2px) rotate(1deg);
     transform: translateX(2px) rotate(1deg);
   }
+
   80% {
     -webkit-transform: translateX(-2px) rotate(-1deg);
     transform: translateX(-2px) rotate(-1deg);
   }
+
   90% {
     -webkit-transform: translateX(1px) rotate(0);
     transform: translateX(1px) rotate(0);
   }
+
   100% {
     -webkit-transform: translateX(-1px) rotate(0);
     transform: translateX(-1px) rotate(0);
@@ -103,8 +115,7 @@ body::-webkit-scrollbar {
 
 /* DASHBOARD STYLES */
 
-.dashboard {
-}
+.dashboard {}
 
 
 /* FOOTER STYLES */
@@ -147,9 +158,11 @@ body::-webkit-scrollbar {
 .toggle-line-one {
   transform: rotate(-45deg) translate(-9px, 5px);
 }
+
 .toggle-line-two {
   opacity: 0;
 }
+
 .toggle-line-three {
   transform: rotate(45deg) translate(-9px, -6px);
 }
@@ -180,13 +193,14 @@ body::-webkit-scrollbar {
 }
 
 .arrow {
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    display: inline-block;
-    padding: 3px;
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
 }
+
 .arrow:hover {
   border: solid #E20351;
   border-width: 0 3px 3px 0;
@@ -200,21 +214,24 @@ body::-webkit-scrollbar {
   display: inline-block;
   padding: 3px;
 }
+
 .drop {
   left: -50px !important;
   background-color: transparent !important;
 }
+
 #menu-list-grow {
   background-color: #17191C !important;
   color: white !important;
 }
-.MuiListItem-button:hover{
- background-color: #1E2024 !important;
+
+.MuiListItem-button:hover {
+  background-color: #1E2024 !important;
 }
 
 .shake {
-	-webkit-animation: shake-vertical 4s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
-	animation: shake-vertical 4s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
+  -webkit-animation: shake-vertical 4s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
+  animation: shake-vertical 4s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
 }
 
 .music-chart {
@@ -227,6 +244,7 @@ body::-webkit-scrollbar {
   justify-content: space-around;
   align-items: center;
 }
+
 .music-component {
   width: 90%;
   display: flex;
@@ -236,94 +254,111 @@ body::-webkit-scrollbar {
   text-align: center;
   min-height: 425px;
 }
+
 .dashboard {
   height: initial;
 }
 
 @media (max-width: 576px) {
 
-    .team-footer{
-      display: none !important;
-    }
-    .logo {
-      top: 28% !important;
-    }
-    .makeStyles-buttonArrow-8 {
-      z-index: 0 !important;
-    }
-    .img-container-mobile {
-      z-index: -2;
-    }
-    .teamContainer {
-      margin-top: 60px !important;
-    }
-    .MuiButton-containedSecondary {
-      color: #fff;
-      background-color: #E20351 !important;
+  .team-footer {
+    display: none !important;
+  }
+
+  .logo {
+    top: 28% !important;
+  }
+
+  .makeStyles-buttonArrow-8 {
+    z-index: 0 !important;
+  }
+
+  .img-container-mobile {
+    z-index: -2;
+  }
+
+  .teamContainer {
+    margin-top: 60px !important;
+  }
+
+  .MuiButton-containedSecondary {
+    color: #fff;
+    background-color: #E20351 !important;
   }
 
   .makeStyles-buttonArrow-8:hover {
     color: rgba(255, 255, 255, 1) !important;
     box-shadow: 0 3px 25px rgba(226, 3, 81, .7) !important;
     transition: 0.3s ease !important;
-}
   }
+}
 
 
 @-webkit-keyframes shake-vertical {
+
   0%,
   100% {
     -webkit-transform: translateY(0);
-            transform: translateY(0);
+    transform: translateY(0);
   }
+
   10%,
   30%,
   50%,
   70% {
     -webkit-transform: translateY(-8px);
-            transform: translateY(-8px);
+    transform: translateY(-8px);
   }
+
   20%,
   40%,
   60% {
     -webkit-transform: translateY(8px);
-            transform: translateY(8px);
+    transform: translateY(8px);
   }
+
   80% {
     -webkit-transform: translateY(6.4px);
-            transform: translateY(6.4px);
+    transform: translateY(6.4px);
   }
+
   90% {
     -webkit-transform: translateY(-6.4px);
-            transform: translateY(-6.4px);
+    transform: translateY(-6.4px);
   }
 }
+
 @keyframes shake-vertical {
+
   0%,
   100% {
     -webkit-transform: translateY(0);
-            transform: translateY(0);
+    transform: translateY(0);
   }
+
   10%,
   30%,
   50%,
   70% {
     -webkit-transform: translateY(-8px);
-            transform: translateY(-8px);
+    transform: translateY(-8px);
   }
+
   20%,
   40%,
   60% {
     -webkit-transform: translateY(8px);
-            transform: translateY(8px);
+    transform: translateY(8px);
   }
+
   80% {
     -webkit-transform: translateY(6.4px);
-            transform: translateY(6.4px);
+    transform: translateY(6.4px);
   }
+
   90% {
     -webkit-transform: translateY(-6.4px);
-            transform: translateY(-6.4px);
+    transform: translateY(-6.4px);
   }
 }
 
@@ -333,6 +368,7 @@ body::-webkit-scrollbar {
   transition: 0.3s ease !important;
   background-color: #E20351 !important;
 }
+
 .loginHover:hover {
   color: rgba(255, 255, 255, 1) !important;
   box-shadow: 0 3px 25px rgba(226, 3, 81, .7) !important;
@@ -349,7 +385,7 @@ body::-webkit-scrollbar {
   .mobileNavWrap {
     height: 25px;
     width: 100%;
-    background-color: #E20351;
+    background-color: #0E0F11;
     position: fixed;
     padding-bottom: 40px;
     z-index: 1;
@@ -365,15 +401,19 @@ body::-webkit-scrollbar {
   .dashboard {
     height: initial;
   }
+
   .audioDiv {
     display: none !important;
   }
+
   .music-component {
     min-height: 300px !important;
   }
+
   .playLogo {
     display: none;
   }
+
   .playH1 {
     width: 100vw;
     padding-top: 0 !important;
@@ -383,36 +423,45 @@ body::-webkit-scrollbar {
     margin-bottom: 5px !important;
     margin-top: 10px !important;
   }
+
   .playH2 {
     display: flex;
     justify-content: center;
     margin-right: 8px;
   }
+
   .listTitles {
     margin: 0 !important;
   }
+
   .MuiPaper-elevation1 {
     margin-left: 6px !important;
   }
- .mainBar {
-  height: 50vw !important;
+
+  .mainBar {
+    height: 50vw !important;
   }
+
   .songAlbumName {
     width: 15% !important;
     margin-right: 50px !important;
   }
+
   .drop {
     left: -70px !important;
   }
+
   .startedButton {
     position: relative !important;
     top: 110px;
+    z-index: 0;
   }
 
   .button-container {
     margin-top: 0px !important;
   }
-  #root{
+
+  #root {
     overflow-x: hidden !important;
   }
 }
@@ -421,21 +470,27 @@ body::-webkit-scrollbar {
   .songAlbumName {
     display: none !important;
   }
+
   .songDuration {
     display: none !important;
   }
+
   .songReleaseDate {
     display: none !important;
   }
+
   .hideTitle {
     display: none !important;
   }
+
   .MuiPaper-elevation1 {
     margin-left: 10px !important;
   }
+
   .moveTitle {
     margin-left: 165px !important;
   }
+
   .drop {
     left: -70px !important;
   }
@@ -446,6 +501,7 @@ body::-webkit-scrollbar {
 .grid-question {
   font-size: 0.85rem;
 }
+
 .grid-question:hover {
   background: #216b98;
 }
@@ -455,6 +511,7 @@ body::-webkit-scrollbar {
     transform: scale(0.85);
   }
 }
+
 .audio-details-open {
   position: absolute;
   z-index: 1;
@@ -470,15 +527,18 @@ body::-webkit-scrollbar {
 .audio-detail {
   margin: 2%;
 }
+
 .audio-detail h4 {
   display: inline;
   color: white;
 }
+
 .audio-detail p {
   display: inline;
   margin-left: 5px;
   font-size: 0.93rem;
 }
+
 .audioDiv {
   display: flex;
   justify-content: flex-end;
@@ -494,10 +554,12 @@ body::-webkit-scrollbar {
   background: transparent url("./assets/likefullwhite.png") no-repeat 0 0 !important;
   transition: 0.15s ease;
 }
+
 .fullHeart:hover {
   background: transparent url("./assets/likefullpink.png") no-repeat 0 0 !important;
   transition: 0.15s ease;
 }
+
 .likeicon {
   display: inline-block;
   height: 25px;
@@ -505,10 +567,12 @@ body::-webkit-scrollbar {
   background: transparent url("./assets/like1emptywhite.png") no-repeat 0 0;
   transition: 0.15s ease;
 }
+
 .likeicon:hover {
   background: transparent url("./assets/like1emptypink.png") no-repeat 0 0;
   transition: 0.15s ease;
 }
+
 .dislikeicon {
   display: inline-block;
   height: 20px;
@@ -516,17 +580,20 @@ body::-webkit-scrollbar {
   background: transparent url("./assets/x1white.png") no-repeat 0 0;
   transition: 0.15s ease;
 }
+
 .dislikeicon:hover {
   background: transparent url("./assets/x1pink.png") no-repeat 0 0;
   transition: 0.15s ease;
 }
+
 .playlisticon {
   background: transparent url("./assets/playlist.png") no-repeat 0 0;
   width: 20px;
-  height:20px;
+  height: 20px;
   margin-top: 6px;
   margin-left: 15px;
 }
+
 .playicon {
   display: inline-block;
   height: 25px;
@@ -534,10 +601,12 @@ body::-webkit-scrollbar {
   background: transparent url("./assets/play-buttonWhite.png") no-repeat 0 0;
   transition: 0.15s ease;
 }
+
 .playicon:hover {
   background: transparent url("./assets/play-buttonPink.png") no-repeat 0 0;
   transition: 0.15s ease;
 }
+
 .pauseicon {
   display: inline-block;
   height: 25px;
@@ -545,10 +614,12 @@ body::-webkit-scrollbar {
   background: transparent url("./assets/pauseWhite.png") no-repeat 0 0;
   transition: 0.15s ease;
 }
+
 .pauseicon:hover {
   background: transparent url("./assets/pausePink.png") no-repeat 0 0;
   transition: 0.15s ease;
 }
+
 .previcon {
   display: inline-block;
   height: 25px;
@@ -556,10 +627,12 @@ body::-webkit-scrollbar {
   background: transparent url("./assets/PrevWhite.png") no-repeat 0 0;
   transition: 0.15s ease;
 }
+
 .previcon:hover {
   background: transparent url("./assets/prevPink.png") no-repeat 0 0;
   transition: 0.15s ease;
 }
+
 .nexticon {
   display: inline-block;
   height: 25px;
@@ -567,10 +640,12 @@ body::-webkit-scrollbar {
   background: transparent url("./assets/nextWhite.png") no-repeat 0 0;
   transition: 0.15s ease;
 }
+
 .nexticon:hover {
   background: transparent url("./assets/nextPink.png") no-repeat 0 0;
   transition: 0.15s ease;
 }
+
 .vectoricon {
   display: inline-block;
   height: 20px;
@@ -606,6 +681,7 @@ body::-webkit-scrollbar {
   height: auto;
   background: #121416;
 }
+
 .MuiGrid-container {
   max-height: 600px;
 }
@@ -613,12 +689,15 @@ body::-webkit-scrollbar {
 .like-dislike-wrapper {
   display: flex;
 }
+
 .MuiLinearProgress-barColorPrimary {
   background-color: #E20351 !important;
 }
-.MuiLinearProgress-colorPrimary{
+
+.MuiLinearProgress-colorPrimary {
   background-color: white !important;
 }
+
 .copybar {
   display: flex;
   flex-direction: column;
@@ -648,6 +727,7 @@ body::-webkit-scrollbar {
   background: transparent url("./assets/whiteplayspaced.png") no-repeat 0 0;
   transition: 0.3s ease;
 }
+
 .playicon2:hover {
   background: white url("./assets/pinkplayspaced.png") no-repeat 0 0;
   transition: 0.3s ease;
@@ -655,10 +735,11 @@ body::-webkit-scrollbar {
 }
 
 .playicon2:active {
- transform: scale(.8);
- transition: 0.3s ease;
+  transform: scale(.8);
+  transition: 0.3s ease;
 
 }
+
 .playflex {
   display: flex;
   align-items: center;
@@ -677,7 +758,7 @@ body::-webkit-scrollbar {
 }
 
 .radarL {
-  background:#22252A !important;
+  background: #22252A !important;
   stroke: #22252A !important;
   fill: #22252A !important;
   border-radius: 100px;
@@ -690,6 +771,7 @@ body::-webkit-scrollbar {
   color: #22252A !important;
   transition: 1s ease;
 }
+
 .mainBarL {
   background: white !important;
   color: #22252A !important;
@@ -702,12 +784,14 @@ body::-webkit-scrollbar {
   padding-bottom: 2px;
   transition: 1s ease;
 }
+
 .nextPrevL {
   background: #22252A !important;
   padding-top: 5px;
   padding-bottom: 2px;
   transition: 1s ease;
 }
+
 .x {
   background: #22252A !important;
   border-top-left-radius: 10px !important;
@@ -721,10 +805,12 @@ body::-webkit-scrollbar {
   border-bottom-right-radius: 10px !important;
   transition: 1s ease;
 }
+
 .progressBarEmpty {
   background-color: #E3E5E8 !important;
   transition: 1s ease;
 }
+
 .progressBarFull {
   background-color: #121416 !important;
   transition: 1s ease;
@@ -749,7 +835,7 @@ body::-webkit-scrollbar {
 .playlistblack {
   background: transparent url("./assets/playlistblack.png") no-repeat 0 0 !important;
   width: 20px;
-  height:20px;
+  height: 20px;
   margin-top: 6px;
   margin-left: 15px;
   transition: 1s ease;

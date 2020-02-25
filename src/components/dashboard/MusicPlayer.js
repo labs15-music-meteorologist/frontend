@@ -30,7 +30,7 @@ import MainBar from "./element-styles/MainBarContainer";
 import PlaylistInfoContainer from "./element-styles/PlaylistInfo";
 import PlaylistSongsContainer from "./element-styles/PlaylistSongs";
 import NavBar from "./element-styles/NavBarMusicPlayer";
-import Footer from '../Footer';
+import Footer from "../Footer";
 
 class MusicPlayer extends Component {
   constructor(props) {
@@ -142,7 +142,7 @@ class MusicPlayer extends Component {
       if (state.track_window.current_track.id !== this.state.currentTrack) {
         this.currentSong();
         this.setState({ currentTrack: state.track_window.current_track.id });
-        console.log("Testing musicplayer", state.track_window.current_track.id)
+        console.log("Testing musicplayer", state.track_window.current_track.id);
         this.player.setVolume(0);
         setTimeout(() => {
           this.player.pause();
@@ -211,25 +211,23 @@ class MusicPlayer extends Component {
 
   transferPlaybackHere() {
     const { token } = this.state;
-    fetch(
-      `https://api.spotify.com/v1/me/player/play/?device_id=${this.state.deviceId}`,
-      {
-        method: "PUT",
-        headers: {
-          authorization: `Bearer ${token}`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          context_uri: `spotify:playlist:${this.props.currentUser.spotify_playlist_id}`
-        })
-      }
-    );
+    fetch(`https://api.spotify.com/v1/me/player`, {
+      method: "PUT",
+      headers: {
+        authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        device_ids: [this.state.deviceId]
+      })
+    });
     this.player.setVolume(0);
     setTimeout(() => this.player.pause(), 2000);
     this.player.setVolume(0.5);
   }
 
   render() {
+    console.log("debugging device id error", this.props);
     const {
       trackName,
       artistName,
@@ -249,7 +247,7 @@ class MusicPlayer extends Component {
         {console.log("all music player props", this.props)}
         <ElementContainer>
           <SideBar id="sideBarLD">
-            <div id="sideBarLD1" className='music-player joyride-player-2'>
+            <div id="sideBarLD1" className="music-player joyride-player-2">
               <AlbumInfo
                 imageSpotify={imageSpotify}
                 trackName={trackName}
@@ -259,9 +257,9 @@ class MusicPlayer extends Component {
               <div>
                 <Grid
                   container
-                  direction='column'
-                  justify='space-around'
-                  alignItems='center'
+                  direction="column"
+                  justify="space-around"
+                  alignItems="center"
                   style={{ width: 377, height: "60px", marginBottom: "10px" }}
                 >
                   <div>
@@ -275,27 +273,31 @@ class MusicPlayer extends Component {
                 </Grid>
                 <Grid
                   container
-                  direction='column'
-                  justify='center'
-                  alignItems='center'
+                  direction="column"
+                  justify="center"
+                  alignItems="center"
                 >
                   <AudioDetailsContainer traits={this.props.traits} />
                   <Grid item>
                     {window.Spotify !== undefined &&
                       this.state.imageUrl !== "" &&
                       artistName !== "Artist Name" && (
-                        <div className='album-art'>
+                        <div className="album-art">
                           <h4 style={{ textAlign: "center" }}>Now Playing</h4>
-                          <img className='album-artwork' src={this.state.imageUrl} alt='album-art' />
+                          <img
+                            className="album-artwork"
+                            src={this.state.imageUrl}
+                            alt="album-art"
+                          />
                         </div>
                       )}
                   </Grid>
                   {error && <p>Error: {error}</p>}
                   <Grid
                     container
-                    direction='row'
-                    justify='center'
-                    alignItems='center'
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
                     style={{ width: 300, marginBottom: "5%" }}
                   ></Grid>
                 </Grid>
@@ -303,11 +305,15 @@ class MusicPlayer extends Component {
             </div>
           </SideBar>
           <MainBar id="mainBarLD" className="mainBar">
-            <PlaylistInfoContainer spotifyId={this.props.spotifyId.id} spotifyName={this.props.spotifyId.display_name}>
-            </PlaylistInfoContainer>
+            <PlaylistInfoContainer
+              spotifyId={this.props.spotifyId.id}
+              spotifyName={this.props.spotifyId.display_name}
+            ></PlaylistInfoContainer>
             <PlaylistSongsContainer>
-              <PlaylistItems player={this.player} deviceId={this.state.deviceId}>
-              </PlaylistItems>
+              <PlaylistItems
+                player={this.player}
+                deviceId={this.state.deviceId}
+              ></PlaylistItems>
             </PlaylistSongsContainer>
           </MainBar>
         </ElementContainer>

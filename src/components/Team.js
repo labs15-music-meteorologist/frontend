@@ -126,7 +126,9 @@ export default function Team() {
 
   return (
     <div className={classes.root}>
-      <MobileNav position />
+      <div className="mobileNavWrap">
+        <MobileNav position />
+      </div>
       <HomepageNavbar>
         <a href="/">
           <img src={MusicLogo} />

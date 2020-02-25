@@ -56,7 +56,7 @@ class MusicPlayer extends Component {
     this.playerCheckInterval = null;
   }
 
-  componentDidMount(prevProps) {
+  componentDidMount() {
     this.handleLogin();
   }
 
@@ -81,10 +81,10 @@ class MusicPlayer extends Component {
     // }
   }
 
-  // dsDelivery() {
-  //   const token = { token: localStorage.getItem("token") };
-  //   this.props.postDSSong(token);
-  // }
+  dsDelivery() {
+    const token = { token: localStorage.getItem("token") };
+    this.props.postDSSong(token);
+  }
 
   handleLogin() {
     if (this.state.token !== "") {
@@ -149,7 +149,8 @@ class MusicPlayer extends Component {
           this.player.seek(1);
           this.player.setVolume(0.5);
         }, 2000);
-        if (this.props.ds_songs) {
+        if (true) {
+          console.log("DS ARRAY called");
           this.getDataScienceSongArray();
         }
       }
@@ -168,14 +169,16 @@ class MusicPlayer extends Component {
   }
 
   getDataScienceSongArray = () => {
-    this.props.ds_songs.length > 0 &&
+    this.props.ds_songs.songs.length > 0 &&
       this.props.getSeveralTracks(
-        this.concatenateSongIds(this.props.ds_songs[0].songs)
+        this.concatenateSongIds(this.props.ds_songs.songs)
       );
   };
 
   concatenateSongIds(array) {
-    return array.map(song => song.values).join(",");
+    const concatString = array.map(song => song.values).join(",");
+    console.log("testing concat string", concatString);
+    return concatString;
   }
   getCurrentSongFeatures = id => this.props.getTrackInfo(id);
 
@@ -186,7 +189,10 @@ class MusicPlayer extends Component {
   checkForPlayer() {
     const { token } = this.state;
 
+    console.log("spotify window", window.Spotify);
+
     if (window.Spotify !== undefined) {
+      console.log("spotify window called");
       clearInterval(this.playerCheckInterval);
 
       this.player = new window.Spotify.Player({

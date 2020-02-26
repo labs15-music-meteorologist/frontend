@@ -148,9 +148,9 @@ const About = () => (
     <div className="mobileNavWrap">
       <MobileNav />
     </div>
-    <HomepageNav/>
+    <HomepageNav />
     <div className='about-image'>
-      <img className="desktop-about"src={AboutImage} />
+      <img className="desktop-about" src={AboutImage} />
       <img className="mobile-about" src={AboutImageMobile} />
     </div>
     <div className='header-container'>
@@ -161,35 +161,35 @@ const About = () => (
         <SecondaryHeader>
           Songs picked just for your music taste.
         </SecondaryHeader>
-        <Sentence style={{zIndex: "-1"}}>
-          We’ll put together a playlsit for you based on the musical traits of
+        <Sentence style={{ zIndex: "-1" }}>
+          We’ll put together a playlist for you based on the musical traits of
           the songs you like.
         </Sentence>
       </InnerGrid>
       <InnerGrid>
-        <img className="about-images" src={ChartImage}/>
+        <img className="about-images" src={ChartImage} />
       </InnerGrid>
       <InnerGridReverse>
-        <img className="about-images" src={SpotifyImage}/>
-        </InnerGridReverse>
-        <InnerGridReverse>
-          <SecondaryHeader>
-            Our prediction model will do all the work.
+        <img className="about-images" src={SpotifyImage} />
+      </InnerGridReverse>
+      <InnerGridReverse>
+        <SecondaryHeader>
+          Our prediction model will do all the work.
           </SecondaryHeader>
-          <Sentence style={{zIndex: "-1"}}>
-            We’ve got you covered, just join with your Spotify account and we’ll
-            take it from there.
+        <Sentence style={{ zIndex: "-1" }}>
+          We’ve got you covered, just join with your Spotify account and we’ll
+          take it from there.
           </Sentence>
-        </InnerGridReverse>
+      </InnerGridReverse>
       <div className="reverse">
         <InnerGrid>
-        <img className="about-images" src={SpotifyImage}/>
+          <img className="about-images" src={SpotifyImage} />
         </InnerGrid>
         <InnerGrid>
           <SecondaryHeader>
             Our prediction model will do all the work.
           </SecondaryHeader>
-          <Sentence style={{zIndex: "-1"}}>
+          <Sentence style={{ zIndex: "-1" }}>
             We’ve got you covered, just join with your Spotify account and we’ll
             take it from there.
           </Sentence>
@@ -197,13 +197,13 @@ const About = () => (
       </div>
       <InnerGrid>
         <SecondaryHeader>Listen and enjoy!</SecondaryHeader>
-        <Sentence style={{zIndex: "-1"}}>
+        <Sentence style={{ zIndex: "-1" }}>
           Voila! Now you can add the playlist to your Spotify or enjoy in our
           music player.
         </Sentence>
       </InnerGrid>
       <InnerGrid>
-      <img className="about-images" src={SongImage}/>
+        <img className="about-images" src={SongImage} />
       </InnerGrid>
     </Grid>
     <div className='button-container'>

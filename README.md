@@ -8,7 +8,7 @@ View prior site at   - https://music-meteorologist.com/
 Sound Drip is a fullstack web application that has been a Green Build during the Labs20 (13th January 2020 - 6th March 2020) by
 [LambdaSchool](https://lambdaschool.com/) students. Each student fulfills a role in the project to collectively build the application. (Roles listed below)
 
-Sound Drip provides a web application where music lovers can receive song recommendations based on Data Science functionality. A sophisticated Machine Learning model will try to predict better than the user themselves; once a certain song is liked or not new songs will be populated for the user to listen and create a new playlist. For that to happen a lot of different characteristics of a songs are considered. 
+Sound Drip provides music lovers with unique song recommendations based on Data Science functionality. Where A sophisticated Machine Learning model will try an predict songs you like better than the user could themselves; once a certain song is liked or not new songs will be populated for the user to listen and create a new playlist. For that to happen a lot of different characteristics of a songs are considered. 
 <!-- At the end the user can revisit the assessment of the model and give feedback about its correctness. To deliver this experience a Node.JS Backend and a React.JS Frontend were built. -->
 
 ## Example
@@ -44,11 +44,9 @@ Sound Drip provides a web application where music lovers can receive song recomm
 - **[Joshua Edgerton](https://github.com/Joshua-Edgerton)**
 - **[Cory Ortega](https://github.com/coryortega)**
 - **[Gurpreet Dhaliwal](https://github.com/gdhaliwal22)**
-- **[Nicholas Truson](https://github.com/NicholasTruson)**
 
 **Role: Data Scientist**
 
-- **[Mugil Choi](https://github.com/mooglol)**
 - **[Riley Pence](https://github.com/fuse999)**
 - **[Xander Bennett](https://github.com/xander-bennett)**
 - **[Zhenya Warshavsky](https://github.com/zwarshavsky)**

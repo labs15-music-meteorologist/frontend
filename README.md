@@ -44,7 +44,6 @@ Sound Drip provides music lovers with unique song recommendations based on Data 
 - **[Joshua Edgerton](https://github.com/Joshua-Edgerton)**
 - **[Cory Ortega](https://github.com/coryortega)**
 - **[Gurpreet Dhaliwal](https://github.com/gdhaliwal22)**
-- **[Nicholas Truson](https://github.com/NicholasTruson)**
 
 **Role: Data Scientist**
 
